@@ -26,17 +26,24 @@ bounded embedded stream carving, unknown metadata, evidence-backed override
 requirements, actual PCM conversion and invalid-cache regeneration.
 
 All 991 dialogue/movie entries still require complete verified semantic
-annotation. Filename conventions and numeric TRG operands do not establish
-exact transcripts or playback semantics. The completeness gate intentionally
+annotation. The completed local ASR pass processed all 991 with zero failures:
+918 have draft recognized text and 73 have no_speech_detected status. Filename
+rules identify 42 Stan Lee and 32 Spider-Man entries, leaving 917 Unknown.
+The fingerprinted native bank/track table resolves 29 recovered TRG playback
+commands to 28 clips. The remaining 963 entries lack a recovered concrete event
+association; original guard logic is not reconstructed. All 68 converted TRG
+graphs were read, preserving 94 named nodes as context. ASR drafts and event
+references do not establish exact transcripts or complete playback semantics.
+The completeness gate intentionally
 rejects this state. Authored menu SFX roles and the Stan_00 intro association
 are distinguished from verified original behavior in the private manifest.
 
 ## Unity and standalone coverage
 
 Validated results: 42 Unity tests passed (10 EditMode, 32 PlayMode), with zero
-failures or skips; 14 Python tests passed. The rendered standalone player
+failures or skips; 17 Python tests passed. The rendered standalone player
 passed 29 checks with an empty error list. Its complete directory is about
-273 MB; extracted WAVs and Unity caches are additional local storage.
+277 MB (277,276,552 bytes); extracted WAVs and Unity caches are additional local storage.
 The separate full mission-route player also passed 18 checks, exercising
 actual rooftop traversal, encounter gates, enemy defeat, recovery and skylight
 completion. Its automation save is isolated from the interactive player's save.
@@ -65,6 +72,8 @@ kinematic body settings, invalid/disabled anchors and wall-collision release.
 Local machine-readable results and private images:
 
 - TestResults/frontend-editmode.xml and frontend-playmode.xml
+- TestResults/audio-final-validation.json and asr-inference-run.json
+- TestResults/mission-smoke.json
 - TestResults/menu-smoke.json
 - TestResults/menu-private.png, menu-private-options.png,
   menu-private-gallery.png, menu-private-credits.png, menu-private-controls.png,
@@ -79,7 +88,8 @@ images/audio/scenes/fonts remain private and ignored by Git.
 
 These are functional and rendered checks, not a sustained frame-time benchmark
 or a guarantee of bug-free play. Audio was decoded and routed successfully;
-the full corpus has not been manually listened to or transcribed.
+the full corpus has draft machine transcripts, but has not been manually
+listened to or verified word for word.
 
 The visible mission briefing is authored text, shown after the cinematic. It is
 not a transcript of the original Stan recording. The menu implements the requested modernized five

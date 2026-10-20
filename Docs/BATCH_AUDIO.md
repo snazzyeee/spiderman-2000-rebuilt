@@ -76,6 +76,27 @@ missing evidence.
 All clips, model/dependency binaries, caches, transcripts, expanded manifests and
 reports remain ignored. Only code, tests, pins and setup documentation are pushed.
 
+## Completed local run — 2026-10-20
+
+All 991 dialogue/movie entries completed with zero ASR failures. Of these, 918
+have draft recognized text and 73 are marked no_speech_detected; the latter is
+a model result, not a human confirmation of silence. The manifest retains all
+3,661 audio entries. Every processed entry has the five requested fields.
+Filename evidence supplies 42 Stan Lee and 32 Spider-Man labels, with 917 Unknown.
+The native join resolves 29 recovered PlayXA commands to 28 distinct clips;
+963 entries have no recovered concrete event association. All 68 converted
+TRG graphs were read, retaining 94 named nodes and reporting zero parse errors.
+
+The inference pass took 2,707.14 seconds on the local CPU. A final metadata join
+reused all 991 per-clip caches without reinference and took 24.7 seconds. Draft
+text does not become verified text through cache reuse or an external reference.
+The final validation report passed: 17 Python tests, 10 Unity EditMode tests,
+32 Unity PlayMode tests and 29 rendered frontend checks. The separate full
+mission-route player passed 18 checks. Private reports are in
+TestResults/audio-final-validation.json, asr-inference-run.json,
+menu-smoke.json and mission-smoke.json. See FRONTEND_VALIDATION.md for build
+locations, coverage and remaining limits.
+
 Tools/Build/finish_audio_validation.ps1 waits for an already-running full ASR
 pass, retains its private inference report, applies current trigger context from
 the complete cache, validates all required fields, and runs Python tests plus

@@ -27,8 +27,13 @@ All source scripts, tests and assembly recipes are tracked; the private assets
 required to reproduce this player are excluded from Git.
 
 The local audio run decoded 3,661 clips without reported failures: 2,663 SFX,
-seven music streams and 991 dialogue/movie entries. All 991 still lack complete
-verified semantic mappings. Menu sound roles and Stan_00's remake intro binding
+seven music streams and 991 dialogue/movie entries. Local faster-whisper processing
+finished all 991 with zero failures: 918 contain draft recognized text and 73
+are marked no_speech_detected. Filename rules identify 74 speakers; 917 remain
+Unknown. Native bank/track tables resolve 29 recovered TRG playback commands to
+28 clips; surrounding guard logic and complete verified semantic mappings remain
+unresolved. See [Docs/BATCH_AUDIO.md](Docs/BATCH_AUDIO.md) for execution, cache
+and evidence details. Menu sound roles and Stan_00's remake intro binding
 are authored associations. The original recording plays; the visible mission
 briefing is authored text, not a verified transcript.
 

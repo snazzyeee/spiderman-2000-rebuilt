@@ -36,9 +36,10 @@ Skip, cue changes and destruction release only the presenter's narration owner.
 Existing cues with direct AudioClip references still work.
 
 When an original clip has no verified transcript, an authored mission instruction
-can remain in the Timeline. It is labeled MISSION BRIEFING, not attributed as
-the narrator's spoken words. Extracted narration and authored UI instructions
-are separate data, even when they appear during the same cutscene.
+is shown separately after OnIntroFinished. It is labeled MISSION BRIEFING, not
+attributed as the narrator's spoken words. The intro, authored briefing and
+gameplay use separate mission lifecycle states; gameplay controls remain locked
+through the briefing. See MISSION_LIFECYCLE.md.
 
 Audio milestone checkpoint: eight Python extraction tests and 29 Unity tests passed
 on 2026-10-20 (eight EditMode, 21 PlayMode). Import registered all 3,661 clips.
@@ -46,5 +47,7 @@ This checks implementation/integration, not the unknown original trigger table
 or transcription accuracy. Generated assets, source audio and manifests remain
 private and excluded from Git.
 
-The later menu/save-load integration expands this to 36 Unity tests. Current
-results and standalone rendering checks are in FRONTEND_VALIDATION.md.
+The current integration passes 42 Unity tests and 17 Python tests. All 991
+dialogue/movie entries have completed local ASR processing; recognized text
+remains draft, and unknown speakers and trigger semantics remain explicit.
+Current results and standalone rendering checks are in FRONTEND_VALIDATION.md.
