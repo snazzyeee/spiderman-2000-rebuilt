@@ -4,6 +4,9 @@ This setup targets the repository's Windows x64 Python 3.12 runtime. Conversion
 uses no cloud service; network access is limited to these hash-checked wheels.
 """
 import hashlib
+import platform
+import struct
+import sys
 from pathlib import Path, PurePosixPath
 import urllib.request
 import zipfile
@@ -22,7 +25,15 @@ PACKAGES = [
 ]
 
 
+def require_supported_runtime():
+    if (sys.platform != 'win32' or sys.version_info[:2] != (3, 12)
+            or platform.machine().lower() not in ('amd64', 'x86_64')
+            or struct.calcsize('P') != 8):
+        raise RuntimeError('Font tools require Windows x64 with Python 3.12; use tools/third_party/audio-python/Scripts/python.exe')
+
+
 def install():
+    require_supported_runtime()
     destination = ROOT / 'tools/third_party/font-tools'
     libraries = destination / 'python'
     libraries.mkdir(parents=True, exist_ok=True)

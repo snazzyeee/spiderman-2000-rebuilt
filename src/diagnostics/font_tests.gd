@@ -32,6 +32,20 @@ func run() -> void:
 	check(config.get_value("video","font_variant","") == "Faithful", "saved font selection reloads exactly")
 	control.free()
 	check(OriginalFonts.set_variant("Enhanced",false), "freed controls do not break live variant changes")
+	var survivor := Label.new()
+	root.add_child(survivor)
+	for iteration in range(20):
+		var temporary := Label.new()
+		OriginalFonts.bind(temporary, "menu")
+		temporary.free()
+	OriginalFonts.bind(survivor, "menu")
+	check(OriginalFonts.bindings.size() == 1, "binding prunes freed controls across repeated scene lifetimes")
+	var old_theme := survivor.theme
+	check(not OriginalFonts.set_variant("Faithful", true, "user://missing-font-settings-parent/settings.cfg"), "failed persistence is reported")
+	check(OriginalFonts.get_variant() == "Faithful" and survivor.theme != old_theme, "save failure still applies live font variant")
+	OriginalFonts.bind(null, "menu")
+	check(OriginalFonts.bindings.size() == 1, "null binding is ignored")
+	survivor.free()
 	var manifest_path := "res://assets/ui/fonts/font_manifest.json"
 	if FileAccess.file_exists(manifest_path):
 		var manifest: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(manifest_path))
@@ -41,6 +55,7 @@ func run() -> void:
 			var outline := load("res://assets/ui/fonts/"+record.enhanced) as Font
 			check(bitmap != null and outline != null, record.name+" both FontFiles load")
 			if bitmap and outline:
+				check([65,66,48,49].all(func(code): return record.mapping.has(str(code))) and record.original_advances.has("32"), record.name+" diagnostic sample has explicit exported mapping and space advance")
 				var size_of_font := int(record.line_height)*4
 				var expected := 0.0
 				for code in [65,66,32,48,49]: expected += float(record.original_advances[str(code)])*4.0

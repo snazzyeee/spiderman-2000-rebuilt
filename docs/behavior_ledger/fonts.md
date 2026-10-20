@@ -103,6 +103,15 @@ The failed trial remains private in staging/validation/font-conversion.log.
 
 ## Verification contract
 
+Evidence `remake:font-review-reproduction-20261021`, confidence **authored
+runtime policy**: ignore null/freed controls and prune dead registrations on
+bind. Persistence failure returns false with a warning, but a valid variant
+still applies to the current session. Invalid variants change nothing. This
+does not recover additional original behavior. Private reproduction logs live
+in staging/validation/review-reproduction/. The generic export explicitly maps
+the diagnostic sample, including font_big; metric equality does not certify
+glyph imagery or original font_big character binding.
+
 Bound reads to 1 MiB/font, 256 glyphs, 256 pixels per dimension, 4 Mi pixels
 total; height, visible width and baseline must fit the recovered byte fields;
 require exact payload accounting. Reject invalid palette/header/table,

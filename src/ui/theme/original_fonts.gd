@@ -36,6 +36,8 @@ static func theme_for(role: String, directory: String = BASE) -> Theme:
 	return result
 
 static func bind(control: Control, role: String) -> void:
+	bindings = bindings.filter(func(binding): return is_instance_valid(binding.control.get_ref()))
+	if not is_instance_valid(control): return
 	for binding in bindings:
 		if binding.control.get_ref() == control:
 			binding.role = role
@@ -48,14 +50,17 @@ static func _apply(control: Control, role: String) -> void:
 	control.theme = theme_for(role)
 	control.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST if get_variant() == "Faithful" else CanvasItem.TEXTURE_FILTER_LINEAR
 
-static func set_variant(value: String, persist: bool = true) -> bool:
+static func set_variant(value: String, persist: bool = true, settings_path: String = "user://settings.cfg") -> bool:
 	if value not in VARIANTS: return false
+	var persisted := true
 	if persist:
 		var config := ConfigFile.new()
-		var status := config.load("user://settings.cfg")
-		if status not in [OK, ERR_FILE_NOT_FOUND]: return false
-		config.set_value("video", "font_variant", value)
-		if config.save("user://settings.cfg") != OK: return false
+		var status := config.load(settings_path)
+		if status in [OK, ERR_FILE_NOT_FOUND]:
+			config.set_value("video", "font_variant", value)
+			status = config.save(settings_path)
+		persisted = status == OK
+		if not persisted: push_warning("Font setting could not be saved; applying for this session")
 	selected = value
 	var live: Array[Dictionary] = []
 	for binding in bindings:
@@ -64,7 +69,7 @@ static func set_variant(value: String, persist: bool = true) -> bool:
 			_apply(control, binding.role)
 			live.append(binding)
 	bindings = live
-	return true
+	return persisted
 
 static func uses_original(control: Control) -> bool:
 	return control.theme != null and control.theme.default_font != null and control.theme.default_font.resource_path.begins_with(BASE+"/")

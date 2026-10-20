@@ -199,3 +199,25 @@ Use run_regression.ps1 so TEMP/TMP point to staging/test_tmp. Close the editor
 before import. Leave owner/Gemini files alone; the single authorized as-is
 brief commit is complete. Keep every existing gate and distinguish the passing
 warm-cache regression from unresolved cold-cache and landmark limitations.
+
+## Current run: section 1 review (2026-10-21)
+
+Owner briefs committed as-is in 11114a9. All Gemini WORKLOG session summaries
+and T4 review read; T7/T8 produced no usable upscales. No Gemini output edited.
+Findings 1, 2, 4 reproduced before fixes: dead weakrefs accumulate, null binding
+raises a script error, save failure prevents a live update, unsupported setup
+hosts reach extraction. Logs: staging/validation/review-reproduction/.
+Findings 1/2 fixed with runtime regression tests; setup now rejects unsupported
+OS, ABI and architecture before filesystem/network effects (synthetic tests).
+The optional settings path allows failure tests without touching real settings.
+A valid variant applies live even if persistence fails; return false and warning
+report that failure, and malformed existing settings are never overwritten.
+Finding 3 disproved as a metric assertion: all six exports explicitly map the
+sample and space advance; original and outline advances match in Godot.
+Added explicit export-map assertions while retaining the original metric gate.
+This does not verify font_big imagery or its original specialized mapping.
+
+Section 1 matrix: staging/validation/regression/review-fonts/summary.json:
+47 reference + 13 pipeline Python tests pass; headless Forward+, real Vulkan
+Forward+ and Mobile each pass smoke 44, traversal 150, fonts 39, zero engine or
+script errors. Original gates retained. CI status is recorded after push.
