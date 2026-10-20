@@ -20,6 +20,42 @@ runs at 60 Hz, so ported per-frame rates must be converted, never copied.
 
 ## Level 1 landmark check (open)
 
+After separating converter model units from world units, the unchanged gate on
+2026-10-20 scores the configured mapping best: **28/146 (19.18%)** supported;
+runner-up **1/146 (0.68%)**. It still fails the >=80% and >=30-point-margin
+criteria (2 of 21 checks fail). Geometry and the mission route are unchanged in
+meters; no fitted offset or search expansion was introduced. The 40 smoke checks
+pass headless, Forward+ and Mobile. The remaining mismatch is unresolved; private
+TRG placement stays unverified. The historical analysis below predates the unit
+distinction and must not be used to justify a fitted transform.
+
+### Independent region audit
+
+Evidence `psx:L1A1_G:header/object-table/model-table` (SHA-256 recorded by
+tools/reference/decode_psx_regions.py in private staging/reference/l1a1-regions.json):
+v6 (0x00020006), 137 objects at byte 12 with 36-byte stride, 137 model pointers,
+packet table at 174160. Origins are signed 20.12 triples at object offsets 4/8/12;
+model index is u16 at +22. Packet records have tag/length/payload and a -1
+terminator. The bounded decoder rejects bad sizes, pointers, indices and versions.
+Confidence: recovered (exact data decode). `decomp:spool.h#SPSXRegion/SModel@f8a0392`
+and `decomp:spool.cpp#Spool_SkipPackets@f8a0392 (@NotOk)` support the model/packet
+structure, but the region is an in-memory structure, not the file header.
+
+Converter evidence `multitool:3c9028e#PsxMeshHeaderReader/PsxMeshSemantics` (MIT,
+https://github.com/slfx77/neversoft-multitool): static mesh vertices and decoded
+object origins are divided by **2.25** in the exported model; axes become
+(x,-y,-z). Independently, object 19 origin (-22961,4926,-54358) divided by 2.25
+and axis-flipped equals exported mesh_00000013 translation
+(-10204.889,-2189.3333,24159.111). Raw mesh 19 bounds divided by 2.25 reproduce
+the GLB accessor bounds. Ninth fractions are explained by division by 9/4,
+not evidence of arbitrary placement. Confidence: verified for this comparison.
+
+World units and converted model units were conflated. Keep the authored character
+calibration as METERS_PER_MODEL_UNIT; original world units use that value /2.25.
+Geometry imports use model units. This is a decoded converter factor, without a
+landmark-fitted offset. The landmark gate below remains required before accepting
+the mapping as verified.
+
 src/diagnostics/verify_units.gd loads the converted l1a1_g/l1a1_o geometry at
 the calibrated scale, then tests whether L1A1 TRG restart, baddy, powerup and
 point nodes rest on that geometry, for every axis-sign combination and for

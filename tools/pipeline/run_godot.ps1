@@ -1,4 +1,4 @@
-param([ValidateSet('mobile', 'forward_plus')][string]$Renderer = 'forward_plus', [switch]$Editor, [switch]$SmokeTest, [switch]$Headless)
+param([ValidateSet('mobile', 'forward_plus')][string]$Renderer = 'forward_plus', [switch]$Editor, [switch]$SmokeTest, [switch]$Headless, [string]$Script)
 $ErrorActionPreference = 'Stop'
 $projectRoot = (Resolve-Path (Join-Path $PSScriptRoot '../..')).Path
 $executable = Join-Path $projectRoot 'tools/third_party/godot-4.7.2/Godot_v4.7.2-stable_win64_console.exe'
@@ -7,6 +7,7 @@ if (-not (Test-Path -LiteralPath $executable)) { & (Join-Path $PSScriptRoot 'set
 $godotArgs = @('--path', $projectRoot, '--rendering-method', $Renderer)
 if ($Editor) { $godotArgs += '--editor' }
 if ($Headless) { $godotArgs += '--headless' }
+if ($Script) { $godotArgs += @('--script', $Script) }
 if ($SmokeTest) { $godotArgs += @('--quit-after', '600', '--max-fps', '60', '--', '--revamp-smoke') }
 $startedUtc = [DateTime]::UtcNow
 & $executable @godotArgs

@@ -55,7 +55,7 @@ func run() -> void:
 			finish({})
 			return
 		world.add_child(model)
-		model.scale = Vector3.ONE*PsxUnits.METERS_PER_WORLD_UNIT
+		model.scale = Vector3.ONE*PsxUnits.METERS_PER_MODEL_UNIT
 		for mesh in model.find_children("*", "MeshInstance3D", true, false):
 			if mesh.mesh:
 				mesh.create_trimesh_collision()

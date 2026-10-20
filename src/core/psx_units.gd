@@ -9,7 +9,9 @@ const FIXED_SHIFT := 12
 const FIXED_ONE := 1 << FIXED_SHIFT        # 4.12 / 20.12 fixed point: 4096 == 1.0
 const ANGLE_FULL_TURN := 4096              # angle units per revolution
 # Authored calibration: Spider-Man's bind pose (~90.9 world units) stands 1.8 m.
-const METERS_PER_WORLD_UNIT := 0.019792303442955017
+const METERS_PER_MODEL_UNIT := 0.019792303442955017
+const CONVERTER_WORLD_DIVISOR := 2.25
+const METERS_PER_WORLD_UNIT := METERS_PER_MODEL_UNIT/CONVERTER_WORLD_DIVISOR
 # World (PSX, Y down) to Godot axis signs, applied before scaling. Decomp convention;
 # the L1A1 TRG-vs-geometry landmark check does not confirm it yet (units.md).
 const AXIS_SIGNS := Vector3(1, -1, -1)
