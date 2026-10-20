@@ -66,9 +66,23 @@ not invent playback conditions. See [native ID evidence](docs/NATIVE_VOICE_IDS.m
 
 ## Public source and private data
 
-Validation: 40 Godot integration checks passed headlessly and on both real
-Mobile and Forward+ Vulkan renderers on the RX 580. All 23 Python pipeline and
-reference-tool tests passed. See the migration guide for test scope and limits.
+Validation: 40 Godot integration checks and 143 synthetic traversal checks passed
+headlessly and on both real Mobile and Forward+ Vulkan renderers on the RX 580.
+All 37 Python pipeline and reference-tool tests passed. Unity deletion remains
+blocked by five preservation screenshot mismatches; Level 1 landmark alignment
+still fails two criteria. See the [Phase 2 report](docs/PHASE2_REPORT.md) for scope.
+
+Public synthetic traversal scenes require no original assets:
+
+```powershell
+./tools/pipeline/run_godot.ps1 -Headless -TraversalTests
+./tools/pipeline/run_godot.ps1 -Renderer forward_plus -TraversalTests
+./tools/pipeline/run_godot.ps1 -Renderer mobile -TraversalTests
+```
+
+Q / R1 targets a zip; T / R2 zips forward. These assignments, the pendulum rates,
+wall attach input, edge probes, grace length and swing animation binding are
+authored tuning. Recovered events bind through the behavior ledger JSON.
 
 Godot scripts/scenes/project settings, Python conversion tools, synthetic tests
 and documentation are tracked. Original and derived assets, transcripts,
