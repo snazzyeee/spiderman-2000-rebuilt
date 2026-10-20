@@ -10,6 +10,7 @@ namespace SpiderManRebuild
         public string Speaker;
         [TextArea] public string Subtitle;
         public AudioClip Audio;
+        public string DatabaseClipId;
         public ExposedReference<CinemachineVirtualCameraBase> ShotCamera;
         public ClipCaps clipCaps => ClipCaps.None;
         public override Playable CreatePlayable(PlayableGraph graph, GameObject owner)

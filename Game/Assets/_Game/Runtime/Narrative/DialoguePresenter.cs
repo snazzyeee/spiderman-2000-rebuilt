@@ -19,6 +19,7 @@ namespace SpiderManRebuild
         CinemachineVirtualCameraBase camera;
         PrioritySettings previousPriority;
         bool audioPaused;
+        DialogueManager routedManager;
         void Awake()
         {
             source = GetComponent<AudioSource>(); source.playOnAwake = false; source.spatialBlend = 0;
@@ -42,9 +43,17 @@ namespace SpiderManRebuild
                 camera = shot;
                 if (camera != null) { previousPriority = camera.Priority; camera.Priority = 100; }
                 source.clip = cue.Audio;
-                if (source.clip != null && time < source.clip.length)
+                if (!string.IsNullOrEmpty(cue.DatabaseClipId) && DialogueManager.Instance != null
+                    && DialogueManager.Instance.BeginTimeline(cue.DatabaseClipId, this, cue.Speaker, cue.Subtitle))
+                {
+                    routedManager = DialogueManager.Instance;
+                    routedManager.SubtitleChanged += OnRoutedSubtitle;
+                    OnRoutedSubtitle(routedManager.Speaker, routedManager.Subtitle);
+                }
+                else if (source.clip != null && time < source.clip.length)
                 { source.time = Mathf.Clamp((float)time, 0, source.clip.length - .001f); source.Play(); }
             }
+            if (routedManager != null) { routedManager.EvaluateTimeline(this, time, playing); return; }
             if (source.clip == null) return;
             if (!playing && !audioPaused) { source.Pause(); audioPaused = true; }
             else if (playing && audioPaused) { source.UnPause(); audioPaused = false; }
@@ -53,11 +62,18 @@ namespace SpiderManRebuild
         }
         public void ClearCue()
         {
+            if (routedManager != null)
+            {
+                routedManager.SubtitleChanged -= OnRoutedSubtitle;
+                routedManager.EndTimeline(this); routedManager = null;
+            }
             if (camera != null) { camera.Priority = previousPriority; camera = null; }
             source?.Stop(); current = null; audioPaused = false;
             if (!string.IsNullOrEmpty(Subtitle))
             { Speaker = Subtitle = ""; SubtitleChanged?.Invoke("", ""); }
         }
+        void OnRoutedSubtitle(string speaker, string text)
+        { Speaker = speaker; Subtitle = text; SubtitleChanged?.Invoke(speaker, text); }
         void OnDisable() { ClearCue(); owner = null; }
     }
 }
