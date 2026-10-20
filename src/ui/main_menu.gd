@@ -52,6 +52,7 @@ func _ready() -> void:
 	add_child(layer)
 	var title := Label.new()
 	title.text = "SPIDER-MAN\n2000 REVAMP"
+	OriginalFonts.bind(title, "title")
 	title.position = Vector2(55, 35)
 	title.add_theme_font_size_override("font_size", 44)
 	title.add_theme_color_override("font_color", Color(1, .83, .1))
@@ -60,6 +61,7 @@ func _ready() -> void:
 	title.add_theme_constant_override("shadow_offset_y", 3)
 	layer.add_child(title)
 	panel.position = Vector2(60, 200)
+	OriginalFonts.bind(panel, "menu")
 	panel.custom_minimum_size = Vector2(360, 400)
 	layer.add_child(panel)
 	art.position = Vector2(550, 70)
@@ -131,6 +133,16 @@ func show_page(name_of_page: String) -> void:
 			button("Load Game", func(): launch(false, true), GameSession.load_checkpoint() < 0)
 			button("Back", func(): show_page("Main"))
 		"Options":
+			var font_label := Label.new()
+			font_label.text = "Font variant"
+			panel.add_child(font_label)
+			var font_choice := OptionButton.new()
+			for variant in OriginalFonts.VARIANTS: font_choice.add_item(variant)
+			font_choice.select(OriginalFonts.VARIANTS.find(OriginalFonts.get_variant()))
+			font_choice.item_selected.connect(func(index: int):
+				OriginalFonts.set_variant(font_choice.get_item_text(index))
+				settings.load("user://settings.cfg"))
+			panel.add_child(font_choice)
 			for bus in ["Dialogue", "Music", "SFX"]:
 				var label := Label.new()
 				label.text = bus

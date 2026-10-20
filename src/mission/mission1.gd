@@ -77,6 +77,9 @@ func _ready() -> void:
 		start_intro()
 
 func _build_hud() -> void:
+	OriginalFonts.bind(hud, "hud")
+	OriginalFonts.bind(prompt, "caption")
+	OriginalFonts.bind(subtitles, "subtitle")
 	var layer := CanvasLayer.new()
 	add_child(layer)
 	hud.position = Vector2(24, 22)

@@ -1,3 +1,36 @@
+# Active Godot controls
+
+Use tools/pipeline/run_godot.ps1 to launch the root Godot project. Main menu:
+arrows/D-pad navigate, Enter/A confirms, mouse clicks select. Options includes
+Dialogue/Music/SFX levels and **Font variant: Faithful / Enhanced**. Enhanced
+is the default; selection persists in user://settings.cfg and applies live to
+menu, HUD and subtitles. Missing private fonts retain the default font.
+
+| Action | Keyboard/mouse | Gamepad |
+|---|---|---|
+| Move | WASD | Left stick |
+| Look | Mouse | Right stick |
+| Jump / swing release | Space | A / Cross |
+| Swing / release | Right mouse press/hold/release | No dedicated binding currently |
+| ZIP_TARGET | Q | RB / R1 |
+| ZIP_FORWARD | T | RT / R2 |
+| Explicit crawl attach / knock off | C | LB / L1 |
+| Melee | F | X / Square |
+| Web | R | Y / Triangle |
+| Interact | E | B / Circle |
+| Pause | Escape | Start |
+
+Zip assignments and explicit wall attach are authored; original button mapping
+is unknown. Training uses the same motor and bindings. Full control remapping,
+video options and accessibility settings remain pending. The old in-game
+controls panel is also pending expansion for ZIP_FORWARD; this document records
+the actual current input map rather than claiming that panel has been updated.
+
+## Historical Unity controls (superseded)
+
+The following content documents the archived Unity slice and is not the current
+Godot input map or launch procedure.
+
 # Menu and Mission 1 controls
 
 Launch Builds/Frontend/SpiderManRevamp.exe for the complete menu entry flow.

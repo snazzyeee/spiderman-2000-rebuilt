@@ -70,7 +70,7 @@ not invent playback conditions. See [native ID evidence](docs/NATIVE_VOICE_IDS.m
 
 Validation: all 40 original integration checks plus two native-audio checks
 (42 total), and all 150 synthetic traversal checks passed headlessly and on real
-Mobile and Forward+ Vulkan on the RX 580. All 52 Python tests passed at the latest offset/CI checkpoint. Phase 0
+Mobile and Forward+ Vulkan on the RX 580. All 58 Python tests passed at the latest font checkpoint. Phase 0
 Unity deletion is complete. The original landmark gate remains 19/21; TRG
 placement is still unverified. See [current handoff](docs/HANDOFF.md) and the
 [historical Phase 2 report](docs/PHASE2_REPORT.md).
@@ -106,3 +106,12 @@ traversal suites, and reports private-asset smoke as an explicit skip. Local
 matrix on headless, real Vulkan Forward+ and Mobile. See
 [tool pins/licenses](docs/THIRD_PARTY.md) and
 [editor paths and CI](docs/GODOT_MIGRATION.md#editor-paths-and-public-ci).
+
+
+Original bitmap typography is now optional at runtime: Options → Font variant
+selects Faithful or Enhanced (default). The private conversion preserves palette
+pixels and exact nominal metrics; unknown font_big bindings remain unresolved.
+See [font evidence](docs/behavior_ledger/fonts.md) and
+[menu status](docs/MAIN_MENU.md). Current local gates: 58 Python, 44 smoke,
+150 traversal and 29 font checks per target. CI explicitly tests missing-font
+fallback with 10 font checks and skips private resources.

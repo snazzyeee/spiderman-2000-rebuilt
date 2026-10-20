@@ -67,12 +67,20 @@ Evidence `decomp:pshell.cpp#PShell_BigFont/PShell_NormalFont/PShell_SmallFont@f8
 respectively. This does not prove every screen's role. The exact original HUD,
 subtitle and button-prompt choices remain unknown.
 
-Remake role choices (confidence **authored**): title uses font_big; menu, HUD
-and dialogue captions use sp_fnt00; subtitles use sp_fnt02. Theme loading is
+Remake role choices (confidence **authored**): title, menu, HUD and dialogue
+captions use sp_fnt00; subtitles use sp_fnt02. Theme loading is
 optional: absent private resources preserve Godot's current fallback. Options
 selects Faithful or Enhanced (Enhanced default), persists under user settings
 and applies to live registered controls. Unsupported glyphs keep font fallback.
 This choice is presentation tuning, not a recovered screen-to-font binding.
+Evidence `remake:font-big-menu-render-audit`, confidence **partial visual
+observation**: font_big's data lacks the normal-map digit/punctuation imagery;
+using the generic map for the remake's mixed title/year displays wrong glyphs.
+Its specialized character binding remains unresolved. All six exports retain
+the recovered generic mode-zero index map for structural/metric diagnostics;
+that does not assert every assigned codepoint has matching imagery in each
+bank. font_big is not bound into the UI. Using sp_fnt00 for the title preserves
+known alphabet, digit and punctuation imagery without guessing new indices.
 
 Faithful export keeps original RGBA pixels and an integer nearest-neighbor 4x
 atlas. Enhanced export traces each visible palette color's pixel union,
@@ -96,7 +104,8 @@ The failed trial remains private in staging/validation/font-conversion.log.
 ## Verification contract
 
 Bound reads to 1 MiB/font, 256 glyphs, 256 pixels per dimension, 4 Mi pixels
-total; require exact payload accounting. Reject invalid palette/header/table,
+total; height, visible width and baseline must fit the recovered byte fields;
+require exact payload accounting. Reject invalid palette/header/table,
 overflow/truncation/trailing data and unsupported BMP encodings. Synthetic
 fixtures cover palette/color-key, nibble order, row padding, baseline/advance,
 signed/oversized metrics, top/down BMP rows and malformed palette indices.

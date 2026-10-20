@@ -20,8 +20,8 @@ def decode_font(blob):
     cursor, pixels, glyphs = 36 + count * 16, 0, []
     for index in range(count):
         slices, height, baseline, width = struct.unpack_from('<4i', blob, 4 + index * 16)
-        if not (1 <= slices <= 64 and 1 <= height <= 256 and 0 <= baseline <= 255
-                and 0 < width <= slices * 4):
+        if not (1 <= slices <= 64 and 1 <= height <= 255 and 0 <= baseline <= 255
+                and 0 < width <= min(255, slices * 4)):
             raise ValueError('Unsupported font glyph metric')
         padded_width = slices * 4
         pixels += padded_width * height

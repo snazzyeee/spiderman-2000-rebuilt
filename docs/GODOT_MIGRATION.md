@@ -315,3 +315,21 @@ texture errors; it is retained as failed evidence in regression/fonts-pipeline/.
 An unchanged import recheck and the complete fonts-pipeline-final matrix then
 passed with zero errors (58 Python, 42 smoke and 150 traversal on each target).
 Do not describe this as a proven zero-error first import from an empty cache.
+
+
+## Runtime typography gate
+
+src/ui/theme/original_fonts.gd applies the optional Theme to registered menu,
+HUD, caption and subtitle controls. Options → Font variant persists Faithful /
+Enhanced (default Enhanced) and reapplies it live, retaining audio settings.
+font_big is not used for the mixed title/year while its specialized binding
+is unresolved. Fonts absent from a source clone use the previous fallback.
+
+run_regression.ps1 now also runs src/diagnostics/font_tests.gd on each target.
+It writes staging/validation/font-tests.json (29 checks with private resources,
+10 otherwise with an explicit skip). It verifies persisted selection, live
+rebinding, missing assets, exact FontFile advances and color-palette loading.
+Private settings are restored after tests. Smoke adds two original-font checks
+without removing any of the previous 42: the local gate is now 44 smoke,
+150 traversal, 29 fonts and 58 Python on all targets. CI runs the synthetic
+font path and reports its private-font skip alongside private smoke.

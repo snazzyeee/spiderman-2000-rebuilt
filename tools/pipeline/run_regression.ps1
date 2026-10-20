@@ -19,14 +19,21 @@ foreach ($suite in @('reference','pipeline')) {
 & (Join-Path $PSScriptRoot 'run_godot.ps1') -Import *> (Join-Path $evidence 'import.log')
 foreach ($target in @('headless','forward_plus','mobile')) {
     $arguments = @{ Renderer= $(if ($target -eq 'headless') { 'forward_plus' } else { $target }); Headless=($target -eq 'headless') }
-    foreach ($suite in @('smoke','traversal')) {
+    foreach ($suite in @('smoke','traversal','fonts')) {
         $log = Join-Path $evidence "$suite-$target.log"
         if ($suite -eq 'smoke') {
             & (Join-Path $PSScriptRoot 'run_godot.ps1') @arguments -SmokeTest *> $log
             $reportPath = Join-Path $projectRoot 'staging/validation/smoke/godot-smoke.json'
-        } else {
+        } elseif ($suite -eq 'traversal') {
             & (Join-Path $PSScriptRoot 'run_godot.ps1') @arguments -TraversalTests *> $log
             $reportPath = Join-Path $projectRoot 'staging/validation/traversal-tests.json'
+        } else {
+            $startedFontTest = [DateTime]::UtcNow
+            & (Join-Path $PSScriptRoot 'run_godot.ps1') @arguments -Script 'res://src/diagnostics/font_tests.gd' *> $log
+            $reportPath = Join-Path $projectRoot 'staging/validation/font-tests.json'
+            if (-not (Test-Path -LiteralPath $reportPath) -or (Get-Item -LiteralPath $reportPath).LastWriteTimeUtc -lt $startedFontTest) { throw 'Missing fresh font test report' }
+            $fontReport = Get-Content $reportPath -Raw | ConvertFrom-Json
+            if (-not $fontReport.passed -or $fontReport.checks.Count -lt 10) { throw 'Font tests failed or incomplete' }
         }
         $report = Get-Content $reportPath -Raw | ConvertFrom-Json
         if ($report.renderer -ne $arguments.Renderer -or ($target -ne 'headless' -and $report.display_driver -eq 'headless')) { throw "Wrong renderer/display for $target" }

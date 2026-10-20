@@ -2,6 +2,7 @@ extends Node
 
 var checks: Array[String] = []
 var failures: Array[String] = []
+var skips: Array[String] = []
 
 func check(condition: bool, label: String) -> void:
 	checks.append(label)
@@ -32,6 +33,9 @@ func run() -> void:
 		if child is Button:
 			labels.append(child.text)
 	check(labels == ["Game", "Options", "Training", "Special", "Gallery"], "five root menu items")
+	var private_fonts := FileAccess.file_exists("res://assets/ui/fonts/font_manifest.json")
+	if not private_fonts: skips.append("original menu/subtitle fonts absent; using existing fallback")
+	check(not private_fonts or OriginalFonts.uses_original(menu.panel), "menu uses original font when private fonts are present")
 	tap_key(KEY_DOWN)
 	await get_tree().process_frame
 	var focused := menu.get_viewport().gui_get_focus_owner()
@@ -128,6 +132,7 @@ func run() -> void:
 	check(mission.checkpoint == 3, "ordered rooftop checkpoint progression")
 	mission._process(.016)
 	check(mission.encounter_started, "bank encounter activates")
+	check(not private_fonts or OriginalFonts.uses_original(mission.subtitles), "subtitles use original font when private fonts are present")
 	mission.player.global_position = mission.vector(mission.layout.skylight)
 	check(not mission.try_enter_skylight() and mission.lifecycle == mission.Lifecycle.GAMEPLAY_ACTIVE, "living enemies gate skylight")
 	for enemy in mission.enemies:
@@ -138,7 +143,7 @@ func run() -> void:
 	check(mission.try_enter_skylight() and mission.lifecycle == mission.Lifecycle.COMPLETE, "defeated encounter unlocks mission completion")
 	check(GameSession.load_checkpoint() == 2, "separate automation checkpoint persists")
 	await capture("mission")
-	var report := {"passed": failures.is_empty(), "checks": checks, "failures": failures, "renderer": RenderingServer.get_current_rendering_method(), "display_driver": DisplayServer.get_name(), "godot": Engine.get_version_info().string}
+	var report := {"passed": failures.is_empty(), "checks": checks, "failures": failures, "skips":skips, "renderer": RenderingServer.get_current_rendering_method(), "display_driver": DisplayServer.get_name(), "godot": Engine.get_version_info().string}
 	var file := FileAccess.open(report_path("godot-smoke.json"), FileAccess.WRITE)
 	file.store_string(JSON.stringify(report, "  "))
 	file.close()

@@ -1,3 +1,31 @@
+# Active Godot menu typography
+
+The five root entries remain Game, Options, Training, Special and Gallery.
+Original art currently used: converted shell_bg and the original Spider-Man
+rig; comic panels are available through the existing gallery flow. Lighting,
+layout, title text, focus style, selected idle and remake UI-role assignments
+are authored. Dynamic fly-bys, parallax, new transitions, attract mode, expanded
+gallery/costume tools, 1080p layout and performance capture remain pending.
+No Gemini style guide has been read or applied by this font milestone.
+
+Original embedded fonts now supply title/menu/HUD/captions (sp_fnt00) and
+subtitles (sp_fnt02). These role choices are authored, with structural/font
+facts in behavior_ledger/fonts.md. font_big is decoded but its specialized
+character binding is unresolved and it is not used for the mixed title/year.
+Options selects Faithful (4x nearest original pixels) or Enhanced (palette-layer
+TrueType outlines), default Enhanced; settings persist and update live. Missing
+private fonts and unsupported characters use the existing fallback.
+
+Generate private resources with convert_fonts.py (via prepare_godot.ps1).
+All font assets, palette manifests and 720p/1080p/1440p comparisons remain under
+assets/ and staging/validation/fonts/. No original font/art/text is tracked.
+Run run_regression.ps1 for all Python, smoke, traversal and font checks on the
+three targets. The original 42 smoke checks are retained; two font checks add
+to 44. The separate font suite has 29 checks with assets or 10 plus an explicit
+private-resource skip without assets. This is not a 60 fps menu benchmark.
+
+## Historical Unity menu (superseded)
+
 > Historical Unity workflow: its prepare_* scripts have been removed after preservation and purge. Use tools/pipeline/prepare_godot.ps1 and docs/GODOT_MIGRATION.md for the active Godot pipeline.
 
 # Main menu, original audio and Mission 1 entry

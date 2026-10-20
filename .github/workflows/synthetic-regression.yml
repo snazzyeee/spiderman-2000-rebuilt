@@ -29,6 +29,7 @@ jobs:
           New-Item -ItemType Directory -Force staging/validation | Out-Null
           ./tools/pipeline/run_godot.ps1 -Import *> staging/validation/ci-import.log
           ./tools/pipeline/run_godot.ps1 -Headless -TraversalTests *> staging/validation/ci-traversal.log
+          ./tools/pipeline/run_godot.ps1 -Headless -Script res://src/diagnostics/font_tests.gd *> staging/validation/ci-fonts.log
       - name: Validate reports and report private-asset skip
         run: python3 tools/pipeline/ci_report.py
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4

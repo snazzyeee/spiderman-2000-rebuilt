@@ -34,7 +34,7 @@ class BitmapFontTests(unittest.TestCase):
     def test_font_bounds_and_exact_accounting(self):
         valid = font_blob()
         cases = [b'', valid[:-1], valid + b'x', struct.pack('<I', 257) + valid[4:]]
-        for offset, value in [(4, -1), (4, 65), (8, 257), (12, -1), (16, 5)]:
+        for offset, value in [(4, -1), (4, 65), (8, 256), (8, 257), (12, -1), (16, 5)]:
             bad = bytearray(valid)
             struct.pack_into('<i', bad, offset, value)
             cases.append(bad)

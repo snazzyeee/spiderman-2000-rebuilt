@@ -24,12 +24,22 @@ def validate(report, logs):
             raise ValueError('Engine/script error in CI log')
 
 
+def validate_fonts(report):
+    if (report.get('passed') is not True or len(report.get('checks', [])) < 10
+            or report.get('display_driver') != 'headless' or report.get('renderer') != 'forward_plus'
+            or any(row.get('passed') is not True for row in report['checks'])):
+        raise ValueError('Font fallback/variant suite incomplete or failed')
+
+
 if __name__ == '__main__':
     evidence = ROOT / 'staging/validation'
     report = json.loads((evidence / 'traversal-tests.json').read_text())
-    validate(report, [(evidence / name).read_text() for name in ('ci-import.log', 'ci-traversal.log')])
+    validate(report, [(evidence / name).read_text() for name in ('ci-import.log', 'ci-traversal.log', 'ci-fonts.log')])
+    fonts = json.loads((evidence / 'font-tests.json').read_text())
+    validate_fonts(fonts)
     result = {'synthetic_traversal': {'passed': True, 'checks': len(report['checks'])},
-              'private_asset_smoke': {'status': 'skipped', 'minimum_checks': 42,
+              'font_checks': {'passed': True, 'checks': len(fonts['checks']), 'skips': fonts.get('skips', [])},
+              'private_asset_smoke': {'status': 'skipped', 'minimum_checks': 44,
                   'reason': 'CI has no original/derived game assets; run the unchanged smoke suite locally on all three targets.'}}
     (evidence / 'ci-summary.json').write_text(json.dumps(result, indent=2) + '\n')
     print(json.dumps(result, indent=2))
