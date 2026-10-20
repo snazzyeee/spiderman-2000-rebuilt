@@ -10,8 +10,9 @@ No original game program is executed. Retain upstream license files locally.
 | Neversoft Multitool | Existing executable SHA-256 `b83b49333dc70a58a7ff730548287b0a719800eb03408823255f68f3e330b95a`; shared pin `tools/reference/pinned_tools.py` | [MIT](https://github.com/slfx77/neversoft-multitool) |
 | spidey-decomp | Read-only reference at `f8a039248908e085f8fba8106769aea7f8f9de67`; `tools/reference/setup_decomp.ps1` | No upstream license; never built, executed or redistributed |
 
-CI uses immutable commit pins for checkout, setup-python and upload-artifact
-(each MIT). The hosted runner provides Python and PowerShell. Test dependencies
+CI uses immutable commit pins for checkout and upload-artifact (each MIT).
+The hosted runner provides Python and PowerShell; no extra interpreter is
+downloaded. Test dependencies
 have exact versions and published universal-wheel SHA-256 pins in
 `tools/pipeline/ci-requirements.txt`: Requests (Apache-2.0), Beautiful Soup (MIT),
 certifi (MPL-2.0), charset-normalizer (MIT), idna (BSD-3-Clause), urllib3 (MIT),
