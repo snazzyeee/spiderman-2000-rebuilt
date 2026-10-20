@@ -1,8 +1,17 @@
 param([ValidateSet('mobile', 'forward_plus')][string]$Renderer = 'forward_plus', [switch]$Editor, [switch]$SmokeTest, [switch]$Headless, [string]$Script, [switch]$Import, [switch]$TraversalTests)
 $ErrorActionPreference = 'Stop'
 $projectRoot = (Resolve-Path (Join-Path $PSScriptRoot '../..')).Path
-$executable = Join-Path $projectRoot 'tools/third_party/godot-4.7.2/Godot_v4.7.2-stable_win64_console.exe'
-if (-not (Test-Path -LiteralPath $executable)) { & (Join-Path $PSScriptRoot 'setup_godot.ps1') }
+$isWindowsHost = $env:OS -eq 'Windows_NT'
+if ($isWindowsHost) {
+    $executable = Join-Path $projectRoot 'tools/third_party/godot-4.7.2/Godot_v4.7.2-stable_win64_console.exe'
+    if (-not (Test-Path -LiteralPath $executable)) { & (Join-Path $PSScriptRoot 'setup_godot.ps1') }
+} else {
+    $executable = Join-Path $projectRoot 'tools/third_party/godot-4.7.2-linux/Godot_v4.7.2-stable_linux.x86_64'
+    if (-not (Test-Path -LiteralPath $executable)) { throw 'Run python tools/pipeline/setup_godot_linux.py first' }
+}
+# Keep editor paths writable inside the ignored tool installation, including
+# imports launched from a sandbox without access to the host editor settings.
+New-Item -ItemType File -Force -Path (Join-Path (Split-Path $executable) '_sc_') | Out-Null
 & (Join-Path $PSScriptRoot 'guard_godot_scan.ps1')
 $godotArgs = @('--path', $projectRoot, '--rendering-method', $Renderer)
 if ($Editor) { $godotArgs += '--editor' }

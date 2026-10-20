@@ -12,6 +12,7 @@ if (-not (Test-Path -LiteralPath $zip) -or (Get-FileHash -Algorithm SHA256 -Lite
 }
 if ((Get-FileHash -Algorithm SHA256 -LiteralPath $zip).Hash.ToLowerInvariant() -ne $expected) { throw 'Godot ZIP digest mismatch' }
 if (-not (Test-Path -LiteralPath $editor)) { Expand-Archive -LiteralPath $zip -DestinationPath $destination -Force }
+New-Item -ItemType File -Force -Path (Join-Path $destination '_sc_') | Out-Null
 & (Join-Path $destination 'Godot_v4.7.2-stable_win64_console.exe') --version
 if ($LASTEXITCODE -ne 0) { throw 'Godot version check failed' }
 if ($Launch) { Start-Process -FilePath $editor -ArgumentList @('--editor', '--path', ('"' + $projectRoot + '"')) -WindowStyle Hidden }

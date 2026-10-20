@@ -96,3 +96,11 @@ original art. There is no embedded proprietary game in the public repository.
 [Unity purge report](docs/migration/PURGE_REPORT.md) ·
 [Behavior ledger](docs/behavior_ledger/README.md) ·
 [Archived Unity mission guide](docs/MISSION1.md)
+
+Public synthetic CI is defined in `.github/workflows/synthetic-regression.yml`.
+It downloads hash-pinned Godot 4.7.2, runs Python fixtures and all synthetic
+traversal suites, and reports private-asset smoke as an explicit skip. Local
+`tools/pipeline/run_regression.ps1 -Milestone <name>` still runs the full private
+matrix on headless, real Vulkan Forward+ and Mobile. See
+[tool pins/licenses](docs/THIRD_PARTY.md) and
+[editor paths and CI](docs/GODOT_MIGRATION.md#editor-paths-and-public-ci).

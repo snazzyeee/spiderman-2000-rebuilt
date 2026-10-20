@@ -251,3 +251,30 @@ Per-node diagnostics and supplemental geometry observations are private:
 staging/validation/units-landmark.json, units-extra-geometry.json and
 staging/reference/landmark_geometry/manifest.json. The supplemental result never
 replaces the original gate or enables TRG placement. No height or offset was fitted.
+
+## Editor paths and public CI
+
+The four root folders export_templates/, feature_profiles/, script_templates/
+and text_editor_themes/ are Godot editor data, not project content. In Godot
+4.7.2's editor/file_system/editor_paths.cpp constructor, a failed change to the
+host data/config directory leaves the filesystem access object in its working
+directory; the constructor still creates these four relative subfolders. This
+explains the observed empty root folders after restricted editor/import launches.
+The normal host %APPDATA%/Godot installation also contains the same four names.
+See https://docs.godotengine.org/en/stable/tutorials/io/data_paths.html#self-contained-mode.
+
+Both setup and run launchers now create the supported _sc_ marker beside the
+pinned binary. Editor data/config/cache go to tools/third_party/godot-4.7.2/editor_data/
+(or godot-4.7.2-linux/editor_data/), inside the ignored writable tool installation.
+The four fallback names are explicitly ignored; empty leftovers can be removed
+without moving project resources. Existing host editor preferences are untouched.
+
+.github/workflows/synthetic-regression.yml runs without secrets or game assets:
+Python synthetic fixtures, hash-pinned Linux Godot 4.7.2, guarded import and all
+150 synthetic traversal assertions. ci_report.py rejects incomplete suites and
+engine/script errors. CI explicitly reports the 42-check private-asset smoke
+suite as skipped with a reason; the existing full local three-target smoke gate
+continues unchanged. Evidence is uploaded as synthetic-validation.
+Linux setup: python tools/pipeline/setup_godot_linux.py, then use the same
+PowerShell run_godot.ps1 -Import / -Headless -TraversalTests launcher.
+Versions, download hashes and licenses are recorded in THIRD_PARTY.md.

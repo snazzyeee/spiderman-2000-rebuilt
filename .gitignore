@@ -13,6 +13,13 @@
 **/.mono/
 /tools/pipeline/.cache/
 
+# Godot EditorPaths fallback folders from launches with inaccessible host config.
+# Launchers now use self-contained editor_data under the ignored pinned install.
+/export_templates/
+/feature_profiles/
+/script_templates/
+/text_editor_themes/
+
 # Python bytecode
 __pycache__/
 *.py[cod]
