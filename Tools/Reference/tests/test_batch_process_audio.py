@@ -1,6 +1,9 @@
 import importlib.util
 import pathlib
 import tempfile
+import json
+import sys
+import threading
 import unittest
 
 SPEC = importlib.util.spec_from_file_location("batch_audio", pathlib.Path(__file__).parents[1] / "batch_process_audio.py")
@@ -9,6 +12,22 @@ SPEC.loader.exec_module(MODULE)
 
 
 class BatchAudioTests(unittest.TestCase):
+    @unittest.skipUnless(sys.platform == "win32", "Windows file-sharing regression")
+    def test_atomic_checkpoint_survives_a_temporary_reader_lock(self):
+        private_tests = pathlib.Path(__file__).parents[3] / "TestResults"
+        private_tests.mkdir(exist_ok=True)
+        with tempfile.TemporaryDirectory(dir=private_tests) as directory:
+            target = pathlib.Path(directory) / "checkpoint.json"
+            MODULE.write_json(target, {"completed": 1})
+            reader = target.open("r", encoding="utf-8")
+            release = threading.Timer(.12, reader.close)
+            release.start()
+            try:
+                MODULE.write_json(target, {"completed": 2})
+            finally:
+                release.join(); reader.close()
+            self.assertEqual(json.loads(target.read_text())["completed"], 2)
+
     def test_requested_character_prefixes_are_case_insensitive(self):
         for prefix, expected in {"Na": "Stan Lee", "Sp": "Spider-Man", "SM": "Spider-Man", "Th": "Thug", "Co": "Police"}.items():
             entry = {"source_path": f"Voice/{prefix}_01.bik"}

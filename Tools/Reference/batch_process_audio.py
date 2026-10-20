@@ -34,7 +34,15 @@ def write_json(path: Path, value: dict) -> None:
         json.dump(value, stream, ensure_ascii=False, indent=2, allow_nan=False)
         stream.flush()
         os.fsync(stream.fileno())
-    os.replace(temporary, path)
+    # Windows readers/antivirus may briefly open a file without delete sharing.
+    for attempt in range(8):
+        try:
+            os.replace(temporary, path)
+            break
+        except PermissionError:
+            if attempt == 7:
+                raise
+            time.sleep(min(.05 * 2 ** attempt, .5))
 
 
 def safe_audio(root: Path, name: str) -> Path:
@@ -84,6 +92,7 @@ def main() -> int:
     if args.threads < 1 or args.beam_size < 1 or args.limit < 0:
         parser.error("threads/beam-size must be positive; limit must be nonnegative")
     from faster_whisper import WhisperModel
+    from faster_whisper.audio import decode_audio
     from faster_whisper.utils import download_model
     document = json.loads(args.manifest.read_text(encoding="utf-8"))
     if document.get("schema_version") != 1:
@@ -92,6 +101,10 @@ def main() -> int:
     identities = [entry["clip_id"] for entry in entries]
     if len(set(identities)) != len(entries):
         raise ValueError("Duplicate clip identities")
+    if not entries:
+        raise ValueError("No dialogue clips in input manifest")
+    # Fail once on an incompatible decoder instead of recording 991 copies.
+    decode_audio(str(safe_audio(args.manifest.parent, entries[0]["file_name"])), sampling_rate=16000)
     evidence = json.loads(args.evidence.read_text(encoding="utf-8"))
     args.cache.mkdir(parents=True, exist_ok=True)
     model_path = Path(args.model) if Path(args.model).is_dir() else Path(

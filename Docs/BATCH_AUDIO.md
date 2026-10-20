@@ -2,6 +2,9 @@
 
 The local pipeline uses faster-whisper 1.2.1 on CPU with int8 compute, small.en,
 six threads, English transcription, beam size five, Silero VAD and word timing.
+PyAV is pinned to 16.0.1 because version 19 removes the audio-open argument used
+by faster-whisper 1.2.1. Decoder preflight runs before model loading or batch
+processing. Atomic JSON writes retry temporary Windows reader/antivirus locks.
 The RX 580 does not provide the NVIDIA CUDA backend used by faster-whisper.
 No audio, transcripts or original game data are uploaded. Only public model
 weights and Python packages are downloaded.
