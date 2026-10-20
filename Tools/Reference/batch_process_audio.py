@@ -71,7 +71,38 @@ def read_trigger_names(directory: Path) -> tuple[dict, dict]:
     return by_level, summary
 
 
-def annotate(entry: dict, result: dict, events: list[dict], trigger_names: dict | None = None) -> None:
+def read_native_references(path: Path, events: list[dict]) -> tuple[dict, dict]:
+    summary = {"available": path.is_file(), "resolved_commands": 0, "resolved_files": 0}
+    if not path.is_file():
+        return {}, summary
+    catalog = json.loads(path.read_text(encoding="utf-8"))
+    if catalog.get("format") != "neversoft_pc_voice_bank_v1" or catalog.get("schema_version") != 1 \
+            or catalog.get("stride") != 16 or catalog.get("bank_count") != 79 or len(catalog.get("entries", [])) != 1264:
+        raise ValueError("Unsupported native voice catalog")
+    references = {}
+    for event in events:
+        if event.get("command", {}).get("name") != "PlayXA":
+            continue
+        args = event["command"].get("args", [])
+        if len(args) != 2 or any(type(value) is not int for value in args) or not 0 <= args[0] < 79 or not 0 <= args[1] < 16:
+            raise ValueError("PlayXA operands exceed the inspected native table")
+        index = args[0] * 16 + args[1]
+        row = catalog["entries"][index]
+        if row.get("native_id") != index or row.get("bank") != args[0] or row.get("track") != args[1]:
+            raise ValueError("Native catalog index mismatch")
+        filename = row["file_name"].lower()
+        reference = {"file": event["file"], "level_id": event["scene_or_mission_id"], "node_id": event["node_id"],
+                     "bank": args[0], "track": args[1], "native_id": index,
+                     "source_sha256": catalog["source_sha256"],
+                     "event_reference": f"TRG:{event['scene_or_mission_id']}:node{event['node_id']}:PlayXA({args[0]},{args[1]})"}
+        references.setdefault(filename, []).append(reference)
+        summary["resolved_commands"] += 1
+    summary["resolved_files"] = len(references)
+    return references, summary
+
+
+def annotate(entry: dict, result: dict, events: list[dict], trigger_names: dict | None = None,
+             native_references: dict | None = None) -> None:
     stem = Path(entry["source_path"]).stem
     prefix = stem.split("_")[0].lower()
     speaker = PREFIXES.get(prefix)
@@ -90,11 +121,15 @@ def annotate(entry: dict, result: dict, events: list[dict], trigger_names: dict 
     entry["level_trigger_candidates"] = related
     entry["level_trigger_names"] = (trigger_names or {}).get(entry["level_id"], [])
     direct = entry.get("trigger_references", [])
+    native = (native_references or {}).get(Path(entry["source_path"]).name.lower(), [])
+    entry["native_trigger_references"] = native
+    entry["trigger_levels"] = sorted({reference["level_id"] for reference in native})
     verified = [mapping for mapping in entry.get("mappings", []) if mapping.get("status") == "verified"
                 and mapping.get("playback_trigger")]
     entry["trigger_condition"] = verified[0]["playback_trigger"] if verified else (
-        json.dumps(direct, sort_keys=True) if direct else None)
-    entry["trigger_condition_status"] = "verified_annotation" if verified else "direct_reference" if direct else "unresolved_numeric_link"
+        " | ".join(reference["event_reference"] for reference in native) if native else json.dumps(direct, sort_keys=True) if direct else None)
+    entry["trigger_condition_status"] = "verified_annotation" if verified else "native_indexed_event" if native else "direct_reference" if direct else "unresolved_numeric_link"
+    entry["trigger_semantics_status"] = "verified_annotation" if verified else "guard_logic_not_reconstructed"
 
 
 def main() -> int:
@@ -102,6 +137,7 @@ def main() -> int:
     parser.add_argument("--manifest", type=Path, default=Path("Game/Assets/_LocalReference/Audio/dialogue_manifest.json"))
     parser.add_argument("--evidence", type=Path, default=Path("Game/Assets/_LocalReference/Audio/extraction_evidence.json"))
     parser.add_argument("--trg-dir", type=Path, default=Path("Game/Assets/_LocalReference/Audio/_work~/trg_json"))
+    parser.add_argument("--native-catalog", type=Path, default=Path("LocalReference/Dialogue/native_voice_catalog.json"))
     parser.add_argument("--cache", type=Path, default=Path("LocalReference/Dialogue/ASR"))
     parser.add_argument("--model", default="small.en")
     parser.add_argument("--model-cache", type=Path, default=Path("Tools/ThirdParty/audio-models"))
@@ -128,6 +164,7 @@ def main() -> int:
     decode_audio(str(safe_audio(args.manifest.parent, entries[0]["file_name"])), sampling_rate=16000)
     evidence = json.loads(args.evidence.read_text(encoding="utf-8"))
     trigger_names, trigger_summary = read_trigger_names(args.trg_dir)
+    native_references, native_summary = read_native_references(args.native_catalog, evidence.get("trigger_commands", []))
     args.cache.mkdir(parents=True, exist_ok=True)
     model_path = Path(args.model) if Path(args.model).is_dir() else Path(
         download_model(args.model, cache_dir=str(args.model_cache), local_files_only=args.offline))
@@ -139,7 +176,8 @@ def main() -> int:
     model = WhisperModel(str(model_path), device="cpu", compute_type="int8", cpu_threads=args.threads, num_workers=1)
     selected = entries[:args.limit] if args.limit else entries
     report = {"total": len(entries), "selected": len(selected), "completed": 0, "reused": 0,
-              "failures": [], "trg_context": trigger_summary, "config": signature, "started_unix": time.time()}
+              "failures": [], "trg_context": trigger_summary, "native_index": native_summary,
+              "config": signature, "started_unix": time.time()}
     began = time.monotonic()
     for index, entry in enumerate(selected):
         try:
@@ -169,7 +207,7 @@ def main() -> int:
                           "transcript": " ".join(row["text"] for row in rows), "segments": rows,
                           "duration": info.duration, "speech_duration": info.duration_after_vad}
                 write_json(cache_path, result)
-            annotate(entry, result, evidence.get("trigger_commands", []), trigger_names)
+            annotate(entry, result, evidence.get("trigger_commands", []), trigger_names, native_references)
             report["completed"] += 1
         except Exception as error:
             report["failures"].append({"clip_id": entry["clip_id"], "error": str(error)})

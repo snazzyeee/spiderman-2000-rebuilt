@@ -14,6 +14,7 @@ weights and Python packages are downloaded.
 From the repository root, after extraction in AUDIO_PIPELINE.md:
 
     .\Tools\Reference\setup_audio_asr.ps1
+    python Tools/Reference/extract_native_voice_catalog.py
     & .\Tools\ThirdParty\audio-python\Scripts\python.exe Tools/Reference/batch_process_audio.py --model Tools/ThirdParty/audio-models/local-small.en --offline
 
 The setup uses an isolated ignored venv, binary-only pinned requirements, and
@@ -25,7 +26,8 @@ Pass -PythonPath for a different compatible 64-bit Python; this machine uses
 Python 3.12.14. Full dependency pins are in requirements-audio.txt.
 
 The Python script also accepts --model small.en for normal Hub downloading,
---threads, --beam-size, --manifest, --evidence, --trg-dir, --cache and --model-cache.
+--threads, --beam-size, --manifest, --evidence, --trg-dir, --native-catalog,
+--cache and --model-cache.
 --limit N is explicitly a partial smoke run. Zero/default processes every
 Dialogue category entry, including movie soundtracks and silent logo carriers.
 
@@ -57,9 +59,13 @@ not a character identity. Ambiguous speakers retain Unknown.
 
 The join retains matching-level PlayXA/RunCinema commands as candidates and
 reads all converted TRG nodes to retain named triggers with their types/links.
-trigger_condition is populated only from a verified annotation or a direct
-filename reference in the extraction evidence. Same-level numeric operands
-alone do not prove the clip or the condition that invokes it. The current TRG
+The optional native catalog now resolves bank/track operands using the inspected
+PC binary's actual filename table. See NATIVE_VOICE_IDS.md: all 29 recovered
+PlayXA commands map to 28 files. trigger_condition then records the exact TRG
+event reference, with native_indexed_event status; the surrounding guard logic
+is still separate and unverified. Verified annotations and direct filename
+references are also retained. Same-level numeric operands without the native
+catalog remain candidates. The current TRG
 parser recovered 384 named commands, including 29 PlayXA and 33 RunCinema
 commands. Their containing nodes have no names; the full graphs separately
 contain 94 named nodes, mainly RESTART nodes such as Re_Start_Death. These are
@@ -69,6 +75,13 @@ missing evidence.
 
 All clips, model/dependency binaries, caches, transcripts, expanded manifests and
 reports remain ignored. Only code, tests, pins and setup documentation are pushed.
+
+Tools/Build/finish_audio_validation.ps1 waits for an already-running full ASR
+pass, retains its private inference report, applies current trigger context from
+the complete cache, validates all required fields, and runs Python tests plus
+the full Unity frontend build/tests/smoke flow. It never launches another ASR
+inference job while waiting. REFERENCE_SOURCES.md records the user's external
+cutscene transcript reference without replacing local ASR output.
 
 Implementation references: [faster-whisper](https://github.com/SYSTRAN/faster-whisper)
 and [the pinned original model](https://huggingface.co/Systran/faster-whisper-small.en/tree/d1d751a5f8271d482d14ca55d9e2deeebbae577f).

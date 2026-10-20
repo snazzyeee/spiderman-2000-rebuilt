@@ -83,3 +83,6 @@ Decoder reference: [Neversoft Multitool](https://github.com/slfx77/neversoft-mul
 Local ASR, requested filename speaker rules, level/TRG candidate joins and
 resumable processing are implemented in [BATCH_AUDIO.md](BATCH_AUDIO.md).
 Draft transcription does not satisfy the verified-complete semantic gate.
+The newer read-only native catalog in NATIVE_VOICE_IDS.md resolves 29 recovered
+numeric PlayXA commands to 28 files using the inspected executable's table.
+These are exact indexed event references, not reconstructed node guard logic.
