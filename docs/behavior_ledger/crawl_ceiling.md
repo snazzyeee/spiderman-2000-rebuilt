@@ -81,6 +81,13 @@ ceiling, or on a wall whose normal component exceeds 3400.
 
 ## Planned tests (tests/scenes/test_wallcrawl.tscn)
 
+Implementation: MotorContext plus Crawl/Ceiling/Ground/Air/Stunned state nodes.
+The original wall attach rule remains unknown: **the remake requires explicit
+crawl input**, a stickable contact and authored reach. This is a deliberate
+deviation, not a recovered auto-attach rule. Exterior/interior/fence reach probes,
+orientation blending, speed and four-frame grace are authored in crawl.tres.
+Recovered event slots resolve through the ledger JSON `runtime_bindings` table.
+
 - A ceiling tilted 30 degrees attaches; one tilted 40 degrees does not.
 - Moving downward never attaches to a ceiling.
 - A no-stick surface never attaches.
