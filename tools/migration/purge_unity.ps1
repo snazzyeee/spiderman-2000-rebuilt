@@ -61,7 +61,9 @@ $archiveSha = (& git -C $workspaceRoot rev-parse refs/remotes/origin/archive/uni
 if ($LASTEXITCODE -ne 0 -or -not $archiveSha) { throw 'Pushed backup branch is required' }
 
 # Promote the existing Godot project; all paths are checked before recursive moves.
-foreach ($file in Get-ChildItem -LiteralPath (Join-Path $workspaceRoot 'Godot/assets/models') -Force) {
+# Each step is a no-op once done, so an interrupted run can be resumed.
+$modelsRoot = Join-Path $workspaceRoot 'Godot/assets/models'
+foreach ($file in @(if (Test-Path -LiteralPath $modelsRoot) { Get-ChildItem -LiteralPath $modelsRoot -Force })) {
     $category = if ($file.Name.StartsWith('l1a1_', [StringComparison]::OrdinalIgnoreCase)) { 'environments' } else { 'characters' }
     Merge-Move $file.FullName (Join-Path $workspaceRoot ('assets/'+$category+'/'+$file.Name))
 }
@@ -102,13 +104,18 @@ $serializedExtensions = @('.meta','.unity','.prefab','.mat','.asset','.anim','.c
     '.overridecontroller','.mixer','.playable','.asmdef','.asmref','.inputactions','.uxml','.uss')
 foreach ($file in Get-ChildItem -LiteralPath $workspaceRoot -Recurse -File -Force) {
     if ($file.FullName.StartsWith((Join-Path $workspaceRoot '.git'), [StringComparison]::OrdinalIgnoreCase)) { continue }
+    # Downloaded third-party tools and references are not Unity output.
+    if ($file.FullName.StartsWith((Join-Path $workspaceRoot 'tools\third_party'), [StringComparison]::OrdinalIgnoreCase)) { continue }
     if ($file.Extension.ToLowerInvariant() -in $serializedExtensions -or $file.Name -like 'Assembly-CSharp*.csproj' -or $file.Extension -in @('.sln','.slnx')) {
         Remove-Checked $file.FullName
     }
 }
-$remaining = @(Get-ChildItem -LiteralPath (Join-Path $workspaceRoot 'Godot') -Recurse -File -Force)
-if ($remaining.Count -ne 0) { throw 'Unexpected files remain under the old Godot wrapper; inspect before removing it' }
-Remove-Checked (Join-Path $workspaceRoot 'Godot')
+$wrapper = Join-Path $workspaceRoot 'Godot'
+if (Test-Path -LiteralPath $wrapper) {
+    $remaining = @(Get-ChildItem -LiteralPath $wrapper -Recurse -File -Force)
+    if ($remaining.Count -ne 0) { throw 'Unexpected files remain under the old Godot wrapper; inspect before removing it' }
+    Remove-Checked $wrapper
+}
 $report = [ordered]@{ backup_sha=$archiveSha; removed=$script:removed; count=$script:removed.Count; finishedUtc=[DateTime]::UtcNow.ToString('o') }
 $report | ConvertTo-Json -Depth 6 | Set-Content -LiteralPath (Join-Path $auditRoot 'purge_operations.json') -Encoding utf8
 Write-Output "Removed $($script:removed.Count) Unity directories/files after preservation verification."
