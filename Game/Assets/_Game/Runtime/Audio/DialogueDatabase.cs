@@ -13,6 +13,7 @@ namespace SpiderManRebuild
     {
         public string clip_id, file_name, source_path, speaker, scene_or_mission_id, subtitle_text;
         public string playback_trigger, category, mapping_status, subtitle_status;
+        public string level_id, transcript, transcript_status, trigger_condition, trigger_condition_status;
         public float duration_seconds;
         public DialogueMapping[] mappings;
         public bool VerifiedSubtitle => subtitle_status == "verified";
