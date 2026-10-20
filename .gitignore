@@ -1,30 +1,30 @@
-# Private Godot assets and migration audit (also needed during relocation)
+# Private original/derived assets, raw extraction backups, validation output and logs
 /assets/
 /staging/
+
+# Private derived level data (generated from original TRG files)
+/levels/**/trg_graph.json
+
+# Downloaded portable tools, models and pinned third-party references; retain upstream licenses locally
 /tools/third_party/
 
-# Local proprietary reference files and downloaded installers
-/LocalReference/
-/Spider.Man.2000/
-/Spider.Man.2000.zip
-
-# Downloaded portable research utility; retain upstream license locally
-/Tools/ThirdParty/innoextract-1.9/
-/Tools/ThirdParty/neversoft-multitool-1.3.4/
-/Tools/ThirdParty/unity-cli/
-/Tools/ThirdParty/audio-python/
-/Tools/ThirdParty/audio-models/
-/Tools/ThirdParty/godot-*/
-
-# Godot caches and locally converted proprietary content
+# Godot caches
 **/.godot/
 **/.mono/
-/Godot/assets/
-/Tools/pipeline/.cache/
-/Tools/UnityEditor/
-/Tools/UnityDownloads/
+/tools/pipeline/.cache/
 
-# Generated Unity/IDE data and local validation output
+# Python bytecode
+__pycache__/
+*.py[cod]
+
+# Private reference inventories/conversion logs and generated machine metadata
+/docs/research_notes/**/*.json
+/docs/research_notes/**/*.log
+
+# Unity-era generated output; remove this block once Game/, Builds/ and Logs/ are purged
+/Builds/
+/Logs/
+/Game/.gdignore
 /Game/[Ll]ibrary/
 /Game/[Tt]emp/
 /Game/[Oo]bj/
@@ -32,26 +32,10 @@
 /Game/[Uu]ser[Ss]ettings/
 /Game/.vs/
 /Game/.vscode/
-__pycache__/
-*.py[cod]
 /Game/*.csproj
 /Game/*.sln
 /Game/*.slnx
-/Game/*.csproj.user
-/Logs/
-/Builds/
-/TestResults/
-
-# Private reference inventories/conversion logs and generated machine metadata
-/research_notes/**/*.json
-/research_notes/**/*.log
-/Game/Assets/Resources/PerformanceTestRun*.json
-/Game/Assets/Resources/PerformanceTestRun*.json.meta
-
-# Optional private research imports, including the folder's adjacent meta
 /Game/Assets/_LocalReference/
 /Game/Assets/_LocalReference.meta
-
-# Editor-bundled TMP essentials are imported reproducibly; do not vendor font binaries.
 /Game/Assets/TextMesh Pro/
 /Game/Assets/TextMesh Pro.meta
