@@ -15,6 +15,7 @@ var sfx := AudioStreamPlayer.new()
 var low_pass := AudioEffectLowPassFilter.new()
 var music_volume_before_speech := 0.0
 var ducked := false
+var active_sfx_bank := ""
 
 func _ready() -> void:
 	for bus in ["Dialogue", "Music", "SFX"]:
@@ -49,22 +50,40 @@ func find_key(stem: String) -> String:
 			return key
 	return ""
 
-# Recovered numeric identities are separate from unresolved filename bindings.
-# The behavior ledger forbids guessing the identity of a converted clip.
+# Exact source/hash bindings and bank selection follow audio_ids.md.
 func play_original_sfx(id: int, at: Vector3) -> bool:
-	original_sfx_requested.emit(id)
+	return play_sfx_id(id,at)
+
+func resolve_sfx_id(id: int, bank: String = "") -> String:
+	if id <= 0 or (id & ~0xFFFF) != 0: return ""
+	var target_bank := "spidey" if (id & 0x8000) == 0 else (bank if bank != "" else active_sfx_bank).to_lower()
+	if target_bank == "": return ""
+	var normalized := id & ~0x4000
+	var matches: Array[String] = []
 	for key in registry:
-		if registry[key].get("native_sfx_id",-1) == id:
-			return play_sfx(key,at)
-	return false
+		for identity in registry[key].get("native_sfx_identities",[]):
+			if identity.bank == target_bank and int(identity.id) == normalized:
+				matches.append(key)
+	return matches[0] if matches.size() == 1 else ""
+
+func play_sfx_id(id: int, at: Variant = null, bank: String = "") -> bool:
+	original_sfx_requested.emit(id)
+	var key := resolve_sfx_id(id,bank)
+	return play_sfx(key,at) if key != "" else false
+
+func resolve_xa(bank: int, track: int) -> String:
+	if bank < 0 or bank >= 79 or track < 0 or track >= 16: return ""
+	var matches: Array[String] = []
+	for key in registry:
+		for identity in registry[key].get("native_xa_identities",[]):
+			if int(identity.bank) == bank and int(identity.track) == track and int(identity.flat_id) == bank*16+track:
+				matches.append(key)
+	return matches[0] if matches.size() == 1 else ""
 
 func play_original_xa(bank: int, track: int) -> bool:
 	original_xa_requested.emit(bank,track)
-	for key in registry:
-		var entry: Dictionary = registry[key]
-		if entry.get("native_bank",-1) == bank and entry.get("native_track",-1) == track:
-			return play(key)
-	return false
+	var key := resolve_xa(bank,track)
+	return play(key) if key != "" else false
 
 func play(clip_id: String, owner: Object = null) -> bool:
 	if is_instance_valid(cinematic_owner) and cinematic_owner != owner:

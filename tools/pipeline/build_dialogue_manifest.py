@@ -15,6 +15,7 @@ from bs4 import BeautifulSoup
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / 'tools/reference'))
 from batch_process_audio import write_json
+from extract_native_voice_catalog import INSPECTED_SHA256
 
 URL = 'https://transcripts-fanon.fandom.com/wiki/Spider-Man_(2000_Video_Game)/Transcript'
 LEVELS = {'L1A1': 'Get to the Bank!', 'L1A2': 'Bank Approach',
@@ -170,6 +171,55 @@ def export_registry(document, rows, source_root, target_root, copy_audio=True):
     return registry
 
 
+def attach_native_identities(registry, clips, xa_catalog=None, sfx_catalog=None):
+    """Exact source identity plus verified extraction WAV hash, never fuzzy names."""
+    by_source={}
+    by_basename={}
+    for clip in clips:
+        source=clip['source_path'].replace('\\','/').casefold()
+        by_source.setdefault(source,[]).append(clip)
+        by_basename.setdefault(Path(source).name,[]).append(clip)
+    xa_names={}
+    if xa_catalog is not None:
+        if xa_catalog.get('source_sha256')!=INSPECTED_SHA256 or xa_catalog.get('stride')!=16 or xa_catalog.get('bank_count')!=79 or len(xa_catalog.get('entries',[]))!=79*16:
+            raise ValueError('Uninspected or incomplete native XA catalog')
+        seen=set()
+        for row in xa_catalog['entries']:
+            bank,track,flat=row['bank'],row['track'],row['native_id']
+            if not 0<=bank<79 or not 0<=track<16 or flat!=bank*16+track or flat in seen or not re.fullmatch(r'[A-Za-z0-9_]+\.bik',row['file_name'],re.I):
+                raise ValueError('Malformed native XA identity')
+            seen.add(flat)
+            xa_names.setdefault(row['file_name'].casefold(),[]).append(dict(bank=bank,track=track,flat_id=flat))
+    if sfx_catalog is not None and sfx_catalog.get('format')!='bounded_pc_sfx_kat_identity_v1':
+        raise ValueError('Unknown SFX catalog format')
+    sfx_sources={}
+    for row in (sfx_catalog or {}).get('records',[]):
+        if row.get('payload_present'):
+            sfx_sources.setdefault(row['source_suffix'].casefold(),[]).append(dict(bank=row['bank'],id=row['native_sfx_id']))
+    joined_xa=joined_sfx=0
+    fields=('native_bank','native_track','native_flat_id','native_xa_identities','native_sfx_bank','native_sfx_id','native_sfx_identities')
+    for entry in registry.values():
+        for field in fields:entry.pop(field,None)
+        source=entry['source_path'].replace('\\','/').casefold()
+        candidates=[c for c in by_source.get(source,[]) if c['wav_sha256']==entry['wav_sha256']]
+        if len(candidates)!=1:
+            entry['native_identity_join_status']='unresolved_source_or_hash';continue
+        basename=Path(source).name
+        if entry['category']=='Dialogue' and basename in xa_names and len(by_basename[basename])==1:
+            identities=xa_names[basename]
+            primary=identities[0]
+            entry.update(native_bank=primary['bank'],native_track=primary['track'],native_flat_id=primary['flat_id'],native_xa_identities=identities)
+            joined_xa+=1
+        suffix='/'.join(source.split('/')[-2:])
+        if entry['category']=='SFX' and suffix in sfx_sources:
+            identities=sfx_sources[suffix]
+            primary=identities[0]
+            entry.update(native_sfx_bank=primary['bank'],native_sfx_id=primary['id'],native_sfx_identities=identities)
+            joined_sfx+=1
+        entry['native_identity_join_status']='exact_source_and_wav_sha256' if any(f in entry for f in ('native_flat_id','native_sfx_id')) else 'unresolved'
+    return dict(xa_entries=joined_xa,sfx_entries=joined_sfx)
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--input', type=Path, default=ROOT/'staging/raw_extracted/audio_source/dialogue_manifest.json')
@@ -178,13 +228,18 @@ def main():
     parser.add_argument('--audio-root', type=Path, default=ROOT/'assets/audio')
     parser.add_argument('--html', type=Path, default=ROOT/'staging/raw_extracted/GodotMigration/transcript.html')
     parser.add_argument('--offline', action='store_true')
+    parser.add_argument('--xa-catalog',type=Path,default=ROOT/'staging/raw_extracted/Dialogue/native_voice_catalog.json')
+    parser.add_argument('--sfx-catalog',type=Path,default=ROOT/'staging/reference/native_sfx_catalog.json')
     args = parser.parse_args()
     html = fetch_reference(args.html, args.offline)
     rows = parse_reference(html)
     document = json.loads(args.input.read_text(encoding='utf-8'))
     registry = export_registry(document, rows, args.input.parent, args.audio_root)
+    identities=attach_native_identities(registry,document['clips'],
+        json.loads(args.xa_catalog.read_text()) if args.xa_catalog.exists() else None,
+        json.loads(args.sfx_catalog.read_text()) if args.sfx_catalog.exists() else None)
     write_json(args.output, registry)
-    report = dict(clips=len(registry), reference_lines=len(rows),
+    report = dict(clips=len(registry), reference_lines=len(rows), native_identity_joins=identities,
         matched=sum(x['reference_match_accepted'] for x in registry.values()),
         text_status=dict(Counter(x['text_status'] for x in registry.values() if x['category']=='Dialogue')),
         source_html_sha256=hashlib.sha256(html.encode()).hexdigest(),

@@ -59,4 +59,16 @@ func run() -> Array:
 	motor.health = 0
 	motor.heal(100)
 	check(motor.health == 0, "dead player cannot heal")
+	var saved_registry := Dialogue.registry
+	Dialogue.registry = {"synthetic_xa":{"native_xa_identities":[{"bank":2,"track":3,"flat_id":35},{"bank":2,"track":4,"flat_id":36}]},
+		"synthetic_sfx":{"native_sfx_identities":[{"bank":"synth","id":0x800b}]}}
+	check(Dialogue.resolve_xa(2,3) == "synthetic_xa", "synthetic exact XA identity resolves")
+	check(Dialogue.resolve_xa(2,4) == "synthetic_xa", "shared-file XA identities both resolve")
+	check(Dialogue.resolve_xa(2,5) == "", "unknown XA identity remains unresolved")
+	check(Dialogue.resolve_sfx_id(0x800b,"synth") == "synthetic_sfx", "synthetic level alias resolves in explicit bank")
+	check(Dialogue.resolve_sfx_id(0x800b,"other") == "", "same alias in another bank cannot resolve")
+	Dialogue.registry = {}
+	check(not Dialogue.play_original_xa(33,2), "XA request returns false cleanly without private registry")
+	check(not Dialogue.play_sfx_id(9), "SFX request returns false cleanly without private registry")
+	Dialogue.registry = saved_registry
 	return checks

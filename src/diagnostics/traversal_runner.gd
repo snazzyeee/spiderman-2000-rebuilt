@@ -15,7 +15,7 @@ func run() -> void:
 		var suite = scene.instantiate()
 		root.add_child(suite)
 		var results: Array = await suite.run()
-		var minimums := {"camera":56,"swing":13,"wallcrawl":21,"zip":14,"webbing":34}
+		var minimums := {"camera":56,"swing":13,"wallcrawl":21,"zip":14,"webbing":41}
 		checks.append({"label":name_of_test+" suite complete", "passed":results.size() >= minimums[name_of_test]})
 		suites[name_of_test] = {"checks":results.size(),"passed":not results.is_empty() and results.all(func(c): return c.passed)}
 		checks.append_array(results)

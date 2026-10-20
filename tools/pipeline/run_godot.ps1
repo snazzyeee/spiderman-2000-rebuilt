@@ -22,11 +22,11 @@ if ($SmokeTest) {
     $reportPath = Join-Path $projectRoot 'staging/validation/smoke/godot-smoke.json'
     if (-not (Test-Path -LiteralPath $reportPath) -or (Get-Item -LiteralPath $reportPath).LastWriteTimeUtc -lt $startedUtc) { throw 'Godot exited without a fresh smoke report' }
     $report = Get-Content -LiteralPath $reportPath -Raw | ConvertFrom-Json
-    if (-not $report.passed -or $report.checks.Count -lt 40) { throw 'Godot smoke report failed or was incomplete' }
+    if (-not $report.passed -or $report.checks.Count -lt 42) { throw 'Godot smoke report failed or was incomplete' }
 }
 if ($TraversalTests) {
     $reportPath = Join-Path $projectRoot 'staging/validation/traversal-tests.json'
     if (-not (Test-Path -LiteralPath $reportPath) -or (Get-Item -LiteralPath $reportPath).LastWriteTimeUtc -lt $startedUtc) { throw 'Godot exited without a fresh traversal report' }
     $report = Get-Content -LiteralPath $reportPath -Raw | ConvertFrom-Json
-    if (-not $report.passed -or $report.checks.Count -lt 143 -or @($report.suites.PSObject.Properties).Count -ne 5) { throw 'Traversal tests failed or were incomplete' }
+    if (-not $report.passed -or $report.checks.Count -lt 150 -or @($report.suites.PSObject.Properties).Count -ne 5) { throw 'Traversal tests failed or were incomplete' }
 }

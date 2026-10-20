@@ -17,15 +17,15 @@ try {
     if ($LASTEXITCODE -ne 0) { throw 'Character conversion failed' }
     & $PythonPath tools/pipeline/prepare_godot_ui.py
     if ($LASTEXITCODE -ne 0) { throw 'Menu texture conversion failed' }
+    & $PythonPath tools/reference/extract_native_voice_catalog.py
+    if ($LASTEXITCODE -ne 0) { throw 'Canonical XA identity catalog failed' }
+    & $PythonPath tools/reference/decode_sfx_ids.py
+    if ($LASTEXITCODE -ne 0) { throw 'SFX/KAT identity catalog failed' }
     $manifestArgs = @('tools/pipeline/build_dialogue_manifest.py', '--input', $Manifest)
     if ($Offline) { $manifestArgs += '--offline' }
     & $PythonPath @manifestArgs
     if ($LASTEXITCODE -ne 0) { throw 'Dialogue registry generation failed' }
-    & tools/pipeline/guard_godot_scan.ps1
-    $godot = Join-Path $projectRoot 'tools/third_party/godot-4.7.2/Godot_v4.7.2-stable_win64_console.exe'
-    & $godot --headless --editor --path $projectRoot --import
-    if ($LASTEXITCODE -ne 0) { throw 'Godot import failed' }
-    & $godot --headless --path $projectRoot --script res://src/diagnostics/generate_layout.gd
-    if ($LASTEXITCODE -ne 0) { throw 'Godot route generation failed' }
+    & tools/pipeline/run_godot.ps1 -Import
+    & tools/pipeline/run_godot.ps1 -Headless -Script res://src/diagnostics/generate_layout.gd
     if ($SmokeTest) { & tools/pipeline/run_godot.ps1 -Headless -SmokeTest }
 } finally { Pop-Location }
