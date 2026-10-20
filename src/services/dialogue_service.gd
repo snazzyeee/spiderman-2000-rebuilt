@@ -71,6 +71,13 @@ func play_sfx_id(id: int, at: Variant = null, bank: String = "") -> bool:
 	var key := resolve_sfx_id(id,bank)
 	return play_sfx(key,at) if key != "" else false
 
+func sfx_stream_for_id(id: int) -> AudioStream:
+	var key := resolve_sfx_id(id)
+	if key == "": return null
+	var entry: Dictionary = registry[key]
+	if entry.get("category") != "SFX" or not ResourceLoader.exists(str(entry.get("file", ""))): return null
+	return load(entry.file) as AudioStream
+
 func resolve_xa(bank: int, track: int) -> String:
 	if bank < 0 or bank >= 79 or track < 0 or track >= 16: return ""
 	var matches: Array[String] = []

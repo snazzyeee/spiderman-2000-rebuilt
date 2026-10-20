@@ -20,6 +20,17 @@ checker = module('ci_report')
 
 
 class CiEvidenceTests(unittest.TestCase):
+    def test_menu_audio_report_rejects_incomplete_or_failed_checks(self):
+        valid = dict(passed=True, display_driver='headless', renderer='forward_plus',
+                     checks=[dict(passed=True) for _ in range(17)])
+        checker.validate_menu_audio(valid)
+        failed = copy.deepcopy(valid)
+        failed['checks'][0]['passed'] = False
+        for report in (dict(valid, checks=[]), dict(valid, passed=False),
+                       dict(valid, renderer='mobile'), failed):
+            with self.assertRaises(ValueError):
+                checker.validate_menu_audio(report)
+
     def test_download_hash_and_archive_identity_fail_closed(self):
         with tempfile.TemporaryDirectory() as temporary:
             folder = Path(temporary)

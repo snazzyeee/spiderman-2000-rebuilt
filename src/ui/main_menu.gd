@@ -10,6 +10,7 @@ var visual: Node3D
 var navigating := false
 var settings := ConfigFile.new()
 var backdrop: MeshInstance3D
+var menu_audio := MenuAudio.new()
 
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
@@ -75,12 +76,8 @@ func _ready() -> void:
 	show_page("Main")
 	_start_music()
 
-func menu_sound(confirm: bool) -> void:
-	var ending := "/menu.kat/001.wav" if confirm else "/menu.kat/000.wav"
-	for key in Dialogue.registry:
-		if str(Dialogue.registry[key].get("source_path", "")).to_lower().ends_with(ending):
-			Dialogue.play_sfx(key)
-			break
+func menu_sound(event: String) -> void:
+	menu_audio.request(event, Dialogue)
 
 func _start_music() -> void:
 	for key in Dialogue.registry:
@@ -98,6 +95,7 @@ func clear_panel() -> void:
 		child.queue_free()
 	art.visible = false
 	navigating = false
+	menu_audio.reset_focus()
 
 func button(text: String, callback: Callable, disabled: bool = false) -> Button:
 	var control := Button.new()
@@ -112,12 +110,13 @@ func button(text: String, callback: Callable, disabled: bool = false) -> Button:
 	focus.set_border_width_all(3)
 	control.add_theme_stylebox_override("focus", focus)
 	control.pressed.connect(func():
-		menu_sound(true)
+		menu_sound("back" if text == "Back" else "confirm")
 		callback.call())
 	control.focus_entered.connect(func():
-		if navigating:
-			menu_sound(false)
+		menu_audio.focus(control, Dialogue)
 		navigating = true)
+	control.mouse_entered.connect(func():
+		if not control.disabled and not control.has_focus(): control.grab_focus())
 	panel.add_child(control)
 	return control
 
@@ -196,6 +195,6 @@ func launch(practice: bool, resume_game: bool = false) -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel") and page != "Main":
-		menu_sound(true)
+		menu_sound("back")
 		show_page("Main")
 		get_viewport().set_input_as_handled()

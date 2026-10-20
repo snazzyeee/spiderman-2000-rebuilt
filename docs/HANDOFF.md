@@ -221,3 +221,42 @@ Section 1 matrix: staging/validation/regression/review-fonts/summary.json:
 47 reference + 13 pipeline Python tests pass; headless Forward+, real Vulkan
 Forward+ and Mobile each pass smoke 44, traversal 150, fonts 39, zero engine or
 script errors. Original gates retained. CI status is recorded after push.
+
+Section 1 CI confirmed green for exact commit
+479dcf83699b6e4e5669699b8a3f9b52048eccef:
+https://github.com/snazzyeee/spiderman-2000-revamp/actions/runs/39506502708.
+
+## Current run: section 2 menu audio
+
+Recovered global move/select/back IDs 0x29/0x1F/0x23 with bounded static
+frontend scan (110 functions, 91 positive call sites). Evidence and authored
+runtime policy were ledgered in frontend.md before src changes. Regenerate:
+`tools/third_party/audio-python/Scripts/python.exe tools/reference/scan_frontend_sfx.py`.
+Private output: staging/reference/frontend-sfx-static.json; deeper branch and
+WAV-duration audit: staging/reference/frontend-branches-static.txt. Setup uses
+the already pinned Capstone toolchain; no new tools/models downloaded.
+
+Removed bank-order guesses; distinct confirm/back events; hover changes focus
+only on a new enabled control; first focus stays silent; previous menu playback
+stops before every distinct event. Reject absent, looping, empty or overlong
+streams. Actual select/back durations are 1.367/1.111 s: both remain silent to
+honor the owner's <=0.6 s rule. Move is 0.303333 s and plays via exact native ID.
+No samples truncated or substituted. Synthetic tests cover the boundary,
+non-overlap, loops, absent sounds, focus/hover and separate event IDs. Private
+checks require select/back native resolution and duration rejection.
+All original smoke labels retained, five mouse/native-ID/duration checks added.
+Regression adds a menu-audio suite on all targets and Linux CI alongside all
+existing suites; no gate relaxed.
+
+Final section 2 local evidence: staging/validation/regression/menu-audio-section-final/.
+Python: 50 reference + 14 pipeline = 64 passing.
+Each of headless Forward+, real Vulkan Forward+ and real Vulkan Mobile:
+49 smoke, 150 traversal, 39 fonts, 23 menu-audio checks, zero engine/script errors.
+The first integration run failed because smoke callers still passed booleans;
+named-event callers fixed and full matrix rerun. Failed evidence retained in
+regression/menu-audio/. Direct Python invocations outside the runner hit sandbox
+TEMP permissions; the configured runner's complete Python suites pass.
+
+Approval review briefly failed due to a reviewer usage limit (no command ran,
+not a safety determination). After the owner's resume, normal approval review
+worked for regression and CI checks; no bypass used.
