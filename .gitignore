@@ -18,6 +18,8 @@
 /Game/[Uu]ser[Ss]ettings/
 /Game/.vs/
 /Game/.vscode/
+__pycache__/
+*.py[cod]
 /Game/*.csproj
 /Game/*.sln
 /Game/*.slnx

@@ -3,8 +3,8 @@
     <ui:VisualElement class="screen" picking-mode="Ignore">
         <ui:VisualElement class="header" picking-mode="Ignore">
             <ui:VisualElement class="title-card" picking-mode="Ignore">
-                <ui:Label text="TRAVERSAL LAB / 01" class="eyebrow" />
-                <ui:Label text="ROOFTOP RUN" class="title" />
+                <ui:Label text="SPIDER-MAN / PHASE 1" class="eyebrow" />
+                <ui:Label text="L1A1" class="title" />
                 <ui:Label name="objective" text="Reach the cyan beacon on the far rooftop." class="objective" />
             </ui:VisualElement>
             <ui:VisualElement class="stats" picking-mode="Ignore">
@@ -15,8 +15,8 @@
         </ui:VisualElement>
         <ui:Label text="+" class="crosshair" picking-mode="Ignore" />
         <ui:VisualElement class="footer" picking-mode="Ignore">
-            <ui:Label text="WASD  MOVE     MOUSE  LOOK     SHIFT  RUN     SPACE  JUMP     R  RESET     ESC  PAUSE" />
-            <ui:Label text="PLACEHOLDER COURSE / ORIGINAL CODE AND GEOMETRY" class="muted fine" />
+            <ui:Label text="WASD / LEFT STICK: MOVE | MOUSE / RIGHT STICK: LOOK | SPACE / A: JUMP | SHIFT / LB: RUN | ESC / START: PAUSE" />
+            <ui:Label text="ORIGINAL PC ASSETS / MECHANICS UNDER VERIFICATION" class="muted fine" />
         </ui:VisualElement>
         <ui:VisualElement name="pause-panel" class="pause-screen">
             <ui:VisualElement class="pause-card">

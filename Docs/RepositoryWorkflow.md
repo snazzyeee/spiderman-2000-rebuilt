@@ -16,6 +16,7 @@ content, private reference indexes/logs, downloaded tools, Unity caches,
 standalone builds, test artifacts, and machine-generated performance metadata
 must remain untracked. Review the staged paths and diff before each push.
 
-No original assets are needed to open or build the placeholder laboratory.
+The source project opens without private assets; building Phase 1 requires a
+local PC archive and the documented private conversion step.
 Pushing source does not publish a binary release or assign an open-source
 license; choose a license before describing this repository as open source.

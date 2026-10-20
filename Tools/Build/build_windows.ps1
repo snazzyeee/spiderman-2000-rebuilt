@@ -20,7 +20,7 @@ function Invoke-LabEditor([string[]]$TaskArguments, [string]$TaskLogName) {
     $taskRun = Start-Process -FilePath $EditorPath -ArgumentList $taskArgumentsAll -WindowStyle Hidden -PassThru -Wait
     if ($taskRun.ExitCode -ne 0) { throw "Unity exited $($taskRun.ExitCode). See $taskLog" }
 }
-Invoke-LabEditor @('-quit', '-executeMethod', 'SpiderManRebuild.Editor.LabSceneBuilder.Create') 'unity-scene.log'
+Invoke-LabEditor @('-quit', '-executeMethod', 'SpiderManRebuild.Editor.Phase1SceneBuilder.Create') 'unity-scene.log'
 if ($RunTests) {
     foreach ($taskPlatform in @('EditMode', 'PlayMode')) {
         $taskReport = Join-Path $taskResults ($taskPlatform.ToLowerInvariant() + '.xml')
@@ -30,10 +30,10 @@ if ($RunTests) {
     }
 }
 Invoke-LabEditor @('-quit', '-executeMethod', 'SpiderManRebuild.Editor.BuildWindows.Build') 'unity-build.log'
-$taskExe = Join-Path $taskRoot 'Builds\Windows\TraversalLab.exe'
+$taskExe = Join-Path $taskRoot 'Builds\Windows\SpiderManPhase1.exe'
 if ($SmokeTest) {
     $taskOutput = Join-Path $taskResults 'standalone-smoke.json'
-    $taskPreview = Join-Path $taskResults 'traversal-lab.png'
+    $taskPreview = Join-Path $taskResults 'phase1-private.png'
     $taskPlayerLog = Join-Path $taskLogs 'standalone-smoke.log'
     # ScreenCapture requires a rendered window; the interactive laboratory closes after this route.
     $taskPlayerArgs = @('-screen-fullscreen', '0', '-screen-width', '1280', '-screen-height', '720',
@@ -42,4 +42,4 @@ if ($SmokeTest) {
     $taskRun = Start-Process -FilePath $taskExe -ArgumentList $taskPlayerArgs -WindowStyle Normal -Wait -PassThru
     if ($taskRun.ExitCode -ne 0) { throw "Standalone smoke test failed. See $taskOutput and $taskPlayerLog" }
 }
-Write-Output "Windows laboratory: $taskExe"
+Write-Output "Windows Phase 1: $taskExe"

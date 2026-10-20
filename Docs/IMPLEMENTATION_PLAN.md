@@ -1,3 +1,7 @@
+> Superseded implementation status: the whitebox milestone is retired.
+> Current exact source/asset setup: [PHASE1.md](PHASE1.md).
+> The layout below is retained as the earlier architecture plan, not current file inventory.
+
 # Implementation plan after editor installation
 
 Status: initial traversal laboratory implemented; validation results are recorded in Docs/Validation.md.

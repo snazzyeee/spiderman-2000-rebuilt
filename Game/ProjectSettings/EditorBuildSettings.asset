@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/_Game/Scenes/TraversalLab.unity
-    guid: 994de7015b331fa44a7afd2b0c42a6ba
+    path: Assets/_LocalReference/Phase1/SpiderManPhase1.unity
+    guid: 55c7eb69339fc0c4c9c4138d07c4ef6f
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}

@@ -1,8 +1,8 @@
 # Reference behavior boundaries
 
-The first playable laboratory uses newly authored code, primitive meshes,
-materials, UI, and collision boxes. Nothing from the original game archives is
-needed to load it, run it, test it, or build it.
+The retired whitebox milestone used newly authored primitive geometry. Phase 1
+now uses private extracted Spider-Man and L1A1 assets; see PHASE1.md. Original
+content is required locally to build this private integration scene.
 
 The initial movement speeds, jump arc, acceleration, camera distance and pitch,
 coyote time, and jump buffer are deliberate prototype choices. No claim of

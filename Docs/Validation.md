@@ -1,80 +1,68 @@
-# Traversal laboratory validation
+# Phase 1 validation
 
-Date: 2026-10-20. Platform: local Windows x64.
+Date: 2026-10-20. Unity 6000.6.6f1; Windows x64; AMD Radeon RX 580 2048SP.
+The earlier primitive/capsule laboratory is retired and its production source,
+scene, materials and prefab have been removed.
 
-## Environment and reproducibility
+## Measured results
 
-- Editor: 6000.6.6f1, revision d20c9ac777da.
-- Official installed Unity.exe publisher signature checked as valid.
-- Editor batch creation, script compilation, and test runs resolved the license.
-- URP 17.6.0; Input System 1.20.0; Cinemachine 6.6.0; Test Framework 1.8.0.
-- Manifest versions agree with resolved direct dependencies in packages-lock.json.
-- No original installer, game executable, or original DLL was launched.
-- Original/derived game data remains outside production Assets in LocalReference/.
-
-## Automated checks
-
-| Suite | Result | Evidence |
+| Check | Result | Local evidence |
 |---|---|---|
 | EditMode | 3/3 passed | TestResults/editmode.xml |
 | PlayMode | 8/8 passed | TestResults/playmode.xml |
-| Windows x64 development build | Succeeded; 173,326,607 bytes across the build folder | Logs/unity-build.log |
-| Standalone smoke | 11 checks passed; zero recorded errors | TestResults/standalone-smoke.json |
-| Rendered preview | Captured and visually inspected at 1280x720 | TestResults/traversal-lab.png |
+| Original skeleton | 18 bound joints, valid Generic avatar | private unity-import-report.json |
+| Original animation export/import | 300 clips preserved | private conversion/import reports |
+| Original textures | 8 character and 98 level PNGs | private converted assets |
+| Original L1A1 geometry | 115 mesh objects | private import report |
+| Windows x64 development build | Succeeded, 178,418,420 bytes reported by Unity | Logs/unity-build.log |
+| Standalone smoke | 12 checks passed; zero recorded errors | TestResults/standalone-smoke.json |
+| Rendered private scene | 1280x720, visually inspected | TestResults/phase1-private.png |
 
-Unit checks cover buffered input consumption, expiry and clearing. Scene checks
-exercise diagonal speed, one jump per ground opportunity, momentum reset, coyote
-time, buffered landing, ceiling collision, pause/resume, Cinemachine obstruction
-avoidance, and keyboard W/Shift binding through the command reader.
+The source-only test suite covers jump-buffer expiry/consumption/clearing,
+box sweep obstruction, low steps, ceiling contact, jumping/reset, diagonal speed,
+gamepad left/right stick bindings and camera rate at 60/120 Hz. The private
+integration test loads the original scene, checks textured URP Lit materials,
+bone count, absence of capsule components, and camera obstruction correction.
+That private test explicitly skips when local assets are missing.
 
-The keyboard test temporarily configures the headless editor to accept synthetic
-keyboard events without a focused Game View and restores those settings afterward.
-An initial run failed that test under the editor's normal focus filtering; all
-eight scene tests passed after the harness correction.
+The standalone route grounded the box motor on original L1A1 geometry, moved,
+jumped, reset, paused/resumed, checked the original skin/Generic avatar,
+confirmed zero capsule colliders/controllers, and verified three mixer groups
+and twelve 3D low-pass-filtered impact emitters before taking the screenshot.
 
-The standalone ran on AMD Radeon RX 580 2048SP using Unity 6000.6.6f1
-at 2026-10-20 06:45 UTC. Its route checked grounded spawn, movement, jumping,
-rejection of a second airborne jump, reset pose/velocity, pause/resume,
-camera rotation, HUD creation, and preview output. The captured frame shows
-the red capsule, roofs, obstacle shapes, route markers, goal, and readable HUD.
+The preview showed 60 FPS / P95 16.7 ms after warm-up in the simple stationary
+view. This is not a full-level benchmark or proof of hitch-free play.
+The build log includes warnings for unused stripped depth-of-field/Panini
+postprocessing shaders; no such postprocessing is enabled on the scene camera.
+SSAO, directional soft shadows and exponential-squared fog are configured.
+No volumetric-scattering renderer is claimed.
 
-The first standalone route passed its gameplay checks but could not capture
-ScreenCapture output in batch mode. The final run opened a rendered window
-briefly, avoided cursor capture/focus pausing during automation, then closed
-automatically. Normal interactive play retains focus-loss pausing.
+## Integrity and privacy
 
-The preview's HUD read 60 FPS / P95 16.7 ms after warm-up on this simple,
-stationary view. This short development-build observation is not a benchmark
-or a guarantee for the course, future assets, or the complete game.
+The conversion recipe selects exact high-resolution PC archive members, checks
+CRC/length, verifies the pinned converter executable, and exports original data.
+A repeat conversion and GLB/BIN/PNG integrity comparison are recorded locally.
+Original game executables/installers/DLLs are never executed.
 
-## Actual first-milestone layout
+The converted glTF/BIN/PNG, 300 native .anim clips, avatar, URP materials,
+private scene, manifests and screenshots are ignored. Public source contains
+only scripts, settings, package pins, tests and procedures.
 
-The implementation uses Runtime/{Core,Input,Player,Camera,World,UI,Diagnostics},
-an Editor assembly, and EditMode/PlayMode test assemblies under Assets/_Game/.
-TraversalLab.unity is the only enabled build scene.
+## Unverified fidelity gates
 
-TraversalRig.prefab composes the player, input/session, camera, spawn, HUD, retry
-and diagnostics together so their serialized references remain internal. This
-replaces the plan's initial separate Player/Camera/HUD prefabs for this milestone.
-World geometry and goal/kill triggers remain in the scene. Tuning and HUD panel
-assets are in _Game/Settings; authored shared materials are in _Game/Materials.
-The template's URP rendering assets remain in Assets/Settings.
+The 1.8 m normalization uses 0.01979230344 metres per export unit. This preserves
+the exporter-relative scale between the character and level, but the metre
+mapping is an integration choice. The automatically selected roof spawn is recorded in the private import report;
+it is not a verified original mission start.
 
-The Create Missing Traversal Laboratory editor command preserves an existing
-scene rather than overwriting scene edits. A Windows build can be regenerated
-with Tools/Build/build_windows.ps1; -RunTests and -SmokeTest opt into validation.
-Close this project in the editor before running the batch script.
+The motor uses a box body and render-mesh-derived static collision. Original
+collision flags, movement constants, animation slot semantics/event timing,
+wall crawling, web swinging, combat, mission scripts and sound cue mappings
+are not verified/implemented here. Locomotion animation fields remain unassigned
+until slots are identified; the imported character retains its authentic bind
+pose. No fabricated animation or audio substitutes are included.
 
-## Limits
-
-This milestone validates a simple capsule/box traversal environment. It does not
-establish original-game parity, full-level performance, hitch-free behavior,
-complete keyboard/mouse usability, or long-session reliability. The standalone
-smoke route is short. Human control/play-feel evaluation remains necessary.
-
-Wall crawling, web swinging, combat, animation, sound, original missions and
-modern replacement art are not implemented. No original GLBs are imported into
-production assets. The user authorized source pushes to
-https://github.com/snazzyeee/spiderman-2000-revamp.git; the first authored-source
-checkpoint is a0233d6 on main. Original content and local build/test output were
-excluded. No binary release was published.
+The AudioMixer hierarchy, attenuation and filter plumbing are present. This
+phase does not identify or automatically bind Stan Lee or web-impact samples.
+Physical gamepad feel, animation behavior and long-session reliability still
+need manual evaluation. The 100% mechanical-fidelity target is not achieved.
