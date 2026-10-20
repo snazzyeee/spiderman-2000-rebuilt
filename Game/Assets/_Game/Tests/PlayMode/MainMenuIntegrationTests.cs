@@ -59,6 +59,20 @@ namespace SpiderManRebuild.Tests
             menu.OpenPage("Controls"); yield return null;
             Assert.That(menu.Body.gameObject.activeInHierarchy, Is.True); Assert.That(menu.Body.text, Does.Contain("WALL LATCH"));
         }
+        [UnityTest] public IEnumerator CreditsPaginateAllTextAndAdvanceWithoutShowingControlCodes()
+        {
+            menu.OpenPage("Credits"); yield return null;
+            Assert.That(menu.CreditsPageCount, Is.GreaterThan(1));
+            Assert.That(menu.Body.text, Does.Contain("LTI Gray Matter"));
+            Assert.That(menu.Body.text, Does.Not.Contain("(0,55,255)"));
+            string completeText = menu.Body.text;
+            menu.Rows.GetComponentsInChildren<Button>()[1].onClick.Invoke(); yield return null;
+            Assert.That(menu.CreditsPage, Is.EqualTo(1));
+            Assert.That(menu.Body.pageToDisplay, Is.EqualTo(2));
+            Assert.That(menu.Body.text, Is.EqualTo(completeText));
+            menu.OpenPage("Controls"); yield return null; menu.Body.ForceMeshUpdate();
+            Assert.That(menu.Body.isTextOverflowing, Is.False);
+        }
         [UnityTest] public IEnumerator NewGameLoadsOriginalNarrationAndSkipStopsItsOwner()
         {
             menu.StartNewGame(false); MissionManager mission = null;

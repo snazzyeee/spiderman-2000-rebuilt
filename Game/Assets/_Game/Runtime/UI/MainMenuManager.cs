@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -32,14 +33,16 @@ namespace SpiderManRebuild
         InputAction cancel;
         MenuSelectionEffect highlighted;
         int mainIndex, creditsPage;
-        string[] creditPages;
+        string creditText;
+        public int CreditsPageCount { get; private set; } = 1;
+        public int CreditsPage => creditsPage;
         bool ready;
         public DialogueManager Audio => DialogueManager.Instance;
         void Awake()
         {
             cancel = new InputAction("MenuCancel", InputActionType.Button, "<Keyboard>/escape");
             cancel.AddBinding("<Gamepad>/buttonEast");
-            creditPages = Paginate(Credits != null ? Credits.text : "Spider-Man PC remake", 850);
+            creditText = FormatCredits(Credits != null ? Credits.text : "Spider-Man PC remake");
         }
         void OnEnable() => cancel.Enable();
         void OnDisable() => cancel.Disable();
@@ -84,6 +87,8 @@ namespace SpiderManRebuild
             GalleryImage.gameObject.SetActive(page == "Gallery"); Body.gameObject.SetActive(page == "Credits" || page == "Controls");
             Body.transform.parent.gameObject.SetActive(page == "Credits" || page == "Controls");
             PageTitle.text = page.ToUpperInvariant(); Status.text = "";
+            Body.overflowMode = page == "Credits" ? TextOverflowModes.Page : TextOverflowModes.Overflow;
+            Body.pageToDisplay = 1;
             if (page == "Main")
             { EventSystem.current.SetSelectedGameObject(MainButtons[Mathf.Clamp(mainIndex, 0, MainButtons.Length - 1)].gameObject); return; }
             if (page == "Game")
@@ -137,8 +142,8 @@ namespace SpiderManRebuild
             else if (page == "Credits")
             {
                 ShowCredits();
-                AddButton("PREVIOUS PAGE", () => { creditsPage = (creditsPage + creditPages.Length - 1) % creditPages.Length; ShowCredits(); });
-                AddButton("NEXT PAGE", () => { creditsPage = (creditsPage + 1) % creditPages.Length; ShowCredits(); });
+                AddButton("PREVIOUS PAGE", () => { creditsPage = (creditsPage + CreditsPageCount - 1) % CreditsPageCount; ShowCredits(); });
+                AddButton("NEXT PAGE", () => { creditsPage = (creditsPage + 1) % CreditsPageCount; ShowCredits(); });
             }
             else if (page == "Exit") AddButton("QUIT GAME", () => Application.Quit(), "Exit to desktop.");
             AddButton("BACK", () => { PlayerPrefs.Save(); Back(); });
@@ -156,7 +161,14 @@ namespace SpiderManRebuild
             if (fitter != null) fitter.aspectRatio = (float)GalleryArt[GalleryIndex].width / GalleryArt[GalleryIndex].height;
             Status.text = "ORIGINAL COMIC COVER " + (GalleryIndex + 1) + " / " + GalleryArt.Length;
         }
-        void ShowCredits() { Body.text = creditPages[creditsPage]; Status.text = "ORIGINAL PC CREDITS " + (creditsPage + 1) + " / " + creditPages.Length; }
+        void ShowCredits()
+        {
+            Body.text = creditText; Body.ForceMeshUpdate();
+            CreditsPageCount = Mathf.Max(1, Body.textInfo.pageCount);
+            creditsPage = Mathf.Clamp(creditsPage, 0, CreditsPageCount - 1);
+            Body.pageToDisplay = creditsPage + 1;
+            Status.text = "ORIGINAL PC CREDITS " + (creditsPage + 1) + " / " + CreditsPageCount;
+        }
         Button AddButton(string label, Action action, string description = "")
         {
             Button button = Instantiate(RowPrefab, Rows); button.gameObject.SetActive(true);
@@ -185,17 +197,16 @@ namespace SpiderManRebuild
                 controls[i].navigation = navigation;
             }
         }
-        static string[] Paginate(string text, int length)
+        static string FormatCredits(string text)
         {
-            var pages = new List<string>(); int offset = 0;
-            while (offset < text.Length)
+            // PC credits encode per-line RGB directives rather than printable text.
+            return Regex.Replace(text.Replace("\r\n", "\n").Trim(), @"(?m)^\((\d{1,3}),(\d{1,3}),(\d{1,3})\)([^\n]*)", match =>
             {
-                int count = Mathf.Min(length, text.Length - offset);
-                if (offset + count < text.Length)
-                { int end = text.LastIndexOf('\n', offset + count - 1, count); if (end >= offset + length / 2) count = end - offset + 1; }
-                pages.Add(text.Substring(offset, count)); offset += count;
-            }
-            return pages.Count == 0 ? new[] { "" } : pages.ToArray();
+                string color = "";
+                for (int component = 1; component <= 3; component++)
+                    color += Mathf.Clamp(int.Parse(match.Groups[component].Value), 0, 255).ToString("X2");
+                return "<color=#" + color + ">" + match.Groups[4].Value + "</color>";
+            });
         }
         public void StartNewGame(bool practice)
         { if (!Loading) StartCoroutine(LoadMission(practice ? MissionLaunchMode.Training : MissionLaunchMode.NewGame, null)); }

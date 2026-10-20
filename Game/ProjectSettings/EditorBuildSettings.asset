@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/_LocalReference/Frontend/MainMenu.unity
+    guid: 185ad9e03502dc749938b48120719ccf
+  - enabled: 1
     path: Assets/_LocalReference/Mission1/BankHeistRooftops.unity
     guid: 3afeb5d550e41b2438728ea3225cef57
   - enabled: 1

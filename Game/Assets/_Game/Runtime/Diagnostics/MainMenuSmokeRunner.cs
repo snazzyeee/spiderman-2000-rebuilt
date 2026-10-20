@@ -56,6 +56,17 @@ namespace SpiderManRebuild
             InputSystem.QueueStateEvent(pad, new GamepadState());
             yield return null; yield return null;
         }
+        IEnumerator Capture(string page)
+        {
+            if (string.IsNullOrEmpty(preview)) yield break;
+            for (int frame = 0; frame < 3; frame++) yield return null;
+            string path = page == "main" ? preview : Path.Combine(Path.GetDirectoryName(preview),
+                Path.GetFileNameWithoutExtension(preview) + "-" + page + ".png");
+            if (File.Exists(path)) File.Delete(path);
+            ScreenCapture.CaptureScreenshot(path);
+            for (int frame = 0; frame < 15; frame++) yield return null;
+            Check("rendered " + page + " preview", File.Exists(path));
+        }
         IEnumerator Start()
         {
             if (!active) yield break;
@@ -68,12 +79,7 @@ namespace SpiderManRebuild
             Check("textured original menu character", FindAnyObjectByType<MainMenuBackdrop>().Hero.GetComponentInChildren<SkinnedMeshRenderer>() != null);
             Check("no capsule controller scaffolding", FindObjectsByType<CapsuleCollider>(FindObjectsSortMode.None).Length == 0
                 && FindObjectsByType<CharacterController>(FindObjectsSortMode.None).Length == 0);
-            if (!string.IsNullOrEmpty(preview))
-            {
-                ScreenCapture.CaptureScreenshot(preview);
-                for (int frame = 0; frame < 15; frame++) yield return null;
-                Check("rendered main menu preview", File.Exists(preview));
-            }
+            yield return Capture("main");
             yield return Press(GamepadButton.DpadDown);
             Check("gamepad navigation selects Options", EventSystem.current.currentSelectedGameObject == Menu.MainButtons[1].gameObject);
             yield return Press(GamepadButton.South);
@@ -82,10 +88,20 @@ namespace SpiderManRebuild
             var slider = Menu.Rows.GetComponentInChildren<Slider>(); slider.value = .6f;
             Check("volume slider reaches mixer preference", Mathf.Abs(Menu.Audio.GetVolume("Master") - .6f) < .01f);
             slider.value = original;
+            yield return Capture("options");
             yield return Press(GamepadButton.East);
             Check("gamepad cancel restores main menu", Menu.CurrentPage == "Main");
             Menu.OpenPage("Gallery"); yield return null;
             Check("original gallery opens", Menu.GalleryArt.Length == 32 && Menu.GalleryImage.texture == Menu.GalleryArt[0]);
+            yield return Capture("gallery");
+            Menu.OpenPage("Credits"); yield return null;
+            Check("credits use layout-aware pages and parsed RGB directives", Menu.CreditsPageCount > 1
+                && !Menu.Body.text.Contains("(0,55,255)"));
+            yield return Capture("credits");
+            Menu.OpenPage("Controls"); yield return null;
+            Menu.Body.ForceMeshUpdate();
+            Check("controls fit reading panel", !Menu.Body.isTextOverflowing);
+            yield return Capture("controls");
             Menu.OpenPage("Special"); Check("Special has functioning branches", Menu.Rows.GetComponentsInChildren<Button>().Length >= 3);
             Menu.OpenPage("Training"); Check("Training offers practice and controls", Menu.Rows.GetComponentsInChildren<Button>().Length >= 3);
             Menu.StartNewGame(false);
