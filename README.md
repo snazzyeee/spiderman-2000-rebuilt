@@ -1,5 +1,7 @@
 # Spider-Man 2000 revamp — Godot 4
 
+[![Synthetic regression](https://github.com/snazzyeee/spiderman-2000-revamp/actions/workflows/synthetic-regression.yml/badge.svg?branch=main)](https://github.com/snazzyeee/spiderman-2000-revamp/actions/workflows/synthetic-regression.yml)
+
 The active engine is **Godot 4.7.2**, with Forward+ as the default renderer and
 Mobile kept as a supported fallback through the launcher. The project contains a playable
 Mission 1 rooftop slice using locally extracted original PC models, textures
