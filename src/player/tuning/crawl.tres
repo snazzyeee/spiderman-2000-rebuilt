@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="CrawlTuning" load_steps=2 format=3]
+[ext_resource type="Script" path="res://src/player/tuning/crawl_tuning.gd" id="1"]
+[resource]
+script = ExtResource("1")
+speed = 5.0
+ceiling_threshold = 0.830
+wall_min_y = -0.830
+wall_max_y = 0.635
+bump_frames = 20.0
+grace_frames = 4.0
+probe_length = 1.5
+attach_reach = 2.0
+body_clearance = 0.5
+orientation_rate = 12.0
+knock_out = 5.0
+knock_up = 7.0
+exterior_reach = 1.2
+interior_reach = 0.8
+fence_reach = 0.6

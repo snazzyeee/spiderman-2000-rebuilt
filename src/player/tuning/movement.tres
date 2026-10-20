@@ -1,0 +1,35 @@
+[gd_resource type="Resource" script_class="MovementTuning" load_steps=2 format=3]
+[ext_resource type="Script" path="res://src/player/tuning/movement_tuning.gd" id="1"]
+[resource]
+script = ExtResource("1")
+speed = 10.0
+acceleration = 38.0
+gravity = 25.0
+jump_speed = 12.0
+body_size = Vector3(0.65, 1.7, 0.55)
+body_center = Vector3(0, 0.88, 0)
+floor_snap = 0.2
+zip_speed = 34.0
+zip_range = 45.0
+zip_clearance = 1.2
+zip_forward_up = 0.25
+zip_ring_radius = 0.8
+stunned_seconds = 0.3
+max_health = 100.0
+damage_immunity = 0.6
+melee_damage = 35.0
+web_damage = 25.0
+melee_range = 2.8
+web_range = 40.0
+melee_cooldown = 0.4
+web_cooldown = 0.25
+web_cost = 0.03125
+mouse_sensitivity = Vector2(0.003, 0.0025)
+look_speed = Vector2(2.6, 1.9)
+pitch_limits = Vector2(-1.1, 0.9)
+look_smoothing = 14.0
+visual_turn_rate = 12.0
+visual_height = 1.8
+hand_height = 1.4
+ground_animation = &"spidey_anim_0"
+air_animation = &"spidey_anim_1"

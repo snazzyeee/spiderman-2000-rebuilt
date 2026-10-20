@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="SwingTuning" load_steps=2 format=3]
+[ext_resource type="Script" path="res://src/player/tuning/swing_tuning.gd" id="1"]
+[resource]
+script = ExtResource("1")
+anchor_policy = 0
+gravity = 25.0
+pump = 1.2
+damping = 0.08
+phase_per_second = 0.4
+release_boost = 0.0
+minimum_length = 2.0
+maximum_length = 70.0
+minimum_rise = 1.2
+sight_origin_height = 1.2
+sight_tolerance = 0.35
+sight_extension = 0.05
+sky_offset = Vector3(0, 12, -6)
+animation_binding = &"spidey_anim_1"
+animation_confidence = "authored placeholder; no swing slot harvested"
