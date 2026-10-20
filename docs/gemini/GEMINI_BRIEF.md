@@ -231,6 +231,15 @@ game's own art and its original bitmap fonts.
 
 ---
 
+### T7–T8. Art enhancement (fonts, title art, character textures)
+
+Specified in [GEMINI_ART_BRIEF.md](GEMINI_ART_BRIEF.md). Status: blocked on 2026-10-21 (the
+available image tool cannot produce exact-size RGBA output); handed to a local pipeline. Do not retry.
+
+### T9–T10. Faithful frontend and in-game UI design
+
+Specified in [GEMINI_MENU_BRIEF.md](GEMINI_MENU_BRIEF.md). Do these before T6.
+
 ### T6. Animation labeling (not available yet)
 
 Rendered clips of the player's 300 animation slots do not exist yet. When
