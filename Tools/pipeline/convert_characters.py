@@ -53,6 +53,9 @@ def inspect_glb(path, modernize=False):
     if not document or not document.get('meshes'):
         raise ValueError('No renderable mesh')
     if modernize:
+        for image in document.get('images', []):
+            if 'name' in image:
+                image['name'] = image['name'].lower()
         for material in document.get('materials', []):
             material.get('extensions', {}).pop('KHR_materials_unlit', None)
             material.setdefault('pbrMetallicRoughness', {}).update(metallicFactor=0, roughnessFactor=.86)
@@ -73,21 +76,21 @@ def inspect_glb(path, modernize=False):
 
 
 def write_layout(output):
-    # Reuse the inspected private authored route; glTF is right handed whereas
-    # Unity's glTF import flipped Z. No copied world coordinates enter source.
+    # glTFast 6.20 converts handedness by negating X (CachedFunction.cs),
+    # whereas Godot retains glTF coordinates. Reuse the private authored route.
     source = ROOT/'Game/Assets/_LocalReference/Mission1/Generated/MissionLayout.asset'
     if not source.exists():
         raise FileNotFoundError('Existing private route missing: '+str(source))
     text = source.read_text()
     def vector(value):
         match = re.search(r'\{x: ([^,]+), y: ([^,]+), z: ([^}]+)\}', value)
-        return [float(match[1]), float(match[2]), -float(match[3])]
+        return [-float(match[1]), float(match[2]), float(match[3])]
     spawn = vector(re.search(r'StartingRoof: (.+)', text)[1])
     points = [vector(x) for x in re.search(r'CheckpointRoofs:(.*?)BankArena:', text, re.S)[1].splitlines() if '{x:' in x]
     write_json(output, dict(spawn=spawn, checkpoints=points,
         bank=vector(re.search(r'm_Center: (.+)', text)[1]),
         skylight=vector(re.search(r'Skylight: (.+)', text)[1]),
-        coordinate_transform='Unity imported glTF to Godot: negate Z',
+        coordinate_transform='Unity glTFast 6.20 to Godot glTF: negate X',
         source='private authored Unity route, not recovered original mission scripting'))
 
 
@@ -127,28 +130,41 @@ def main():
         key = relative.with_suffix('').as_posix().lower().removeprefix('data/')
         target = output/(key+'.glb')
         target.parent.mkdir(parents=True, exist_ok=True)
+        # Windows accepts case-insensitive lookups; Godot exports and Linux do
+        # not. Normalize converter-produced uppercase filenames even on cache hits.
+        for actual in target.parent.glob('*.glb'):
+            if actual.name.casefold() == target.name.casefold() and actual.name != target.name:
+                temporary = actual.with_suffix('.rename-glb')
+                actual.rename(temporary)
+                temporary.rename(target)
         digest = hashlib.sha256(source.read_bytes()).hexdigest()
         cache = target.with_suffix('.conversion.json')
         try:
             if cache.exists() and target.exists():
                 old = json.loads(cache.read_text())
                 if old.get('source_sha256') == digest and old.get('converter_sha256') == CONVERTER_SHA256 and old.get('glb_sha256') == hashlib.sha256(target.read_bytes()).hexdigest():
+                    if old.get('conversion_version') != 2:
+                        inspect_glb(target, modernize=True)
+                        old.update(conversion_version=2, glb_sha256=hashlib.sha256(target.read_bytes()).hexdigest())
+                        write_json(cache, old)
                     records.append(old)
                     continue
             command = [str(args.converter), 'psx-anim-export', str(source), '--anim', '-1', '--fps', '30', '-o', str(target)] if animated else [
                 str(args.converter), 'psx-mesh', str(source), '-o', str(target.parent)]
             with (logs/(key.replace('/', '_')+'.log')).open('w') as log:
                 subprocess.run(command, stdout=log, stderr=subprocess.STDOUT, check=True, timeout=180)
-            if not target.exists():
-                actual = next(x for x in target.parent.glob('*.glb') if x.name.lower() == target.name.lower())
-                actual.rename(target)
+            actual = next(x for x in target.parent.glob('*.glb') if x.name.casefold() == target.name.casefold())
+            if actual.name != target.name:
+                temporary = actual.with_suffix('.rename-glb')
+                actual.rename(temporary)
+                temporary.rename(target)
             details = inspect_glb(target, modernize=True)
             if animated and not details['skins']:
                 raise ValueError('Rigged survey candidate exported without a skin')
             record = dict(source=relative.as_posix(), file='res://assets/models/'+key+'.glb',
                 source_sha256=digest, converter_sha256=CONVERTER_SHA256,
                 glb_sha256=hashlib.sha256(target.read_bytes()).hexdigest(),
-                animation_semantics_verified=False, **details)
+                animation_semantics_verified=False, conversion_version=2, **details)
             write_json(cache, record)
             records.append(record)
             print(json.dumps(dict(converted=key, **details)), flush=True)
