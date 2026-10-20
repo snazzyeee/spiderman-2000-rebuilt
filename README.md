@@ -68,7 +68,7 @@ not invent playback conditions. See [native ID evidence](docs/NATIVE_VOICE_IDS.m
 
 Validation: all 40 original integration checks plus two native-audio checks
 (42 total), and all 150 synthetic traversal checks passed headlessly and on real
-Mobile and Forward+ Vulkan on the RX 580. All 47 Python tests passed. Phase 0
+Mobile and Forward+ Vulkan on the RX 580. All 52 Python tests passed at the latest offset/CI checkpoint. Phase 0
 Unity deletion is complete. The original landmark gate remains 19/21; TRG
 placement is still unverified. See [current handoff](docs/HANDOFF.md) and the
 [historical Phase 2 report](docs/PHASE2_REPORT.md).

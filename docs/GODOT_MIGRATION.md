@@ -216,7 +216,7 @@ Phase 0 deletion is complete. Preserve audit evidence remains private under
 staging/migration_audit/. The shared converter digest is in
  tools/reference/pinned_tools.py; the Unity-only prepare_* scripts are removed.
 The historical validation counts above describe the earlier promotion checkpoint.
-Current results are 47 Python tests, 42 smoke checks (all original 40 plus two
+Current results are 52 Python tests, 42 smoke checks (all original 40 plus two
 native-audio checks) and 150 traversal checks on all three targets. The original
 units gate remains 19/21, supporting only 28/146 landmarks.
 
