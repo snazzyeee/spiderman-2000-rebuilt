@@ -54,7 +54,7 @@ def parse_reference(html):
             level = next((key for key, name in LEVELS.items()
                           if normalize(name) == normalize(section)), '')
             rows.append(dict(index=len(rows), section=section, level=level,
-                             speaker=speaker, text=text))
+                             speaker=speaker, text=text, normalized=normalize(text)))
     if not rows:
         raise ValueError('Reference page contains no recognized speaker paragraphs')
     return rows
@@ -86,14 +86,23 @@ def rank_matches(transcript, level, rows, previous=None):
     query = normalize(transcript)
     if len(query.split()) < 4:
         return []
+    query_words = set(query.split())
     ranked = []
     for row in rows:
         if row['level'] and level and row['level'] != level:
             continue
-        reference = normalize(row['text'])
+        reference = row.get('normalized') or normalize(row['text'])
+        if 2*min(len(query), len(reference))/max(1, len(query)+len(reference)) < .45:
+            continue
+        reference_words = set(reference.split())
+        if len(query_words & reference_words) < max(2, .25*min(len(query_words), len(reference_words))):
+            continue
         # Ordering is only a tie-break within the same known section; numeric
         # suffixes never establish dialogue identities or trigger semantics.
-        score = SequenceMatcher(None, query, reference, autojunk=False).ratio()
+        matcher = SequenceMatcher(None, query, reference, autojunk=False)
+        if matcher.quick_ratio() < .45:
+            continue
+        score = matcher.ratio()
         if score < .45:
             continue
         order = bool(previous and previous['section'] == row['section']

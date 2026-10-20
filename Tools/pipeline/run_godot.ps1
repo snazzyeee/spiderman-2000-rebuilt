@@ -14,5 +14,5 @@ if ($SmokeTest) {
     $reportPath = Join-Path $projectRoot 'TestResults/godot-smoke.json'
     if (-not (Test-Path -LiteralPath $reportPath) -or (Get-Item -LiteralPath $reportPath).LastWriteTimeUtc -lt $startedUtc) { throw 'Godot exited without a fresh smoke report' }
     $report = Get-Content -LiteralPath $reportPath -Raw | ConvertFrom-Json
-    if (-not $report.passed -or $report.checks.Count -lt 33) { throw 'Godot smoke report failed or was incomplete' }
+    if (-not $report.passed -or $report.checks.Count -lt 40) { throw 'Godot smoke report failed or was incomplete' }
 }

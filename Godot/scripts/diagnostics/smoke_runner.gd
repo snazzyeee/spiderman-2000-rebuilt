@@ -27,6 +27,14 @@ func run() -> void:
 		if child is Button:
 			labels.append(child.text)
 	check(labels == ["Game", "Options", "Training", "Special", "Gallery"], "five root menu items")
+	tap_key(KEY_DOWN)
+	await get_tree().process_frame
+	var focused := menu.get_viewport().gui_get_focus_owner()
+	check(focused is Button and focused.text == "Options", "keyboard navigation moves menu focus")
+	tap_key(KEY_ENTER)
+	await get_tree().process_frame
+	check(menu.page == "Options", "keyboard submit opens focused menu branch")
+	menu.show_page("Main")
 	check(Dialogue.registry.size() == 3661, "all extracted clips loaded")
 	var manifest = JSON.parse_string(FileAccess.get_file_as_string("res://assets/models/conversion_manifest.json"))
 	check(manifest.errors.is_empty(), "batch character conversion without failures")
@@ -129,8 +137,19 @@ func run() -> void:
 	print("GODOT_SMOKE ", JSON.stringify(report))
 	# Let scene-owned resources and awaited callbacks finish before engine exit.
 	get_tree().current_scene.queue_free()
-	await get_tree().process_frame
+	await get_tree().create_timer(.25).timeout
+	call_deferred("finish")
+
+func finish() -> void:
 	get_tree().quit(0 if failures.is_empty() else 1)
+
+func tap_key(key: Key) -> void:
+	for pressed in [true, false]:
+		var event := InputEventKey.new()
+		event.keycode = key
+		event.physical_keycode = key
+		event.pressed = pressed
+		Input.parse_input_event(event)
 
 func find_anchor(player: SpiderPlayer) -> Dictionary:
 	var origin := player.global_position+Vector3.UP*2.0

@@ -15,7 +15,7 @@
 **/.godot/
 **/.mono/
 /Godot/assets/
-/tools/pipeline/.cache/
+/Tools/pipeline/.cache/
 /Tools/UnityEditor/
 /Tools/UnityDownloads/
 

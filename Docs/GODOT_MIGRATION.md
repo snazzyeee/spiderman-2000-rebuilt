@@ -167,6 +167,21 @@ and Load resumes the private remake checkpoint without replaying the intro.
 
 ## Validation and remaining limits
 
+Validated locally on 2026-10-20: all 40 integration checks passed headlessly,
+and all 40 passed separately with real Windows Vulkan rendering in Mobile and
+Forward+ on the AMD Radeon RX 580 2048SP (Vulkan 1.3.260). The final rendered
+error logs were empty. Six new Python pipeline tests and all 17 existing
+reference-tool regressions passed. The complete prepare_godot.ps1 -Offline
+-SmokeTest workflow was executed successfully. Runtime checks also inject real
+menu key events, rather than only calling page methods.
+
+Private reports: TestResults/godot-mobile-smoke.json,
+godot-forward_plus-smoke.json, godot-dialogue.json and godot-conversion.json.
+Private captures: TestResults/godot-menu.png, godot-intro.png,
+godot-briefing.png, godot-rooftop.png and godot-mission.png. The rendered menu,
+intro, supported rooftop spawn and completed encounter were visually inspected.
+These reports and images are excluded from source control.
+
 ```powershell
 & .\Tools\ThirdParty\audio-python\Scripts\python.exe -m unittest discover -s Tools/pipeline/tests -v
 .\Tools\pipeline\run_godot.ps1 -Headless -SmokeTest

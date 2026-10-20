@@ -14,3 +14,10 @@ text from the page is copied into this repository or the generated manifest.
 Native audio-ID associations are instead recovered from the inspected local
 PC binary's bounded data table. Original speech remains local and ASR-generated
 text remains explicitly marked as a draft. See BATCH_AUDIO.md.
+
+The Godot migration's executable scraper/matcher is
+Tools/pipeline/build_dialogue_manifest.py. The parsed reference contains 225
+dialogue rows and supplies five accepted whole-clip candidates for the current
+ASR corpus. It preserves the four user-supplied Level/Act display names as
+user_supplied metadata. It does not assign cutscene headings to gameplay acts
+or infer automatic trigger guards from numeric file order. See GODOT_MIGRATION.md.

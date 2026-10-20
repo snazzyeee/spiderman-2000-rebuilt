@@ -1,136 +1,79 @@
-# Spider-Man 2000 PC revamp
+# Spider-Man 2000 revamp — Godot 4
 
-Unity/C#/URP reimplementation using privately extracted original PC art.
-The current private player opens with a textured main menu, original extracted
-audio, settings, save/load and a narrated Mission 1 rooftop/combat slice.
-Mechanical fidelity remains an unverified target.
+The active engine is **Godot 4.7.2**, with Mobile as the default renderer and
+Forward+ available through the launcher. The project contains a playable
+Mission 1 rooftop slice using locally extracted original PC models, textures
+and audio. Mechanical fidelity and complete dialogue verification remain goals.
 
-## Build the menu and narrated Mission 1
+The former Unity project is retained under Game/ as an implementation reference.
+Unity is not required to generate the new Godot route, import GLBs or run the
+Godot game. Historical Unity build instructions remain in [Docs/MAIN_MENU.md](Docs/MAIN_MENU.md).
 
-[Docs/MAIN_MENU.md](Docs/MAIN_MENU.md) covers the complete build and Inspector
-setup. [Docs/AUDIO_PIPELINE.md](Docs/AUDIO_PIPELINE.md) documents extraction,
-manifest evidence and unresolved mappings. [Docs/DIALOGUE_ARCHITECTURE.md](Docs/DIALOGUE_ARCHITECTURE.md)
-covers the runtime registry, mixer, subtitles and Timeline ownership.
+## Play or open the prepared local project
 
-Place data.pkr and media.pkr under LocalReference/PC/app. With Unity closed:
+From this repository root:
 
-    .\Tools\Reference\setup_converter.ps1
-    python Tools/Reference/prepare_phase1_assets.py
-    python Tools/Reference/prepare_mission1_assets.py
-    .\Tools\Build\build_frontend.ps1 -ExtractAudio -RunTests -SmokeTest
+```powershell
+./Tools/pipeline/run_godot.ps1
+./Tools/pipeline/run_godot.ps1 -Renderer forward_plus
+./Tools/pipeline/run_godot.ps1 -Editor
+```
 
-Python, FFmpeg/FFprobe and the licensed pinned Unity editor must be available.
-Subsequent builds can omit -ExtractAudio. Open the private scene
-Assets/_LocalReference/Frontend/MainMenu.unity, or launch
-Builds/Frontend/SpiderManRevamp.exe with its accompanying data/runtime files.
-All source scripts, tests and assembly recipes are tracked; the private assets
-required to reproduce this player are excluded from Git.
+The main scene is Godot/scenes/main_menu.tscn. Game -> New Game plays the original
+intro audio, then a separate authored briefing, then the rooftop mission.
+Gamepad and keyboard/mouse controls, menu navigation, volume settings, original
+comic gallery, checkpoint loading and a free rooftop practice mode are included.
 
-The local audio run decoded 3,661 clips without reported failures: 2,663 SFX,
-seven music streams and 991 dialogue/movie entries. Local faster-whisper processing
-finished all 991 with zero failures: 918 contain draft recognized text and 73
-are marked no_speech_detected. Filename rules identify 74 speakers; 917 remain
-Unknown. Native bank/track tables resolve 29 recovered TRG playback commands to
-28 clips; surrounding guard logic and complete verified semantic mappings remain
-unresolved. See [Docs/BATCH_AUDIO.md](Docs/BATCH_AUDIO.md) for execution, cache
-and evidence details. Menu sound roles and Stan_00's remake intro binding
-are authored associations. The original recording plays; the visible mission
-briefing is authored text, not a verified transcript.
+## Reproduce the private assets
 
-The opening now follows IntroCinematic -> MissionBriefing -> GameplayActive.
-The recording has exclusive dialogue ownership and a hidden objective HUD;
-the separate briefing starts only after the intro completion event. See
-[Docs/MISSION_LIFECYCLE.md](Docs/MISSION_LIFECYCLE.md).
-[Docs/MENU_AND_PENDULUM.md](Docs/MENU_AND_PENDULUM.md) describes the enforced
-five-item menu and fixed-length kinematic swing/collision rules.
+With Godot closed, the existing local PC archive and extraction/ASR data present:
 
-See [Docs/FRONTEND_VALIDATION.md](Docs/FRONTEND_VALIDATION.md) for current test
-results, rendered checks and remaining limits.
+```powershell
+./Tools/pipeline/prepare_godot.ps1 -Offline -SmokeTest
+```
 
-## Build and play Mission 1
+Omit -Offline to fetch the supplied transcript reference again. The workflow
+uses the pinned converter, CRC/SHA-checked inputs, requests/BeautifulSoup,
+FFmpeg, the isolated Python environment and a hash-verified portable Godot.
+It never executes original game programs. No packaged Windows export was made;
+the prepared source project runs with the portable editor/runtime.
 
-[Docs/MISSION1.md](Docs/MISSION1.md) contains the scripts/component guide,
-Inspector references, input bindings and exact state-machine flows.
-[Docs/PHASE1.md](Docs/PHASE1.md) documents the model conversion, box-sweep motor,
-orbital camera, URP materials/lighting and audio mixer.
+[Docs/GODOT_MIGRATION.md](Docs/GODOT_MIGRATION.md) documents exact commands,
+directory structure, component connections, controls, manifest fields,
+validation and remaining limits.
 
-Place your PC archive at LocalReference/PC/app/data.pkr. From this repository
-root, with the Unity project closed:
+## Generated outputs and evidence
 
-    .\Tools\Reference\setup_converter.ps1
-    python Tools/Reference/prepare_phase1_assets.py
-    python Tools/Reference/prepare_mission1_assets.py
-    .\Tools\Build\build_mission1.ps1 -RunTests -SmokeTest
+- Godot/assets/audio/dialogue_manifest.json: all 3,661 clips with logical Godot
+  paths, ASR/reference status, speaker evidence and native trigger references.
+- Godot/assets/models/: 107 exported GLBs, including 105 rigged assets and
+  low-resolution variants, plus two original rooftop geometry files.
+- Godot/assets/ui/: 34 original menu/comic images converted to PNG.
+- Godot/assets/world/mission1_layout.json: a three-checkpoint authored route
+  derived directly from Godot collision queries over the original geometry.
 
-The conversion verifies archive member CRCs/lengths and the pinned converter.
-It never runs the original installer, game executable or compatibility DLLs.
+The player preserves 18 bones and 300 animation slots. Numeric animation
+bindings and the authored mission route are not proof of original gameplay
+semantics. The transcript page yielded 225 parsed reference lines and five
+strong whole-clip candidates. The 991 dialogue/movie entries retain 918 draft
+ASR transcripts and 73 no-speech results; complete verified transcripts,
+speaker labels and original trigger guards have not been recovered. The user
+supplied L1A1-L1A4 display names retain that provenance. Filename ordering does
+not invent playback conditions. See [native ID evidence](Docs/NATIVE_VOICE_IDS.md),
+[local ASR](Docs/BATCH_AUDIO.md) and [external reference scope](Docs/REFERENCE_SOURCES.md).
 
-Open Game in Unity Hub with editor 6000.6.6f1. Open the private scene
-Assets/_LocalReference/Mission1/BankHeistRooftops.unity, or run the local build
-Builds/Mission1/SpiderManMission1.exe with its accompanying data/runtime files.
-The Rebuild > Mission 1 editor menu also assembles and builds the scene.
+## Public source and private data
 
-## Implemented systems
+Validation: 40 Godot integration checks passed headlessly and on both real
+Mobile and Forward+ Vulkan renderers on the RX 580. All 23 Python pipeline and
+reference-tool tests passed. See the migration guide for test scope and limits.
 
-- PlayerStateMachine: pendulum swing, release momentum, geometry zip, surface
-  latch/crawl, clearance-checked roof mantle, hit stun and control transitions.
-- SpiderManCharacterController: swept box motion, sliding, steps, buffered jumps,
-  coyote timing and recovery; no capsule or Unity CharacterController component.
-- SpiderManOrbitCamera: mouse/right-stick orbit, damping, framing and Cinemachine
-  third-person collision handling.
-- PlayerCombat / Health: traced web shots, web energy, buffered three-hit melee,
-  web dome, damage, invulnerability and defeat events.
-- MissionManager / EncounterDirector: ordered rooftop checkpoints, living-enemy
-  encounter gate, arena constraints, skylight completion, checkpoint recovery/replay.
-- ThugAI / SurfaceSteeringMotor: patrol, alert, melee/ranged wind-ups, obstacle
-  steering, hit reactions, web stun and full web capture.
-- CutsceneSequence / DialogueCueTrack / DialogueTrigger: Timeline/Cinemachine
-  intro, authored subtitles, optional synchronized audio, pause/skip and control locks.
-- TraversalAudioRig: SFX/Music/Dialogue mixer buses, spatial web impacts,
-  distance curves and altitude/velocity-driven low-pass filters.
+Godot scripts/scenes/project settings, Python conversion tools, synthetic tests
+and documentation are tracked. Original and derived assets, transcripts,
+private manifests, caches, models, tools, captures and builds stay ignored.
+A public source clone needs locally supplied PC files and conversion to assemble
+original art. There is no embedded proprietary game in the public repository.
 
-Runtime: Game/Assets/_Game/Runtime. Editor assembly/build:
-Game/Assets/_Game/Editor. Validation: [Docs/Mission1Validation.md](Docs/Mission1Validation.md).
-Controls: [Docs/Controls.md](Docs/Controls.md).
-
-## Asset facts and fidelity limits
-
-The conversion preserves Spider-Man's 18 joints, eight textures and 300 numeric
-animation slots, plus L1A1's 115 mesh objects and 98 textures. The mission also
-uses original henchman, web-dome, level object and named combat SFX assets.
-All visible production geometry comes from private original assets.
-
-The rooftop route, bank encounter placement, entry role, animation bindings and
-combat/traversal tuning are authored integration choices. The original mission
-script, bank/skylight identity, animation semantics and gameplay timing have not
-been verified. The frontend extends the original subtitle-only slice with a
-32.35-second original Stan stream and an authored mission briefing. This is a
-playable authored slice on original art, with animation polish, fidelity research
-and performance work remaining. The menu uses the original character/albedo and
-comic art with procedural modern detail; exact original layout/pose parity and
-high-resolution repainting of every source texture are not claimed.
-
-## Private assets and public source
-
-Original/derived content stays ignored under LocalReference/ and
-Game/Assets/_LocalReference/: models, textures, clips, avatars, SFX, scenes,
-prefabs, Timeline assets and layouts. Builds, screenshots, test artifacts,
-downloaded tools and Unity caches remain private too.
-
-A source clone opens without the proprietary data. Rebuilding the playable
-scene requires a local PC archive and the conversion steps above. Private
-integration tests explicitly skip if those assets are missing.
-
-Source checkpoints go to https://github.com/snazzyeee/spiderman-2000-revamp.
-Do not commit proprietary derivatives or screenshots. See
-[Docs/RepositoryWorkflow.md](Docs/RepositoryWorkflow.md).
-
-## Pinned environment
-
-Unity 6000.6.6f1 (d20c9ac777da), URP 17.6.0, Cinemachine 6.6.0,
-Input System 1.20.0, Timeline 6.6.0 (editor-bundled), glTFast 6.20.0,
-Test Framework 1.8.0, UGUI 2.6.0. Manifest, lockfile, project settings and
-.meta files are tracked.
-
-The older Unity 6.3 worker and automation remain removed. REA is optional for
-future scoped behavioral research and is not required by this asset pipeline.
+[Repository workflow](Docs/RepositoryWorkflow.md) ·
+[Godot migration guide](Docs/GODOT_MIGRATION.md) ·
+[Archived Unity mission guide](Docs/MISSION1.md)
