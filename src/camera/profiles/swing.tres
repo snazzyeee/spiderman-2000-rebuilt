@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="CameraProfile" load_steps=2 format=3]
+[ext_resource type="Script" path="res://src/camera/camera_profile.gd" id="1"]
+[resource]
+script = ExtResource("1")
+mode = 4
+offset = Vector3(0, 0, 0)
+xz_distance = 650.0
+y_distance = -100.0
+sphere_radius = 0.22
+margin = 0.25
+whisker_side = 1.0
+whisker_back = 6.0
+pivot_height = 1.5
+fov = 72.0
+near_plane = 0.1
