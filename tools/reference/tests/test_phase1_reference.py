@@ -42,6 +42,14 @@ class UnitsTests(unittest.TestCase):
 
 
 class HarvestTests(unittest.TestCase):
+    def test_reviewed_runtime_bindings_survive_refresh_only_with_evidence(self):
+        document = {'entries':[{'actor':'CPlayer','animation_name':'synthetic_player_anim'}]}
+        previous = {'runtime_bindings':{'ground_loss':'synthetic_player_anim'}}
+        harvest.preserve_runtime_bindings(document, previous)
+        self.assertEqual(document['runtime_bindings'], previous['runtime_bindings'])
+        with self.assertRaises(ValueError):
+            harvest.preserve_runtime_bindings({'entries':[]}, previous)
+
     SOURCE = '\n'.join([
         '// @Ok', 'void CPlayer::CheckGroundGone(void)', '{', '\tthis->PlaySingleAnim(212, 0, -1);', '}', '',
         '// @MEDIUMTODO', 'void CPlayer::CheckJump(void)', '{', '\tPlaySingleAnim(0x10u, 0, -1);', '}', '',

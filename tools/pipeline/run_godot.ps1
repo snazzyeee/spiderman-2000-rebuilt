@@ -1,4 +1,4 @@
-param([ValidateSet('mobile', 'forward_plus')][string]$Renderer = 'forward_plus', [switch]$Editor, [switch]$SmokeTest, [switch]$Headless, [string]$Script, [switch]$Import)
+param([ValidateSet('mobile', 'forward_plus')][string]$Renderer = 'forward_plus', [switch]$Editor, [switch]$SmokeTest, [switch]$Headless, [string]$Script, [switch]$Import, [switch]$TraversalTests)
 $ErrorActionPreference = 'Stop'
 $projectRoot = (Resolve-Path (Join-Path $PSScriptRoot '../..')).Path
 $executable = Join-Path $projectRoot 'tools/third_party/godot-4.7.2/Godot_v4.7.2-stable_win64_console.exe'
@@ -9,6 +9,7 @@ if ($Editor) { $godotArgs += '--editor' }
 if ($Headless) { $godotArgs += '--headless' }
 if ($Import) { $godotArgs += @('--headless', '--editor', '--import', '--quit') }
 if ($Script) { $godotArgs += @('--script', $Script) }
+if ($TraversalTests) { $godotArgs += @('--script', 'res://src/diagnostics/traversal_runner.gd', '--quit-after', '2400', '--max-fps', '60', '--', '--traversal-tests') }
 if ($SmokeTest) { $godotArgs += @('--quit-after', '600', '--max-fps', '60', '--', '--revamp-smoke') }
 $startedUtc = [DateTime]::UtcNow
 & $executable @godotArgs
@@ -18,4 +19,10 @@ if ($SmokeTest) {
     if (-not (Test-Path -LiteralPath $reportPath) -or (Get-Item -LiteralPath $reportPath).LastWriteTimeUtc -lt $startedUtc) { throw 'Godot exited without a fresh smoke report' }
     $report = Get-Content -LiteralPath $reportPath -Raw | ConvertFrom-Json
     if (-not $report.passed -or $report.checks.Count -lt 40) { throw 'Godot smoke report failed or was incomplete' }
+}
+if ($TraversalTests) {
+    $reportPath = Join-Path $projectRoot 'staging/validation/traversal-tests.json'
+    if (-not (Test-Path -LiteralPath $reportPath) -or (Get-Item -LiteralPath $reportPath).LastWriteTimeUtc -lt $startedUtc) { throw 'Godot exited without a fresh traversal report' }
+    $report = Get-Content -LiteralPath $reportPath -Raw | ConvertFrom-Json
+    if (-not $report.passed -or $report.checks.Count -lt 143 -or @($report.suites.PSObject.Properties).Count -ne 5) { throw 'Traversal tests failed or were incomplete' }
 }

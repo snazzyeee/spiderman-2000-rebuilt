@@ -135,6 +135,16 @@ def decomp_head(decomp: Path) -> str:
     return result.stdout.strip()
 
 
+def preserve_runtime_bindings(document: dict, previous: dict) -> None:
+    """Keep reviewed ledger event choices across an evidence refresh, fail closed."""
+    bindings = previous.get('runtime_bindings', {})
+    names = {e['animation_name'] for e in document['entries'] if e['actor'] == 'CPlayer'}
+    if any(name not in names for name in bindings.values()):
+        raise ValueError('Reviewed runtime binding lost its player-slot evidence')
+    if bindings:
+        document['runtime_bindings'] = dict(bindings)
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--decomp', type=Path, default=ROOT / 'tools/third_party/spidey-decomp')
@@ -144,6 +154,8 @@ def main() -> int:
     if decomp_head(args.decomp) != DECOMP_COMMIT:
         raise SystemExit('Decomp checkout differs from the pinned commit; run tools/reference/setup_decomp.ps1')
     document = build(args.decomp, args.assets)
+    if args.output.exists():
+        preserve_runtime_bindings(document, json.loads(args.output.read_text(encoding='utf-8')))
     sys.path.insert(0, str(ROOT / 'tools/reference'))
     from batch_process_audio import write_json
     write_json(args.output, document)
