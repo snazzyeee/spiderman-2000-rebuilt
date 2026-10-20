@@ -34,9 +34,12 @@ are distinguished from verified original behavior in the private manifest.
 ## Unity and standalone coverage
 
 Validated results: 42 Unity tests passed (10 EditMode, 32 PlayMode), with zero
-failures or skips; 12 Python tests passed. The rendered standalone player
+failures or skips; 14 Python tests passed. The rendered standalone player
 passed 29 checks with an empty error list. Its complete directory is about
 273 MB; extracted WAVs and Unity caches are additional local storage.
+The separate full mission-route player also passed 18 checks, exercising
+actual rooftop traversal, encounter gates, enemy defeat, recovery and skylight
+completion. Its automation save is isolated from the interactive player's save.
 
 The Unity suite includes the earlier traversal, combat, mission, Timeline and
 camera checks plus dialogue registry validation, subtitle/audio ownership,

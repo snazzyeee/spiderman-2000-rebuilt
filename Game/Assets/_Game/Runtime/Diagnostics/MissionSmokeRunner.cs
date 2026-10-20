@@ -17,6 +17,7 @@ namespace SpiderManRebuild
         public MissionManager Mission;
         readonly Report report = new Report();
         string output, preview;
+        string previousSavePath;
         bool active;
         double began;
         void Awake()
@@ -26,6 +27,8 @@ namespace SpiderManRebuild
             if (!active) { enabled = false; return; }
             output = Arg(args, "--smoke-output"); preview = Arg(args, "--capture-preview");
             if (string.IsNullOrEmpty(output)) output = Path.Combine(Application.persistentDataPath, "mission-smoke.json");
+            previousSavePath = SaveGameStore.OverridePath;
+            SaveGameStore.OverridePath = Path.Combine(Path.GetDirectoryName(Path.GetFullPath(output)), "mission-route-smoke-save.json");
             Mission.Player.Automation = true;
             Mission.Player.GetComponent<TraversalInput>().Automation = true;
             began = Time.realtimeSinceStartupAsDouble;
@@ -131,6 +134,10 @@ namespace SpiderManRebuild
             Directory.CreateDirectory(Path.GetDirectoryName(Path.GetFullPath(output)));
             File.WriteAllText(output, JsonUtility.ToJson(report, true)); Application.Quit(report.passed ? 0 : 1);
         }
-        void OnDestroy() => Application.logMessageReceived -= Log;
+        void OnDestroy()
+        {
+            Application.logMessageReceived -= Log;
+            if (active || previousSavePath != null || !string.IsNullOrEmpty(output)) SaveGameStore.OverridePath = previousSavePath;
+        }
     }
 }
