@@ -50,6 +50,16 @@ and axis-flipped equals exported mesh_00000013 translation
 the GLB accessor bounds. Ninth fractions are explained by division by 9/4,
 not evidence of arbitrary placement. Confidence: verified for this comparison.
 
+The full GLB audit finds 116 plain mesh-name candidates: 109 translations agree
+with their G-file object origin /2.25 within 0.01 exported unit; seven do not.
+Exported nodes do not identify their source bank, so these seven candidates are
+reported as unmatched, not treated as proven bad placements. Additional mesh
+names have suffixes and are not assigned by this audit. Raw origin bounds for the
+G file are X [-25557,-8148], Y [-3466,7526], Z [-56614,-186]; TRG landmarks also
+extend into positive X. The decoder reports per-candidate origin deltas and raw
+versus exported vertex bounds. These facts narrow the investigation but do not
+establish a complete geometry/TRG relation.
+
 World units and converted model units were conflated. Keep the authored character
 calibration as METERS_PER_MODEL_UNIT; original world units use that value /2.25.
 Geometry imports use model units. This is a decoded converter factor, without a

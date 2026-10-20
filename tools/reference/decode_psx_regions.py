@@ -8,6 +8,7 @@ import hashlib
 import json
 from pathlib import Path
 import struct
+import re
 
 MAX_BYTES = 64 * 1024 * 1024
 MAX_ENTRIES = 65536
@@ -80,7 +81,33 @@ def compare_glb(path, decoded):
         if magic != 0x46546c67 or version != 2 or kind != 0x4e4f534a or not 0 < length <= MAX_BYTES or size != path.stat().st_size:
             raise ValueError('Invalid bounded GLB')
         document = json.loads(stream.read(length))
-    return dict(nodes=[dict(name=n.get('name'), translation=n.get('translation'),
+    comparisons = []
+    for node in document.get('nodes', []):
+        if 'mesh' not in node:
+            continue
+        mesh = document['meshes'][node['mesh']]
+        match = re.fullmatch(r'mesh_([0-9a-fA-F]{8})', mesh.get('name', ''))
+        if not match:
+            continue
+        index = int(match[1], 16)
+        objects = [o for o in decoded['objects'] if o['model'] == index]
+        if len(objects) != 1:
+            continue
+        expected = [v*s/2.25 for v,s in zip(objects[0]['origin_world'], [1,-1,-1])]
+        matrix = node.get('matrix')
+        actual = matrix[12:15] if matrix else node.get('translation', [0,0,0])
+        comparisons.append(dict(model=index, expected_translation=expected,
+            actual_translation=actual, translation_error=[a-b for a,b in zip(actual,expected)],
+            raw_vertex_bounds=decoded['models'][index]['vertex_bounds_raw'],
+            glb_position_bounds=[dict(min=document['accessors'][p['attributes']['POSITION']].get('min'),
+                                     max=document['accessors'][p['attributes']['POSITION']].get('max'))
+                                 for p in mesh.get('primitives', [])],
+            decoded_converter_divisor=2.25))
+    return dict(comparisons=comparisons,
+                comparison_status='Candidate correspondence by mesh name; source bank is not encoded in exported node names',
+                matching_translations=sum(max(map(abs,c['translation_error'])) < 0.01 for c in comparisons),
+                max_translation_error=max((abs(v) for c in comparisons for v in c['translation_error']), default=None),
+                nodes=[dict(name=n.get('name'), translation=n.get('translation'),
                            matrix=n.get('matrix'), scale=n.get('scale'))
                        for n in document.get('nodes', [])],
                 decoded_origins_world=[o['origin_world'] for o in decoded['objects']],
