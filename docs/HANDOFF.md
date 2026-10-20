@@ -1,262 +1,200 @@
 # Handoff — 2026-10-21
 
-## Current state and scope
+## HEAD, scope and commits
 
-Branch main; implementation HEAD at handoff preparation:
-`85fba40d1725324c1dd99c2ff756b2a2fafdcd6a`. This handoff is the following
-docs-only commit; `git rev-parse HEAD` identifies its final hash. Commits were
-pushed normally, without force. Status was clean before this handoff edit.
+Branch: main. Implementation HEAD:
+`0d18ee205d0a0278dd52f932a3f2526c7822c0c4`.
+This handoff and the preliminary ledger audit are the following docs-only
+commit; resolve its final hash with `git rev-parse HEAD`. Normal pushes only.
+The final docs commit's CI result is checked after pushing and reported in chat.
 
-This run completed section 0 and the original-font pipeline/theme milestone.
-New sections were stopped to reserve context for the required handoff.
-Sections 2–7 remain pending; do not infer their completion from font progress.
-
-| Requested section | Result |
+| Section | Result this run |
 |---|---|
-| 0 Sync / CI | Authenticated gh session works; prior and new Linux runs are green; README badge added |
-| Gemini brief exception | Committed once, as-is, in ad207fd; no other owner/Gemini file edited |
-| 1 Fonts | Six fonts decoded/exported, five sheets inventoried, Faithful/Enhanced resources, optional theme/options and tests implemented |
-| 2 Texture enhancement | Not started; no upscaler or model downloaded |
-| 3 Display / 4 Dynamic menu | Not started; current viewport/layout and existing menu flow retained |
-| 5 Human transcript review | Not started; no Gemini proposal approved or promoted |
-| 6 Landmark investigation | Not started; unchanged existing gate rerun and reported below |
-| 7 Carryovers | Not started this run |
-| 8 Docs | Font commands, controls, current menu status, licenses, ledger/index, CI badge and this handoff updated |
-| 9 Final gate / handoff | Local matrix and runtime CI pass; known landmark failure and limitations retained |
+| 0 Sync | Status/log/prior handoff read; owner briefs committed as-is; all Gemini WORKLOG summaries and T4 review read |
+| 1 Review findings | Findings 1/2/4 reproduced then fixed; finding 3 disproved as a metric assertion; tests added |
+| 2 Menu audio | Global move/select/back recovered, bank-order guesses removed, duration/non-overlap/hover policy and tests implemented |
+| 3 Layout | Preliminary source audit only; both JSON proposals inspected, no complete schema/asset/claim validation or layout adopted |
+| 4 Wireframes | Not started; no generated wireframes or overlays |
+| 5 Frontend/pause/loading rebuild | Not started; current presentation retained apart from audio/focus fixes |
+| 6 Texture/display | Not started; no upscaler/model download, Remastered font, HD tree or video-options work |
+| 7 Transcript review | Not started; no proposal promoted or human decision created |
+| 8 Campaign/costume research | Not started; no inferred title, objective or suit-name changes |
+| 9 Carryovers | Not started; animation renders and all listed follow-ons remain pending |
+| 10 Final gate | All-target regression passes for implemented scope; remaining requested work explicitly deferred |
 
-Gemini brief SHA-256 before and after the as-is commit:
-`89c62f79ae23ef4547d2103849ce280b861a67ee78089a7e44038fb1abb5ffb6`.
-Never edit/delete docs/gemini/ or staging/gemini/. No staging/gemini input or
-optional menu style guide was read or used by this milestone.
+Stopped starting sections to preserve context for this handoff, per owner
+instruction. Sections 3–9 are pending, not certified or declared blocked.
 
-## Exact gates
+- `11114a9 docs(gemini): add art and design briefs` — the three owner files as-is.
+- `479dcf8 fix(fonts): guard bindings and preserve live switching on save failure`.
+- `0d18ee2 fix(ui): recover menu sound ids and enforce bounded non-overlapping playback`.
 
-Final local evidence: `staging/validation/regression/fonts-section-final/`.
-Python: **47 reference + 11 pipeline = 58 passing**.
+No edits to staging/gemini/ or further edits to docs/gemini/. Gemini T7/T8
+produced no usable enhancement assets: exact-size RGBA capability was blocked.
+All texture/font enhancement remains Codex's section 6 responsibility.
 
-| Target | Smoke | Traversal | Fonts | Engine/script errors |
-|---|---:|---:|---:|---:|
-| Headless, forward_plus | 44/44 | 150/150 | 29/29 | 0 |
-| Real Vulkan Forward+ | 44/44 | 150/150 | 29/29 | 0 |
-| Real Vulkan Mobile | 44/44 | 150/150 | 29/29 | 0 |
+## Final local and CI gates
 
-Import passes in the final matrix. Real GPU logs identify the RX 580 2048SP.
-All previous 42 smoke labels are retained; two original-font assertions are
-added. Evidence: staging/validation/fonts/retained-smoke-checks.json.
-The original 150 traversal checks and every existing gate stay in place.
-No human playtest, new dynamic-menu suite, 1080p layout certification or steady
-60 fps benchmark has been claimed.
+Final local evidence: `staging/validation/regression/handoff-final/`.
+Section 2 evidence: `staging/validation/regression/menu-audio-section-final/`.
+Python: **50 reference + 14 pipeline = 64 passing**.
 
-CI is green for runtime commit 85fba40:
-[run 39480489642](https://github.com/snazzyeee/spiderman-2000-revamp/actions/runs/39480489642).
-Downloaded reports: `staging/validation/ci-fonts-runtime/`. Linux CI passes all
-58 Python tests, 150 traversal checks and 10 font variant/fallback checks.
-Private-font loading/metrics and the 44-check private smoke suite are explicitly
-skipped with reasons; they remain mandatory locally. The final docs-only
-handoff push triggers another run, checked after pushing and reported in chat.
+| Target | Smoke | Traversal | Fonts | Menu audio | Engine/script errors |
+|---|---:|---:|---:|---:|---:|
+| Headless Forward+ | 49/49 | 150/150 | 39/39 | 23/23 | 0 |
+| Real Vulkan Forward+ | 49/49 | 150/150 | 39/39 | 23/23 | 0 |
+| Real Vulkan Mobile | 49/49 | 150/150 | 39/39 | 23/23 | 0 |
 
-The owner's gh login resolved the old authentication blocker. Only the gh
-session was used; no stored Git credential was accessed. Earlier runs for
-98e5b52, the brief/badge and font-pipeline commits were also confirmed green.
+RX 580 2048SP identified in real Vulkan logs. Import passes. All 44 prior smoke
+labels, all 150 traversal checks and prior font assertions retained; five smoke
+checks and a separate menu-audio suite added. No existing gate relaxed.
+
+CI green on implementation HEAD 0d18ee2:
+[run 39508563480](https://github.com/snazzyeee/spiderman-2000-revamp/actions/runs/39508563480).
+Private downloaded evidence: `staging/validation/ci-menu-audio-runtime/`.
+Linux CI passes 64 Python, 150 traversal, 14 fallback/font-policy and 17 synthetic
+menu-audio checks. Original-font metrics, private audio identities/durations and
+full private smoke are explicitly skipped in CI; they pass locally as above.
+Section 1 also green for exact 479dcf83699b6e4e5669699b8a3f9b52048eccef:
+[run 39506502708](https://github.com/snazzyeee/spiderman-2000-revamp/actions/runs/39506502708).
 
 ```powershell
 ./tools/pipeline/run_regression.ps1 -Milestone next-section
-./tools/pipeline/run_godot.ps1 -Headless -Script res://src/diagnostics/font_tests.gd
 ```
 
-Regression now includes the font suite on all three targets. It verifies fresh
-reports, existing renderer/Vulkan evidence and zero engine/script errors.
+The runner sets TEMP/TMP to staging/test_tmp, validates fresh reports, renderer
+and real Vulkan evidence, and rejects engine/script errors. Do not infer a
+1080p design certificate, 60 fps benchmark or human playtest from these checks.
 
-## Recovered font facts and authored presentation
+## Section 1: verified findings
 
-New ledger: docs/behavior_ledger/fonts.md, added before implementation.
-FNT is self-contained: count, sixteen-byte glyph records, sixteen-color palette
-and aligned packed four-bit bitmaps. Width/height/baseline/slice widths are
-bounded and checked; file accounting must be exact. The five BMP companions
-are independently CRC-checked paletted authoring sheets; their per-glyph sheet
-mapping remains unverified and is not guessed from names.
+Private test-first evidence: `staging/validation/review-reproduction/`.
+1. Confirmed: repeated binding retained dead weakrefs; null binding raised a
+   script error. Bind now prunes dead references and ignores invalid controls.
+2. Confirmed: failed persistence aborted live switching. A valid variant now
+   applies to live controls even on save failure; false return plus a warning
+   reports persistence failure. Invalid existing configs are not overwritten.
+   Optional settings-path injection tests failure without replacing user config.
+3. Disproved as an exported-metric test: all six fonts explicitly map the
+   sampled codepoints, including space advance, and both exports preserve them.
+   Added mapping assertions without removing the metric gate. This does NOT
+   verify font_big imagery or its original specialized character binding;
+   font_big remains unused by the live theme.
+4. Confirmed: setup had no runtime guard. Unsupported OS, Python ABI, machine
+   architecture or pointer width now fail before filesystem/network effects.
+   Synthetic tests cover non-Windows, Python 3.11/3.13, ARM64 and 32-bit cases.
 
-A bounded static read of the canonical fingerprinted executable recovered the
-normal ASCII index map and nominal advances/space width. The decomp's
-getCharIndex body is a stub despite its tag, so it was not used as proof.
-Private static audits remain staging/reference/font-{charmap,width,constructor}-static.txt.
-No original program or decomp build was executed, and no disassembly or raw
-original-program data was copied into src/, tests or comments.
+These are authored runtime policies recorded in fonts.md, not new original-game
+behavior. Existing Faithful/Enhanced resources, fallback and role choices remain.
 
-Faithful: decoded RGBA pixels in original and integer nearest-neighbor 4x
-BMFont atlases. Enhanced: union boundaries traced independently per visible
-palette color into layered COLR/CPAL TrueType outlines. Every layer's polygon
-area must equal its original pixel count; all advances are checked exactly
-against source metrics. Per-glyph trace failures fail conversion and are
-recorded in the private manifest. Final conversion: six fonts, five sheets,
-zero tracing failures, exact variant metrics. All derived fonts/art stay private.
+## Section 2: recovered sounds and authored policy
 
-Authored: scalable palette-outline presentation; theme/default sizes; UI-role
-selection, Enhanced default, user-setting policy and filtering. Title/menu/HUD/
-captions use sp_fnt00; subtitles use sp_fnt02. Shell font helper choices are
-recovered, but exact original title/HUD/subtitle/button roles remain partly
-unknown. Nominal metrics are preserved; original global scale is a separate
-runtime setting and is not claimed as the remake's UI scale.
+Ledger: `docs/behavior_ledger/frontend.md`; exact joins: audio_ids.md.
+Read-only, canonical fingerprint-gated scan of 110 named frontend functions
+found 91 positive direct SFX call sites. Each function bounded by the next
+names.json address, at most 65535 bytes; total scan at most 2 MiB.
+Source: decomp f8a039248908e085f8fba8106769aea7f8f9de67. No original program ran.
+Positive branch contexts establish move 0x29, select 0x1F, back 0x23. Cheat
+accept/reject/exit and actor punch events are separately identified, never used
+to guess generic selection. Jump-table gaps mean absence of decoded calls is
+not proof of absence.
 
-Options → Font variant selects Faithful / Enhanced, persists under video in
-user://settings.cfg and applies live to registered controls. Missing private
-fonts and unsupported characters retain the existing fallback. Tests restore
-the user's settings file after checking persistence.
+| Event | Native global ID | Private duration | Remake policy |
+|---|---:|---:|---|
+| Changed focus | 0x29 | 0.303333 s | Plays |
+| Confirm | 0x1F | 1.367 s | Silent: exceeds owner's 0.6 s maximum |
+| Back | 0x23 | 1.111 s | Silent: exceeds owner's 0.6 s maximum |
 
-## Limitations and failed evidence retained
+Removed menu.kat/000 and /001 guesses. Menu requests use Dialogue.play_sfx_id;
+stop previous playback first; reject absent, looping, empty, non-finite or
+long streams. No trimming or unrelated substitution. Initial focus and repeated
+hover on the same enabled item are silent; mouse hover changes focus when needed.
+Confirm and Back have separate events. Tests cover boundaries, overlap, hover,
+loop rejection, native bindings and deliberate private-duration suppression.
 
-- The initial monochrome luminance-threshold experiment lost dark underline
-  glyphs. It failed; the threshold was not lowered and no glyph was omitted.
-  Palette-layer tracing replaces that approach and preserves all visible colors.
-  The failed trial log and explanation remain private / in the ledger.
-- Visual QA found font_big's generic map inappropriate for the mixed title/year:
-  its specialized glyph binding remains unresolved. That bank's raw/outline
-  exports support structural/metric diagnostics, not a claim of correct imagery
-  for every generic codepoint. It is not used in the live theme. The title uses
-  sp_fnt00 without guessing font_big indices. Other unused specialized mappings,
-  accents and dynamic button prompts still require evidence.
-- Palette high bits are retained in the manifest. Color-key transparency is
-  preserved; original semi-transparency behavior beyond that remains partial.
-- The first import of newly created font resources emitted two dummy-renderer
-  texture errors. Failed evidence is in regression/fonts-pipeline/import.log.
-  An unchanged import recheck and subsequent full matrices passed with zero
-  errors. The cold-cache cause is unresolved; do not claim first-import
-  cleanliness. Reproduce and fix it without suppressing engine errors.
-- The original landmark gate was rerun unchanged and remains **19/21**:
-  28/146 supported (19.18%) versus runner-up 1/146 (0.68%). The >=80% support
-  and >=30-point margin criteria fail. TRG placement stays unverified.
-  Current reports: units-fonts-final.log, units-landmark.json and
-  units-fonts-analysis.log under staging/validation/. No spatial correction
-  was applied and no new landmark subset/gate was substituted.
-
-## Private outputs and regeneration
-
-Prerequisites: canonical staging/raw_extracted/PC/app/data.pkr; the canonical
-SpideyPC.exe only for bounded fingerprint-gated static audits; raw extracted
-PSX/SFX/KAT/fonts, private assets/ and levels/*/trg_graph.json, existing audio
-source WAV manifest/tree and exact native catalogs. Keep staging/migration_audit/
-and the prior landmark evidence. Existing Unity deletion remains complete.
-
-Use the pinned audio Python interpreter:
+Synthetic scanner tests use no original bytes; all private artifacts stay ignored.
+Regenerate static inventory with the existing pinned Python/Capstone setup:
 
 ```powershell
-./tools/third_party/audio-python/Scripts/python.exe tools/pipeline/setup_font_tools.py
-./tools/third_party/audio-python/Scripts/python.exe tools/pipeline/convert_fonts.py
-./tools/pipeline/run_godot.ps1 -Import
-./tools/pipeline/run_regression.ps1 -Milestone fonts-section-final
+./tools/third_party/audio-python/Scripts/python.exe tools/reference/scan_frontend_sfx.py
 ```
 
-prepare_godot.ps1 includes setup/conversion before import. Setup fetches only
-version/hash-pinned wheels into tools/third_party/font-tools/: Pillow 11.3.0,
-fontTools 4.60.1, Capstone 5.0.6. Licenses and SHA pins are in THIRD_PARTY.md and
-the setup script. Conversion itself is entirely local/offline.
+Output: `staging/reference/frontend-sfx-static.json`. Deeper manually inspected
+branch/WAV audit: `staging/reference/frontend-branches-static.txt`; private
+helper scripts remain beside it. Setup uses already pinned tools; no new
+models or libraries were downloaded. Runtime/test code uses ledger facts only.
 
-New private outputs:
+## Preliminary section 3 observations and owner decisions
 
-- assets/ui/fonts/: six original/4x BMFont resources, palette-layer TTFs,
-  source-sheet PNGs and font_manifest.json with source hashes, palette words,
-  glyph metrics, generic mapping and variant advances.
-- staging/validation/fonts/: comparison renders for each font at 1280x720,
-  1920x1080 and 2560x1440, plus retained-smoke-label evidence. Comparison text
-  is neutral test text; the original authoring sheets are exported separately.
-- staging/validation/smoke/: menu/mission captures now show original fonts.
-- staging/validation/regression/fonts-section-final/: exact final logs/reports;
-  staging/validation/ci-fonts-runtime/: downloaded green CI evidence.
+No owner reference screenshots found at staging/reference/menu_original/.
+Both Gemini JSON specs inspected: 12 frontend and 5 in-game screens. They are
+still **Gemini proposal (unverified)**; the complete validation report, per-claim
+audit and layout single source of truth are NOT implemented.
 
-No original or derived art/font/audio/video/game text was committed. All public
-fixtures are synthetic. No enhancement model or cloud service was used.
+Independently checked generic CMenu centering, output-coordinate scaling,
+control-column origins, title helper, normal/small font helpers, background,
+legal wait and rude-word actor. Own-word facts/confidence now in frontend.md.
+Significant corrections: title helper takes its Y from the caller; several
+flow functions are TODO stubs; shell background references menubg, not proven
+shell_bg equivalence; font helpers do not establish a subtitle role. Legal
+body does not implement the proposal's any-button early skip. Constructor
+placement for the rude-word actor is NotOk and does not prove main-menu staging.
 
-## Remaining sections and next three tasks
+No section 3 owner-question defaults implemented yet. Recommended future
+switchable defaults from owner_questions.md (recommendations, not owner decisions):
 
-1. Reproduce the font cold-cache import errors and fix their cause, then start
-   section 2: private texture inventory, pinned offline RX 580 upscaler/models,
-   wrap/alpha processing, HD/hand-curated override provenance, runtime texture
-   choice and VRAM/visual QA. No part of this enhancement pipeline exists yet.
-2. Section 3: 1080p/adaptive UI, live persisted renderer-aware Video options and
-   layout checks at the four requested resolutions. Current 1280x720 viewport
-   and authored menu placement have not been changed by typography work.
-3. Section 4: dynamic menu/transition/attract/gallery/costume/accessibility work
-   with honest frame-time evidence. Then section 5's local human transcript
-   review tool and approved-only registry merge, followed by the time-boxed
-   restart/SCRIPTONLYBADDY investigation and ordered section 7 carryovers.
+| Question | Recommended default | Qualification |
+|---|---|---|
+| Enhanced side-fill | Centered 4:3 art with authored side wings; strict pillarbox alternative | Preserve original art geometry; no generated art yet |
+| Cursor | Show on mouse movement, hide on keyboard/controller; always-visible alternative | Original cursor mapping still needs evidence |
+| Cheats | Verified classic code entry with optional remembered toggles | Verify table/unlocks first; do not invent entries |
+| Attract | Character/comic carousel, optional converted video | Owner's 60 s trigger overrides Gemini's 50 s; reduced-motion choice |
+| Training | Phased rollout with current traversal practice available | Do not expose invented challenge lists or unlock rules |
 
-Carryovers still include alias/provenance import processing, remaining Level 1
-asset conversion/collision, Theora cinematics, opcode ledger/MissionRuntime
-logic-only/default-off integration, debug overlay, human playtest checklist and
-InputRecorder/replayer. Audio XA/SFX identity binding was completed previously;
-Gemini transcript proposals must never become verified without human decisions.
-BATCH_AUDIO.md remains the existing audio workflow; no review-tool command is
-advertised as implemented.
+## Failed gates, limitations and retained evidence
 
-## Permissions and operational notes
+- Historical landmark gate remains **19/21**, 28/146 support (19.18%) versus
+  runner-up 1/146 (0.68%); >=80% support and >=30-point margin still fail.
+  Not reinvestigated in this run. No spatial correction or substitute gate.
+  Prior evidence remains staging/validation/units-landmark.json and related logs.
+- Prior cold-cache font import error remains unresolved; current imports/matrices
+  pass, which does not certify the first import of a cleared cache.
+- Initial menu integration failed because retained smoke callers still used
+  boolean sound arguments; callers now use named events. Failed log remains
+  regression/menu-audio/. Complete subsequent matrices pass.
+- Direct Python tests outside the runner hit sandbox TEMP permissions. Those
+  logs remain staging/validation/menu-audio-python-*.log. Complete configured
+  runner suites pass; no fixture or gate weakened to work around the failure.
+- Automatic approval review briefly failed due to reviewer usage limits; no
+  rejected command executed and it was not a safety determination. After owner
+  resume, normal approval review succeeded. No bypass or unresolved approval.
 
-Elevated execution was used for gh auth/status/run/download, normal Git
-commit/push, public PyPI metadata and pinned setup downloads, process inspection
-and Godot import/runtime matrices. No automatic-review rejection occurred this
-run; the historical stored-credential action was not repeated.
+No new art, fonts, audio, video, game transcripts, raw functions or private
+registry/graph data tracked. No Gemini proposal promoted to verified dialogue.
+Historical fonts, private conversion and source requirements remain described
+in fonts.md, BATCH_AUDIO.md, THIRD_PARTY.md and Git history of this handoff.
 
-Use run_regression.ps1 so TEMP/TMP point to staging/test_tmp. Close the editor
-before import. Leave owner/Gemini files alone; the single authorized as-is
-brief commit is complete. Keep every existing gate and distinguish the passing
-warm-cache regression from unresolved cold-cache and landmark limitations.
+## Review outputs and remaining work
 
-## Current run: section 1 review (2026-10-21)
+- Current menu smoke screenshots: `staging/validation/smoke/godot-menu.png`
+  and other godot-*.png captures. Existing single-size presentation evidence,
+  NOT the requested per-screen/style/resolution design QA matrix.
+- New menu contact sheet, full screenshot matrix, private overlays and tracked
+  wireframe index: **not generated**. Intended locations remain
+  staging/validation/menu/ and docs/design/wireframes/index.html.
+- Existing font comparison sheets: staging/validation/fonts/; private fonts:
+  assets/ui/fonts/. Regenerate through setup_font_tools.py / convert_fonts.py.
+- No HD textures, Remastered atlas, loading covers, transcript-review page,
+  act graph, cheat table recovery or animation renders created this run.
 
-Owner briefs committed as-is in 11114a9. All Gemini WORKLOG session summaries
-and T4 review read; T7/T8 produced no usable upscales. No Gemini output edited.
-Findings 1, 2, 4 reproduced before fixes: dead weakrefs accumulate, null binding
-raises a script error, save failure prevents a live update, unsupported setup
-hosts reach extraction. Logs: staging/validation/review-reproduction/.
-Findings 1/2 fixed with runtime regression tests; setup now rejects unsupported
-OS, ABI and architecture before filesystem/network effects (synthetic tests).
-The optional settings path allows failure tests without touching real settings.
-A valid variant applies live even if persistence fails; return false and warning
-report that failure, and malformed existing settings are never overwritten.
-Finding 3 disproved as a metric assertion: all six exports explicitly map the
-sample and space advance; original and outline advances match in Godot.
-Added explicit export-map assertions while retaining the original metric gate.
-This does not verify font_big imagery or its original specialized mapping.
-
-Section 1 matrix: staging/validation/regression/review-fonts/summary.json:
-47 reference + 13 pipeline Python tests pass; headless Forward+, real Vulkan
-Forward+ and Mobile each pass smoke 44, traversal 150, fonts 39, zero engine or
-script errors. Original gates retained. CI status is recorded after push.
-
-Section 1 CI confirmed green for exact commit
-479dcf83699b6e4e5669699b8a3f9b52048eccef:
-https://github.com/snazzyeee/spiderman-2000-revamp/actions/runs/39506502708.
-
-## Current run: section 2 menu audio
-
-Recovered global move/select/back IDs 0x29/0x1F/0x23 with bounded static
-frontend scan (110 functions, 91 positive call sites). Evidence and authored
-runtime policy were ledgered in frontend.md before src changes. Regenerate:
-`tools/third_party/audio-python/Scripts/python.exe tools/reference/scan_frontend_sfx.py`.
-Private output: staging/reference/frontend-sfx-static.json; deeper branch and
-WAV-duration audit: staging/reference/frontend-branches-static.txt. Setup uses
-the already pinned Capstone toolchain; no new tools/models downloaded.
-
-Removed bank-order guesses; distinct confirm/back events; hover changes focus
-only on a new enabled control; first focus stays silent; previous menu playback
-stops before every distinct event. Reject absent, looping, empty or overlong
-streams. Actual select/back durations are 1.367/1.111 s: both remain silent to
-honor the owner's <=0.6 s rule. Move is 0.303333 s and plays via exact native ID.
-No samples truncated or substituted. Synthetic tests cover the boundary,
-non-overlap, loops, absent sounds, focus/hover and separate event IDs. Private
-checks require select/back native resolution and duration rejection.
-All original smoke labels retained, five mouse/native-ID/duration checks added.
-Regression adds a menu-audio suite on all targets and Linux CI alongside all
-existing suites; no gate relaxed.
-
-Final section 2 local evidence: staging/validation/regression/menu-audio-section-final/.
-Python: 50 reference + 14 pipeline = 64 passing.
-Each of headless Forward+, real Vulkan Forward+ and real Vulkan Mobile:
-49 smoke, 150 traversal, 39 fonts, 23 menu-audio checks, zero engine/script errors.
-The first integration run failed because smoke callers still passed booleans;
-named-event callers fixed and full matrix rerun. Failed evidence retained in
-regression/menu-audio/. Direct Python invocations outside the runner hit sandbox
-TEMP permissions; the configured runner's complete Python suites pass.
-
-Approval review briefly failed due to a reviewer usage limit (no command ran,
-not a safety determination). After the owner's resume, normal approval review
-worked for regression and CI checks; no bypass used.
+Next three tasks, in requested section order:
+1. Finish section 3: validate every proposal element/assets/evidence; audit all
+   remaining decomp claims; build classic/enhanced screens.json with nonoverlapping
+   actor/menu regions, verified labels only and explicit authored/proposal grades.
+2. Section 4: generate all blueprint SVGs/index from that data; add bounds/overlap/
+   SVG-completeness checks and honest overlays only where real screens exist.
+3. Section 5: layout-driven frontend plus pause/loading, private bounded logo/
+   cover conversion, style/reduced-motion/attract options and full objective QA.
+   Then section 6 textures/fonts/display, 7 human transcript review, 8 campaign/
+   cheats and all ordered section 9 carryovers. Do not jump to animation renders
+   or edit staging/gemini/ except the explicitly authorized future renders folder.

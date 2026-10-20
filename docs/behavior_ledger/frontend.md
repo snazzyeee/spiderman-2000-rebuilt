@@ -36,3 +36,48 @@ zero-length, non-finite or overlong streams. Initial focus is silent; hover
 grabs focus only when it changes; repeated hover/focus on the same item is
 silent. Confirm and Back use distinct events. Test with synthetic streams;
 private checks require exact native ID resolution but honor duration rejection.
+
+## Preliminary design audit (section 3 remains incomplete)
+
+These checks do not validate Gemini's screen rectangles, strings, unlock rules
+or per-screen font use. Every such claim remains **Gemini proposal (unverified)**
+until a separate claim audit confirms it. No owner reference screenshots were
+present in staging/reference/menu_original/ at this inspection.
+
+- `decomp:front.cpp#CMenu::CentreX/CentreY/GetMenuHeight@f8a0392 (@Ok)`,
+  confidence **recovered**: virtual extent 512x240. Center justification uses
+  x=256; other justification modes offset by measured menu width. Vertical
+  centering depends on visible menu height. A single fixed rectangle cannot be
+  inferred from these helpers. Constructor line spacing comes from its caller.
+- `decomp:PCShell.cpp#PCSHELL_CoordsDCtoPC/PCSHELL_CoordsPCtoDC@f8a0392 (@Ok)`,
+  confidence **recovered**: scale virtual x by output_width/512 and y by
+  output_height/240 (inverse for mouse input). At 640x480 that means factors
+  1.25 and 2 respectively; virtual pixels are not square display pixels.
+- `decomp:PCShell.cpp#resetActionMaps@f8a0392 (@Ok, Matching)`, confidence
+  **recovered**: two control menus originate at (30,60) and (332,60) in the
+  virtual frame, with line separation 15. This does not recover final row text.
+- `decomp:shell.cpp#Shell_DrawTitleBar@f8a0392 (@Ok, Matching)`, confidence
+  **recovered**: position is caller-supplied, not a fixed Y=25. The helper
+  conditionally selects the big font and returns to the normal font; top RGB
+  128,128,128 and bottom RGB 69,60,107. Per-screen callers still need checking.
+- `decomp:pshell.cpp#PShell_DefaultText/PShell_InstructionalText/PShell_NormalFont/PShell_SmallFont@f8a0392 (@Ok)`,
+  confidence **recovered**: default helper selects sp_fnt00, instructional
+  helper selects sp_fnt02. The small-font helper alone is not evidence of
+  original dialogue subtitles. That role remains the authored fonts.md choice.
+- `decomp:shell.cpp#Shell_DrawBackground@f8a0392 (@Ok, Matching)`, confidence
+  **recovered**: draws the menubg animation resource over 512x240. This does
+  not establish that shell_bg.png is an equivalent resource or composition.
+- `decomp:shell.cpp#Shell_LegalScreen@f8a0392 (@Ok)`, confidence **recovered**:
+  loads LegalPC.bmp and waits until the 180-vblank deadline passes. The visible
+  body does not implement the proposal's any-button early exit.
+- `decomp:shell.cpp#Shell_MainMenu/Shell_Options/Shell_Gallery/Shell_Special/Shell_TitleScreen/Shell_DoShell@f8a0392`,
+  confidence **unknown** for page flow from these bodies: they are TODO stubs.
+  Names alone cannot verify Gemini's page flow or option lists.
+- `decomp:shell.cpp#CRudeWordHitterSpidey::AI@f8a0392 (@Ok)`, confidence
+  **recovered**: cycles animation 0 and 0x64 after completion, with a one-time
+  random punch sound among 0xE..0x11 at frame 7. Constructor placement is
+  tagged NotOk, confidence **partial**. Existence of this cheat/input actor
+  does not prove placement or idle animation for the main menu actor.
+
+All enhanced placement, motion, contrast, side-fill and safe-area decisions are
+authored presentation requirements; no runtime layout data has been adopted yet.
