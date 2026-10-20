@@ -44,6 +44,7 @@ func run() -> void:
 	check(Dialogue.sfx.stream != null, "original menu confirm audio bound")
 	menu.menu_sound(false)
 	check(Dialogue.sfx.stream != null, "original menu shift audio bound")
+	var configured_music_volume := AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Music"))
 	menu.launch(false)
 	await get_tree().process_frame
 	await get_tree().process_frame
@@ -65,6 +66,14 @@ func run() -> void:
 	check(mission.lifecycle == mission.Lifecycle.MISSION_BRIEFING and not mission.player.controls_enabled, "intro finished starts separate locked briefing")
 	check(mission.prompt.text.begins_with("MISSION BRIEFING"), "authored briefing labeled separately")
 	await capture("briefing")
+	check(absf(AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Music"))-configured_music_volume) < .01, "dialogue restores configured music volume")
+	mission.start_intro()
+	mission.set_paused(true)
+	check(Dialogue.speech.stream_paused and not mission.player.controls_enabled, "pause retains cinematic audio and control lock")
+	mission.set_paused(false)
+	Dialogue.speech.seek(maxf(0, Dialogue.speech.stream.get_length()-.04))
+	await get_tree().create_timer(.4).timeout
+	check(mission.lifecycle == mission.Lifecycle.MISSION_BRIEFING, "natural audio completion starts briefing")
 	mission.activate_gameplay()
 	check(mission.player.controls_enabled and mission.hud.visible, "briefing completion enables gameplay")
 	var start: Vector3 = mission.player.global_position
@@ -76,18 +85,23 @@ func run() -> void:
 	mission.recover()
 	check(mission.player.global_position.distance_to(mission.spawn) < .01, "checkpoint recovery")
 	check(not mission.player.begin_swing({}), "swing rejects missing anchors")
+	mission.player.global_position += Vector3.UP*5.0
 	var anchor_hit := find_anchor(mission.player)
 	check(not anchor_hit.is_empty(), "raycast finds an original building anchor")
 	if not anchor_hit.is_empty():
 		check(mission.player.begin_swing(anchor_hit), "swing accepts valid geometry anchor")
 		var radius: float = mission.player.rope_length
 		var radial_error := 0.0
+		var swing_steps := 0
 		for step in range(30):
 			if mission.player.state != SpiderPlayer.State.SWINGING:
 				break
 			mission.player._step_swing(1.0/60.0, Vector3.FORWARD)
+			swing_steps += 1
 			radial_error = maxf(radial_error, absf(mission.player.global_position.distance_to(mission.player.anchor)-radius))
 		check(radial_error < .003, "pendulum maintains fixed rope length until collision release")
+		check(swing_steps >= 6, "pendulum test advances through actual airborne steps")
+		check(absf(mission.player.velocity.dot((mission.player.global_position-mission.player.anchor).normalized())) < .005, "swing velocity remains tangent to rope")
 		mission.player.release_anchor()
 		check(mission.player.state == SpiderPlayer.State.AIRBORNE, "release retains airborne traversal")
 		mission.recover()
@@ -108,7 +122,7 @@ func run() -> void:
 	check(mission.try_enter_skylight() and mission.lifecycle == mission.Lifecycle.COMPLETE, "defeated encounter unlocks mission completion")
 	check(GameSession.load_checkpoint() == 2, "separate automation checkpoint persists")
 	await capture("mission")
-	var report := {"passed": failures.is_empty(), "checks": checks, "failures": failures, "renderer": RenderingServer.get_current_rendering_method(), "godot": Engine.get_version_info().string}
+	var report := {"passed": failures.is_empty(), "checks": checks, "failures": failures, "renderer": RenderingServer.get_current_rendering_method(), "display_driver": DisplayServer.get_name(), "godot": Engine.get_version_info().string}
 	var file := FileAccess.open("res://../TestResults/godot-smoke.json", FileAccess.WRITE)
 	file.store_string(JSON.stringify(report, "  "))
 	file.close()

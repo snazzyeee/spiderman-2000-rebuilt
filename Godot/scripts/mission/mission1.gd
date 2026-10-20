@@ -137,7 +137,8 @@ func start_intro() -> void:
 	prompt.text = ""
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	Dialogue.acquire_cinematic(self)
-	add_child(intro_camera)
+	if not intro_camera.get_parent():
+		add_child(intro_camera)
 	intro_camera.global_position = spawn+Vector3(9, 6, 11)
 	intro_camera.look_at(spawn+Vector3.UP)
 	intro_camera.current = true
@@ -254,6 +255,7 @@ func try_enter_skylight() -> bool:
 			return false
 	lifecycle = Lifecycle.COMPLETE
 	player.controls_enabled = false
+	hud.text = "BANK ROOFTOP COMPLETE   |   Health %d" % player.health
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	prompt.text = "MISSION COMPLETE\nEnter / A returns to the main menu"
 	lifecycle_changed.emit(lifecycle)

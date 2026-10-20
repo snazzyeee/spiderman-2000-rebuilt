@@ -174,7 +174,11 @@ def main():
         surveyed_psx=len(rows), converted=records, not_rigged=dispositions, errors=errors)
     write_json(ROOT/'Godot/assets/models/conversion_manifest.json', report)
     write_json(ROOT/'TestResults/godot-conversion.json', report)
-    write_layout(ROOT/'Godot/assets/world/mission1_layout.json')
+    # The standalone Godot generate_layout.gd command generates a fresh route.
+    # Only reuse the older private route as a migration fallback when available.
+    layout_path = ROOT/'Godot/assets/world/mission1_layout.json'
+    if not layout_path.exists() and (ROOT/'Game/Assets/_LocalReference/Mission1/Generated/MissionLayout.asset').is_file():
+        write_layout(layout_path)
     print(json.dumps(dict(converted=len(records), not_rigged=len(dispositions), failures=len(errors))))
     return 1 if errors else 0
 

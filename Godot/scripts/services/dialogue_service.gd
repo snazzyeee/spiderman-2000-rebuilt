@@ -11,6 +11,8 @@ var speech := AudioStreamPlayer.new()
 var music := AudioStreamPlayer.new()
 var sfx := AudioStreamPlayer.new()
 var low_pass := AudioEffectLowPassFilter.new()
+var music_volume_before_speech := 0.0
+var ducked := false
 
 func _ready() -> void:
 	for bus in ["Dialogue", "Music", "SFX"]:
@@ -58,7 +60,10 @@ func play(clip_id: String, owner: Object = null) -> bool:
 	current_id = clip_id
 	speech.stream = stream
 	speech.play()
-	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Music"), -12.0)
+	var music_bus := AudioServer.get_bus_index("Music")
+	music_volume_before_speech = AudioServer.get_bus_volume_db(music_bus)
+	ducked = true
+	AudioServer.set_bus_volume_db(music_bus, music_volume_before_speech-12.0)
 	# Keep unverified ASR out of character-attributed UI subtitles.
 	if entry.get("text_status") == "verified":
 		subtitle_changed.emit(entry.get("speaker", ""), entry.get("text", ""))
@@ -68,7 +73,9 @@ func stop() -> void:
 	speech.stop()
 	current_id = ""
 	subtitle_changed.emit("", "")
-	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Music"), 0.0)
+	if ducked:
+		AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Music"), music_volume_before_speech)
+		ducked = false
 
 func _finished() -> void:
 	var completed := current_id

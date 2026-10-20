@@ -9,15 +9,28 @@ var background := Node3D.new()
 var visual: Node3D
 var navigating := false
 var settings := ConfigFile.new()
+var backdrop: MeshInstance3D
 
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	RevampAssets.lighting(self)
 	add_child(background)
+	if ResourceLoader.exists("res://assets/ui/shell_bg.png"):
+		backdrop = MeshInstance3D.new()
+		var quad := QuadMesh.new()
+		quad.size = Vector2(40, 30)
+		backdrop.mesh = quad
+		var material := StandardMaterial3D.new()
+		material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+		material.albedo_texture = load("res://assets/ui/shell_bg.png")
+		material.disable_fog = true
+		backdrop.material_override = material
+		backdrop.position.z = -5
+		background.add_child(backdrop)
 	visual = RevampAssets.instantiate_model("res://assets/models/spidey.glb")
 	if visual:
 		background.add_child(visual)
-		RevampAssets.fit_character(visual, 3.0)
+		RevampAssets.fit_character(visual, 3.8)
 		visual.rotation_degrees.y = -30
 		var animation := RevampAssets.animation_player(visual)
 		if animation:
@@ -31,6 +44,10 @@ func _ready() -> void:
 	camera.position = Vector3(-1, 1.6, 5.5)
 	camera.look_at(Vector3(-.7, 1.4, 0))
 	camera.current = true
+	if backdrop:
+		backdrop.reparent(camera)
+		backdrop.position = Vector3(0, 0, -10)
+		backdrop.rotation = Vector3.ZERO
 	var layer := CanvasLayer.new()
 	add_child(layer)
 	var title := Label.new()

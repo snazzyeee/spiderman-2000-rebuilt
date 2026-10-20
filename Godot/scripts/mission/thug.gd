@@ -68,6 +68,12 @@ func _physics_process(delta: float) -> void:
 		var desired := (destination-global_position).normalized()*3.0
 		velocity.x = desired.x
 		velocity.z = desired.z
+	# Keep simple steering on supported rooftops rather than chasing over ledges.
+	var next := global_position+Vector3(velocity.x, 0, velocity.z).normalized()*.65
+	var support := PhysicsRayQueryParameters3D.create(next+Vector3.UP, next-Vector3.UP*1.5, 1, [get_rid()])
+	if get_world_3d().direct_space_state.intersect_ray(support).is_empty():
+		velocity.x = 0
+		velocity.z = 0
 	move_and_slide()
 
 func _visible_player() -> bool:

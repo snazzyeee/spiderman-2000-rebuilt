@@ -82,8 +82,14 @@ func aim_hit(mask: int = 1, distance: float = 70.0) -> Dictionary:
 func begin_swing(hit: Dictionary) -> bool:
 	if not controls_enabled or hit.is_empty() or not hit.get("collider") is CollisionObject3D:
 		return false
+	if hit.collider.collision_layer & 1 == 0:
+		return false
 	var point: Vector3 = hit.position
 	if point.y < global_position.y+1.2 or global_position.distance_to(point) > 70.0:
+		return false
+	var line := PhysicsRayQueryParameters3D.create(global_position+Vector3.UP*1.2, point+(point-global_position).normalized()*.05, 1, [get_rid()])
+	var verified_hit := get_world_3d().direct_space_state.intersect_ray(line)
+	if verified_hit.is_empty() or verified_hit.collider != hit.collider or verified_hit.position.distance_to(point) > .35:
 		return false
 	anchor = point
 	anchor_body = hit.collider
@@ -124,9 +130,12 @@ func _physics_process(delta: float) -> void:
 		if state == State.CRAWLING:
 			state = State.AIRBORNE
 		else:
-			var wall := aim_hit(1, 4.0)
+			var origin := global_position+Vector3.UP*.8
+			var query := PhysicsRayQueryParameters3D.create(origin, origin-camera.global_basis.z*2.0, 1, [get_rid()])
+			var wall := get_world_3d().direct_space_state.intersect_ray(query)
 			if not wall.is_empty() and absf(wall.normal.y) < .5:
 				wall_normal = wall.normal
+				move_and_collide(wall.position+wall_normal*.5-Vector3.UP*.8-global_position)
 				state = State.CRAWLING
 	match state:
 		State.SWINGING:

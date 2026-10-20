@@ -6,6 +6,13 @@ if (-not (Test-Path -LiteralPath $executable)) { & (Join-Path $PSScriptRoot 'set
 $godotArgs = @('--path', (Join-Path $projectRoot 'Godot'), '--rendering-method', $Renderer)
 if ($Editor) { $godotArgs += '--editor' }
 if ($Headless) { $godotArgs += '--headless' }
-if ($SmokeTest) { $godotArgs += @('--', '--revamp-smoke') }
+if ($SmokeTest) { $godotArgs += @('--quit-after', '600', '--max-fps', '60', '--', '--revamp-smoke') }
+$startedUtc = [DateTime]::UtcNow
 & $executable @godotArgs
 if ($LASTEXITCODE -ne 0) { throw "Godot exited with code $LASTEXITCODE" }
+if ($SmokeTest) {
+    $reportPath = Join-Path $projectRoot 'TestResults/godot-smoke.json'
+    if (-not (Test-Path -LiteralPath $reportPath) -or (Get-Item -LiteralPath $reportPath).LastWriteTimeUtc -lt $startedUtc) { throw 'Godot exited without a fresh smoke report' }
+    $report = Get-Content -LiteralPath $reportPath -Raw | ConvertFrom-Json
+    if (-not $report.passed -or $report.checks.Count -lt 33) { throw 'Godot smoke report failed or was incomplete' }
+}
