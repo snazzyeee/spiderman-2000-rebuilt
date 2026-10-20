@@ -18,6 +18,13 @@ have exact versions and published universal-wheel SHA-256 pins in
 certifi (MPL-2.0), charset-normalizer (MIT), idna (BSD-3-Clause), urllib3 (MIT),
 Soup Sieve (MIT), and typing-extensions (PSF-2.0).
 
-No upscaler, font tracer or enhancement model has been downloaded by this
-milestone. Existing private audio tool installations predate this inventory;
+Font conversion dependencies are fetched by `tools/pipeline/setup_font_tools.py`
+into `tools/third_party/font-tools/`, with the exact wheel SHA-256 values in that
+script: Pillow 11.3.0 (HPND), fontTools 4.60.1 (MIT), Capstone 5.0.6 (BSD-3-Clause).
+Pillow supports private visual QA; fontTools builds outlines/fonts; Capstone is
+used only for bounded static analysis of the fingerprinted executable. Wheel
+metadata includes upstream license notices. No original font or glyph is public.
+
+No upscaler or enhancement model has been downloaded by this milestone.
+Existing private audio tool installations predate this inventory;
 their provenance still needs consolidation before new download/setup changes.

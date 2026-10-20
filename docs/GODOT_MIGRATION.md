@@ -290,3 +290,28 @@ transform. Its three public tests use synthetic text and compressed payloads.
 The consumer/units remain unknown; a with/without geometry correction is blocked
 by evidence, and the existing landmark gate remains mandatory. See
 behavior_ledger/offset_files.md and behavior_ledger/units.md.
+
+## Private original fonts
+
+Run tools/pipeline/setup_font_tools.py with the pinned audio Python once (network
+only for the version/hash-pinned wheels), then tools/pipeline/convert_fonts.py.
+prepare_godot.ps1 includes both steps before import. FontTools/Pillow/Capstone
+versions, hashes and licenses are recorded in THIRD_PARTY.md and the setup script.
+The converter CRC-checks six embedded FNT and five independent BMP members.
+Outputs remain private in assets/ui/fonts/: original/4x nearest BMFont resources,
+palette-layer traced TrueType resources and font_manifest.json. Every variant's
+advances are checked exactly; every color contour's area must match its source
+pixels. Tracing failures fail conversion and are recorded per glyph.
+
+Private comparisons: staging/validation/fonts/<font>-<width>x<height>.png at
+1280x720, 1920x1080 and 2560x1440. These use neutral sample text and are generated
+from decoded original pixels, Faithful and Enhanced variants. Source sheets are
+inventoried separately: their glyph-rectangle mapping is unverified. No original
+font or derived image is committed. fonts.md documents recovered facts, the
+bounded executable mapping audit and authored UI roles.
+
+The initial import after creating the new fonts produced two dummy-renderer
+texture errors; it is retained as failed evidence in regression/fonts-pipeline/.
+An unchanged import recheck and the complete fonts-pipeline-final matrix then
+passed with zero errors (58 Python, 42 smoke and 150 traversal on each target).
+Do not describe this as a proven zero-error first import from an empty cache.

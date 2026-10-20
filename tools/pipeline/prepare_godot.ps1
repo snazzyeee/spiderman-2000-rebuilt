@@ -17,6 +17,10 @@ try {
     if ($LASTEXITCODE -ne 0) { throw 'Character conversion failed' }
     & $PythonPath tools/pipeline/prepare_godot_ui.py
     if ($LASTEXITCODE -ne 0) { throw 'Menu texture conversion failed' }
+    & $PythonPath tools/pipeline/setup_font_tools.py
+    if ($LASTEXITCODE -ne 0) { throw 'Pinned offline font tool setup failed' }
+    & $PythonPath tools/pipeline/convert_fonts.py
+    if ($LASTEXITCODE -ne 0) { throw 'Original bitmap font conversion failed' }
     & $PythonPath tools/reference/extract_native_voice_catalog.py
     if ($LASTEXITCODE -ne 0) { throw 'Canonical XA identity catalog failed' }
     & $PythonPath tools/reference/decode_sfx_ids.py

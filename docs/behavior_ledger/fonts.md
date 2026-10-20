@@ -49,8 +49,11 @@ stub, despite its @Ok tag, and is not used as the mapping implementation.
 Normal map (mode zero): A–Z and a–z share glyphs 0–25; digits 0–9 use 26–35.
 Underscore uses 36, question mark 37, exclamation 38, colon 39, period 40,
 hyphen 41, apostrophe 42 and plus 43, provided that index exists. Space is a
-non-glyph; its nominal width is integer 80% of glyph zero's width in the
-available width implementation (confidence **partial**). Digit-only mode one
+non-glyph; its nominal width is integer 80% of glyph zero's width. Evidence
+`exe:0x0043EA60..0x0043EAE4`, confidence **recovered**, confirms that calculation,
+ordinary advance width plus spacing, and a separate final fixed-point global
+scale. The bounded static audit is staging/reference/font-width-static.txt.
+Digit-only mode one
 uses digits 0–9 and colon at ten; mode two has different lower-case and accent
 mapping. Unsupported characters and dynamic button prompts are unresolved by
 this milestone and use the existing fallback. Do not invent Unicode bindings
@@ -72,15 +75,23 @@ and applies to live registered controls. Unsupported glyphs keep font fallback.
 This choice is presentation tuning, not a recovered screen-to-font binding.
 
 Faithful export keeps original RGBA pixels and an integer nearest-neighbor 4x
-atlas. Enhanced export traces the union boundary of source pixels at authored
-50% luminance coverage, removes collinear points and builds a scalable TrueType
-outline with pinned fontTools. Godot rasterizes the outline at the requested
-size. This is an authored smoothing/coverage decision, not recovered art.
+atlas. Enhanced export traces each visible palette color's pixel union,
+removes collinear points and builds layered COLR/CPAL TrueType outlines with
+pinned fontTools. Godot rasterizes the outlines at the requested size. This is
+authored scalable presentation, not recovered rendering behavior.
 No cloud service, substituted glyph design or guessed character mapping is used.
 Both exports use identical advances/baselines in source-pixel units; TTF metrics
 are integral multiples of 64. Any tracing failure is recorded per glyph and
-fails conversion; no silent replacement is permitted. Pixel colors remain in
-the faithful variant; the enhanced outline is monochrome coverage.
+fails conversion; no silent replacement is permitted. Both variants retain the
+decoded palette colors, with the zero key omitted from visible outlines.
+
+Evidence `remake:font-threshold-failure-20261021`, confidence **recovered
+observation**: the first experimental monochrome 50% luminance trace loses
+glyph 36 in sp_fnt02 and sp_fnt03 because their visible pixels are dark.
+That approach failed and is superseded, not accepted with missing glyphs or a
+lower threshold. Palette-layer tracing accounts for every non-key pixel and
+keeps its color; conversion checks exact pixel area for every color layer.
+The failed trial remains private in staging/validation/font-conversion.log.
 
 ## Verification contract
 
