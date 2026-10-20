@@ -1,0 +1,2466 @@
+{
+  "schema_version": 1,
+  "decomp_commit": "f8a039248908e085f8fba8106769aea7f8f9de67",
+  "method": "Text scan of PlaySingleAnim/RunAnim literal arguments and mAnim comparisons; labels derive from enclosing function names",
+  "confidence_rules": {
+    "high": "enclosing function tagged @Ok and the call targets the player",
+    "medium": "decompiled (@Ok/@NotOk) and the actor maps to a converted model",
+    "low": "TODO/untagged function, unmapped actor, or slot outside the model animation range"
+  },
+  "index_mapping": "slot N is the converted animation named <model>_anim_N (Multitool export names; contiguous from 0)",
+  "semantics_status": "evidence_only: labels name the code path that uses a slot, not verified motion content",
+  "model_animation_counts": {
+    "blackcat": 14,
+    "carnage": 39,
+    "docock": 43,
+    "hostage": 7,
+    "lizard": 6,
+    "lizman": 40,
+    "mysterio": 23,
+    "rhino": 31,
+    "scorpion": 30,
+    "spidey": 300,
+    "superock": 22,
+    "thug": 44,
+    "torch": 10,
+    "venom": 44
+  },
+  "entries": [
+    {
+      "actor": "CBlackCat",
+      "model": "blackcat",
+      "slot": 12,
+      "animation_name": "blackcat_anim_12",
+      "label": "cblack_cat",
+      "labels": [
+        "cblack_cat"
+      ],
+      "confidence": "medium",
+      "model_animation_count": 14,
+      "slot_in_model_range": true,
+      "evidence": [
+        {
+          "role": "play",
+          "operator": "",
+          "function": "CBlackCat::CBlackCat",
+          "function_status": "NotOk",
+          "source": "decomp:blackcat.cpp:118@f8a0392"
+        }
+      ]
+    },
+    {
+      "actor": "CCarnage",
+      "model": "carnage",
+      "slot": 1,
+      "animation_name": "carnage_anim_1",
+      "label": "select_attack",
+      "labels": [
+        "select_attack"
+      ],
+      "confidence": "medium",
+      "model_animation_count": 39,
+      "slot_in_model_range": true,
+      "evidence": [
+        {
+          "role": "play",
+          "operator": "",
+          "function": "CCarnage::SelectAttack",
+          "function_status": "Ok",
+          "source": "decomp:carnage.cpp:232@f8a0392"
+        }
+      ]
+    },
+    {
+      "actor": "CCarnage",
+      "model": "carnage",
+      "slot": 2,
+      "animation_name": "carnage_anim_2",
+      "label": "select_attack",
+      "labels": [
+        "select_attack"
+      ],
+      "confidence": "medium",
+      "model_animation_count": 39,
+      "slot_in_model_range": true,
+      "evidence": [
+        {
+          "role": "state_test",
+          "operator": "!=",
+          "function": "CCarnage::SelectAttack",
+          "function_status": "Ok",
+          "source": "decomp:carnage.cpp:231@f8a0392"
+        },
+        {
+          "role": "play",
+          "operator": "",
+          "function": "CCarnage::SelectAttack",
+          "function_status": "Ok",
+          "source": "decomp:carnage.cpp:292@f8a0392"
+        },
+        {
+          "role": "play",
+          "operator": "",
+          "function": "CCarnage::SelectAttack",
+          "function_status": "Ok",
+          "source": "decomp:carnage.cpp:323@f8a0392"
+        }
+      ]
+    },
+    {
+      "actor": "CCarnage",
+      "model": "carnage",
+      "slot": 4,
+      "animation_name": "carnage_anim_4",
+      "label": "initialise | laugh",
+      "labels": [
+        "initialise",
+        "laugh"
+      ],
+      "confidence": "medium",
+      "model_animation_count": 39,
+      "slot_in_model_range": true,
+      "evidence": [
+        {
+          "role": "play",
+          "operator": "",
+          "function": "CCarnage::Initialise",
+          "function_status": "Ok",
+          "source": "decomp:carnage.cpp:1592@f8a0392"
+        },
+        {
+          "role": "play",
+          "operator": "",
+          "function": "CCarnage::Initialise",
+          "function_status": "Ok",
+          "source": "decomp:carnage.cpp:1627@f8a0392"
+        },
+        {
+          "role": "state_test",
+          "operator": "!=",
+          "function": "CCarnage::Laugh",
+          "function_status": "Ok",
+          "source": "decomp:carnage.cpp:1700@f8a0392"
+        },
+        {
+          "role": "play",
+          "operator": "",
+          "function": "CCarnage::Laugh",
+          "function_status": "Ok",
+          "source": "decomp:carnage.cpp:1701@f8a0392"
+        },
+        {
+          "role": "play",
+          "operator": "",
+          "function": "CCarnage::Laugh",
+          "function_status": "Ok",
+          "source": "decomp:carnage.cpp:1715@f8a0392"
+        }
+      ]
+    },
+    {
+      "actor": "CCarnage",
+      "model": "carnage",
+      "slot": 6,
+      "animation_name": "carnage_anim_6",
+      "label": "stretch_jump_advance",
+      "labels": [
+        "stretch_jump_advance"
+      ],
+      "confidence": "medium",
+      "model_animation_count": 39,
+      "slot_in_model_range": true,
+      "evidence": [
+        {
+          "role": "play",
+          "operator": "",
+          "function": "CCarnage::StretchJumpAdvance",
+          "function_status": "Ok",
+          "source": "decomp:carnage.cpp:903@f8a0392"
+        }
+      ]
+    },
+    {
+      "actor": "CCarnage",
+      "model": "carnage",
+      "slot": 7,
+      "animation_name": "carnage_anim_7",
+      "label": "stretch_jump_advance",
+      "labels": [
+        "stretch_jump_advance"
+      ],
+      "confidence": "medium",
+      "model_animation_count": 39,
+      "slot_in_model_range": true,
+      "evidence": [
+        {
+          "role": "play",
+          "operator": "",
+          "function": "CCarnage::StretchJumpAdvance",
+          "function_status": "Ok",
+          "source": "decomp:carnage.cpp:937@f8a0392"
+        }
+      ]
+    },
+    {
+      "actor": "CCarnage",
+      "model": "carnage",
+      "slot": 8,
+      "animation_name": "carnage_anim_8",
+      "label": "stretch_jump_advance",
+      "labels": [
+        "stretch_jump_advance"
+      ],
+      "confidence": "medium",
+      "model_animation_count": 39,
+      "slot_in_model_range": true,
+      "evidence": [
+        {
+          "role": "play",
+          "operator": "",
+          "function": "CCarnage::StretchJumpAdvance",
+          "function_status": "Ok",
+          "source": "decomp:carnage.cpp:969@f8a0392"
+        },
+        {
+          "role": "play",
+          "operator": "",
+          "function": "CCarnage::StretchJumpAdvance",
+          "function_status": "Ok",
+          "source": "decomp:carnage.cpp:981@f8a0392"
+        }
+      ]
+    },
+    {
+      "actor": "CCarnage",
+      "model": "carnage",
+      "slot": 9,
+      "animation_name": "carnage_anim_9",
+      "label": "get_trapped | tug_web_trapped",
+      "labels": [
+        "get_trapped",
+        "tug_web_trapped"
+      ],
+      "confidence": "medium",
+      "model_animation_count": 39,
+      "slot_in_model_range": true,
+      "evidence": [
+        {
+          "role": "play",
+          "operator": "",
+          "function": "CCarnage::GetTrapped",
+          "function_status": "Ok",
+          "source": "decomp:carnage.cpp:1380@f8a0392"
+        },
+        {
+          "role": "state_test",
+          "operator": "!=",
+          "function": "CCarnage::GetTrapped",
+          "function_status": "Ok",
+          "source": "decomp:carnage.cpp:1399@f8a0392"
+        },
+        {
+          "role": "play",
+          "operator": "",
+          "function": "CCarnage::TugWebTrapped",
+          "function_status": "Ok",
+          "source": "decomp:carnage.cpp:1459@f8a0392"
+        }
+      ]
+    },
+    {
+      "actor": "CCarnage",
+      "model": "carnage",
+      "slot": 10,
+      "animation_name": "carnage_anim_10",
+      "label": "get_trapped | tug_web_trapped",
+      "labels": [
+        "get_trapped",
+        "tug_web_trapped"
+      ],
+      "confidence": "medium",
+      "model_animation_count": 39,
+      "slot_in_model_range": true,
+      "evidence": [
+        {
+          "role": "play",
+          "operator": "",
+          "function": "CCarnage::GetTrapped",
+          "function_status": "Ok",
+          "source": "decomp:carnage.cpp:1389@f8a0392"
+        },
+        {
+          "role": "state_test",
+          "operator": "!=",
+          "function": "CCarnage::GetTrapped",
+          "function_status": "Ok",
+          "source": "decomp:carnage.cpp:1398@f8a0392"
+        },
+        {
+          "role": "play",
+          "operator": "",
+          "function": "CCarnage::GetTrapped",
+          "function_status": "Ok",
+          "source": "decomp:carnage.cpp:1402@f8a0392"
+        },
+        {
+          "role": "play",
+          "operator": "",
+          "function": "CCarnage::TugWebTrapped",
+          "function_status": "Ok",
+          "source": "decomp:carnage.cpp:1472@f8a0392"
+        }
+      ]
+    },
+    {
+      "actor": "CCarnage",
+      "model": "carnage",
+      "slot": 11,
+      "animation_name": "carnage_anim_11",
+      "label": "get_trapped | tug_web_trapped",
+      "labels": [
+        "get_trapped",
+        "tug_web_trapped"
+      ],
+      "confidence": "medium",
+      "model_animation_count": 39,
+      "slot_in_model_range": true,
+      "evidence": [
+        {
+          "role": "state_test",
+          "operator": "==",
+          "function": "CCarnage::GetTrapped",
+          "function_status": "Ok",
+          "source": "decomp:carnage.cpp:1426@f8a0392"
+        },
+        {
+          "role": "play",
+          "operator": "",
+          "function": "CCarnage::GetTrapped",
+          "function_status": "Ok",
+          "source": "decomp:carnage.cpp:1428@f8a0392"
+        },
+        {
+          "role": "play",
+          "operator": "",
+          "function": "CCarnage::TugWebTrapped",
+          "function_status": "Ok",
+          "source": "decomp:carnage.cpp:1479@f8a0392"
+        }
+      ]
+    },
+    {
+      "actor": "CCarnage",
+      "model": "carnage",
+      "slot": 12,
+      "animation_name": "carnage_anim_12",
+      "label": "hit",
+      "labels": [
+        "hit"
+      ],
+      "confidence": "medium",
+      "model_animation_count": 39,
+      "slot_in_model_range": true,
+      "evidence": [
+        {
+          "role": "state_test",
+          "operator": "==",
+          "function": "CCarnage::Hit",
+          "function_status": "NotOk",
+          "source": "decomp:carnage.cpp:339@f8a0392"
+        }
+      ]
+    },
+    {
+      "actor": "CCarnage",
+      "model": "carnage",
+      "slot": 13,
+      "animation_name": "carnage_anim_13",
+      "label": "hit",
+      "labels": [
+        "hit"
+      ],
+      "confidence": "medium",
+      "model_animation_count": 39,
+      "slot_in_model_range": true,
+      "evidence": [
+        {
+          "role": "state_test",
+          "operator": "==",
+          "function": "CCarnage::Hit",
+          "function_status": "NotOk",
+          "source": "decomp:carnage.cpp:342@f8a0392"
+        }
+      ]
+    },
+    {
+      "actor": "CCarnage",
+      "model": "carnage",
+      "slot": 15,
+      "animation_name": "carnage_anim_15",
+      "label": "burn_in_bubble",
+      "labels": [
+        "burn_in_bubble"
+      ],
+      "confidence": "medium",
+      "model_animation_count": 39,
+      "slot_in_model_range": true,
+      "evidence": [
+        {
+          "role": "play",
+          "operator": "",
+          "function": "CCarnage::BurnInBubble",
+          "function_status": "Ok",
+          "source": "decomp:carnage.cpp:515@f8a0392"
+        },
+        {
+          "role": "state_test",
+          "operator": "==",
+          "function": "CCarnage::BurnInBubble",
+          "function_status": "Ok",
+          "source": "decomp:carnage.cpp:530@f8a0392"
+        }
+      ]
+    },
+    {
+      "actor": "CCarnage",
+      "model": "carnage",
+      "slot": 16,
+      "animation_name": "carnage_anim_16",
+      "label": "burn_in_bubble",
+      "labels": [
+        "burn_in_bubble"
+      ],
+      "confidence": "medium",
+      "model_animation_count": 39,
+      "slot_in_model_range": true,
+      "evidence": [
+        {
+          "role": "play",
+          "operator": "",
+          "function": "CCarnage::BurnInBubble",
+          "function_status": "Ok",
+          "source": "decomp:carnage.cpp:532@f8a0392"
+        },
+        {
+          "role": "play",
+          "operator": "",
+          "function": "CCarnage::BurnInBubble",
+          "function_status": "Ok",
+          "source": "decomp:carnage.cpp:556@f8a0392"
+        }
+      ]
+    },
+    {
+      "actor": "CCarnage",
+      "model": "carnage",
+      "slot": 17,
+      "animation_name": "carnage_anim_17",
+      "label": "burn_in_bubble",
+      "labels": [
+        "burn_in_bubble"
+      ],
+      "confidence": "medium",
+      "model_animation_count": 39,
+      "slot_in_model_range": true,
+      "evidence": [
+        {
+          "role": "play",
+          "operator": "",
+          "function": "CCarnage::BurnInBubble",
+          "function_status": "Ok",
+          "source": "decomp:carnage.cpp:565@f8a0392"
+        },
+        {
+          "role": "state_test",
+          "operator": "==",
+          "function": "CCarnage::BurnInBubble",
+          "function_status": "Ok",
+          "source": "decomp:carnage.cpp:575@f8a0392"
+        }
+      ]
+    },
+    {
+      "actor": "CCarnage",
+      "model": "carnage",
+      "slot": 18,
+      "animation_name": "carnage_anim_18",
+      "label": "burn_in_bubble",
+      "labels": [
+        "burn_in_bubble"
+      ],
+      "confidence": "medium",
+      "model_animation_count": 39,
+      "slot_in_model_range": true,
+      "evidence": [
+        {
+          "role": "play",
+          "operator": "",
+          "function": "CCarnage::BurnInBubble",
+          "function_status": "Ok",
+          "source": "decomp:carnage.cpp:473@f8a0392"
+        }
+      ]
+    },
+    {
+      "actor": "CCarnage",
+      "model": "carnage",
+      "slot": 19,
+      "animation_name": "carnage_anim_19",
+      "label": "burn_in_bubble",
+      "labels": [
+        "burn_in_bubble"
+      ],
+      "confidence": "medium",
+      "model_animation_count": 39,
+      "slot_in_model_range": true,
+      "evidence": [
+        {
+          "role": "play",
+          "operator": "",
+          "function": "CCarnage::BurnInBubble",
+          "function_status": "Ok",
+          "source": "decomp:carnage.cpp:522@f8a0392"
+        }
+      ]
+    },
+    {
+      "actor": "CCarnage",
+      "model": "carnage",
+      "slot": 20,
+      "animation_name": "carnage_anim_20",
+      "label": "hit | stretch_jump_flow",
+      "labels": [
+        "hit",
+        "stretch_jump_flow"
+      ],
+      "confidence": "medium",
+      "model_animation_count": 39,
+      "slot_in_model_range": true,
+      "evidence": [
+        {
+          "role": "state_test",
+          "operator": "==",
+          "function": "CCarnage::Hit",
+          "function_status": "NotOk",
+          "source": "decomp:carnage.cpp:337@f8a0392"
+        },
+        {
+          "role": "play",
+          "operator": "",
+          "function": "CCarnage::StretchJumpFlow",
+          "function_status": "Ok",
+          "source": "decomp:carnage.cpp:1131@f8a0392"
+        }
+      ]
+    },
+    {
+      "actor": "CCarnage",
+      "model": "carnage",
+      "slot": 22,
+      "animation_name": "carnage_anim_22",
+      "label": "burn_in_bubble",
+      "labels": [
+        "burn_in_bubble"
+      ],
+      "confidence": "medium",
+      "model_animation_count": 39,
+      "slot_in_model_range": true,
+      "evidence": [
+        {
+          "role": "play",
+          "operator": "",
+          "function": "CCarnage::BurnInBubble",
+          "function_status": "Ok",
+          "source": "decomp:carnage.cpp:595@f8a0392"
+        },
+        {
+          "role": "state_test",
+          "operator": "==",
+          "function": "CCarnage::BurnInBubble",
+          "function_status": "Ok",
+          "source": "decomp:carnage.cpp:603@f8a0392"
+        }
+      ]
+    },
+    {
+      "actor": "CCarnage",
+      "model": "carnage",
+      "slot": 23,
+      "animation_name": "carnage_anim_23",
+      "label": "burn_in_bubble",
+      "labels": [
+        "burn_in_bubble"
+      ],
+      "confidence": "medium",
+      "model_animation_count": 39,
+      "slot_in_model_range": true,
+      "evidence": [
+        {
+          "role": "play",
+          "operator": "",
+          "function": "CCarnage::BurnInBubble",
+          "function_status": "Ok",
+          "source": "decomp:carnage.cpp:605@f8a0392"
+        }
+      ]
+    },
+    {
+      "actor": "CCarnage",
+      "model": "carnage",
+      "slot": 24,
+      "animation_name": "carnage_anim_24",
+      "label": "burn_in_bubble",
+      "labels": [
+        "burn_in_bubble"
+      ],
+      "confidence": "medium",
+      "model_animation_count": 39,
+      "slot_in_model_range": true,
+      "evidence": [
+        {
+          "role": "play",
+          "operator": "",
+          "function": "CCarnage::BurnInBubble",
+          "function_status": "Ok",
+          "source": "decomp:carnage.cpp:609@f8a0392"
+        }
+      ]
+    },
+    {
+      "actor": "CCarnage",
+      "model": "carnage",
+      "slot": 25,
+      "animation_name": "carnage_anim_25",
+      "label": "take_hit",
+      "labels": [
+        "take_hit"
+      ],
+      "confidence": "medium",
+      "model_animation_count": 39,
+      "slot_in_model_range": true,
+      "evidence": [
+        {
+          "role": "play",
+          "operator": "",
+          "function": "CCarnage::TakeHit",
+          "function_status": "Ok",
+          "source": "decomp:carnage.cpp:1307@f8a0392"
+        }
+      ]
+    },
+    {
+      "actor": "CCarnage",
+      "model": "carnage",
+      "slot": 26,
+      "animation_name": "carnage_anim_26",
+      "label": "take_hit",
+      "labels": [
+        "take_hit"
+      ],
+      "confidence": "medium",
+      "model_animation_count": 39,
+      "slot_in_model_range": true,
+      "evidence": [
+        {
+          "role": "play",
+          "operator": "",
+          "function": "CCarnage::TakeHit",
+          "function_status": "Ok",
+          "source": "decomp:carnage.cpp:1303@f8a0392"
+        }
+      ]
+    },
+    {
+      "actor": "CCarnage",
+      "model": "carnage",
+      "slot": 27,
+      "animation_name": "carnage_anim_27",
+      "label": "take_hit",
+      "labels": [
+        "take_hit"
+      ],
+      "confidence": "medium",
+      "model_animation_count": 39,
+      "slot_in_model_range": true,
+      "evidence": [
+        {
+          "role": "play",
+          "operator": "",
+          "function": "CCarnage::TakeHit",
+          "function_status": "Ok",
+          "source": "decomp:carnage.cpp:1299@f8a0392"
+        }
+      ]
+    },
+    {
+      "actor": "CCarnage",
+      "model": "carnage",
+      "slot": 28,
+      "animation_name": "carnage_anim_28",
+      "label": "take_hit",
+      "labels": [
+        "take_hit"
+      ],
+      "confidence": "medium",
+      "model_animation_count": 39,
+      "slot_in_model_range": true,
+      "evidence": [
+        {
+          "role": "play",
+          "operator": "",
+          "function": "CCarnage::TakeHit",
+          "function_status": "Ok",
+          "source": "decomp:carnage.cpp:1295@f8a0392"
+        }
+      ]
+    },
+    {
+      "actor": "CCarnage",
+      "model": "carnage",
+      "slot": 32,
+      "animation_name": "carnage_anim_32",
+      "label": "take_hit",
+      "labels": [
+        "take_hit"
+      ],
+      "confidence": "medium",
+      "model_animation_count": 39,
+      "slot_in_model_range": true,
+      "evidence": [
+        {
+          "role": "play",
+          "operator": "",
+          "function": "CCarnage::TakeHit",
+          "function_status": "Ok",
+          "source": "decomp:carnage.cpp:1291@f8a0392"
+        },
+        {
+          "role": "state_test",
+          "operator": "==",
+          "function": "CCarnage::TakeHit",
+          "function_status": "Ok",
+          "source": "decomp:carnage.cpp:1321@f8a0392"
+        }
+      ]
+    },
+    {
+      "actor": "CCarnage",
+      "model": "carnage",
+      "slot": 33,
+      "animation_name": "carnage_anim_33",
+      "label": "get_yanked_by_spidey",
+      "labels": [
+        "get_yanked_by_spidey"
+      ],
+      "confidence": "medium",
+      "model_animation_count": 39,
+      "slot_in_model_range": true,
+      "evidence": [
+        {
+          "role": "play",
+          "operator": "",
+          "function": "CCarnage::GetYankedBySpidey",
+          "function_status": "Ok",
+          "source": "decomp:carnage.cpp:636@f8a0392"
+        },
+        {
+          "role": "play",
+          "operator": "",
+          "function": "CCarnage::GetYankedBySpidey",
+          "function_status": "Ok",
+          "source": "decomp:carnage.cpp:643@f8a0392"
+        }
+      ]
+    },
+    {
+      "actor": "CCarnage",
+      "model": "carnage",
+      "slot": 34,
+      "animation_name": "carnage_anim_34",
+      "label": "hit",
+      "labels": [
+        "hit"
+      ],
+      "confidence": "medium",
+      "model_animation_count": 39,
+      "slot_in_model_range": true,
+      "evidence": [
+        {
+          "role": "state_test",
+          "operator": "==",
+          "function": "CCarnage::Hit",
+          "function_status": "NotOk",
+          "source": "decomp:carnage.cpp:348@f8a0392"
+        }
+      ]
+    },
+    {
+      "actor": "CCarnage",
+      "model": "carnage",
+      "slot": 35,
+      "animation_name": "carnage_anim_35",
+      "label": "double_axe_hand_slash | hit",
+      "labels": [
+        "double_axe_hand_slash",
+        "hit"
+      ],
+      "confidence": "medium",
+      "model_animation_count": 39,
+      "slot_in_model_range": true,
+      "evidence": [
+        {
+          "role": "state_test",
+          "operator": "==",
+          "function": "CCarnage::Hit",
+          "function_status": "NotOk",
+          "source": "decomp:carnage.cpp:353@f8a0392"
+        },
+        {
+          "role": "play",
+          "operator": "",
+          "function": "CCarnage::DoubleAxeHandSlash",
+          "function_status": "Ok",
+          "source": "decomp:carnage.cpp:1014@f8a0392"
+        }
+      ]
+    },
+    {
+      "actor": "CCarnage",
+      "model": "carnage",
+      "slot": 36,
+      "animation_name": "carnage_anim_36",
+      "label": "die_carnage",
+      "labels": [
+        "die_carnage"
+      ],
+      "confidence": "medium",
+      "model_animation_count": 39,
+      "slot_in_model_range": true,
+      "evidence": [
+        {
+          "role": "play",
+          "operator": "",
+          "function": "CCarnage::DieCarnage",
+          "function_status": "Ok",
+          "source": "decomp:carnage.cpp:1859@f8a0392"
+        }
+      ]
+    },
+    {
+      "actor": "CCop",
+      "model": "unmapped",
+      "slot": 2,
+      "animation_name": "",
+      "label": "acknowledge",
+      "labels": [
+        "acknowledge"
+      ],
+      "confidence": "low",
+      "model_animation_count": null,
+      "slot_in_model_range": null,
+      "evidence": [
+        {
+          "role": "play",
+          "operator": "",
+          "function": "CCop::Acknowledge",
+          "function_status": "Ok",
+          "source": "decomp:cop.cpp:88@f8a0392"
+        }
+      ]
+    },
+    {
+      "actor": "CCop",
+      "model": "unmapped",
+      "slot": 12,
+      "animation_name": "",
+      "label": "stop_shooting",
+      "labels": [
+        "stop_shooting"
+      ],
+      "confidence": "low",
+      "model_animation_count": null,
+      "slot_in_model_range": null,
+      "evidence": [
+        {
+          "role": "play",
+          "operator": "",
+          "function": "CCop::StopShooting",
+          "function_status": "Ok",
+          "source": "decomp:cop.cpp:273@f8a0392"
+        }
+      ]
+    },
+    {
+      "actor": "CDocOc",
+      "model": "docock",
+      "slot": 0,
+      "animation_name": "docock_anim_0",
+      "label": "play_idle_or_gloat_anim",
+      "labels": [
+        "play_idle_or_gloat_anim"
+      ],
+      "confidence": "medium",
+      "model_animation_count": 43,
+      "slot_in_model_range": true,
+      "evidence": [
+        {
+          "role": "play",
+          "operator": "",
+          "function": "CDocOc::PlayIdleOrGloatAnim",
+          "function_status": "Ok",
+          "source": "decomp:docock.cpp:187@f8a0392"
+        }
+      ]
+    },
+    {
+      "actor": "CDocOc",
+      "model": "docock",
+      "slot": 1,
+      "animation_name": "docock_anim_1",
+      "label": "play_idle_or_gloat_anim",
+      "labels": [
+        "play_idle_or_gloat_anim"
+      ],
+      "confidence": "medium",
+      "model_animation_count": 43,
+      "slot_in_model_range": true,
+      "evidence": [
+        {
+          "role": "play",
+          "operator": "",
+          "function": "CDocOc::PlayIdleOrGloatAnim",
+          "function_status": "Ok",
+          "source": "decomp:docock.cpp:194@f8a0392"
+        }
+      ]
+    },
+    {
+      "actor": "CDocOc",
+      "model": "docock",
+      "slot": 5,
+      "animation_name": "docock_anim_5",
+      "label": "play_idle_or_gloat_anim",
+      "labels": [
+        "play_idle_or_gloat_anim"
+      ],
+      "confidence": "medium",
+      "model_animation_count": 43,
+      "slot_in_model_range": true,
+      "evidence": [
+        {
+          "role": "play",
+          "operator": "",
+          "function": "CDocOc::PlayIdleOrGloatAnim",
+          "function_status": "Ok",
+          "source": "decomp:docock.cpp:185@f8a0392"
+        }
+      ]
+    },
+    {
+      "actor": "CDocOc",
+      "model": "docock",
+      "slot": 23,
+      "animation_name": "docock_anim_23",
+      "label": "hang_and_get_beaten",
+      "labels": [
+        "hang_and_get_beaten"
+      ],
+      "confidence": "medium",
+      "model_animation_count": 43,
+      "slot_in_model_range": true,
+      "evidence": [
+        {
+          "role": "state_test",
+          "operator": "==",
+          "function": "CDocOc::HangAndGetBeaten",
+          "function_status": "Ok",
+          "source": "decomp:docock.cpp:324@f8a0392"
+        },
+        {
+          "role": "play",
+          "operator": "",
+          "function": "CDocOc::HangAndGetBeaten",
+          "function_status": "Ok",
+          "source": "decomp:docock.cpp:326@f8a0392"
+        }
+      ]
+    },
+    {
+      "actor": "CDocOc",
+      "model": "docock",
+      "slot": 24,
+      "animation_name": "docock_anim_24",
+      "label": "hang_and_get_beaten",
+      "labels": [
+        "hang_and_get_beaten"
+      ],
+      "confidence": "medium",
+      "model_animation_count": 43,
+      "slot_in_model_range": true,
+      "evidence": [
+        {
+          "role": "play",
+          "operator": "",
+          "function": "CDocOc::HangAndGetBeaten",
+          "function_status": "Ok",
+          "source": "decomp:docock.cpp:358@f8a0392"
+        }
+      ]
+    },
+    {
+      "actor": "CDocOc",
+      "model": "docock",
+      "slot": 27,
+      "animation_name": "docock_anim_27",
+      "label": "take_hit",
+      "labels": [
+        "take_hit"
+      ],
+      "confidence": "medium",
+      "model_animation_count": 43,
+      "slot_in_model_range": true,
+      "evidence": [
+        {
+          "role": "play",
+          "operator": "",
+          "function": "CDocOc::TakeHit",
+          "function_status": "Ok",
+          "source": "decomp:docock.cpp:284@f8a0392"
+        }
+      ]
+    },
+    {
+      "actor": "CDocOc",
+      "model": "docock",
+      "slot": 28,
+      "animation_name": "docock_anim_28",
+      "label": "take_hit",
+      "labels": [
+        "take_hit"
+      ],
+      "confidence": "medium",
+      "model_animation_count": 43,
+      "slot_in_model_range": true,
+      "evidence": [
+        {
+          "role": "play",
+          "operator": "",
+          "function": "CDocOc::TakeHit",
+          "function_status": "Ok",
+          "source": "decomp:docock.cpp:272@f8a0392"
+        }
+      ]
+    },
+    {
+      "actor": "CDocOc",
+      "model": "docock",
+      "slot": 29,
+      "animation_name": "docock_anim_29",
+      "label": "take_hit",
+      "labels": [
+        "take_hit"
+      ],
+      "confidence": "medium",
+      "model_animation_count": 43,
+      "slot_in_model_range": true,
+      "evidence": [
+        {
+          "role": "play",
+          "operator": "",
+          "function": "CDocOc::TakeHit",
+          "function_status": "Ok",
+          "source": "decomp:docock.cpp:276@f8a0392"
+        }
+      ]
+    },
+    {
+      "actor": "CDocOc",
+      "model": "docock",
+      "slot": 30,
+      "animation_name": "docock_anim_30",
+      "label": "take_hit",
+      "labels": [
+        "take_hit"
+      ],
+      "confidence": "medium",
+      "model_animation_count": 43,
+      "slot_in_model_range": true,
+      "evidence": [
+        {
+          "role": "play",
+          "operator": "",
+          "function": "CDocOc::TakeHit",
+          "function_status": "Ok",
+          "source": "decomp:docock.cpp:280@f8a0392"
+        }
+      ]
+    },
+    {
+      "actor": "CDocOc",
+      "model": "docock",
+      "slot": 32,
+      "animation_name": "docock_anim_32",
+      "label": "hang_and_get_beaten | play_idle_or_gloat_anim",
+      "labels": [
+        "hang_and_get_beaten",
+        "play_idle_or_gloat_anim"
+      ],
+      "confidence": "medium",
+      "model_animation_count": 43,
+      "slot_in_model_range": true,
+      "evidence": [
+        {
+          "role": "play",
+          "operator": "",
+          "function": "CDocOc::PlayIdleOrGloatAnim",
+          "function_status": "Ok",
+          "source": "decomp:docock.cpp:177@f8a0392"
+        },
+        {
+          "role": "state_test",
+          "operator": "==",
+          "function": "CDocOc::HangAndGetBeaten",
+          "function_status": "Ok",
+          "source": "decomp:docock.cpp:324@f8a0392"
+        },
+        {
+          "role": "play",
+          "operator": "",
+          "function": "CDocOc::HangAndGetBeaten",
+          "function_status": "Ok",
+          "source": "decomp:docock.cpp:330@f8a0392"
+        }
+      ]
+    },
+    {
+      "actor": "CDocOc",
+      "model": "docock",
+      "slot": 35,
+      "animation_name": "docock_anim_35",
+      "label": "play_idle_or_gloat_anim",
+      "labels": [
+        "play_idle_or_gloat_anim"
+      ],
+      "confidence": "medium",
+      "model_animation_count": 43,
+      "slot_in_model_range": true,
+      "evidence": [
+        {
+          "role": "play",
+          "operator": "",
+          "function": "CDocOc::PlayIdleOrGloatAnim",
+          "function_status": "Ok",
+          "source": "decomp:docock.cpp:192@f8a0392"
+        }
+      ]
+    },
+    {
+      "actor": "CHostage",
+      "model": "hostage",
+      "slot": 1,
+      "animation_name": "hostage_anim_1",
+      "label": "wait_for_player",
+      "labels": [
+        "wait_for_player"
+      ],
+      "confidence": "medium",
+      "model_animation_count": 7,
+      "slot_in_model_range": true,
+      "evidence": [
+        {
+          "role": "play",
+          "operator": "",
+          "function": "CHostage::WaitForPlayer",
+          "function_status": "Ok",
+          "source": "decomp:hostage.cpp:236@f8a0392"
+        }
+      ]
+    },
+    {
+      "actor": "CHostage",
+      "model": "hostage",
+      "slot": 2,
+      "animation_name": "hostage_anim_2",
+      "label": "get_up",
+      "labels": [
+        "get_up"
+      ],
+      "confidence": "medium",
+      "model_animation_count": 7,
+      "slot_in_model_range": true,
+      "evidence": [
+        {
+          "role": "play",
+          "operator": "",
+          "function": "CHostage::GetUp",
+          "function_status": "Ok",
+          "source": "decomp:hostage.cpp:299@f8a0392"
+        }
+      ]
+    },
+    {
+      "actor": "CLizMan",
+      "model": "lizman",
+      "slot": 0,
+      "animation_name": "lizman_anim_0",
+      "label": "acknowledge",
+      "labels": [
+        "acknowledge"
+      ],
+      "confidence": "medium",
+      "model_animation_count": 40,
+      "slot_in_model_range": true,
+      "evidence": [
+        {
+          "role": "play",
+          "operator": "",
+          "function": "CLizMan::Acknowledge",
+          "function_status": "Ok",
+          "source": "decomp:lizman.cpp:135@f8a0392"
+        }
+      ]
+    },
+    {
+      "actor": "CLizMan",
+      "model": "lizman",
+      "slot": 5,
+      "animation_name": "lizman_anim_5",
+      "label": "guard",
+      "labels": [
+        "guard"
+      ],
+      "confidence": "medium",
+      "model_animation_count": 40,
+      "slot_in_model_range": true,
+      "evidence": [
+        {
+          "role": "state_test",
+          "operator": "!=",
+          "function": "CLizMan::Guard",
+          "function_status": "Ok",
+          "source": "decomp:lizman.cpp:92@f8a0392"
+        },
+        {
+          "role": "play",
+          "operator": "",
+          "function": "CLizMan::Guard",
+          "function_status": "Ok",
+          "source": "decomp:lizman.cpp:94@f8a0392"
+        }
+      ]
+    },
+    {
+      "actor": "CLizMan",
+      "model": "lizman",
+      "slot": 19,
+      "animation_name": "lizman_anim_19",
+      "label": "stand_still",
+      "labels": [
+        "stand_still"
+      ],
+      "confidence": "medium",
+      "model_animation_count": 40,
+      "slot_in_model_range": true,
+      "evidence": [
+        {
+          "role": "play",
+          "operator": "",
+          "function": "CLizMan::StandStill",
+          "function_status": "Ok",
+          "source": "decomp:lizman.cpp:212@f8a0392"
+        }
+      ]
+    },
+    {
+      "actor": "CLizard",
+      "model": "lizard",
+      "slot": 0,
+      "animation_name": "lizard_anim_0",
+      "label": "ai",
+      "labels": [
+        "ai"
+      ],
+      "confidence": "medium",
+      "model_animation_count": 6,
+      "slot_in_model_range": true,
+      "evidence": [
+        {
+          "role": "state_test",
+          "operator": "==",
+          "function": "CLizard::AI",
+          "function_status": "Ok",
+          "source": "decomp:lizard.cpp:52@f8a0392"
+        }
+      ]
+    },
+    {
+      "actor": "CMysterio",
+      "model": "mysterio",
+      "slot": 8,
+      "animation_name": "mysterio_anim_8",
+      "label": "look_menacing",
+      "labels": [
+        "look_menacing"
+      ],
+      "confidence": "medium",
+      "model_animation_count": 23,
+      "slot_in_model_range": true,
+      "evidence": [
+        {
+          "role": "play",
+          "operator": "",
+          "function": "CMysterio::LookMenacing",
+          "function_status": "NotOk",
+          "source": "decomp:mysterio.cpp:464@f8a0392"
+        }
+      ]
+    },
+    {
+      "actor": "CMysterio",
+      "model": "mysterio",
+      "slot": 10,
+      "animation_name": "mysterio_anim_10",
+      "label": "enter_p2 | summon_attack",
+      "labels": [
+        "enter_p2",
+        "summon_attack"
+      ],
+      "confidence": "medium",
+      "model_animation_count": 23,
+      "slot_in_model_range": true,
+      "evidence": [
+        {
+          "role": "play",
+          "operator": "",
+          "function": "CMysterio::EnterP2",
+          "function_status": "Ok",
+          "source": "decomp:mysterio.cpp:367@f8a0392"
+        },
+        {
+          "role": "play",
+          "operator": "",
+          "function": "CMysterio::SummonAttack",
+          "function_status": "Ok",
+          "source": "decomp:mysterio.cpp:426@f8a0392"
+        }
+      ]
+    },
+    {
+      "actor": "CPlayer",
+      "model": "spidey",
+      "slot": 0,
+      "animation_name": "spidey_anim_0",
+      "label": "cut_scene_skip_cleanup",
+      "labels": [
+        "cut_scene_skip_cleanup"
+      ],
+      "confidence": "medium",
+      "model_animation_count": 300,
+      "slot_in_model_range": true,
+      "evidence": [
+        {
+          "role": "play",
+          "operator": "",
+          "function": "CPlayer::CutSceneSkipCleanup",
+          "function_status": "NotOk",
+          "source": "decomp:spidey.cpp:1883@f8a0392"
+        }
+      ]
+    },
+    {
+      "actor": "CPlayer",
+      "model": "spidey",
+      "slot": 14,
+      "animation_name": "spidey_anim_14",
+      "label": "run_into_wall",
+      "labels": [
+        "run_into_wall"
+      ],
+      "confidence": "medium",
+      "model_animation_count": 300,
+      "slot_in_model_range": true,
+      "evidence": [
+        {
+          "role": "play",
+          "operator": "",
+          "function": "CPlayer::CheckRunIntoWall",
+          "function_status": "NotOk",
+          "source": "decomp:spidey.cpp:468@f8a0392"
+        }
+      ]
+    },
+    {
+      "actor": "CPlayer",
+      "model": "spidey",
+      "slot": 106,
+      "animation_name": "spidey_anim_106",
+      "label": "spidey_anim_uppercut",
+      "labels": [
+        "spidey_anim_uppercut"
+      ],
+      "confidence": "high",
+      "model_animation_count": 300,
+      "slot_in_model_range": true,
+      "evidence": [
+        {
+          "role": "state_test",
+          "operator": "==",
+          "function": "CCop::SpideyAnimUppercut",
+          "function_status": "Ok",
+          "source": "decomp:cop.cpp:396@f8a0392"
+        },
+        {
+          "role": "state_test",
+          "operator": "==",
+          "function": "CThug::SpideyAnimUppercut",
+          "function_status": "Ok",
+          "source": "decomp:thug.cpp:417@f8a0392"
+        }
+      ]
+    },
+    {
+      "actor": "CPlayer",
+      "model": "spidey",
+      "slot": 113,
+      "animation_name": "spidey_anim_113",
+      "label": "spidey_anim_uppercut",
+      "labels": [
+        "spidey_anim_uppercut"
+      ],
+      "confidence": "high",
+      "model_animation_count": 300,
+      "slot_in_model_range": true,
+      "evidence": [
+        {
+          "role": "state_test",
+          "operator": "==",
+          "function": "CCop::SpideyAnimUppercut",
+          "function_status": "Ok",
+          "source": "decomp:cop.cpp:397@f8a0392"
+        },
+        {
+          "role": "state_test",
+          "operator": "==",
+          "function": "CThug::SpideyAnimUppercut",
+          "function_status": "Ok",
+          "source": "decomp:thug.cpp:418@f8a0392"
+        }
+      ]
+    },
+    {
+      "actor": "CPlayer",
+      "model": "spidey",
+      "slot": 129,
+      "animation_name": "spidey_anim_129",
+      "label": "ceiling_jumping_smash_punch",
+      "labels": [
+        "ceiling_jumping_smash_punch"
+      ],
+      "confidence": "high",
+      "model_animation_count": 300,
+      "slot_in_model_range": true,
+      "evidence": [
+        {
+          "role": "play",
+          "operator": "",
+          "function": "CPlayer::CheckCeilingJumpingSmashPunch",
+          "function_status": "Ok",
+          "source": "decomp:spidey.cpp:322@f8a0392"
+        }
+      ]
+    },
+    {
+      "actor": "CPlayer",
+      "model": "spidey",
+      "slot": 133,
+      "animation_name": "spidey_anim_133",
+      "label": "ceiling_jumping_smash_punch",
+      "labels": [
+        "ceiling_jumping_smash_punch"
+      ],
+      "confidence": "high",
+      "model_animation_count": 300,
+      "slot_in_model_range": true,
+      "evidence": [
+        {
+          "role": "play",
+          "operator": "",
+          "function": "CPlayer::CheckCeilingJumpingSmashPunch",
+          "function_status": "Ok",
+          "source": "decomp:spidey.cpp:320@f8a0392"
+        }
+      ]
+    },
+    {
+      "actor": "CPlayer",
+      "model": "spidey",
+      "slot": 175,
+      "animation_name": "spidey_anim_175",
+      "label": "knock_spidey_from_crawl_position",
+      "labels": [
+        "knock_spidey_from_crawl_position"
+      ],
+      "confidence": "high",
+      "model_animation_count": 300,
+      "slot_in_model_range": true,
+      "evidence": [
+        {
+          "role": "play",
+          "operator": "",
+          "function": "CPlayer::KnockSpideyFromCrawlPosition",
+          "function_status": "Ok",
+          "source": "decomp:spidey.cpp:829@f8a0392"
+        }
+      ]
+    },
+    {
+      "actor": "CPlayer",
+      "model": "spidey",
+      "slot": 186,
+      "animation_name": "spidey_anim_186",
+      "label": "spidey_ai_thrown_by_simby",
+      "labels": [
+        "spidey_ai_thrown_by_simby"
+      ],
+      "confidence": "high",
+      "model_animation_count": 300,
+      "slot_in_model_range": true,
+      "evidence": [
+        {
+          "role": "play",
+          "operator": "",
+          "function": "SpideyAI_ThrownBySimby",
+          "function_status": "Ok",
+          "source": "decomp:simby.cpp:34@f8a0392"
+        }
+      ]
+    },
+    {
+      "actor": "CPlayer",
+      "model": "spidey",
+      "slot": 212,
+      "animation_name": "spidey_anim_212",
+      "label": "ground_gone",
+      "labels": [
+        "ground_gone"
+      ],
+      "confidence": "high",
+      "model_animation_count": 300,
+      "slot_in_model_range": true,
+      "evidence": [
+        {
+          "role": "play",
+          "operator": "",
+          "function": "CPlayer::CheckGroundGone",
+          "function_status": "Ok",
+          "source": "decomp:spidey.cpp:364@f8a0392"
+        }
+      ]
+    },
+    {
+      "actor": "CPlayer",
+      "model": "spidey",
+      "slot": 227,
+      "animation_name": "spidey_anim_227",
+      "label": "stick_to_ceiling",
+      "labels": [
+        "stick_to_ceiling"
+      ],
+      "confidence": "high",
+      "model_animation_count": 300,
+      "slot_in_model_range": true,
+      "evidence": [
+        {
+          "role": "play",
+          "operator": "",
+          "function": "CPlayer::CheckStickToCeiling",
+          "function_status": "Ok",
+          "source": "decomp:spidey.cpp:510@f8a0392"
+        }
+      ]
+    },
+    {
+      "actor": "CPlayer",
+      "model": "spidey",
+      "slot": 232,
+      "animation_name": "spidey_anim_232",
+      "label": "stick_to_ceiling",
+      "labels": [
+        "stick_to_ceiling"
+      ],
+      "confidence": "high",
+      "model_animation_count": 300,
+      "slot_in_model_range": true,
+      "evidence": [
+        {
+          "role": "state_test",
+          "operator": "==",
+          "function": "CPlayer::CheckStickToCeiling",
+          "function_status": "Ok",
+          "source": "decomp:spidey.cpp:507@f8a0392"
+        }
+      ]
+    },
+    {
+      "actor": "CPlayer",
+      "model": "spidey",
+      "slot": 234,
+      "animation_name": "spidey_anim_234",
+      "label": "stick_to_ceiling",
+      "labels": [
+        "stick_to_ceiling"
+      ],
+      "confidence": "high",
+      "model_animation_count": 300,
+      "slot_in_model_range": true,
+      "evidence": [
+        {
+          "role": "play",
+          "operator": "",
+          "function": "CPlayer::CheckStickToCeiling",
+          "function_status": "Ok",
+          "source": "decomp:spidey.cpp:508@f8a0392"
+        }
+      ]
+    },
+    {
+      "actor": "CPlayer",
+      "model": "spidey",
+      "slot": 284,
+      "animation_name": "spidey_anim_284",
+      "label": "spidey_anim_uppercut",
+      "labels": [
+        "spidey_anim_uppercut"
+      ],
+      "confidence": "high",
+      "model_animation_count": 300,
+      "slot_in_model_range": true,
+      "evidence": [
+        {
+          "role": "state_test",
+          "operator": "==",
+          "function": "CCop::SpideyAnimUppercut",
+          "function_status": "Ok",
+          "source": "decomp:cop.cpp:398@f8a0392"
+        },
+        {
+          "role": "state_test",
+          "operator": "==",
+          "function": "CThug::SpideyAnimUppercut",
+          "function_status": "Ok",
+          "source": "decomp:thug.cpp:419@f8a0392"
+        }
+      ]
+    },
+    {
+      "actor": "CPunchOb",
+      "model": "unmapped",
+      "slot": 0,
+      "animation_name": "",
+      "label": "ai | cpunch_ob",
+      "labels": [
+        "ai",
+        "cpunch_ob"
+      ],
+      "confidence": "low",
+      "model_animation_count": null,
+      "slot_in_model_range": null,
+      "evidence": [
+        {
+          "role": "play",
+          "operator": "",
+          "function": "CPunchOb::AI",
+          "function_status": "Ok",
+          "source": "decomp:simby.cpp:441@f8a0392"
+        },
+        {
+          "role": "play",
+          "operator": "",
+          "function": "CPunchOb::CPunchOb",
+          "function_status": "Ok",
+          "source": "decomp:simby.cpp:580@f8a0392"
+        }
+      ]
+    },
+    {
+      "actor": "CRhino",
+      "model": "rhino",
+      "slot": 0,
+      "animation_name": "rhino_anim_0",
+      "label": "get_launched | hit_wall | laugh | rhino_init | stand_still | take_hit",
+      "labels": [
+        "get_launched",
+        "hit_wall",
+        "laugh",
+        "rhino_init",
+        "stand_still",
+        "take_hit"
+      ],
+      "confidence": "medium",
+      "model_animation_count": 31,
+      "slot_in_model_range": true,
+      "evidence": [
+        {
+          "role": "play",
+          "operator": "",
+          "function": "CRhino::GetLaunched",
+          "function_status": "Ok",
+          "source": "decomp:rhino.cpp:254@f8a0392"
+        },
+        {
+          "role": "play",
+          "operator": "",
+          "function": "CRhino::TakeHit",
+          "function_status": "Ok",
+          "source": "decomp:rhino.cpp:438@f8a0392"
+        },
+        {
+          "role": "play",
+          "operator": "",
+          "function": "CRhino::HitWall",
+          "function_status": "Ok",
+          "source": "decomp:rhino.cpp:489@f8a0392"
+        },
+        {
+          "role": "play",
+          "operator": "",
+          "function": "CRhino::Laugh",
+          "function_status": "Ok",
+          "source": "decomp:rhino.cpp:553@f8a0392"
+        },
+        {
+          "role": "play",
+          "operator": "",
+          "function": "CRhino::RhinoInit",
+          "function_status": "Ok",
+          "source": "decomp:rhino.cpp:579@f8a0392"
+        },
+        {
+          "role": "play",
+          "operator": "",
+          "function": "CRhino::StandStill",
+          "function_status": "Ok",
+          "source": "decomp:rhino.cpp:624@f8a0392"
+        }
+      ]
+    },
+    {
+      "actor": "CRhino",
+      "model": "rhino",
+      "slot": 15,
+      "animation_name": "rhino_anim_15",
+      "label": "get_launched | take_hit",
+      "labels": [
+        "get_launched",
+        "take_hit"
+      ],
+      "confidence": "medium",
+      "model_animation_count": 31,
+      "slot_in_model_range": true,
+      "evidence": [
+        {
+          "role": "play",
+          "operator": "",
+          "function": "CRhino::GetLaunched",
+          "function_status": "Ok",
+          "source": "decomp:rhino.cpp:215@f8a0392"
+        },
+        {
+          "role": "play",
+          "operator": "",
+          "function": "CRhino::TakeHit",
+          "function_status": "Ok",
+          "source": "decomp:rhino.cpp:412@f8a0392"
+        }
+      ]
+    },
+    {
+      "actor": "CRhino",
+      "model": "rhino",
+      "slot": 17,
+      "animation_name": "rhino_anim_17",
+      "label": "hit_wall",
+      "labels": [
+        "hit_wall"
+      ],
+      "confidence": "medium",
+      "model_animation_count": 31,
+      "slot_in_model_range": true,
+      "evidence": [
+        {
+          "role": "play",
+          "operator": "",
+          "function": "CRhino::HitWall",
+          "function_status": "Ok",
+          "source": "decomp:rhino.cpp:460@f8a0392"
+        }
+      ]
+    },
+    {
+      "actor": "CRhino",
+      "model": "rhino",
+      "slot": 18,
+      "animation_name": "rhino_anim_18",
+      "label": "hit_wall",
+      "labels": [
+        "hit_wall"
+      ],
+      "confidence": "medium",
+      "model_animation_count": 31,
+      "slot_in_model_range": true,
+      "evidence": [
+        {
+          "role": "play",
+          "operator": "",
+          "function": "CRhino::HitWall",
+          "function_status": "Ok",
+          "source": "decomp:rhino.cpp:473@f8a0392"
+        },
+        {
+          "role": "state_test",
+          "operator": "==",
+          "function": "CRhino::HitWall",
+          "function_status": "Ok",
+          "source": "decomp:rhino.cpp:481@f8a0392"
+        }
+      ]
+    },
+    {
+      "actor": "CRhino",
+      "model": "rhino",
+      "slot": 20,
+      "animation_name": "rhino_anim_20",
+      "label": "laugh",
+      "labels": [
+        "laugh"
+      ],
+      "confidence": "medium",
+      "model_animation_count": 31,
+      "slot_in_model_range": true,
+      "evidence": [
+        {
+          "role": "play",
+          "operator": "",
+          "function": "CRhino::Laugh",
+          "function_status": "Ok",
+          "source": "decomp:rhino.cpp:537@f8a0392"
+        }
+      ]
+    },
+    {
+      "actor": "CRhino",
+      "model": "rhino",
+      "slot": 21,
+      "animation_name": "rhino_anim_21",
+      "label": "hit_wall",
+      "labels": [
+        "hit_wall"
+      ],
+      "confidence": "medium",
+      "model_animation_count": 31,
+      "slot_in_model_range": true,
+      "evidence": [
+        {
+          "role": "play",
+          "operator": "",
+          "function": "CRhino::HitWall",
+          "function_status": "Ok",
+          "source": "decomp:rhino.cpp:484@f8a0392"
+        }
+      ]
+    },
+    {
+      "actor": "CRudeWordHitterSpidey",
+      "model": "unmapped",
+      "slot": 0,
+      "animation_name": "",
+      "label": "ai | crude_word_hitter_spidey",
+      "labels": [
+        "ai",
+        "crude_word_hitter_spidey"
+      ],
+      "confidence": "low",
+      "model_animation_count": null,
+      "slot_in_model_range": null,
+      "evidence": [
+        {
+          "role": "play",
+          "operator": "",
+          "function": "CRudeWordHitterSpidey::CRudeWordHitterSpidey",
+          "function_status": "NotOk",
+          "source": "decomp:shell.cpp:1151@f8a0392"
+        },
+        {
+          "role": "play",
+          "operator": "",
+          "function": "CRudeWordHitterSpidey::AI",
+          "function_status": "Ok",
+          "source": "decomp:shell.cpp:1185@f8a0392"
+        }
+      ]
+    },
+    {
+      "actor": "CRudeWordHitterSpidey",
+      "model": "unmapped",
+      "slot": 100,
+      "animation_name": "",
+      "label": "ai",
+      "labels": [
+        "ai"
+      ],
+      "confidence": "low",
+      "model_animation_count": null,
+      "slot_in_model_range": null,
+      "evidence": [
+        {
+          "role": "play",
+          "operator": "",
+          "function": "CRudeWordHitterSpidey::AI",
+          "function_status": "Ok",
+          "source": "decomp:shell.cpp:1181@f8a0392"
+        }
+      ]
+    },
+    {
+      "actor": "CScorpion",
+      "model": "scorpion",
+      "slot": 10,
+      "animation_name": "scorpion_anim_10",
+      "label": "take_hit",
+      "labels": [
+        "take_hit"
+      ],
+      "confidence": "medium",
+      "model_animation_count": 30,
+      "slot_in_model_range": true,
+      "evidence": [
+        {
+          "role": "state_test",
+          "operator": "!=",
+          "function": "CScorpion::TakeHit",
+          "function_status": "NotOk",
+          "source": "decomp:scorpion.cpp:480@f8a0392"
+        },
+        {
+          "role": "play",
+          "operator": "",
+          "function": "CScorpion::TakeHit",
+          "function_status": "NotOk",
+          "source": "decomp:scorpion.cpp:481@f8a0392"
+        }
+      ]
+    },
+    {
+      "actor": "CScorpion",
+      "model": "scorpion",
+      "slot": 12,
+      "animation_name": "scorpion_anim_12",
+      "label": "get_trapped",
+      "labels": [
+        "get_trapped"
+      ],
+      "confidence": "medium",
+      "model_animation_count": 30,
+      "slot_in_model_range": true,
+      "evidence": [
+        {
+          "role": "play",
+          "operator": "",
+          "function": "CScorpion::GetTrapped",
+          "function_status": "NotOk",
+          "source": "decomp:scorpion.cpp:175@f8a0392"
+        },
+        {
+          "role": "state_test",
+          "operator": "==",
+          "function": "CScorpion::GetTrapped",
+          "function_status": "NotOk",
+          "source": "decomp:scorpion.cpp:176@f8a0392"
+        }
+      ]
+    },
+    {
+      "actor": "CScorpion",
+      "model": "scorpion",
+      "slot": 13,
+      "animation_name": "scorpion_anim_13",
+      "label": "get_trapped",
+      "labels": [
+        "get_trapped"
+      ],
+      "confidence": "medium",
+      "model_animation_count": 30,
+      "slot_in_model_range": true,
+      "evidence": [
+        {
+          "role": "play",
+          "operator": "",
+          "function": "CScorpion::GetTrapped",
+          "function_status": "NotOk",
+          "source": "decomp:scorpion.cpp:185@f8a0392"
+        }
+      ]
+    },
+    {
+      "actor": "CScorpion",
+      "model": "scorpion",
+      "slot": 14,
+      "animation_name": "scorpion_anim_14",
+      "label": "gloat",
+      "labels": [
+        "gloat"
+      ],
+      "confidence": "medium",
+      "model_animation_count": 30,
+      "slot_in_model_range": true,
+      "evidence": [
+        {
+          "role": "play",
+          "operator": "",
+          "function": "CScorpion::Gloat",
+          "function_status": "Ok",
+          "source": "decomp:scorpion.cpp:426@f8a0392"
+        }
+      ]
+    },
+    {
+      "actor": "CSimby",
+      "model": "unmapped",
+      "slot": 17,
+      "animation_name": "",
+      "label": "run_appropriate_hit_anim",
+      "labels": [
+        "run_appropriate_hit_anim"
+      ],
+      "confidence": "low",
+      "model_animation_count": null,
+      "slot_in_model_range": null,
+      "evidence": [
+        {
+          "role": "play",
+          "operator": "",
+          "function": "CSimby::RunAppropriateHitAnim",
+          "function_status": "Ok",
+          "source": "decomp:simby.cpp:771@f8a0392"
+        }
+      ]
+    },
+    {
+      "actor": "CSimby",
+      "model": "unmapped",
+      "slot": 18,
+      "animation_name": "",
+      "label": "run_appropriate_hit_anim",
+      "labels": [
+        "run_appropriate_hit_anim"
+      ],
+      "confidence": "low",
+      "model_animation_count": null,
+      "slot_in_model_range": null,
+      "evidence": [
+        {
+          "role": "play",
+          "operator": "",
+          "function": "CSimby::RunAppropriateHitAnim",
+          "function_status": "Ok",
+          "source": "decomp:simby.cpp:773@f8a0392"
+        }
+      ]
+    },
+    {
+      "actor": "CSimby",
+      "model": "unmapped",
+      "slot": 19,
+      "animation_name": "",
+      "label": "run_appropriate_hit_anim",
+      "labels": [
+        "run_appropriate_hit_anim"
+      ],
+      "confidence": "low",
+      "model_animation_count": null,
+      "slot_in_model_range": null,
+      "evidence": [
+        {
+          "role": "play",
+          "operator": "",
+          "function": "CSimby::RunAppropriateHitAnim",
+          "function_status": "Ok",
+          "source": "decomp:simby.cpp:775@f8a0392"
+        }
+      ]
+    },
+    {
+      "actor": "CSimby",
+      "model": "unmapped",
+      "slot": 43,
+      "animation_name": "",
+      "label": "shoot",
+      "labels": [
+        "shoot"
+      ],
+      "confidence": "low",
+      "model_animation_count": null,
+      "slot_in_model_range": null,
+      "evidence": [
+        {
+          "role": "play",
+          "operator": "",
+          "function": "CSimby::Shoot",
+          "function_status": "NotOk",
+          "source": "decomp:simby.cpp:643@f8a0392"
+        }
+      ]
+    },
+    {
+      "actor": "CSpClone",
+      "model": "unmapped",
+      "slot": 202,
+      "animation_name": "",
+      "label": "csp_clone",
+      "labels": [
+        "csp_clone"
+      ],
+      "confidence": "low",
+      "model_animation_count": null,
+      "slot_in_model_range": null,
+      "evidence": [
+        {
+          "role": "play",
+          "operator": "",
+          "function": "CSpClone::CSpClone",
+          "function_status": "Ok",
+          "source": "decomp:spclone.cpp:50@f8a0392"
+        }
+      ]
+    },
+    {
+      "actor": "CSuperDocOck",
+      "model": "superock",
+      "slot": 1,
+      "animation_name": "superock_anim_1",
+      "label": "play_idle_or_gloat_anim",
+      "labels": [
+        "play_idle_or_gloat_anim"
+      ],
+      "confidence": "medium",
+      "model_animation_count": 22,
+      "slot_in_model_range": true,
+      "evidence": [
+        {
+          "role": "play",
+          "operator": "",
+          "function": "CSuperDocOck::PlayIdleOrGloatAnim",
+          "function_status": "Ok",
+          "source": "decomp:superock.cpp:361@f8a0392"
+        },
+        {
+          "role": "play",
+          "operator": "",
+          "function": "CSuperDocOck::PlayIdleOrGloatAnim",
+          "function_status": "Ok",
+          "source": "decomp:superock.cpp:369@f8a0392"
+        }
+      ]
+    },
+    {
+      "actor": "CSuperDocOck",
+      "model": "superock",
+      "slot": 22,
+      "animation_name": "superock_anim_22",
+      "label": "play_idle_or_gloat_anim",
+      "labels": [
+        "play_idle_or_gloat_anim"
+      ],
+      "confidence": "low",
+      "model_animation_count": 22,
+      "slot_in_model_range": false,
+      "evidence": [
+        {
+          "role": "play",
+          "operator": "",
+          "function": "CSuperDocOck::PlayIdleOrGloatAnim",
+          "function_status": "Ok",
+          "source": "decomp:superock.cpp:352@f8a0392"
+        }
+      ]
+    },
+    {
+      "actor": "CSuperDocOck",
+      "model": "superock",
+      "slot": 24,
+      "animation_name": "superock_anim_24",
+      "label": "hang_and_get_beaten",
+      "labels": [
+        "hang_and_get_beaten"
+      ],
+      "confidence": "low",
+      "model_animation_count": 22,
+      "slot_in_model_range": false,
+      "evidence": [
+        {
+          "role": "play",
+          "operator": "",
+          "function": "CSuperDocOck::HangAndGetBeaten",
+          "function_status": "Ok",
+          "source": "decomp:superock.cpp:288@f8a0392"
+        }
+      ]
+    },
+    {
+      "actor": "CSuperDocOck",
+      "model": "superock",
+      "slot": 31,
+      "animation_name": "superock_anim_31",
+      "label": "hit",
+      "labels": [
+        "hit"
+      ],
+      "confidence": "low",
+      "model_animation_count": 22,
+      "slot_in_model_range": false,
+      "evidence": [
+        {
+          "role": "play",
+          "operator": "",
+          "function": "CSuperDocOck::Hit",
+          "function_status": "Ok",
+          "source": "decomp:superock.cpp:108@f8a0392"
+        }
+      ]
+    },
+    {
+      "actor": "CSuperDocOck",
+      "model": "superock",
+      "slot": 35,
+      "animation_name": "superock_anim_35",
+      "label": "play_idle_or_gloat_anim",
+      "labels": [
+        "play_idle_or_gloat_anim"
+      ],
+      "confidence": "low",
+      "model_animation_count": 22,
+      "slot_in_model_range": false,
+      "evidence": [
+        {
+          "role": "play",
+          "operator": "",
+          "function": "CSuperDocOck::PlayIdleOrGloatAnim",
+          "function_status": "Ok",
+          "source": "decomp:superock.cpp:359@f8a0392"
+        }
+      ]
+    },
+    {
+      "actor": "CThug",
+      "model": "thug",
+      "slot": 9,
+      "animation_name": "thug_anim_9",
+      "label": "stop_shooting",
+      "labels": [
+        "stop_shooting"
+      ],
+      "confidence": "medium",
+      "model_animation_count": 44,
+      "slot_in_model_range": true,
+      "evidence": [
+        {
+          "role": "play",
+          "operator": "",
+          "function": "CThug::StopShooting",
+          "function_status": "Ok",
+          "source": "decomp:thug.cpp:1253@f8a0392"
+        }
+      ]
+    },
+    {
+      "actor": "CThug",
+      "model": "thug",
+      "slot": 10,
+      "animation_name": "thug_anim_10",
+      "label": "guard",
+      "labels": [
+        "guard"
+      ],
+      "confidence": "medium",
+      "model_animation_count": 44,
+      "slot_in_model_range": true,
+      "evidence": [
+        {
+          "role": "state_test",
+          "operator": "!=",
+          "function": "CThug::Guard",
+          "function_status": "Ok",
+          "source": "decomp:thug.cpp:547@f8a0392"
+        },
+        {
+          "role": "play",
+          "operator": "",
+          "function": "CThug::Guard",
+          "function_status": "Ok",
+          "source": "decomp:thug.cpp:549@f8a0392"
+        },
+        {
+          "role": "play",
+          "operator": "",
+          "function": "CThug::Guard",
+          "function_status": "Ok",
+          "source": "decomp:thug.cpp:553@f8a0392"
+        }
+      ]
+    },
+    {
+      "actor": "CThug",
+      "model": "thug",
+      "slot": 11,
+      "animation_name": "thug_anim_11",
+      "label": "guard",
+      "labels": [
+        "guard"
+      ],
+      "confidence": "medium",
+      "model_animation_count": 44,
+      "slot_in_model_range": true,
+      "evidence": [
+        {
+          "role": "state_test",
+          "operator": "==",
+          "function": "CThug::Guard",
+          "function_status": "Ok",
+          "source": "decomp:thug.cpp:542@f8a0392"
+        }
+      ]
+    },
+    {
+      "actor": "CThug",
+      "model": "thug",
+      "slot": 12,
+      "animation_name": "thug_anim_12",
+      "label": "guard",
+      "labels": [
+        "guard"
+      ],
+      "confidence": "medium",
+      "model_animation_count": 44,
+      "slot_in_model_range": true,
+      "evidence": [
+        {
+          "role": "play",
+          "operator": "",
+          "function": "CThug::Guard",
+          "function_status": "Ok",
+          "source": "decomp:thug.cpp:565@f8a0392"
+        }
+      ]
+    },
+    {
+      "actor": "CThug",
+      "model": "thug",
+      "slot": 21,
+      "animation_name": "thug_anim_21",
+      "label": "guard",
+      "labels": [
+        "guard"
+      ],
+      "confidence": "medium",
+      "model_animation_count": 44,
+      "slot_in_model_range": true,
+      "evidence": [
+        {
+          "role": "play",
+          "operator": "",
+          "function": "CThug::Guard",
+          "function_status": "Ok",
+          "source": "decomp:thug.cpp:587@f8a0392"
+        }
+      ]
+    },
+    {
+      "actor": "CTorch",
+      "model": "torch",
+      "slot": 4,
+      "animation_name": "torch_anim_4",
+      "label": "ctorch",
+      "labels": [
+        "ctorch"
+      ],
+      "confidence": "medium",
+      "model_animation_count": 10,
+      "slot_in_model_range": true,
+      "evidence": [
+        {
+          "role": "play",
+          "operator": "",
+          "function": "CTorch::CTorch",
+          "function_status": "NotOk",
+          "source": "decomp:torch.cpp:90@f8a0392"
+        }
+      ]
+    },
+    {
+      "actor": "CVenom",
+      "model": "venom",
+      "slot": 8,
+      "animation_name": "venom_anim_8",
+      "label": "lookaround",
+      "labels": [
+        "lookaround"
+      ],
+      "confidence": "medium",
+      "model_animation_count": 44,
+      "slot_in_model_range": true,
+      "evidence": [
+        {
+          "role": "play",
+          "operator": "",
+          "function": "CVenom::Lookaround",
+          "function_status": "Ok",
+          "source": "decomp:venom.cpp:314@f8a0392"
+        }
+      ]
+    },
+    {
+      "actor": "CVenom",
+      "model": "venom",
+      "slot": 41,
+      "animation_name": "venom_anim_41",
+      "label": "venom_die",
+      "labels": [
+        "venom_die"
+      ],
+      "confidence": "medium",
+      "model_animation_count": 44,
+      "slot_in_model_range": true,
+      "evidence": [
+        {
+          "role": "play",
+          "operator": "",
+          "function": "CVenom::VenomDie",
+          "function_status": "Ok",
+          "source": "decomp:venom.cpp:424@f8a0392"
+        }
+      ]
+    },
+    {
+      "actor": "Spidey_CIcon",
+      "model": "unmapped",
+      "slot": 0,
+      "animation_name": "",
+      "label": "icon",
+      "labels": [
+        "icon"
+      ],
+      "confidence": "low",
+      "model_animation_count": null,
+      "slot_in_model_range": null,
+      "evidence": [
+        {
+          "role": "play",
+          "operator": "",
+          "function": "Spidey_CIcon::SetIcon",
+          "function_status": "Ok",
+          "source": "decomp:shell.cpp:593@f8a0392"
+        }
+      ]
+    }
+  ]
+}
