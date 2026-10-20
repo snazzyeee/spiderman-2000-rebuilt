@@ -18,7 +18,75 @@ Implemented by src/core/psx_units.gd (runtime) and tools/reference/psx_units.py
 `per_frame_to_per_second()` scales per-frame constants by the tick. Godot physics
 runs at 60 Hz, so ported per-frame rates must be converted, never copied.
 
+## Round 2 diagnostic contract
+
+Evidence `remake:landmark-diagnostics-v2`, confidence authored. The original
+21-check gate and its support window, hypothesis set, 80% threshold and 30-point
+margin stay unchanged. Per-landmark reporting adds original node identity,
+type/subtype/flags, current converted coordinates, a full-height XZ collision
+probe, nearest vertical surface above/below, nearest mesh chunk and summaries by
+type/subtype. Classification is descriptive: outside footprint, over geometry
+with an unsupported gap, or near a previously unmatched name candidate. A 2 m
+chunk-nearness radius is authored diagnostic grouping, not a placement correction.
+Vertical gaps are reported, never subtracted from node coordinates.
+
+Evidence `trg:L1A1:node12`, confidence partial (converter command decode): the
+startup references G/O/L banks plus character/effect banks. Nodes 14 and 257
+reference two background model checksums; nodes 224/282/283 reference following
+TRG areas. Several later environment arguments decode to control characters;
+these are unresolved and must not be interpreted as geometry filenames.
+
+Evidence `psx:L1A1_O:object-table` + `glb:l1a1_g:node-transforms`, confidence
+recovered: six of the seven former G-name mismatches match O-bank object origins
+directly, using the already decoded divisor/signs. The seventh matches O object
+7's origin while its exported mesh name reuses index 5. Thus an exported mesh
+index does not uniquely identify a source-bank object. No origin offset or
+converter placement defect follows from those seven candidates. G object words
+at +16/+18/+20 are zero for all 137 objects; no rotation correction is inferred.
+
+Evidence `decomp:thug.cpp#CThug::CThug/SetThugType@f8a0392 (@Ok)` and
+`decomp:baddy.cpp#CBaddy::SetHeight@f8a0392 (@Ok, AlmostMatching)`, confidence
+recovered: the constructor consumes a node position via the common position
+reader; height updates probe from a type-specific root-height displacement and
+settle the entity root that distance above ground in Y-down coordinates. Thug
+and henchman types set that displacement to 100 original world units. This does
+**not** prove every spawn node was authored at the settled ground root height.
+`decomp:trig.cpp#Trig_ExecuteRestart@f8a0392 (@Ok, AlmostMatching)` copies a
+restart position directly to the player root before its command list. Neither
+fact proves a universal feet/root/center correction for TRG node classes.
+
+Evidence `remake:extra-geometry-diagnostic`, confidence authored: referenced
+following-area TRG graphs can supply additional G/O bank names for a separate
+diagnostic collision world. Convert only named local banks with the pinned MIT
+converter, record source/tool/output hashes privately, and load those GLBs with
+GLTFDocument in a standalone diagnostic. L banks with zero model counts are
+reported as non-renderable. Additional-area results never replace or modify the
+original L1A1 gate. A transition reference does not establish simultaneous
+geometry residency. No supplemental grounded gate is justified yet, since
+node-class grounding conventions remain insufficiently decoded.
+
 ## Level 1 landmark check (open)
+
+Round 2 evidence `remake:units-landmark-v2` (private per-node report): 28 supported,
+82 outside the G/O XZ collision footprint, 36 over geometry with unsupported
+vertical gaps; zero unsupported nodes are within the authored 2 m nearness test
+of a former unmatched chunk. By class: BADDY 12/99 (81 are script-only), POINT
+11/38, POWERUP 5/7, RESTART 0/2. Gaps differ even within actor classes; no common
+offset is inferred. These counts are diagnostic observations, not new criteria.
+
+Evidence `remake:units-extra-geometry` and referenced TRG nodes in the private
+manifest: startup and following-area graph references yielded five convertible
+G/O banks and three L banks with no models. The additional collision world still
+supports 28/146 and selects the same configured mapping. It neither improves nor
+replaces the original gate. Character/effect banks are not assumed to be placed
+environment geometry. Background checksums resolve to existing O-bank models;
+all seven former mismatches have exact O-origin attribution, including exported
+mesh-index reuse at O object 7. No converter post-process fix is justified.
+
+Remaining blocker: several dynamic environment arguments are unresolved control
+characters in the existing command decode; no proven missing geometry target or
+class-specific TRG height convention has been recovered. Placement remains
+unverified. No grounded-only gate was added on an unproven node selection.
 
 After separating converter model units from world units, the unchanged gate on
 2026-10-20 scores the configured mapping best: **28/146 (19.18%)** supported;
@@ -65,6 +133,12 @@ calibration as METERS_PER_MODEL_UNIT; original world units use that value /2.25.
 Geometry imports use model units. This is a decoded converter factor, without a
 landmark-fitted offset. The landmark gate below remains required before accepting
 the mapping as verified.
+
+## Historical (superseded)
+
+The following analysis predates the decoded 2.25 converter unit distinction.
+Its zero-support result and fitted offsets are superseded and are not runtime
+specifications. The original gate criteria remain current.
 
 src/diagnostics/verify_units.gd loads the converted l1a1_g/l1a1_o geometry at
 the calibrated scale, then tests whether L1A1 TRG restart, baddy, powerup and
