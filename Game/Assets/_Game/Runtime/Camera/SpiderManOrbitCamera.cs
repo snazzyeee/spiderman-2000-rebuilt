@@ -13,8 +13,12 @@ namespace SpiderManRebuild
         public float TargetHeight = 1.45f, MouseSensitivity = .12f, StickDegreesPerSecond = 160;
         public float MinPitch = -35, MaxPitch = 70, StartPitch = 15, LookDamping = .055f;
         public bool InvertY;
+        public bool UseInitialHeading;
+        public float InitialYaw;
         float targetYaw, targetPitch, yaw, pitch, yawRate, pitchRate;
         public Quaternion Heading => Quaternion.Euler(0, yaw, 0);
+        public void SetHeading(float value)
+        { targetYaw = yaw = value; yawRate = 0; }
         public void ApplyLook(Vector2 pixels, Vector2 stick, float dt)
         {
             targetYaw += pixels.x * MouseSensitivity + stick.x * StickDegreesPerSecond * dt;
@@ -23,10 +27,10 @@ namespace SpiderManRebuild
             yaw = Mathf.SmoothDampAngle(yaw, targetYaw, ref yawRate, LookDamping, Mathf.Infinity, dt);
             pitch = Mathf.SmoothDamp(pitch, targetPitch, ref pitchRate, LookDamping, Mathf.Infinity, dt);
         }
-        void Start() { targetPitch = pitch = StartPitch; targetYaw = yaw = Player.eulerAngles.y; }
+        void Start() { targetPitch = pitch = StartPitch; targetYaw = yaw = UseInitialHeading ? InitialYaw : Player.eulerAngles.y; }
         void Update()
         {
-            if (Input.Automation || (Session != null && Session.Paused)) return;
+            if (Input.Automation || (Session != null && Session.ControlBlocked)) return;
             // Mouse input is pixels/frame; stick input is a rate. Only stick is multiplied by dt.
             ApplyLook(Input.MouseDelta, Input.LookStick, Time.unscaledDeltaTime);
         }

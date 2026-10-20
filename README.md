@@ -1,80 +1,90 @@
 # Spider-Man 2000 PC revamp
 
-Unity/C#/URP reimplementation using locally extracted original PC art.
-The whitebox prototype is retired. The current Phase 1 scene uses the original
-Spider-Man model and L1A1 meshes, with a custom box-sweep player motor.
-Mechanical fidelity is a target, not an achieved or verified claim.
+Unity/C#/URP reimplementation using privately extracted original PC art.
+The current Mission 1 slice connects rooftop traversal, a bank encounter and a
+final entry interaction. Mechanical fidelity remains an unverified target.
 
-## Phase 1 files and exact commands
+## Build and play Mission 1
 
-[Docs/PHASE1.md](Docs/PHASE1.md) contains the complete extraction, import,
-controller installation, camera configuration, animation binding and audio APIs.
+[Docs/MISSION1.md](Docs/MISSION1.md) contains the scripts/component guide,
+Inspector references, input bindings and exact state-machine flows.
+[Docs/PHASE1.md](Docs/PHASE1.md) documents the model conversion, box-sweep motor,
+orbital camera, URP materials/lighting and audio mixer.
 
-From this repository root, with the Unity project closed:
+Place your PC archive at LocalReference/PC/app/data.pkr. From this repository
+root, with the Unity project closed:
 
     .\Tools\Reference\setup_converter.ps1
     python Tools/Reference/prepare_phase1_assets.py
-    .\Tools\Build\build_windows.ps1 -RunTests -SmokeTest
+    python Tools/Reference/prepare_mission1_assets.py
+    .\Tools\Build\build_mission1.ps1 -RunTests -SmokeTest
 
-Place your PC archive at LocalReference/PC/app/data.pkr first. These commands
-never execute the game's installer, executable or compatibility DLLs.
+The conversion verifies archive member CRCs/lengths and the pinned converter.
+It never runs the original installer, game executable or compatibility DLLs.
 
-Open Game in Unity Hub with editor 6000.6.6f1. The private scene is
-Assets/_LocalReference/Phase1/SpiderManPhase1.unity. The local build is
-Builds/Windows/SpiderManPhase1.exe; retain its accompanying data/runtime files.
+Open Game in Unity Hub with editor 6000.6.6f1. Open the private scene
+Assets/_LocalReference/Mission1/BankHeistRooftops.unity, or run the local build
+Builds/Mission1/SpiderManMission1.exe with its accompanying data/runtime files.
+The Rebuild > Mission 1 editor menu also assembles and builds the scene.
 
-## Concrete deliverables
+## Implemented systems
 
-- Tools/Reference/prepare_phase1_assets.py: exact PKR-member selection, CRC/length
-  verification, animated PSX/PSH conversion, glTF/BIN plus unchanged PNG export.
-- SpiderManCharacterController.cs: kinematic box sweeps, sliding, ground/step
-  handling, jump buffering, coyote timing and reset. No capsule-based component.
-- SpiderManOrbitCamera.cs: separately scaled mouse and right-stick look,
-  smoothed yaw/pitch, framed tracking target and Cinemachine collision handling.
-- SpiderManPlayerInstaller.cs: drop onto an identity-transform root, assign the
-  imported visual child and movement tuning, then press Play.
-- Phase1SceneBuilder.cs: private original-asset scene assembly, URP Lit material
-  remapping, Generic avatar, SSAO, soft shadows and exponential-squared fog.
-- TraversalAudioRig.cs: separate SFX/Music/Dialogue buses, 3D impact emitter pool,
-  custom distance attenuation and altitude/velocity-driven low-pass filters.
+- PlayerStateMachine: pendulum swing, release momentum, geometry zip, surface
+  latch/crawl, clearance-checked roof mantle, hit stun and control transitions.
+- SpiderManCharacterController: swept box motion, sliding, steps, buffered jumps,
+  coyote timing and recovery; no capsule or Unity CharacterController component.
+- SpiderManOrbitCamera: mouse/right-stick orbit, damping, framing and Cinemachine
+  third-person collision handling.
+- PlayerCombat / Health: traced web shots, web energy, buffered three-hit melee,
+  web dome, damage, invulnerability and defeat events.
+- MissionManager / EncounterDirector: ordered rooftop checkpoints, living-enemy
+  encounter gate, arena constraints, skylight completion, checkpoint recovery/replay.
+- ThugAI / SurfaceSteeringMotor: patrol, alert, melee/ranged wind-ups, obstacle
+  steering, hit reactions, web stun and full web capture.
+- CutsceneSequence / DialogueCueTrack / DialogueTrigger: Timeline/Cinemachine
+  intro, authored subtitles, optional synchronized audio, pause/skip and control locks.
+- TraversalAudioRig: SFX/Music/Dialogue mixer buses, spatial web impacts,
+  distance curves and altitude/velocity-driven low-pass filters.
 
-Runtime source is under Game/Assets/_Game/Runtime; editor assembly/build tools
-are under Game/Assets/_Game/Editor. See [Docs/Validation.md](Docs/Validation.md).
+Runtime: Game/Assets/_Game/Runtime. Editor assembly/build:
+Game/Assets/_Game/Editor. Validation: [Docs/Mission1Validation.md](Docs/Mission1Validation.md).
+Controls: [Docs/Controls.md](Docs/Controls.md).
 
-## Current asset facts and remaining fidelity work
+## Asset facts and fidelity limits
 
-The local conversion preserves 18 character joints, eight character textures,
-300 original animation slots, and L1A1's 115 mesh objects and 98 textures.
-The Generic avatar and imported textured materials are checked in Unity.
+The conversion preserves Spider-Man's 18 joints, eight textures and 300 numeric
+animation slots, plus L1A1's 115 mesh objects and 98 textures. The mission also
+uses original henchman, web-dome, level object and named combat SFX assets.
+All visible production geometry comes from private original assets.
 
-Animation slot meanings and gameplay event timing are not yet established.
-Assign identified native clips to SpiderManAnimationDriver; no guessed idle/run
-mapping is shipped. Wall crawling, web swinging, combat, mission scripts and
-original audio cue identification remain unimplemented. Current movement tuning,
-1.8 m normalization, box shape, roof spawn and mesh-derived world collision are
-integration choices, not verified original mechanics.
+The rooftop route, bank encounter placement, entry role, animation bindings and
+combat/traversal tuning are authored integration choices. The original mission
+script, bank/skylight identity, animation semantics and gameplay timing have not
+been verified. The eight-second intro uses newly authored subtitles; original
+Stan Lee narration remains unassigned. This is a playable authored slice on
+original art, with animation polish, fidelity research and performance work remaining.
 
 ## Private assets and public source
 
-All original and derived content is ignored under LocalReference/ and
-Game/Assets/_LocalReference/. This includes converted meshes, textures, clips,
-avatars and private scenes. Builds, screenshots, tests, caches, downloaded tools,
-reference indexes and conversion logs are ignored as well.
+Original/derived content stays ignored under LocalReference/ and
+Game/Assets/_LocalReference/: models, textures, clips, avatars, SFX, scenes,
+prefabs, Timeline assets and layouts. Builds, screenshots, test artifacts,
+downloaded tools and Unity caches remain private too.
 
-A source clone opens without private assets. Rebuilding the playable scene
-requires a local PC archive and the conversion command. Do not commit or upload
-proprietary derivatives or screenshots. GitHub source checkpoints go to
-https://github.com/snazzyeee/spiderman-2000-revamp.
+A source clone opens without the proprietary data. Rebuilding the playable
+scene requires a local PC archive and the conversion steps above. Private
+integration tests explicitly skip if those assets are missing.
 
-The PKR tools and conversion workflow read data only. Antivirus no-detection
-results do not establish the original package is safe to execute.
+Source checkpoints go to https://github.com/snazzyeee/spiderman-2000-revamp.
+Do not commit proprietary derivatives or screenshots. See
+[Docs/RepositoryWorkflow.md](Docs/RepositoryWorkflow.md).
 
 ## Pinned environment
 
 Unity 6000.6.6f1 (d20c9ac777da), URP 17.6.0, Cinemachine 6.6.0,
-Input System 1.20.0, glTFast 6.20.0, Test Framework 1.8.0, UGUI 2.6.0.
-Manifest, lockfile, project settings and authored .meta files are tracked.
+Input System 1.20.0, Timeline 6.6.0 (editor-bundled), glTFast 6.20.0,
+Test Framework 1.8.0, UGUI 2.6.0. Manifest, lockfile, project settings and
+.meta files are tracked.
 
-The old 6.3 download/install worker and automation remain removed. No installer
-or game launch is needed for Phase 1. REA remains optional for later, narrowly
-scoped behavioral research; it is not required by this asset pipeline.
+The older Unity 6.3 worker and automation remain removed. REA is optional for
+future scoped behavioral research and is not required by this asset pipeline.

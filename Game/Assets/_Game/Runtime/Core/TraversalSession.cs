@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace SpiderManRebuild
@@ -7,6 +9,13 @@ namespace SpiderManRebuild
     {
         TraversalInput input;
         public bool Paused { get; private set; }
+        public bool MenuMode { get; private set; }
+        public void SetMenuMode(bool enabled) { MenuMode = enabled; UpdateCursor(); }
+        readonly HashSet<UnityEngine.Object> locks = new HashSet<UnityEngine.Object>();
+        public bool ControlBlocked => Paused || locks.Count > 0;
+        public event Action<bool> PauseChanged;
+        public void SetControlLock(UnityEngine.Object owner, bool locked)
+        { if (owner == null) return; if (locked) locks.Add(owner); else locks.Remove(owner); }
         void Awake() { input = GetComponent<TraversalInput>(); }
         void Start()
         {
@@ -17,11 +26,18 @@ namespace SpiderManRebuild
         void Update() { if (!input.Automation && input.PausePressed) SetPaused(!Paused); }
         public void SetPaused(bool paused)
         {
+            bool changed = Paused != paused;
             Paused = paused; Time.timeScale = paused ? 0 : 1;
+            AudioListener.pause = paused;
+            UpdateCursor();
+            if (changed) PauseChanged?.Invoke(paused);
+        }
+        void UpdateCursor()
+        {
             if (input != null && !input.Automation && !Application.isBatchMode)
             {
-                Cursor.lockState = paused ? CursorLockMode.None : CursorLockMode.Locked;
-                Cursor.visible = paused;
+                Cursor.lockState = Paused || MenuMode ? CursorLockMode.None : CursorLockMode.Locked;
+                Cursor.visible = Paused || MenuMode;
             }
         }
         void OnApplicationFocus(bool focused)
@@ -29,6 +45,7 @@ namespace SpiderManRebuild
         void OnDestroy()
         {
             Time.timeScale = 1;
+            AudioListener.pause = false;
             if (!Application.isBatchMode) { Cursor.lockState = CursorLockMode.None; Cursor.visible = true; }
         }
     }

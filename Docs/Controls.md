@@ -1,22 +1,36 @@
-# Phase 1 controls
+# Mission 1 controls
 
-Open Assets/_LocalReference/Phase1/SpiderManPhase1.unity in Unity 6000.6.6f1,
-or run Builds/Windows/SpiderManPhase1.exe.
+Open Assets/_LocalReference/Mission1/BankHeistRooftops.unity in Unity 6000.6.6f1,
+or run Builds/Mission1/SpiderManMission1.exe.
 
 | Action | Keyboard/mouse | Gamepad |
 |---|---|---|
-| Move | WASD | Left stick |
-| Orbit | Mouse | Right stick |
-| Jump | Space | South / A / Cross |
-| Run (hold) | Left Shift | Left shoulder / LB / L1 |
+| Move / orbit | WASD / mouse | Left / right stick |
+| Jump / swing release | Space | A / Cross |
+| Run (hold) | Left Shift | LB / L1 |
+| Swing (hold) | F | RT / R2 |
+| Zip to visible geometry | Q | LT / L2 |
+| Wall crawl / latch (hold) | C | B / Circle |
+| Melee / queue next combo stage | Left mouse | X / Square |
+| Web shot (hold) | Right mouse | RB / R1 |
+| Web dome | V | D-pad down |
+| Skylight interaction | E | Y / Triangle |
 | Pause | Escape | Start |
-| Reset | R | Select / Back |
+| Recover checkpoint | R | Back / Select |
+| Skip intro | Enter | A / Cross during intro |
 
-Losing window focus pauses normal interactive play. The pause menu also supports
-Resume, Restart and Quit. Reset returns to an automatically selected clear L1A1
-roof; this is not a verified original mission start.
+Follow the rooftop objective markers. Aim toward building geometry for swing
+and zip. Hold latch when approaching a wall, then move up to crawl and mantle
+its lip. Swing requires a visible elevated surface within range.
 
-The rig uses the original skinned model with URP Lit textures. Animation slots
-must be identified and assigned before locomotion animations play. Current
-movement tuning and mesh-derived collision are not yet original-game calibrated.
-See PHASE1.md for script installation and all remaining fidelity gates.
+The final rooftop starts the encounter and constrains movement to its arena.
+Defeat all three guards with web capture or melee to unlock the entry prompt.
+Three accumulated web stacks capture a guard; a dome supplies two area stacks.
+
+Losing window focus pauses normal interactive play. Pause provides Resume,
+Restart Checkpoint and Quit. Completion provides Replay Mission. During combat,
+recovery returns to the preceding approach roof and resets the encounter.
+After clearing it, recovery preserves the cleared guards.
+
+The old Phase 1 foundation scene supports move/orbit/jump/run/pause/reset only.
+See [MISSION1.md](MISSION1.md) for the full component setup and scope limits.

@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/_LocalReference/Mission1/BankHeistRooftops.unity
+    guid: 3afeb5d550e41b2438728ea3225cef57
+  - enabled: 1
     path: Assets/_LocalReference/Phase1/SpiderManPhase1.unity
     guid: 55c7eb69339fc0c4c9c4138d07c4ef6f
   m_configObjects:

@@ -7,7 +7,7 @@ namespace SpiderManRebuild
     public sealed class TraversalInput : MonoBehaviour
     {
         InputActionMap map;
-        InputAction move, mouse, stick, jump, run, pause, reset;
+        InputAction move, mouse, stick, jump, run, pause, reset, swing, zip, crawl, melee, web, dome, interact, skip;
         public Vector2 Move => move.ReadValue<Vector2>();
         public Vector2 MouseDelta => mouse.ReadValue<Vector2>();
         public Vector2 LookStick => stick.ReadValue<Vector2>();
@@ -15,6 +15,14 @@ namespace SpiderManRebuild
         public bool RunHeld => run.IsPressed();
         public bool PausePressed => pause.WasPressedThisFrame();
         public bool ResetPressed => reset.WasPressedThisFrame();
+        public bool SwingHeld => swing.IsPressed();
+        public bool ZipPressed => zip.WasPressedThisFrame();
+        public bool CrawlHeld => crawl.IsPressed();
+        public bool MeleePressed => melee.WasPressedThisFrame();
+        public bool WebHeld => web.IsPressed();
+        public bool DomePressed => dome.WasPressedThisFrame();
+        public bool InteractPressed => interact.WasPressedThisFrame();
+        public bool SkipPressed => skip.WasPressedThisFrame();
         public bool Automation { get; set; }
         public InputActionMap Actions => map;
         void Awake()
@@ -30,6 +38,14 @@ namespace SpiderManRebuild
             run = Button("Run", "<Keyboard>/leftShift", "<Gamepad>/leftShoulder");
             pause = Button("Pause", "<Keyboard>/escape", "<Gamepad>/start");
             reset = Button("Reset", "<Keyboard>/r", "<Gamepad>/select");
+            swing = Button("Swing", "<Keyboard>/f", "<Gamepad>/rightTrigger");
+            zip = Button("Zip", "<Keyboard>/q", "<Gamepad>/leftTrigger");
+            crawl = Button("Crawl", "<Keyboard>/c", "<Gamepad>/buttonEast");
+            melee = Button("Melee", "<Mouse>/leftButton", "<Gamepad>/buttonWest");
+            web = Button("Web", "<Mouse>/rightButton", "<Gamepad>/rightShoulder");
+            dome = Button("Dome", "<Keyboard>/v", "<Gamepad>/dpad/down");
+            interact = Button("Interact", "<Keyboard>/e", "<Gamepad>/buttonNorth");
+            skip = Button("Skip", "<Keyboard>/enter", "<Gamepad>/buttonSouth");
         }
         InputAction Button(string name, string keyboard, string gamepad)
         {

@@ -1,5 +1,6 @@
 > Superseded implementation status: the whitebox milestone is retired.
-> Current exact source/asset setup: [PHASE1.md](PHASE1.md).
+> Current playable mission setup: [MISSION1.md](MISSION1.md).
+> Foundation source/asset setup: [PHASE1.md](PHASE1.md).
 > The layout below is retained as the earlier architecture plan, not current file inventory.
 
 # Implementation plan after editor installation

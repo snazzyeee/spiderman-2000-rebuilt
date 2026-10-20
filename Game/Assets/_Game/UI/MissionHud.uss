@@ -1,0 +1,7 @@
+.subtitles { position: absolute; left: 20%; right: 20%; bottom: 125px; padding: 18px 24px; background-color: rgba(8, 18, 30, .92); display: none; }
+.subtitle { font-size: 19px; white-space: normal; -unity-font-style: normal; }
+.destination { position: absolute; font-size: 18px; color: rgb(70, 230, 215); background-color: rgba(8, 18, 30, .8); padding: 6px 12px; }
+.title-card { max-width: 640px; }
+.objective { white-space: normal; }
+#complete-panel .pause-card { width: 540px; max-width: 90%; }
+#complete-panel .title { font-size: 32px; white-space: normal; }

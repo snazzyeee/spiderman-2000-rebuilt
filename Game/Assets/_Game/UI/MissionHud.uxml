@@ -1,0 +1,38 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements">
+    <Style src="PrototypeHud.uss" />
+    <Style src="MissionHud.uss" />
+    <ui:VisualElement class="screen" picking-mode="Ignore">
+        <ui:VisualElement class="header" picking-mode="Ignore">
+            <ui:VisualElement class="title-card" picking-mode="Ignore">
+                <ui:Label text="MISSION 01 / BANK HEIST" class="eyebrow" />
+                <ui:Label text="ROOFTOPS" class="title" />
+                <ui:Label name="objective" class="objective" />
+                <ui:Label name="vitals" class="muted" />
+            </ui:VisualElement>
+            <ui:VisualElement class="stats" picking-mode="Ignore"><ui:Label name="state" class="eyebrow" /></ui:VisualElement>
+        </ui:VisualElement>
+        <ui:Label text="+" class="crosshair" picking-mode="Ignore" />
+        <ui:Label name="marker" class="destination" picking-mode="Ignore" />
+        <ui:VisualElement name="subtitle-panel" class="subtitles" picking-mode="Ignore">
+            <ui:Label name="speaker" class="eyebrow" /><ui:Label name="subtitle" class="subtitle" />
+        </ui:VisualElement>
+        <ui:VisualElement class="footer" picking-mode="Ignore">
+            <ui:Label text="WASD MOVE / SPACE JUMP / F SWING / Q ZIP / C CRAWL / E INTERACT" />
+            <ui:Label text="LEFT CLICK MELEE / RIGHT CLICK WEB / V WEB DOME / ESC PAUSE" class="muted fine" />
+        </ui:VisualElement>
+        <ui:VisualElement name="pause-panel" class="pause-screen">
+            <ui:VisualElement class="pause-card">
+                <ui:Label text="PAUSED" class="title" />
+                <ui:Button name="resume" text="RESUME" /><ui:Button name="restart" text="RESTART CHECKPOINT" /><ui:Button name="quit" text="QUIT" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="complete-panel" class="pause-screen">
+            <ui:VisualElement class="pause-card">
+                <ui:Label text="BANK ROOFTOP SECURED" class="eyebrow" />
+                <ui:Label text="MISSION COMPLETE" class="title" />
+                <ui:Label text="The skylight is clear. Time to head inside." class="objective" />
+                <ui:Button name="replay" text="REPLAY MISSION" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

@@ -135,7 +135,7 @@ namespace SpiderManRebuild.Editor
             public Vector3 spawn;
             public bool genericAvatarValid, collisionParityVerified, animationMappingVerified;
         }
-        static Bounds BoundsOf(GameObject go)
+        internal static Bounds BoundsOf(GameObject go)
         {
             var renderers = go.GetComponentsInChildren<Renderer>();
             if (renderers.Length == 0) throw new InvalidOperationException("No original mesh renderers.");
@@ -143,7 +143,7 @@ namespace SpiderManRebuild.Editor
             foreach (var renderer in renderers) bounds.Encapsulate(renderer.bounds);
             return bounds;
         }
-        static void ConvertMaterials(GameObject go, string prefix)
+        internal static void ConvertMaterials(GameObject go, string prefix)
         {
             foreach (var renderer in go.GetComponentsInChildren<Renderer>())
             {
@@ -253,7 +253,7 @@ namespace SpiderManRebuild.Editor
                 || Object.FindObjectsByType<CharacterController>(FindObjectsSortMode.None).Length != 0)
                 throw new InvalidOperationException("Capsule-based colliders are forbidden in the Phase 1 scene.");
             foreach (var filter in Object.FindObjectsByType<MeshFilter>(FindObjectsSortMode.None))
-                if (!AssetDatabase.GetAssetPath(filter.sharedMesh).StartsWith(PrivateRoot, StringComparison.Ordinal))
+                if (!AssetDatabase.GetAssetPath(filter.sharedMesh).StartsWith("Assets/_LocalReference/", StringComparison.Ordinal))
                     throw new InvalidOperationException("Scene mesh is not from the private authentic asset conversion: " + filter.name);
         }
     }

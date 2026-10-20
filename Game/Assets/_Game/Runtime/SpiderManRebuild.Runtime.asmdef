@@ -1,6 +1,6 @@
 {
   "name": "SpiderManRebuild.Runtime",
   "rootNamespace": "SpiderManRebuild",
-  "references": ["Unity.InputSystem", "Unity.Cinemachine", "Unity.RenderPipelines.Universal.Runtime"],
+  "references": ["Unity.InputSystem", "Unity.Cinemachine", "Unity.RenderPipelines.Universal.Runtime", "Unity.Timeline"],
   "autoReferenced": true
 }

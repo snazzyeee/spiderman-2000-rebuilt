@@ -18,6 +18,9 @@ namespace SpiderManRebuild
         public bool Grounded { get; private set; }
         public Vector3 SpawnPosition { get; set; }
         public bool Automation { get; set; }
+        public bool ArenaLocked;
+        public Bounds ArenaBounds;
+        public event System.Action ResetOccurred;
         readonly RaycastHit[] hits = new RaycastHit[32];
         readonly Collider[] overlaps = new Collider[32];
         readonly JumpBuffer jump = new JumpBuffer();
@@ -85,6 +88,13 @@ namespace SpiderManRebuild
             if (Grounded && groundNormal.y < .999f)
                 displacement = Vector3.ProjectOnPlane(planar, groundNormal) * dt + Vector3.up * vertical * dt;
             Slide(displacement);
+            if (ArenaLocked)
+            {
+                Vector3 position = transform.position;
+                position.x = Mathf.Clamp(position.x, ArenaBounds.min.x, ArenaBounds.max.x);
+                position.z = Mathf.Clamp(position.z, ArenaBounds.min.z, ArenaBounds.max.z);
+                transform.position = position;
+            }
             Grounded = Velocity.y <= 0 && ProbeGround(transform.position, .07f, out ground);
             if (Grounded)
             {
@@ -171,6 +181,25 @@ namespace SpiderManRebuild
             transform.position = SpawnPosition; Velocity = Vector3.zero; Grounded = false;
             lastGrounded = double.NegativeInfinity; jump.Clear(); Physics.SyncTransforms();
             if (Orbit != null) Orbit.Warp(delta);
+            ResetOccurred?.Invoke();
+        }
+        public void SetVelocity(Vector3 velocity) => Velocity = velocity;
+        public Vector3 MoveExternal(Vector3 velocity, float dt)
+        {
+            if (dt <= 0) return Vector3.zero;
+            Depenetrate();
+            Vector3 before = transform.position, desired = velocity * dt;
+            if (ArenaLocked)
+            {
+                Vector3 next = before + desired;
+                next.x = Mathf.Clamp(next.x, ArenaBounds.min.x, ArenaBounds.max.x);
+                next.z = Mathf.Clamp(next.z, ArenaBounds.min.z, ArenaBounds.max.z);
+                desired = next - before;
+            }
+            Velocity = velocity; Slide(desired);
+            Vector3 actual = transform.position - before;
+            Grounded = velocity.y <= 0 && ProbeGround(transform.position, .1f, out _);
+            Physics.SyncTransforms(); return actual;
         }
     }
 }

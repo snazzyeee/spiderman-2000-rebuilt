@@ -5,7 +5,8 @@
     "SpiderManRebuild.Runtime",
     "Unity.InputSystem",
     "Unity.Cinemachine",
-    "Unity.RenderPipelines.Universal.Runtime"
+    "Unity.RenderPipelines.Universal.Runtime",
+    "Unity.Timeline"
   ],
   "includePlatforms": ["Editor"]
 }
