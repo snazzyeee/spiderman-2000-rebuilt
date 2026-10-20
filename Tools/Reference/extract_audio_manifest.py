@@ -259,6 +259,9 @@ def apply_mappings(clips, evidence, mappings):
             if field in item:
                 clip[field] = item[field]
         clip["mapping_status"] = item["status"]
+        clip["mappings"] = [old for old in clip["mappings"] if
+                            (old.get("scene_or_mission_id"), old.get("playback_trigger")) !=
+                            (item.get("scene_or_mission_id"), item.get("playback_trigger"))]
         clip["mappings"].append(item)
         if item.get("subtitle_text"):
             clip["subtitle_status"] = item["status"]
@@ -267,15 +270,30 @@ def apply_mappings(clips, evidence, mappings):
 
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("inputs", nargs="+", type=Path)
+    parser.add_argument("inputs", nargs="*", type=Path)
     parser.add_argument("--output", required=True, type=Path)
     parser.add_argument("--ffmpeg", default=shutil.which("ffmpeg"))
     parser.add_argument("--ffprobe", default=shutil.which("ffprobe"))
     parser.add_argument("--converter", type=Path)
     parser.add_argument("--mapping", type=Path, help="Private evidence-backed metadata overrides")
+    parser.add_argument("--apply-mapping-only", action="store_true", help="Update an existing manifest without re-decoding")
     parser.add_argument("--workers", type=int, default=2)
     parser.add_argument("--require-complete-mapping", action="store_true")
     args = parser.parse_args(argv)
+    if args.apply_mapping_only:
+        if not args.mapping:
+            parser.error("--apply-mapping-only requires --mapping")
+        manifest_path = args.output.resolve() / "dialogue_manifest.json"
+        document = json.loads(manifest_path.read_text(encoding="utf-8"))
+        overrides = json.loads(args.mapping.read_text(encoding="utf-8"))
+        apply_mappings(document["clips"], {"trigger_commands": []}, overrides)
+        document["statistics"]["unresolved_dialogue"] = sum(
+            c["category"] == "Dialogue" and c["mapping_status"] != "verified" for c in document["clips"])
+        atomic_json(manifest_path, document)
+        print(json.dumps(document["statistics"], indent=2))
+        return 1 if args.require_complete_mapping and document["statistics"]["unresolved_dialogue"] else 0
+    if not args.inputs:
+        parser.error("Supply inputs, or use --apply-mapping-only")
     if not args.ffmpeg or not args.ffprobe:
         parser.error("FFmpeg and FFprobe are required; pass their paths or add them to PATH")
     if not 1 <= args.workers <= 8:

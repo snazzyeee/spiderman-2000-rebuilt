@@ -66,4 +66,16 @@ for a clip are retained in mappings. --require-complete-mapping exits nonzero if
 any dialogue clip still lacks verified mapping. Source clips/transcripts and all
 generated manifests remain ignored under the private asset/reference trees.
 
+To apply annotations without repeating extraction/decoding:
+
+    python Tools/Reference/extract_audio_manifest.py --apply-mapping-only --output Game/Assets/_LocalReference/Audio --mapping LocalReference/Dialogue/dialogue_overrides.json
+
+Updating the same scene/trigger annotation is idempotent. Authored mappings do
+not satisfy the verified-complete gate.
+
+The local full run on 2026-10-20 produced 3,661 clips: 2,663 SFX, seven music
+streams and 991 dialogue/movie entries, with zero reported decode failures or
+unsupported inputs. All 991 dialogue entries still require complete verified
+semantic annotation; successful decoding does not mean exact mapping is known.
+
 Decoder reference: [Neversoft Multitool](https://github.com/slfx77/neversoft-multitool).
