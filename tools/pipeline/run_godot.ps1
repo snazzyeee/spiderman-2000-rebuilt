@@ -10,12 +10,16 @@ if ($Headless) { $godotArgs += '--headless' }
 if ($Import) { $godotArgs += @('--headless', '--editor', '--import', '--quit') }
 if ($Script) { $godotArgs += @('--script', $Script) }
 if ($TraversalTests) { $godotArgs += @('--script', 'res://src/diagnostics/traversal_runner.gd', '--quit-after', '2400', '--max-fps', '60', '--', '--traversal-tests') }
-if ($SmokeTest) { $godotArgs += @('--quit-after', '600', '--max-fps', '60', '--', '--revamp-smoke') }
+if ($SmokeTest) {
+    & (Join-Path $projectRoot 'tools/third_party/audio-python/Scripts/python.exe') (Join-Path $projectRoot 'tools/migration/smoke_outputs.py') --check-output-paths
+    if ($LASTEXITCODE -ne 0) { throw 'Smoke paths overlap preserved targets' }
+    $godotArgs += @('--quit-after', '600', '--max-fps', '60', '--', '--revamp-smoke')
+}
 $startedUtc = [DateTime]::UtcNow
 & $executable @godotArgs
 if ($LASTEXITCODE -ne 0) { throw "Godot exited with code $LASTEXITCODE" }
 if ($SmokeTest) {
-    $reportPath = Join-Path $projectRoot 'staging/validation/godot-smoke.json'
+    $reportPath = Join-Path $projectRoot 'staging/validation/smoke/godot-smoke.json'
     if (-not (Test-Path -LiteralPath $reportPath) -or (Get-Item -LiteralPath $reportPath).LastWriteTimeUtc -lt $startedUtc) { throw 'Godot exited without a fresh smoke report' }
     $report = Get-Content -LiteralPath $reportPath -Raw | ConvertFrom-Json
     if (-not $report.passed -or $report.checks.Count -lt 40) { throw 'Godot smoke report failed or was incomplete' }

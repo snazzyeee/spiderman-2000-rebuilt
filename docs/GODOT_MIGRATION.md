@@ -179,7 +179,7 @@ menu key events, rather than only calling page methods.
 
 Private reports: staging/validation/godot-mobile-smoke.json,
 godot-forward_plus-smoke.json, godot-dialogue.json and godot-conversion.json.
-Private captures: staging/validation/godot-menu.png, godot-intro.png,
+Private captures: staging/validation/smoke/godot-menu.png, godot-intro.png,
 godot-briefing.png, godot-rooftop.png and godot-mission.png. The rendered menu,
 intro, supported rooftop spawn and completed encounter were visually inspected.
 These reports and images are excluded from source control.
@@ -191,7 +191,7 @@ These reports and images are excluded from source control.
 .\tools\pipeline\run_godot.ps1 -Renderer forward_plus -SmokeTest
 ```
 
-The runner writes staging/validation/godot-smoke.json and uses a separate automation
+The runner writes staging/validation/smoke/godot-smoke.json and uses a separate automation
 checkpoint. It checks menu/rig/clip imports, audio ownership and mixer restore,
 natural and skipped intro completion, pause locks, supported spawn, movement,
 actual airborne pendulum steps, fixed radius/tangent velocity, ordered objective
@@ -206,3 +206,5 @@ All original data, converted assets, downloaded transcript HTML, WAVs, ASR draft
 reports, rendered captures and engine caches remain private and ignored. Only
 source code, settings, synthetic tests and documentation are pushed. A public
 source clone requires local archive conversion to assemble the original art.
+
+Smoke PNGs and reports now live exclusively in staging/validation/smoke/. The launcher checks their six exact paths against every preservation target. Run tools/pipeline/run_regression.ps1 -Milestone <name> for Python, clean import and the full headless/Forward+/Mobile smoke and traversal matrix; private logs/reports live under staging/validation/regression/<name>/.

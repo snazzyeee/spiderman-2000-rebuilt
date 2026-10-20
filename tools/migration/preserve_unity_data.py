@@ -10,6 +10,7 @@ import json
 import os
 from pathlib import Path
 import shutil
+from smoke_outputs import PNG_EXCEPTIONS, prove_capture
 
 ROOT = Path(__file__).resolve().parents[2]
 AUDIT = ROOT/'staging/migration_audit'
@@ -200,6 +201,8 @@ ACCEPTED_EXCEPTIONS = {
     ('TestResults/godot-smoke.json', 'staging/validation/godot-smoke.json'):
         'Regenerated Godot smoke test report after inventory; original hash retained, inventory unchanged.'
 }
+ACCEPTED_EXCEPTIONS.update({identity: 'Regenerated renderer smoke capture; original hash retained, inventory unchanged.'
+                            for identity in PNG_EXCEPTIONS})
 
 
 def verify(copied_only=False):
@@ -214,9 +217,17 @@ def verify(copied_only=False):
             # A missing report is not a regenerated report. Both paths must match
             # the single allowlisted identity; this is not a wildcard bypass.
             if not copied_only and identity in ACCEPTED_EXCEPTIONS and os.path.isfile(long_path(destination)):
+                proof = {}
+                if identity in PNG_EXCEPTIONS:
+                    try:
+                        proof = prove_capture(ROOT, row)
+                    except (ValueError, OSError) as error:
+                        failures.append(dict(source=row['source'], target=row['target'], reason=str(error)))
+                        count += 1
+                        continue
                 accepted.append(dict(source=row['source'], target=row['target'],
                     original_sha256=row['sha256'], current_sha256=digest(destination),
-                    reason=ACCEPTED_EXCEPTIONS[identity]))
+                    **dict(reason=ACCEPTED_EXCEPTIONS[identity], **{k:v for k,v in proof.items() if k != 'reason'})))
             else:
                 failures.append(dict(source=row['source'], target=row['target']))
         count += 1

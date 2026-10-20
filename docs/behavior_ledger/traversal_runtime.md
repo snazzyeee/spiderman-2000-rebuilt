@@ -57,3 +57,11 @@ and global modifiers, spare swap events and empty bark; no original audio IDs ar
 guessed beyond the ledger's SFX 30 / XA bank 33 track 2..4. A visual-only web line
 connects the authored hand offset to the anchor. These integration choices are
 not evidence of original movement, animation content, audio or input mapping.
+
+## Validation output ownership
+
+Evidence `remake:smoke-output-isolation`, confidence authored. Smoke screenshots
+and godot-smoke.json belong under staging/validation/smoke/. Their six exact
+paths must not intersect any preservation inventory target. Historical captures
+remain unchanged at their old destinations for the migration audit. This changes
+diagnostic output ownership only, not gameplay or any smoke criterion.

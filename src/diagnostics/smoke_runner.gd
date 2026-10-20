@@ -20,8 +20,8 @@ func capture(name_of_view: String) -> void:
 
 # Private validation output lives in the ignored, .gdignore-guarded staging tree.
 func report_path(file_name: String) -> String:
-	DirAccess.make_dir_recursive_absolute("res://staging/validation")
-	return "res://staging/validation/"+file_name
+	DirAccess.make_dir_recursive_absolute("res://staging/validation/smoke")
+	return "res://staging/validation/smoke/"+file_name
 
 func run() -> void:
 	await get_tree().process_frame
