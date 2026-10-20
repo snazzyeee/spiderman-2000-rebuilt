@@ -12,6 +12,7 @@ import re
 
 MAX_BYTES = 64 * 1024 * 1024
 MAX_ENTRIES = 65536
+MAX_TOTAL_VERTICES = 1000000
 
 
 def decode(blob):
@@ -44,11 +45,14 @@ def decode(blob):
             raise ValueError('Invalid object model index')
         objects.append(dict(index=index, offset=offset, flags=flags, model=model,
                             origin_fixed=[x,y,z], origin_world=[x/4096,y/4096,z/4096]))
-    models = []
+    models, total_vertices = [], 0
     for index, pointer in enumerate(pointers):
         if pointer % 4 or not table_end <= pointer < meta:
             raise ValueError('Invalid model pointer')
         flags, vertices, normals, faces = read('<HHHH', pointer)
+        total_vertices += vertices
+        if total_vertices > MAX_TOTAL_VERTICES:
+            raise ValueError('Aggregate vertex read budget exceeded')
         if pointer+28+8*(vertices+normals) > meta:
             raise ValueError('Model arrays overlap packets')
         xyz = [read('<hhhH', pointer+28+8*i) for i in range(vertices)]
@@ -81,6 +85,11 @@ def compare_glb(path, decoded):
         if magic != 0x46546c67 or version != 2 or kind != 0x4e4f534a or not 0 < length <= MAX_BYTES or size != path.stat().st_size:
             raise ValueError('Invalid bounded GLB')
         document = json.loads(stream.read(length))
+    if len(document.get('nodes', [])) > MAX_ENTRIES or len(document.get('meshes', [])) > MAX_ENTRIES:
+        raise ValueError('GLB comparison table budget exceeded')
+    objects_by_model = {}
+    for obj in decoded['objects']:
+        objects_by_model.setdefault(obj['model'], []).append(obj)
     comparisons = []
     for node in document.get('nodes', []):
         if 'mesh' not in node:
@@ -90,7 +99,7 @@ def compare_glb(path, decoded):
         if not match:
             continue
         index = int(match[1], 16)
-        objects = [o for o in decoded['objects'] if o['model'] == index]
+        objects = objects_by_model.get(index, [])
         if len(objects) != 1:
             continue
         expected = [v*s/2.25 for v,s in zip(objects[0]['origin_world'], [1,-1,-1])]
