@@ -52,11 +52,10 @@ while alive and below the maximum, and clamps at the maximum.
 
 Implemented as WebFluid and DifficultyTable resources with synthetic coverage in
 tests/scenes/test_webbing.tscn. Numeric SFX/XA requests go through Dialogue.
-The current private audio registry does not identify `native_sfx_id` or
-`native_bank`/`native_track`: those recovered requests emit observable signals,
-but return false until verified clip bindings exist. No filename was guessed as
-SFX 9/30 or XA33. Thus cartridge/empty-shot behavior is covered, while playback of
-those particular original identities remains unresolved.
+Exact source/hash bindings now resolve global SFX 9/30 and XA33 requests through
+the private registry, as documented in audio_ids.md. Missing private registries
+return false cleanly; unsupported or missing bank references remain unresolved.
+No filename was guessed from a sound's apparent meaning.
 
 - Cap: 10 spares (2 in suits 6/9/10); overflow carries into the meter.
 - Spend at setting 0 costs 1/32; an empty meter with spares swaps and plays SFX 30.

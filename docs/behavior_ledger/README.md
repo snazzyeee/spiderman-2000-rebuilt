@@ -50,6 +50,7 @@ planned tests that will guard it.
 - [zip.md](zip.md): zip-web variants and landing clean-up
 - [camera.md](camera.md): per-surface presets, script control, interpolation, collision, shake
 - [webbing_damage.md](webbing_damage.md): web fluid cartridges, suits, difficulty damage, health
+- [audio_ids.md](audio_ids.md): exact XA catalog joins, bounded SFX/KAT identities and bank selection
 - [trg.md](trg.md): trigger file layout, node types, links and entry points
 - [traversal_runtime.md](traversal_runtime.md): authored Phase 2 integration contract and tuning boundaries
 - [data/animation_semantics.json](data/animation_semantics.json): animation slot evidence
