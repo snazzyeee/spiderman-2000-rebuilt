@@ -1,3 +1,8 @@
+# Private Godot assets and migration audit (also needed during relocation)
+/assets/
+/staging/
+/tools/third_party/
+
 # Local proprietary reference files and downloaded installers
 /LocalReference/
 /Spider.Man.2000/
