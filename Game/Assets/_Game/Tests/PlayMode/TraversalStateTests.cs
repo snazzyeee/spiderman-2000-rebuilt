@@ -37,6 +37,60 @@ namespace SpiderManRebuild.Tests
             Assert.That(player.State, Is.EqualTo(PlayerState.Airborne));
             Assert.That(Vector3.Distance(release, player.Motor.Velocity), Is.LessThan(.001f));
         }
+        [Test] public void SwingStaysKinematicAndTautThenReleasesADisabledAnchor()
+        {
+            root.transform.position = Vector3.up * 5;
+            surface = new GameObject("Raycast pendulum anchor"); surface.transform.position = new Vector3(0, 15, 5);
+            var collider = surface.AddComponent<BoxCollider>(); collider.size = Vector3.one;
+            Physics.SyncTransforms();
+            Vector3 chest = root.transform.position + Vector3.up * 1.1f;
+            Assert.That(Physics.Raycast(chest, (surface.transform.position - chest).normalized, out var hit, 30, 1), Is.True);
+            player.Motor.SetVelocity(Vector3.right * 8);
+            Assert.That(player.BeginSwing(new WebAnchor(hit)), Is.True);
+            for (int frame = 0; frame < 120; frame++)
+            {
+                player.Tick(new MissionInputCommand { Swing = true }, 1f / 120, frame / 120f);
+                Assert.That(player.State, Is.EqualTo(PlayerState.Swinging));
+                Vector3 radial = root.transform.position + Vector3.up * 1.1f - player.SwingAnchorPoint;
+                Assert.That(radial.magnitude, Is.EqualTo(player.SwingRopeLength).Within(.003f));
+                Assert.That(Mathf.Abs(Vector3.Dot(radial.normalized, player.Motor.Velocity)), Is.LessThan(.003f));
+            }
+            Assert.That(root.GetComponent<Rigidbody>().isKinematic, Is.True);
+            Assert.That(root.GetComponent<Rigidbody>().useGravity, Is.False);
+            collider.enabled = false;
+            player.Tick(new MissionInputCommand { Swing = true }, 1f / 120, 2);
+            Assert.That(player.State, Is.EqualTo(PlayerState.Airborne));
+        }
+        [Test] public void CollisionReleasesSwingWithoutPullingThroughAWall()
+        {
+            root.transform.position = Vector3.up * 5;
+            surface = new GameObject("Collision test anchor"); surface.transform.position = new Vector3(0, 15, 5);
+            surface.AddComponent<BoxCollider>(); Physics.SyncTransforms();
+            Vector3 chest = root.transform.position + Vector3.up * 1.1f;
+            Assert.That(Physics.Raycast(chest, (surface.transform.position - chest).normalized, out var hit, 30, 1), Is.True);
+            player.Motor.SetVelocity(Vector3.right * 8);
+            Assert.That(player.BeginSwing(new WebAnchor(hit)), Is.True);
+            var barrier = new GameObject("Blocking collision wall");
+            try
+            {
+                barrier.transform.position = new Vector3(.9f, 10, 0);
+                barrier.AddComponent<BoxCollider>().size = new Vector3(.15f, 20, 20); Physics.SyncTransforms();
+                for (int frame = 0; frame < 60 && player.State == PlayerState.Swinging; frame++)
+                    player.Tick(new MissionInputCommand { Swing = true }, 1f / 120, frame / 120f);
+                Assert.That(player.State, Is.EqualTo(PlayerState.Airborne));
+                Assert.That(root.transform.position.x, Is.LessThan(.7f));
+            }
+            finally { Object.DestroyImmediate(barrier); }
+        }
+        [Test] public void SwingRejectsDefaultAndLowAnchors()
+        {
+            Assert.That(player.BeginSwing(default), Is.False);
+            surface = new GameObject("Low geometry"); surface.transform.position = new Vector3(0, .5f, 6);
+            surface.AddComponent<BoxCollider>(); Physics.SyncTransforms();
+            Vector3 chest = root.transform.position + Vector3.up * 1.1f;
+            Assert.That(Physics.Raycast(chest, (surface.transform.position - chest).normalized, out var hit, 10, 1), Is.True);
+            Assert.That(player.BeginSwing(new WebAnchor(hit)), Is.False);
+        }
         [Test] public void WallCrawlSlidesUpAndJumpDetachesOutward()
         {
             root.transform.position = Vector3.up * .04f;

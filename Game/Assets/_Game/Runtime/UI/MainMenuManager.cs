@@ -14,6 +14,7 @@ namespace SpiderManRebuild
 {
     public sealed class MainMenuManager : MonoBehaviour
     {
+        static readonly string[] MainPages = { "Game", "Options", "Training", "Special", "Gallery" };
         public Button[] MainButtons;
         public GameObject MainRoot, PageRoot;
         public RectTransform Rows;
@@ -52,10 +53,12 @@ namespace SpiderManRebuild
             Time.timeScale = 1; AudioListener.pause = false;
             Cursor.lockState = CursorLockMode.None; Cursor.visible = true;
             Application.targetFrameRate = 60;
-            string[] pages = { "Game", "Options", "Training", "Special", "Gallery" };
+            if (MainButtons == null || MainButtons.Length != MainPages.Length)
+                throw new InvalidOperationException("Main menu requires exactly Game, Options, Training, Special and Gallery.");
             for (int i = 0; i < MainButtons.Length; i++)
             {
-                int index = i; MainButtons[i].onClick.AddListener(() => { Confirm(); mainIndex = index; OpenPage(pages[index]); });
+                MainButtons[i].GetComponentInChildren<TMP_Text>().text = MainPages[i].ToUpperInvariant();
+                int index = i; MainButtons[i].onClick.AddListener(() => { Confirm(); mainIndex = index; OpenPage(MainPages[index]); });
                 var effect = MainButtons[i].GetComponent<MenuSelectionEffect>(); effect.Owner = this;
             }
             Connect(MainButtons); ready = true; OpenPage("Main");
@@ -72,7 +75,10 @@ namespace SpiderManRebuild
         void Confirm() { if (Audio != null) Audio.PlaySfx(MenuConfirmId); }
         public void Back()
         {
-            Confirm();
+            Confirm(); NavigateBack();
+        }
+        void NavigateBack()
+        {
             if (CurrentPage == "Main") OpenPage("Exit");
             else if (CurrentPage == "Music" || CurrentPage == "Credits") OpenPage("Special");
             else if (CurrentPage == "Controls") OpenPage("Training");
@@ -149,7 +155,7 @@ namespace SpiderManRebuild
                 AddButton("NEXT PAGE", () => { creditsPage = (creditsPage + 1) % CreditsPageCount; ShowCredits(); });
             }
             else if (page == "Exit") AddButton("QUIT GAME", () => Application.Quit(), "Exit to desktop.");
-            AddButton("BACK", () => { PlayerPrefs.Save(); Back(); });
+            AddButton("BACK", () => { PlayerPrefs.Save(); NavigateBack(); });
             Connect(selections);
             var first = selections.FirstOrDefault(item => item.IsInteractable());
             EventSystem.current.SetSelectedGameObject(first != null ? first.gameObject : null);

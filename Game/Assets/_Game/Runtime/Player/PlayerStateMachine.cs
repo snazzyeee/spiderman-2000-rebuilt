@@ -25,6 +25,8 @@ namespace SpiderManRebuild
         public PlayerState State { get; private set; } = PlayerState.Airborne;
         public SpiderManCharacterController Motor { get; private set; }
         public Health Health { get; private set; }
+        public float SwingRopeLength => ropeLength;
+        public Vector3 SwingAnchorPoint => anchor.Valid ? anchor.Point : Vector3.zero;
         public event Action<PlayerState> StateChanged;
         public event Action RecoveryRequested;
         public event Action InteractRequested;
@@ -92,7 +94,8 @@ namespace SpiderManRebuild
                     SwingSolver.Integrate(ref chest, ref velocity, anchor.Point, ropeLength, move, sub, Settings);
                     Vector3 desired = chest - Vector3.up * 1.1f - before;
                     Vector3 actual = Motor.MoveExternal(desired / sub, sub);
-                    if ((actual - desired).sqrMagnitude > .0004f) velocity = Motor.Velocity;
+                    if ((actual - desired).sqrMagnitude > .000004f)
+                    { velocity = Motor.Velocity; Release(); break; }
                     Motor.SetVelocity(velocity);
                     if (Motor.Grounded) { Release(); break; }
                 }
@@ -154,9 +157,16 @@ namespace SpiderManRebuild
         }
         public bool BeginSwing(WebAnchor target)
         {
-            if (!target.Valid || Settings == null) return false;
+            if (!target.Valid || Settings == null || (Motor.Session != null && Motor.Session.ControlBlocked)) return false;
+            Vector3 chest = transform.position + Vector3.up * 1.1f;
+            Vector3 offset = target.Point - chest;
+            if (offset.magnitude < 2 || offset.magnitude > Settings.AnchorRange
+                || offset.y < Settings.AnchorMinimumHeight || Anchors == null) return false;
+            if (Physics.Raycast(chest, offset.normalized, out var obstruction, offset.magnitude - .12f,
+                Anchors.Geometry, QueryTriggerInteraction.Ignore) && Vector3.Distance(obstruction.point, target.Point) > .4f) return false;
             anchor = target; ropeLength = Mathf.Max(2, Vector3.Distance(transform.position + Vector3.up * 1.1f, target.Point));
             velocity = Motor.Velocity; if (Motor.Grounded) velocity += Vector3.up * 5;
+            velocity = Vector3.ProjectOnPlane(velocity, (chest - target.Point).normalized);
             SetState(PlayerState.Swinging); return true;
         }
         public bool BeginZip(WebAnchor target)
