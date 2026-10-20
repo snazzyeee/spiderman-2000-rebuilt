@@ -78,8 +78,8 @@ No proprietary game content is imported into its production assets.
 
 Pinned editor: 6000.6.6f1 (d20c9ac777da). Direct package pins include URP 17.6.0,
 Input System 1.20.0, Cinemachine 6.6.0 (bundled), Test Framework 1.8.0 and
-UGUI 2.6.0. Commit the manifest, lockfile, project settings and authored .meta
-files together when version control is initialized.
+UGUI 2.6.0. The manifest, lockfile, project settings and authored .meta files
+are tracked together in Git.
 
 Close this project in the editor before running batch commands:
 
