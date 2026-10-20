@@ -52,7 +52,26 @@ def safe_audio(root: Path, name: str) -> Path:
     return path
 
 
-def annotate(entry: dict, result: dict, events: list[dict]) -> None:
+def read_trigger_names(directory: Path) -> tuple[dict, dict]:
+    by_level = {}
+    summary = {"files": 0, "named_nodes": 0, "errors": []}
+    for path in sorted(directory.glob("*.json")):
+        try:
+            if path.stat().st_size > 20 * 1024 * 1024:
+                raise ValueError("TRG JSON exceeds metadata size limit")
+            document = json.loads(path.read_text(encoding="utf-8-sig"))
+            level = re.sub(r"_t$", "", re.sub(r"^[a-f0-9]{10}_", "", path.stem), flags=re.I).upper()
+            names = [{"file": path.name, "node_id": node["index"], "name": node["name"],
+                      "type": node.get("type", ""), "links": node.get("links", [])}
+                     for node in document["nodes"] if node.get("name")]
+            by_level.setdefault(level, []).extend(names)
+            summary["files"] += 1; summary["named_nodes"] += len(names)
+        except (OSError, ValueError, KeyError, TypeError) as error:
+            summary["errors"].append({"file": path.name, "error": str(error)})
+    return by_level, summary
+
+
+def annotate(entry: dict, result: dict, events: list[dict], trigger_names: dict | None = None) -> None:
     stem = Path(entry["source_path"]).stem
     prefix = stem.split("_")[0].lower()
     speaker = PREFIXES.get(prefix)
@@ -69,6 +88,7 @@ def annotate(entry: dict, result: dict, events: list[dict]) -> None:
     related = [event for event in events if event.get("scene_or_mission_id", "").upper() == entry["level_id"]
                and event.get("command", {}).get("name") in ("PlayXA", "RunCinema")]
     entry["level_trigger_candidates"] = related
+    entry["level_trigger_names"] = (trigger_names or {}).get(entry["level_id"], [])
     direct = entry.get("trigger_references", [])
     verified = [mapping for mapping in entry.get("mappings", []) if mapping.get("status") == "verified"
                 and mapping.get("playback_trigger")]
@@ -81,6 +101,7 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--manifest", type=Path, default=Path("Game/Assets/_LocalReference/Audio/dialogue_manifest.json"))
     parser.add_argument("--evidence", type=Path, default=Path("Game/Assets/_LocalReference/Audio/extraction_evidence.json"))
+    parser.add_argument("--trg-dir", type=Path, default=Path("Game/Assets/_LocalReference/Audio/_work~/trg_json"))
     parser.add_argument("--cache", type=Path, default=Path("LocalReference/Dialogue/ASR"))
     parser.add_argument("--model", default="small.en")
     parser.add_argument("--model-cache", type=Path, default=Path("Tools/ThirdParty/audio-models"))
@@ -106,6 +127,7 @@ def main() -> int:
     # Fail once on an incompatible decoder instead of recording 991 copies.
     decode_audio(str(safe_audio(args.manifest.parent, entries[0]["file_name"])), sampling_rate=16000)
     evidence = json.loads(args.evidence.read_text(encoding="utf-8"))
+    trigger_names, trigger_summary = read_trigger_names(args.trg_dir)
     args.cache.mkdir(parents=True, exist_ok=True)
     model_path = Path(args.model) if Path(args.model).is_dir() else Path(
         download_model(args.model, cache_dir=str(args.model_cache), local_files_only=args.offline))
@@ -117,7 +139,7 @@ def main() -> int:
     model = WhisperModel(str(model_path), device="cpu", compute_type="int8", cpu_threads=args.threads, num_workers=1)
     selected = entries[:args.limit] if args.limit else entries
     report = {"total": len(entries), "selected": len(selected), "completed": 0, "reused": 0,
-              "failures": [], "config": signature, "started_unix": time.time()}
+              "failures": [], "trg_context": trigger_summary, "config": signature, "started_unix": time.time()}
     began = time.monotonic()
     for index, entry in enumerate(selected):
         try:
@@ -147,7 +169,7 @@ def main() -> int:
                           "transcript": " ".join(row["text"] for row in rows), "segments": rows,
                           "duration": info.duration, "speech_duration": info.duration_after_vad}
                 write_json(cache_path, result)
-            annotate(entry, result, evidence.get("trigger_commands", []))
+            annotate(entry, result, evidence.get("trigger_commands", []), trigger_names)
             report["completed"] += 1
         except Exception as error:
             report["failures"].append({"clip_id": entry["clip_id"], "error": str(error)})
@@ -165,7 +187,7 @@ def main() -> int:
     document["asr_processing"] = report
     write_json(args.manifest, document)
     write_json(args.cache / "progress.json", report)
-    return 1 if report["failures"] else 0
+    return 1 if report["failures"] or trigger_summary["errors"] else 0
 
 
 if __name__ == "__main__":

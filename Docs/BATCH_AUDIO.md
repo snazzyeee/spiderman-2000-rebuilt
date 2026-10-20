@@ -25,7 +25,7 @@ Pass -PythonPath for a different compatible 64-bit Python; this machine uses
 Python 3.12.14. Full dependency pins are in requirements-audio.txt.
 
 The Python script also accepts --model small.en for normal Hub downloading,
---threads, --beam-size, --manifest, --evidence, --cache and --model-cache.
+--threads, --beam-size, --manifest, --evidence, --trg-dir, --cache and --model-cache.
 --limit N is explicitly a partial smoke run. Zero/default processes every
 Dialogue category entry, including movie soundtracks and silent logo carriers.
 
@@ -55,13 +55,17 @@ Sp_/SM_ -> Spider-Man, Th_ -> Thug, Co_ -> Police. Existing verified speaker
 annotations take precedence. A level prefix such as L1A1_ supplies level_id,
 not a character identity. Ambiguous speakers retain Unknown.
 
-The join retains matching-level PlayXA/RunCinema commands as candidates.
+The join retains matching-level PlayXA/RunCinema commands as candidates and
+reads all converted TRG nodes to retain named triggers with their types/links.
 trigger_condition is populated only from a verified annotation or a direct
 filename reference in the extraction evidence. Same-level numeric operands
 alone do not prove the clip or the condition that invokes it. The current TRG
 parser recovered 384 named commands, including 29 PlayXA and 33 RunCinema
-commands, but no nonempty node names. Inventing ON_LEVEL_START or ON_COMBAT_START
-from those numbers would conceal missing evidence.
+commands. Their containing nodes have no names; the full graphs separately
+contain 94 named nodes, mainly RESTART nodes such as Re_Start_Death. These are
+retained as level context, not asserted as the condition for a voice clip.
+Inventing ON_LEVEL_START or ON_COMBAT_START from those numbers would conceal
+missing evidence.
 
 All clips, model/dependency binaries, caches, transcripts, expanded manifests and
 reports remain ignored. Only code, tests, pins and setup documentation are pushed.

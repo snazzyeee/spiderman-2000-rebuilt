@@ -35,6 +35,19 @@ class BatchAudioTests(unittest.TestCase):
             self.assertEqual(entry["speaker"], expected)
             self.assertEqual(entry["transcript_status"], "asr_draft")
 
+    def test_named_restart_nodes_are_retained_without_becoming_voice_conditions(self):
+        private_tests = pathlib.Path(__file__).parents[3] / "TestResults"
+        private_tests.mkdir(exist_ok=True)
+        with tempfile.TemporaryDirectory(dir=private_tests) as directory:
+            path = pathlib.Path(directory) / "abcdef0123_L1A1_T.json"
+            path.write_text(json.dumps({"nodes": [{"index": 1, "name": "Re_Start_Death", "type": "RESTART", "links": [2]}]}))
+            names, report = MODULE.read_trigger_names(path.parent)
+            self.assertEqual(report["named_nodes"], 1)
+            entry = {"source_path": "Voice/L1A1_00.bik"}
+            MODULE.annotate(entry, {"transcript": "Draft", "segments": [{}]}, [], names)
+            self.assertEqual(entry["level_trigger_names"][0]["name"], "Re_Start_Death")
+            self.assertIsNone(entry["trigger_condition"])
+
     def test_level_join_retains_numeric_candidates_without_inventing_conditions(self):
         event = {"scene_or_mission_id": "L1A1", "node_id": 9, "command": {"name": "PlayXA", "args": [1, 3]}}
         entry = {"source_path": "Voice/L1A1_03.bik", "speaker": "Unknown"}
