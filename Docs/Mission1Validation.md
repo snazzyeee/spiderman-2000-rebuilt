@@ -1,5 +1,8 @@
 # Mission 1 validation — 2026-10-20
 
+This records the earlier mission-only baseline. Current menu/audio/save-load
+validation is in [FRONTEND_VALIDATION.md](FRONTEND_VALIDATION.md).
+
 ## Environment and reproduction
 
 Unity 6000.6.6f1 (d20c9ac777da), Windows x64 development build with Mono,

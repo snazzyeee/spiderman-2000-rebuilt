@@ -1,5 +1,11 @@
 # Mission 1 vertical slice: scripts, prefab setup and exact flow
 
+The current frontend extends this mission baseline with original extracted
+Stan_00 audio, a 32.35-second Timeline, save/load and menu return. Its mission
+briefing text remains authored. Use [MAIN_MENU.md](MAIN_MENU.md) for that build
+and [FRONTEND_VALIDATION.md](FRONTEND_VALIDATION.md) for current validation.
+The standalone recipe below also remains available.
+
 The slice uses original PC Spider-Man, L1A1, henchman, web-dome and named SFX
 assets locally. The route, encounter placement, entry marker and animation
 bindings are authored integration data; they are not verified reconstructions

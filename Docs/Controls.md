@@ -1,4 +1,14 @@
-# Mission 1 controls
+# Menu and Mission 1 controls
+
+Launch Builds/Frontend/SpiderManRevamp.exe for the complete menu entry flow.
+Arrow keys, D-pad or left stick navigate; Enter/A submits; Escape/B returns;
+left/right adjusts sliders. Mouse hover selects and click submits. Game offers
+New Game and checkpoint Load Game. Training offers an invulnerable rooftop
+practice mode that does not overwrite the normal save. Options persists mixer
+levels, mouse sensitivity and invert Y. Pause/completion also offers Main Menu
+when that scene is included in the build.
+
+The standalone mission-only entry below remains available for development.
 
 Open Assets/_LocalReference/Mission1/BankHeistRooftops.unity in Unity 6000.6.6f1,
 or run Builds/Mission1/SpiderManMission1.exe.

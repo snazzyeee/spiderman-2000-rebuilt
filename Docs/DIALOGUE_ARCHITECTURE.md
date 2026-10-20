@@ -40,8 +40,11 @@ can remain in the Timeline. It is labeled MISSION BRIEFING, not attributed as
 the narrator's spoken words. Extracted narration and authored UI instructions
 are separate data, even when they appear during the same cutscene.
 
-Validation checkpoint: eight Python extraction tests and 29 Unity tests passed
+Audio milestone checkpoint: eight Python extraction tests and 29 Unity tests passed
 on 2026-10-20 (eight EditMode, 21 PlayMode). Import registered all 3,661 clips.
 This checks implementation/integration, not the unknown original trigger table
 or transcription accuracy. Generated assets, source audio and manifests remain
 private and excluded from Git.
+
+The later menu/save-load integration expands this to 36 Unity tests. Current
+results and standalone rendering checks are in FRONTEND_VALIDATION.md.

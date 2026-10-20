@@ -1,8 +1,39 @@
 # Spider-Man 2000 PC revamp
 
 Unity/C#/URP reimplementation using privately extracted original PC art.
-The current Mission 1 slice connects rooftop traversal, a bank encounter and a
-final entry interaction. Mechanical fidelity remains an unverified target.
+The current private player opens with a textured main menu, original extracted
+audio, settings, save/load and a narrated Mission 1 rooftop/combat slice.
+Mechanical fidelity remains an unverified target.
+
+## Build the menu and narrated Mission 1
+
+[Docs/MAIN_MENU.md](Docs/MAIN_MENU.md) covers the complete build and Inspector
+setup. [Docs/AUDIO_PIPELINE.md](Docs/AUDIO_PIPELINE.md) documents extraction,
+manifest evidence and unresolved mappings. [Docs/DIALOGUE_ARCHITECTURE.md](Docs/DIALOGUE_ARCHITECTURE.md)
+covers the runtime registry, mixer, subtitles and Timeline ownership.
+
+Place data.pkr and media.pkr under LocalReference/PC/app. With Unity closed:
+
+    .\Tools\Reference\setup_converter.ps1
+    python Tools/Reference/prepare_phase1_assets.py
+    python Tools/Reference/prepare_mission1_assets.py
+    .\Tools\Build\build_frontend.ps1 -ExtractAudio -RunTests -SmokeTest
+
+Python, FFmpeg/FFprobe and the licensed pinned Unity editor must be available.
+Subsequent builds can omit -ExtractAudio. Open the private scene
+Assets/_LocalReference/Frontend/MainMenu.unity, or launch
+Builds/Frontend/SpiderManRevamp.exe with its accompanying data/runtime files.
+All source scripts, tests and assembly recipes are tracked; the private assets
+required to reproduce this player are excluded from Git.
+
+The local audio run decoded 3,661 clips without reported failures: 2,663 SFX,
+seven music streams and 991 dialogue/movie entries. All 991 still lack complete
+verified semantic mappings. Menu sound roles and Stan_00's remake intro binding
+are authored associations. The original recording plays; the visible mission
+briefing is authored text, not a verified transcript.
+
+See [Docs/FRONTEND_VALIDATION.md](Docs/FRONTEND_VALIDATION.md) for current test
+results, rendered checks and remaining limits.
 
 ## Build and play Mission 1
 
@@ -60,9 +91,12 @@ All visible production geometry comes from private original assets.
 The rooftop route, bank encounter placement, entry role, animation bindings and
 combat/traversal tuning are authored integration choices. The original mission
 script, bank/skylight identity, animation semantics and gameplay timing have not
-been verified. The eight-second intro uses newly authored subtitles; original
-Stan Lee narration remains unassigned. This is a playable authored slice on
-original art, with animation polish, fidelity research and performance work remaining.
+been verified. The frontend extends the original subtitle-only slice with a
+32.35-second original Stan stream and an authored mission briefing. This is a
+playable authored slice on original art, with animation polish, fidelity research
+and performance work remaining. The menu uses the original character/albedo and
+comic art with procedural modern detail; exact original layout/pose parity and
+high-resolution repainting of every source texture are not claimed.
 
 ## Private assets and public source
 

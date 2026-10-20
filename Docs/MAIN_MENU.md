@@ -56,7 +56,8 @@ and submit play original samples from menu.kat. Options persist in PlayerPrefs.
 Keyboard/mouse and gamepad gameplay bindings are listed in Controls.md.
 
 The Special archive plays the extracted original music streams. Credits are
-read from the original PC credits file. Gallery uses original cb00..cb31 art.
+read from the original PC credits file, with its RGB directives converted to
+TMP styling and layout-driven pagination. Gallery uses original cb00..cb31 art.
 Training is a remake traversal-practice mode on the existing slice rooftops:
 damage is disabled, the bank fight is bypassed and it does not overwrite the
 normal save. It does not claim to reconstruct the original game's training levels.
