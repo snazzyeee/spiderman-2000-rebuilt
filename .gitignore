@@ -9,6 +9,13 @@
 /Tools/ThirdParty/unity-cli/
 /Tools/ThirdParty/audio-python/
 /Tools/ThirdParty/audio-models/
+/Tools/ThirdParty/godot-*/
+
+# Godot caches and locally converted proprietary content
+**/.godot/
+**/.mono/
+/Godot/assets/
+/tools/pipeline/.cache/
 /Tools/UnityEditor/
 /Tools/UnityDownloads/
 
