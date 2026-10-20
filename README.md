@@ -78,4 +78,6 @@ original art. There is no embedded proprietary game in the public repository.
 
 [Repository workflow](docs/RepositoryWorkflow.md) ·
 [Godot migration guide](docs/GODOT_MIGRATION.md) ·
+[Unity purge report](docs/migration/PURGE_REPORT.md) ·
+[Behavior ledger](docs/behavior_ledger/README.md) ·
 [Archived Unity mission guide](docs/MISSION1.md)
