@@ -13,6 +13,8 @@ const SUPPORT_BELOW := 0.3   # meters a node may sit below a surface (feet/root 
 const CONFIGURED_RATIO := 1.0
 var world := Node3D.new()
 var failures: Array[String] = []
+var chunks: Array[Dictionary] = []
+var landmark_nodes: Array[Dictionary] = []
 
 func _initialize() -> void:
 	call_deferred("run")
@@ -45,6 +47,61 @@ func supported(point: Vector3) -> bool:
 	var query := PhysicsRayQueryParameters3D.create(point+Vector3.UP*SUPPORT_BELOW, point-Vector3.UP*SUPPORT_ABOVE, 1)
 	return not world.get_world_3d().direct_space_state.intersect_ray(query).is_empty()
 
+func vector_array(point: Vector3) -> Array:
+	return [point.x,point.y,point.z]
+
+func ray_hit(from: Vector3, to: Vector3) -> Dictionary:
+	return world.get_world_3d().direct_space_state.intersect_ray(PhysicsRayQueryParameters3D.create(from,to,1))
+
+func landmark_diagnostics(geometry: AABB) -> Dictionary:
+	var rows: Array = []
+	var groups := {}
+	var counts := {"supported":0,"outside_xz":0,"over_geometry_unsupported":0}
+	for node in landmark_nodes:
+		var p := PsxUnits.world_to_godot(Vector3(node.position_world[0],node.position_world[1],node.position_world[2]))
+		var ok := supported(p)
+		var top := maxf(geometry.end.y,p.y)+5.0
+		var bottom := minf(geometry.position.y,p.y)-5.0
+		var full := ray_hit(Vector3(p.x,top,p.z),Vector3(p.x,bottom,p.z))
+		var above := ray_hit(p,Vector3(p.x,top,p.z))
+		var below := ray_hit(p,Vector3(p.x,bottom,p.z))
+		var gap: Variant = null
+		for hit in [above,below,full]:
+			if not hit.is_empty():
+				var candidate: float = p.y-hit.position.y
+				if gap == null or absf(candidate) < absf(float(gap)):
+					gap = candidate
+		var nearest := {}
+		var distance := INF
+		var xz_distance := INF
+		for chunk in chunks:
+			var box: AABB = chunk.bounds
+			var close := Vector2(clampf(p.x,box.position.x,box.end.x),clampf(p.z,box.position.z,box.end.z))
+			var candidate_xz := close.distance_to(Vector2(p.x,p.z))
+			var candidate := p.distance_to(Vector3(close.x,clampf(p.y,box.position.y,box.end.y),close.y))
+			if candidate < distance:
+				distance = candidate
+				xz_distance = candidate_xz
+				nearest = chunk
+		var category := "supported" if ok else ("outside_xz" if full.is_empty() else "over_geometry_unsupported")
+		counts[category] += 1
+		var subtype: String = str(node.get("subTypeName",node.get("subType","none")))
+		for key in [str(node.type),str(node.type)+"/"+subtype]:
+			if not groups.has(key): groups[key] = {"total":0,"supported":0}
+			groups[key].total += 1
+			groups[key].supported += int(ok)
+		rows.append({"node_index":node.index,"type":node.type,"subtype":subtype,
+			"flags":{"baddyFlags":node.get("baddyFlags"),"groundedCheck":node.get("groundedCheck")},
+			"position_m":vector_array(p),"supported":ok,"xz_over_geometry":not full.is_empty(),
+			"nearest_surface_vertical_gap_m":gap,"nearest_chunk":nearest.get("path"),
+			"nearest_chunk_mesh":nearest.get("mesh_name"),"nearest_chunk_xz_distance_m":xz_distance,
+			"nearest_chunk_distance_m":distance,"nearest_chunk_origin_m":vector_array(nearest.get("origin",Vector3.ZERO)),
+			"classification":category})
+	for key in groups:
+		groups[key].supported_rate = float(groups[key].supported)/groups[key].total
+	return {"per_landmark":rows,"by_type_and_subtype":groups,"classification_counts":counts,
+		"classification_note":"Near-candidate grouping overlaps the other classes; gaps are observations, not corrections."}
+
 func run() -> void:
 	check_vectors()
 	root.add_child(world)
@@ -58,6 +115,8 @@ func run() -> void:
 		model.scale = Vector3.ONE*PsxUnits.METERS_PER_MODEL_UNIT
 		for mesh in model.find_children("*", "MeshInstance3D", true, false):
 			if mesh.mesh:
+				chunks.append({"path":str(mesh.get_path()),"mesh_name":mesh.mesh.resource_name,
+					"bounds":mesh.global_transform*mesh.get_aabb(),"origin":mesh.global_position})
 				mesh.create_trimesh_collision()
 	if not FileAccess.file_exists(GRAPH):
 		check(false, "L1A1 trg_graph.json present (run tools/reference/export_trg_graph.py)")
@@ -70,6 +129,7 @@ func run() -> void:
 	for node in graph.nodes:
 		if node.type in LANDMARK_TYPES and node.has("position_world"):
 			landmarks.append(Vector3(node.position_world[0], node.position_world[1], node.position_world[2]))
+			landmark_nodes.append(node)
 	var geometry := AABB()
 	for model in world.get_children():
 		var box: AABB = RevampAssets.bounds_of(model)
@@ -114,10 +174,12 @@ func run() -> void:
 	check(best == configured, "configured axis signs fit the landmark best")
 	check(scores.get(configured, 0.0) >= 0.8, "at least 80% of landmarks are supported by geometry")
 	check(scores.get(configured, 0.0)-runner_up >= 0.3, "configured mapping beats every alternative by 30 points")
-	finish({"landmarks": landmarks.size(), "scores": scores,
+	var details := {"landmarks": landmarks.size(), "scores": scores,
 		"geometry_bounds_m": [geometry.position, geometry.end].map(func(v): return [v.x, v.y, v.z]),
 		"configured_landmark_bounds_m": [configured_bounds.position, configured_bounds.end].map(func(v): return [v.x, v.y, v.z]), "best": best, "configured": configured, "runner_up": runner_up,
-		"meters_per_world_unit": PsxUnits.METERS_PER_WORLD_UNIT, "support_window_m": [SUPPORT_BELOW, SUPPORT_ABOVE]})
+		"meters_per_world_unit": PsxUnits.METERS_PER_WORLD_UNIT, "support_window_m": [SUPPORT_BELOW, SUPPORT_ABOVE]}
+	details.merge(landmark_diagnostics(geometry))
+	finish(details)
 
 func finish(details: Dictionary) -> void:
 	var report := {"passed": failures.is_empty(), "failures": failures, "details": details}
