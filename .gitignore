@@ -20,22 +20,3 @@ __pycache__/
 # Private reference inventories/conversion logs and generated machine metadata
 /docs/research_notes/**/*.json
 /docs/research_notes/**/*.log
-
-# Unity-era generated output; remove this block once Game/, Builds/ and Logs/ are purged
-/Builds/
-/Logs/
-/Game/.gdignore
-/Game/[Ll]ibrary/
-/Game/[Tt]emp/
-/Game/[Oo]bj/
-/Game/[Ll]ogs/
-/Game/[Uu]ser[Ss]ettings/
-/Game/.vs/
-/Game/.vscode/
-/Game/*.csproj
-/Game/*.sln
-/Game/*.slnx
-/Game/Assets/_LocalReference/
-/Game/Assets/_LocalReference.meta
-/Game/Assets/TextMesh Pro/
-/Game/Assets/TextMesh Pro.meta

@@ -1,6 +1,0 @@
-{
-  "name": "SpiderManRebuild.EditModeTests",
-  "references": ["SpiderManRebuild.Runtime"],
-  "includePlatforms": ["Editor"],
-  "optionalUnityReferences": ["TestAssemblies"]
-}
