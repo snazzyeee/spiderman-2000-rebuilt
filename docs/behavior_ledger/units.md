@@ -18,6 +18,19 @@ Implemented by src/core/psx_units.gd (runtime) and tools/reference/psx_units.py
 `per_frame_to_per_second()` scales per-frame constants by the tick. Godot physics
 runs at 60 Hz, so ported per-frame rates must be converted, never copied.
 
+## Level offset files investigation
+
+Evidence and format are in [offset_files.md](offset_files.md). A CRC-checked
+archive audit decoded nine files / 34 records. No L1A1 offset file exists.
+The loader stores a key and two signed-short parameters, not a decoded XYZ
+translation. Their consumer and units remain unknown; all transforms stay
+unchanged. The first-column values fit both the object and model ranges of
+their respective G banks, which does not distinguish the index space.
+L1A3/L1A4 with/without spatial correction is blocked by that missing meaning;
+applying the fields as axes would invent a transform. The original L1A1 gate
+continues unchanged, and the O-bank attribution already accounts for all seven
+former unmatched chunk origins. TRG placement remains unverified.
+
 ## Round 2 diagnostic contract
 
 Evidence `remake:landmark-diagnostics-v2`, confidence authored. The original

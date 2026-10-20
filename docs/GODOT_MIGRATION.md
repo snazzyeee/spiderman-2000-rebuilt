@@ -278,3 +278,15 @@ continues unchanged. Evidence is uploaded as synthetic-validation.
 Linux setup: python tools/pipeline/setup_godot_linux.py, then use the same
 PowerShell run_godot.ps1 -Import / -Headless -TraversalTests launcher.
 Versions, download hashes and licenses are recorded in THIRD_PARTY.md.
+
+## Level offset audit
+
+Run `tools/third_party/audio-python/Scripts/python.exe tools/reference/decode_level_offsets.py`
+to CRC-check and decode the nine private archive offset members. Optional
+`--archive`, `--geometry-directory` and private `--output` paths select inputs
+and report location. The default report is staging/reference/level-offsets.json.
+The tool validates the G-bank counts alongside each record key and applies no
+transform. Its three public tests use synthetic text and compressed payloads.
+The consumer/units remain unknown; a with/without geometry correction is blocked
+by evidence, and the existing landmark gate remains mandatory. See
+behavior_ledger/offset_files.md and behavior_ledger/units.md.
