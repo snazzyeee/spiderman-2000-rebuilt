@@ -2462,5 +2462,13 @@
         }
       ]
     }
-  ]
+  ],
+  "runtime_bindings": {
+    "wall_bump": "spidey_anim_14",
+    "knock_off": "spidey_anim_175",
+    "ground_loss": "spidey_anim_212",
+    "ceiling_attach": "spidey_anim_227",
+    "ceiling_current": "spidey_anim_232",
+    "ceiling_alternate": "spidey_anim_234"
+  }
 }

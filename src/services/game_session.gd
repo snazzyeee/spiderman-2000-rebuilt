@@ -5,15 +5,15 @@ var resume_checkpoint := -1
 var save_path := "user://mission_checkpoint.json"
 
 func _ready() -> void:
-	for action in ["move_left", "move_right", "move_forward", "move_back", "jump", "swing", "zip", "crawl", "attack", "web", "interact", "pause", "look_left", "look_right", "look_up", "look_down"]:
+	for action in ["move_left", "move_right", "move_forward", "move_back", "jump", "swing", "zip", "zip_forward", "crawl", "attack", "web", "interact", "pause", "look_left", "look_right", "look_up", "look_down"]:
 		if not InputMap.has_action(action):
 			InputMap.add_action(action, 0.18)
-	var keys := {"move_left": KEY_A, "move_right": KEY_D, "move_forward": KEY_W, "move_back": KEY_S, "jump": KEY_SPACE, "zip": KEY_Q, "crawl": KEY_C, "attack": KEY_F, "web": KEY_R, "interact": KEY_E}
+	var keys := {"move_left": KEY_A, "move_right": KEY_D, "move_forward": KEY_W, "move_back": KEY_S, "jump": KEY_SPACE, "zip": KEY_Q, "zip_forward": KEY_T, "crawl": KEY_C, "attack": KEY_F, "web": KEY_R, "interact": KEY_E}
 	for action in keys:
 		var event := InputEventKey.new()
 		event.physical_keycode = keys[action]
 		InputMap.action_add_event(action, event)
-	for binding in [["move_left", JOY_AXIS_LEFT_X, -1.0], ["move_right", JOY_AXIS_LEFT_X, 1.0], ["move_forward", JOY_AXIS_LEFT_Y, -1.0], ["move_back", JOY_AXIS_LEFT_Y, 1.0], ["look_left", JOY_AXIS_RIGHT_X, -1.0], ["look_right", JOY_AXIS_RIGHT_X, 1.0], ["look_up", JOY_AXIS_RIGHT_Y, -1.0], ["look_down", JOY_AXIS_RIGHT_Y, 1.0], ["swing", JOY_AXIS_TRIGGER_RIGHT, 1.0]]:
+	for binding in [["move_left", JOY_AXIS_LEFT_X, -1.0], ["move_right", JOY_AXIS_LEFT_X, 1.0], ["move_forward", JOY_AXIS_LEFT_Y, -1.0], ["move_back", JOY_AXIS_LEFT_Y, 1.0], ["look_left", JOY_AXIS_RIGHT_X, -1.0], ["look_right", JOY_AXIS_RIGHT_X, 1.0], ["look_up", JOY_AXIS_RIGHT_Y, -1.0], ["look_down", JOY_AXIS_RIGHT_Y, 1.0], ["zip_forward", JOY_AXIS_TRIGGER_RIGHT, 1.0]]:
 		var event := InputEventJoypadMotion.new()
 		event.axis = binding[1]
 		event.axis_value = binding[2]

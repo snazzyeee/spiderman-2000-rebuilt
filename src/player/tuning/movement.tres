@@ -33,3 +33,7 @@ visual_height = 1.8
 hand_height = 1.4
 ground_animation = &"spidey_anim_0"
 air_animation = &"spidey_anim_1"
+refill_sfx = 30
+ceiling_sfx = 9
+empty_bank = 33
+empty_tracks = PackedInt32Array(2,3,4)

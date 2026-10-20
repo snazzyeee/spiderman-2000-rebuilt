@@ -2,6 +2,8 @@ extends Node
 
 signal subtitle_changed(speaker: String, text: String)
 signal clip_finished(clip_id: String)
+signal original_sfx_requested(id: int)
+signal original_xa_requested(bank: int, track: int)
 
 const MANIFEST := "res://assets/audio/dialogue/dialogue_manifest.json"
 var registry: Dictionary = {}
@@ -24,7 +26,7 @@ func _ready() -> void:
 		pair[0].bus = pair[1]
 		add_child(pair[0])
 	speech.finished.connect(_finished)
-	if FileAccess.file_exists(MANIFEST):
+	if "--traversal-tests" not in OS.get_cmdline_user_args() and FileAccess.file_exists(MANIFEST):
 		var parsed = JSON.parse_string(FileAccess.get_file_as_string(MANIFEST))
 		if parsed is Dictionary:
 			registry = parsed
@@ -46,6 +48,23 @@ func find_key(stem: String) -> String:
 		if str(key).to_lower() == stem.to_lower():
 			return key
 	return ""
+
+# Recovered numeric identities are separate from unresolved filename bindings.
+# The behavior ledger forbids guessing the identity of a converted clip.
+func play_original_sfx(id: int, at: Vector3) -> bool:
+	original_sfx_requested.emit(id)
+	for key in registry:
+		if registry[key].get("native_sfx_id",-1) == id:
+			return play_sfx(key,at)
+	return false
+
+func play_original_xa(bank: int, track: int) -> bool:
+	original_xa_requested.emit(bank,track)
+	for key in registry:
+		var entry: Dictionary = registry[key]
+		if entry.get("native_bank",-1) == bank and entry.get("native_track",-1) == track:
+			return play(key)
+	return false
 
 func play(clip_id: String, owner: Object = null) -> bool:
 	if is_instance_valid(cinematic_owner) and cinematic_owner != owner:

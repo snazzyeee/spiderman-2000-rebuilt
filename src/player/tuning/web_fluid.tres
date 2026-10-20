@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="WebFluid" load_steps=2 format=3]
+[ext_resource type="Script" path="res://src/player/web_fluid.gd" id="1"]
+[resource]
+script = ExtResource("1")
+meter = 1.0
+spares = 0
+suit = 0
+cost_setting = 1
+cap = 10
+reduced_cap = 2
+reduced_cap_suits = PackedInt32Array(6,9,10)
+no_cost_suits = PackedInt32Array(3,4)
+cost_divisors = PackedFloat32Array(32,2)

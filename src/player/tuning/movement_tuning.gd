@@ -32,3 +32,7 @@ extends Resource
 @export var hand_height: float
 @export var ground_animation: StringName
 @export var air_animation: StringName
+@export var refill_sfx: int
+@export var ceiling_sfx: int
+@export var empty_bank: int
+@export var empty_tracks: PackedInt32Array
