@@ -22,7 +22,7 @@ import tempfile
 import wave
 import zlib
 
-CONVERTER_SHA256 = "b83b49333dc70a58a7ff730548287b0a719800eb03408823255f68f3e330b95a"
+from pinned_tools import CONVERTER_SHA256
 AUDIO = {".wav", ".bik", ".vag", ".pss", ".adx", ".xa", ".vab", ".kat"}
 METADATA = {".trg", ".sfx", ".dat", ".txt", ".seq", ".exe"}
 MAX_MEMBER = 256 * 1024 * 1024

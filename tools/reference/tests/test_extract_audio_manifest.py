@@ -7,8 +7,10 @@ import tempfile
 import unittest
 import wave
 import zlib
+import sys
 
 SCRIPT = Path(__file__).resolve().parents[1] / "extract_audio_manifest.py"
+sys.path.insert(0, str(SCRIPT.parent))
 spec = importlib.util.spec_from_file_location("extract_audio_manifest", SCRIPT)
 audio = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(audio)

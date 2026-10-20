@@ -174,7 +174,7 @@ def main() -> int:
     parser.add_argument('--output-root', type=Path, default=ROOT / 'levels')
     args = parser.parse_args()
     from batch_process_audio import write_json
-    from prepare_phase1_assets import CONVERTER_SHA256
+    from pinned_tools import CONVERTER_SHA256
     decoder_sha256 = hashlib.sha256(args.decoder.read_bytes()).hexdigest()
     if decoder_sha256 != CONVERTER_SHA256:
         raise SystemExit('Multitool digest differs from the pinned converter')

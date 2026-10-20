@@ -13,7 +13,7 @@ import zlib
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT/'tools/reference'))
 from pkr_index import inspect
-from prepare_phase1_assets import CONVERTER_SHA256
+from pinned_tools import CONVERTER_SHA256
 from batch_process_audio import write_json
 
 
