@@ -45,6 +45,12 @@
 
 ## Deliberate deviations
 
+- Phase 2 implementation: `src/player/states/swing.gd`; all numerical tuning and
+  the explicitly authored animation binding are in `src/player/tuning/swing.tres`.
+  HYBRID uses verified geometry when available and otherwise the authored sky hook.
+  A phase-driven synthetic animation verifies real AnimationPlayer seeking, not
+  only an internal phase variable. Test geometry and animation are synthetic.
+
 - Continuous re-attach (chaining arcs without landing) is a remake choice until the
   original availability rule is recovered.
 
