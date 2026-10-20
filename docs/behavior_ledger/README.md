@@ -46,6 +46,7 @@ planned tests that will guard it.
 
 - [units.md](units.md): fixed point, angles, axes, scale, tick rate, landmark status
 - [offset_files.md](offset_files.md): bounded level push-offset text tables; parameter semantics unresolved
+- [fonts.md](fonts.md): embedded bitmap metrics/palettes, recovered ASCII map and authored font variants/theme
 - [swing.md](swing.md): web swing frame, phase-driven animation, availability
 - [crawl_ceiling.md](crawl_ceiling.md): wall/ceiling attach, run-into-wall, knock-off, ground loss
 - [zip.md](zip.md): zip-web variants and landing clean-up
