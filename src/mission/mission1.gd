@@ -40,7 +40,7 @@ func _ready() -> void:
 		missing_assets = true
 		return
 	add_child(level)
-	level.scale = Vector3.ONE*.019792303442955017
+	level.scale = Vector3.ONE*PsxUnits.METERS_PER_WORLD_UNIT
 	for mesh in level.find_children("*", "MeshInstance3D", true, false):
 		if mesh.mesh:
 			mesh.create_trimesh_collision()

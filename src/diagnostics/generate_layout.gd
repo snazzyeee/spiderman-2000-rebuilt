@@ -45,7 +45,7 @@ func run() -> void:
 		return
 	world.add_child(level)
 	world.add_child(objects)
-	level.scale = Vector3.ONE*.019792303442955017
+	level.scale = Vector3.ONE*PsxUnits.METERS_PER_WORLD_UNIT
 	objects.scale = level.scale
 	var bank_mesh: MeshInstance3D
 	for mesh in level.find_children("*", "MeshInstance3D", true, false):
