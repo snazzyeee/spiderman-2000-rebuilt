@@ -39,4 +39,4 @@ is under staging/validation/regression/. The unchanged landmark gate remains a
 separate 19/21 result; no claim of verified TRG geometry placement is made.
 
 CONVERTER_SHA256 now lives in tools/reference/pinned_tools.py. The Unity-only
-prepare_* tools are removed in a separate commit after the deletion milestone.
+prepare_* tools were removed in a separate commit after the deletion milestone; their callers now use the shared pin and all regression gates pass.

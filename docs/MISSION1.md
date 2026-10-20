@@ -1,3 +1,5 @@
+> Historical Unity workflow: its prepare_* scripts have been removed after preservation and purge. Use tools/pipeline/prepare_godot.ps1 and docs/GODOT_MIGRATION.md for the active Godot pipeline.
+
 # Mission 1 vertical slice: scripts, prefab setup and exact flow
 
 The current frontend extends this mission baseline with original extracted

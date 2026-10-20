@@ -1,3 +1,5 @@
+> Historical Unity workflow: its prepare_* scripts have been removed after preservation and purge. Use tools/pipeline/prepare_godot.ps1 and docs/GODOT_MIGRATION.md for the active Godot pipeline.
+
 # Main menu, original audio and Mission 1 entry
 
 ## Reproduce the private player

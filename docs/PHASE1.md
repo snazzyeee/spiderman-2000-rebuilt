@@ -1,3 +1,5 @@
+> Historical Unity workflow: its prepare_* scripts have been removed after preservation and purge. Use tools/pipeline/prepare_godot.ps1 and docs/GODOT_MIGRATION.md for the active Godot pipeline.
+
 # Phase 1: exact import and rig procedure
 
 Unity 6000.6.6f1, URP 17.6.0, Cinemachine 6.6.0, Input System 1.20.0,
