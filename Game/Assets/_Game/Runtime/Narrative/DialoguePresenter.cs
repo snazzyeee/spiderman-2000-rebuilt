@@ -27,11 +27,17 @@ namespace SpiderManRebuild
         }
         public bool TryAcquire(UnityEngine.Object claimant)
         {
+            if (DialogueManager.Instance != null && !DialogueManager.Instance.CanOwnCinematic(this)) return false;
             if (owner != null && owner != claimant) return false;
             owner = claimant; return true;
         }
         public void Release(UnityEngine.Object claimant)
         { if (owner != claimant) return; ClearCue(); owner = null; }
+        public void PresentText(UnityEngine.Object claimant, string speaker, string text)
+        {
+            if (owner != claimant) return;
+            ClearCue(); Speaker = speaker; Subtitle = text; SubtitleChanged?.Invoke(Speaker, Subtitle);
+        }
         public void Evaluate(DialogueCueClip cue, CinemachineVirtualCameraBase shot, double time, bool playing)
         {
             if (!Claimed) return;

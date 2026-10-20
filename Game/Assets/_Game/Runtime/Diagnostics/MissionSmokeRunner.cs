@@ -39,11 +39,13 @@ namespace SpiderManRebuild
             if (!active) yield break;
             yield return null; yield return null; yield return null;
             Check("intro holds gameplay control", Mission.Stage == MissionStage.Intro && Mission.Player.Motor.Session.ControlBlocked);
-            Check("authored Timeline subtitle", !string.IsNullOrEmpty(Mission.Intro.Presenter.Subtitle));
+            Check("intro does not show authored briefing", string.IsNullOrEmpty(Mission.Intro.Presenter.Subtitle));
             Mission.Player.Motor.Session.SetPaused(true);
             yield return new WaitForSecondsRealtime(.15f);
             Check("pause retains cinematic control lock", Mission.Player.Motor.Session.Paused && Mission.Player.Motor.Session.ControlBlocked);
             Mission.Player.Motor.Session.SetPaused(false); Mission.Intro.Skip();
+            Check("intro completion starts separate briefing", Mission.Lifecycle == MissionLifecycle.MissionBriefing);
+            Mission.CompleteBriefing();
             yield return null;
             Check("intro skip restores gameplay", Mission.Stage == MissionStage.RooftopRoute && !Mission.Player.Motor.Session.ControlBlocked);
             Mission.Player.Health.InvulnerableUntil = Time.time + 90;

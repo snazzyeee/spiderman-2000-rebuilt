@@ -11,8 +11,10 @@ namespace SpiderManRebuild
         public TraversalInput Input;
         public DialoguePresenter Presenter;
         public bool BlocksControl = true, AllowSkip = true;
+        public bool ExclusiveDialogue;
         public bool Playing { get; private set; }
         public event Action<bool> Finished;
+        public event Action OnIntroFinished;
         PlayableDirector director;
         bool aborting, pausedBySession;
         void Awake()
@@ -26,6 +28,8 @@ namespace SpiderManRebuild
         public bool TryPlay()
         {
             if (Playing || director.playableAsset == null || Presenter == null || !Presenter.TryAcquire(this)) return false;
+            if (ExclusiveDialogue && DialogueManager.Instance != null && !DialogueManager.Instance.BeginCinematic(Presenter))
+            { Presenter.Release(this); return false; }
             Playing = true; aborting = false; pausedBySession = false;
             if (BlocksControl && Session != null) Session.SetControlLock(this, true);
             director.time = 0; director.Play(); return true;
@@ -37,6 +41,8 @@ namespace SpiderManRebuild
         }
         public void Skip() { if (Playing) director.Stop(); }
         public void Abort() { if (Playing) { aborting = true; director.Stop(); } }
+        public void CompleteWithoutPlayback()
+        { if (!Playing) { Finished?.Invoke(true); OnIntroFinished?.Invoke(); } }
         void OnPause(bool paused)
         {
             if (!Playing) return;
@@ -48,8 +54,10 @@ namespace SpiderManRebuild
             if (!Playing) return;
             Playing = false;
             Presenter.Release(this);
+            if (ExclusiveDialogue && DialogueManager.Instance != null) DialogueManager.Instance.EndCinematic(Presenter);
             if (BlocksControl && Session != null) Session.SetControlLock(this, false);
             Finished?.Invoke(!aborting);
+            if (!aborting) OnIntroFinished?.Invoke();
         }
         void OnDisable() => Abort();
         void OnDestroy()

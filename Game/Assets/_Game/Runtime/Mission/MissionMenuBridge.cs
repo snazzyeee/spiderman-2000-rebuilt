@@ -40,7 +40,7 @@ namespace SpiderManRebuild
         }
         void SaveCheckpoint()
         {
-            if (training || mission.Stage == MissionStage.Intro || mission.Stage == MissionStage.Recovering) return;
+            if (training || !mission.GameplayActive || mission.Stage == MissionStage.Recovering) return;
             var save = new MissionSaveData { checkpoint = mission.SavedCheckpoint,
                 bankCleared = mission.Stage == MissionStage.Skylight || mission.Stage == MissionStage.Complete };
             if (!SaveGameStore.TryWrite(save, out string error)) Debug.LogWarning("Checkpoint save failed: " + error);

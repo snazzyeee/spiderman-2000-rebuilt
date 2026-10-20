@@ -11,11 +11,13 @@ namespace SpiderManRebuild
         public DialoguePresenter Dialogue;
         Label objective, state, vitals, subtitle, speaker, marker;
         VisualElement pausePanel, completePanel, subtitlePanel;
+        VisualElement header, footer, crosshair;
         double refresh;
         Button returnMenuButton, completeMenuButton;
         void OnEnable()
         {
             var root = GetComponent<UIDocument>().rootVisualElement;
+            header = root.Q(className: "header"); footer = root.Q(className: "footer"); crosshair = root.Q(className: "crosshair");
             objective = root.Q<Label>("objective"); state = root.Q<Label>("state");
             vitals = root.Q<Label>("vitals"); subtitle = root.Q<Label>("subtitle"); speaker = root.Q<Label>("speaker");
             marker = root.Q<Label>("marker"); pausePanel = root.Q("pause-panel");
@@ -32,7 +34,7 @@ namespace SpiderManRebuild
         void Start()
         { Dialogue.SubtitleChanged += OnSubtitle; Mission.ObjectiveChanged += RefreshObjective; }
         void OnSubtitle(string name, string text)
-        { speaker.text = name; subtitle.text = text; subtitlePanel.style.display = string.IsNullOrEmpty(text) ? DisplayStyle.None : DisplayStyle.Flex; }
+        { speaker.text = name; subtitle.text = text; subtitlePanel.style.display = Mission.Lifecycle == MissionLifecycle.IntroCinematic || string.IsNullOrEmpty(text) ? DisplayStyle.None : DisplayStyle.Flex; }
         void RefreshObjective() => objective.text = Mission.Objective;
         void Resume() => Mission.Player.Motor.Session.SetPaused(false);
         void Recover() { Mission.RequestRecovery(); Resume(); }
@@ -49,7 +51,11 @@ namespace SpiderManRebuild
         void Update()
         {
             if (Mission == null) return;
-            pausePanel.style.display = Mission.Player.Motor.Session.Paused ? DisplayStyle.Flex : DisplayStyle.None;
+            bool cinematic = Mission.Lifecycle == MissionLifecycle.IntroCinematic;
+            header.style.display = footer.style.display = crosshair.style.display = Mission.GameplayActive ? DisplayStyle.Flex : DisplayStyle.None;
+            objective.style.display = state.style.display = vitals.style.display = Mission.GameplayActive ? DisplayStyle.Flex : DisplayStyle.None;
+            if (cinematic) subtitlePanel.style.display = DisplayStyle.None;
+            pausePanel.style.display = !cinematic && Mission.Player.Motor.Session.Paused ? DisplayStyle.Flex : DisplayStyle.None;
             completePanel.style.display = Mission.Stage == MissionStage.Complete ? DisplayStyle.Flex : DisplayStyle.None;
             if (Time.unscaledTimeAsDouble >= refresh)
             {

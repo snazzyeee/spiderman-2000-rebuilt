@@ -314,7 +314,7 @@ namespace SpiderManRebuild.Editor
             timeline.durationMode = TimelineAsset.DurationMode.FixedLength; timeline.fixedDuration = 8;
             var cameras = timeline.CreateTrack<CinemachineTrack>(null, "Rooftop framing");
             director.SetGenericBinding(cameras, Camera.main.GetComponent<CinemachineBrain>());
-            var dialogue = timeline.CreateTrack<DialogueCueTrack>(null, "Mission briefing subtitles");
+            var dialogue = timeline.CreateTrack<DialogueCueTrack>(null, "Intro audio");
             director.SetGenericBinding(dialogue, presenter);
             for (int i = 0; i < 2; i++)
             {
@@ -326,9 +326,7 @@ namespace SpiderManRebuild.Editor
                 var shot = cameras.CreateClip<CinemachineShot>(); shot.start = i * 4; shot.duration = 4;
                 ((CinemachineShot)shot.asset).VirtualCamera = new ExposedReference<CinemachineVirtualCameraBase> { exposedName = key };
                 var line = dialogue.CreateClip<DialogueCueClip>(); line.start = i * 4; line.duration = 4;
-                var cue = (DialogueCueClip)line.asset; cue.Speaker = "MISSION BRIEFING";
-                cue.Subtitle = i == 0 ? "A bank robbery is underway. Cross the rooftops and reach the bank." :
-                    "Clear the rooftop guards, then enter through the skylight.";
+                var cue = (DialogueCueClip)line.asset; cue.Speaker = ""; cue.Subtitle = "";
             }
             director.playableAsset = timeline; return sequence;
         }

@@ -16,6 +16,7 @@ namespace SpiderManRebuild
         public event Action<string, string> SubtitleChanged;
         public event Action<string> PlaybackFinished;
         public event Action<string> PlaybackFailed;
+        public event Action<string> SfxPlayed;
         public string ActiveClipId { get; private set; }
         public string Speaker { get; private set; } = "";
         public string Subtitle { get; private set; } = "";
@@ -26,6 +27,16 @@ namespace SpiderManRebuild
         int effectCursor, generation;
         Coroutine loading;
         UnityEngine.Object timelineOwner;
+        UnityEngine.Object cinematicOwner;
+        public bool CinematicDialogueActive => cinematicOwner != null;
+        public bool CanOwnCinematic(UnityEngine.Object owner) => cinematicOwner == null || cinematicOwner == owner;
+        public bool BeginCinematic(UnityEngine.Object owner)
+        {
+            if (owner == null || !CanOwnCinematic(owner)) return false;
+            StopDialogue(); cinematicOwner = owner; return true;
+        }
+        public void EndCinematic(UnityEngine.Object owner)
+        { if (cinematicOwner == owner) { StopDialogue(); cinematicOwner = null; } }
         string fallbackSpeaker, fallbackSubtitle;
         bool timelinePaused;
         bool began;
@@ -51,7 +62,10 @@ namespace SpiderManRebuild
             return source;
         }
         public bool Play(string id, Vector3? position = null, bool interrupt = true)
+            => PlayOwned(id, position, interrupt, null);
+        bool PlayOwned(string id, Vector3? position, bool interrupt, UnityEngine.Object owner)
         {
+            if (!CanOwnCinematic(owner)) return false;
             if (Database == null || !Database.TryResolve(id, out DialogueEntry entry, out AudioClip clip)) return false;
             if (!interrupt && IsSpeaking) return false;
             StopDialogue(); ActiveClipId = id;
@@ -86,7 +100,7 @@ namespace SpiderManRebuild
         }
         public bool BeginTimeline(string id, UnityEngine.Object owner, string authoredSpeaker, string authoredSubtitle)
         {
-            if (owner == null || !Play(id)) return false;
+            if (owner == null || !PlayOwned(id, null, true, owner)) return false;
             timelineOwner = owner; fallbackSpeaker = authoredSpeaker; fallbackSubtitle = authoredSubtitle;
             if (began && Database.TryGet(id, out DialogueEntry entry))
             { PublishSubtitle(entry); SubtitleChanged?.Invoke(Speaker, Subtitle); }
@@ -122,7 +136,7 @@ namespace SpiderManRebuild
             AudioSource source = effects[effectCursor]; effectCursor = (effectCursor + 1) % effects.Length; source.Stop();
             source.spatialBlend = position.HasValue ? 1 : 0;
             if (position.HasValue) source.transform.position = position.Value;
-            source.clip = clip; source.Play(); return true;
+            source.clip = clip; source.Play(); SfxPlayed?.Invoke(id); return true;
         }
         public bool PlayMusic(string id)
         {

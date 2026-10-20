@@ -42,7 +42,7 @@ TextMeshPro installation.
 ## Navigation and actual behavior
 
     Main
-      Game -> New Game -> fade -> Mission 1 narrated Timeline
+      Game -> New Game -> fade -> narrated Timeline -> separate briefing -> gameplay
            -> Load Game -> saved checkpoint, without replaying intro
       Options -> Master/Music/SFX/Dialogue volume, mouse look speed,
                  invert Y and fullscreen
@@ -72,9 +72,11 @@ energy, position and encounter clearance. Pause/completion can return to Main Me
 
 New Game resolves the original data/Voice/stan_00.bik stream through the private
 database. The Timeline spans its 32.35-second audio duration and routes it through
-DialogueManager. Skip stops that narration owner and restores gameplay control.
-The on-screen MISSION BRIEFING is newly authored; it is not presented as a
-verbatim Stan Lee subtitle. No transcript was recovered for that clip.
+DialogueManager. Skip stops that narration owner and starts the separate authored
+MISSION BRIEFING, with gameplay control still locked. Briefing completion then
+enables gameplay. No objective/briefing UI is displayed over the recording.
+See MISSION_LIFECYCLE.md for ownership, events and transport controls. The
+briefing is not presented as a verbatim Stan Lee subtitle.
 
 The menu-bank sample roles, theme selection and Stan_00-to-remake-intro association
 are authored bindings to authentic extracted files. Original executable playback

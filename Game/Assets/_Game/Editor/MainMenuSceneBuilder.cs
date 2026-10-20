@@ -155,8 +155,7 @@ namespace SpiderManRebuild.Editor
                 {
                     for (int i = 1; i < clips.Length; i++) timeline.DeleteClip(clips[i]);
                     var cue = (DialogueCueClip)clips[0].asset; cue.DatabaseClipId = opening;
-                    cue.Speaker = "MISSION BRIEFING";
-                    cue.Subtitle = "Cross the rooftops to the bank. Clear the guards, then enter through the skylight.";
+                    cue.Speaker = ""; cue.Subtitle = "";
                     clips[0].start = 0; clips[0].duration = duration; EditorUtility.SetDirty(cue);
                 }
                 else for (int i = 0; i < clips.Length; i++) { clips[i].start = i * duration / clips.Length; clips[i].duration = duration / clips.Length; }

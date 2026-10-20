@@ -41,6 +41,12 @@ namespace SpiderManRebuild.Tests
         }
         [UnityTest] public IEnumerator GamepadNavigatesSubmitsCancelsAndAdjustsMixer()
         {
+            string[] expected = { "GAME", "OPTIONS", "TRAINING", "SPECIAL", "GALLERY" };
+            for (int i = 0; i < expected.Length; i++)
+                Assert.That(menu.MainButtons[i].GetComponentInChildren<TMPro.TMP_Text>().text, Is.EqualTo(expected[i]));
+            int confirmed = 0;
+            void CountSound(string id) { if (id == menu.MenuConfirmId) confirmed++; }
+            menu.Audio.SfxPlayed += CountSound;
             yield return Press(GamepadButton.DpadDown);
             Assert.That(EventSystem.current.currentSelectedGameObject, Is.SameAs(menu.MainButtons[1].gameObject));
             yield return Press(GamepadButton.South); Assert.That(menu.CurrentPage, Is.EqualTo("Options"));
@@ -49,6 +55,7 @@ namespace SpiderManRebuild.Tests
             Assert.That(menu.Audio.Mixer.GetFloat("MasterVolume", out float gain), Is.True);
             Assert.That(gain, Is.EqualTo(20 * Mathf.Log10(.45f)).Within(.01f)); slider.value = previousVolume;
             yield return Press(GamepadButton.East); Assert.That(menu.CurrentPage, Is.EqualTo("Main"));
+            Assert.That(confirmed, Is.EqualTo(2)); menu.Audio.SfxPlayed -= CountSound;
         }
         [UnityTest] public IEnumerator GalleryAndControlsUseConfiguredArtAndContent()
         {
@@ -84,6 +91,9 @@ namespace SpiderManRebuild.Tests
             Assert.That(entry.source_path, Does.EndWith("/stan_00.bik"));
             mission.Intro.Skip(); yield return null;
             Assert.That(DialogueManager.Instance.ActiveClipId, Is.Null);
+            Assert.That(mission.Lifecycle, Is.EqualTo(MissionLifecycle.MissionBriefing));
+            Assert.That(mission.Player.Motor.Session.ControlBlocked, Is.True);
+            mission.CompleteBriefing(); yield return null;
             Assert.That(SaveGameStore.TryRead(out _, out _), Is.True);
         }
         [UnityTest] public IEnumerator LoadPreservesClearedEncounterAndSkipsIntro()

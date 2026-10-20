@@ -115,7 +115,11 @@ namespace SpiderManRebuild
                 && DialogueManager.Instance.Database.TryGet(DialogueManager.Instance.ActiveClipId, out var narration)
                 && narration.source_path.EndsWith("/stan_00.bik", StringComparison.OrdinalIgnoreCase));
             mission.Intro.Skip(); yield return null; yield return null;
-            Check("skip releases narrated Timeline and gameplay", mission.Stage == MissionStage.RooftopRoute
+            Check("intro completion exclusively begins blocked briefing", mission.Lifecycle == MissionLifecycle.MissionBriefing
+                && mission.Player.Motor.Session.ControlBlocked && DialogueManager.Instance.ActiveClipId == null
+                && mission.Intro.Presenter.Subtitle == mission.BriefingText);
+            mission.CompleteBriefing(); yield return null;
+            Check("briefing completion releases gameplay", mission.Stage == MissionStage.RooftopRoute
                 && !mission.Player.Motor.Session.ControlBlocked && DialogueManager.Instance.ActiveClipId == null);
             Check("checkpoint persisted separately from original saves", SaveGameStore.TryRead(out _, out _));
             yield return SceneManager.LoadSceneAsync("MainMenu"); yield return null; yield return null;

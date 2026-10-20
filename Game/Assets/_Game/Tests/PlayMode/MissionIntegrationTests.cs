@@ -23,12 +23,16 @@ namespace SpiderManRebuild.Tests
         {
             Assert.That(mission.Stage, Is.EqualTo(MissionStage.Intro));
             yield return null; yield return null;
-            Assert.That(mission.Intro.Presenter.Subtitle, Is.Not.Empty);
+            Assert.That(mission.Intro.Presenter.Subtitle, Is.Empty);
             mission.Player.Motor.Session.SetPaused(true);
             yield return new WaitForSecondsRealtime(.05f);
             mission.Player.Motor.Session.SetPaused(false);
             Assert.That(mission.Player.Motor.Session.ControlBlocked, Is.True);
             mission.Intro.Skip(); yield return null;
+            Assert.That(mission.Lifecycle, Is.EqualTo(MissionLifecycle.MissionBriefing));
+            Assert.That(mission.Player.Motor.Session.ControlBlocked, Is.True);
+            Assert.That(mission.Intro.Presenter.Subtitle, Is.EqualTo(mission.BriefingText));
+            mission.CompleteBriefing(); yield return null;
             Assert.That(mission.Stage, Is.EqualTo(MissionStage.RooftopRoute));
             Assert.That(mission.Player.Motor.Session.ControlBlocked, Is.False);
             Assert.That(mission.Intro.Presenter.Subtitle, Is.Empty);
@@ -36,6 +40,7 @@ namespace SpiderManRebuild.Tests
         IEnumerator ReachBank()
         {
             mission.Intro.Skip();
+            mission.CompleteBriefing();
             mission.Player.Health.InvulnerableUntil = Time.time + 20;
             foreach (var checkpoint in mission.Checkpoints)
             {
@@ -49,6 +54,7 @@ namespace SpiderManRebuild.Tests
         [UnityTest] public IEnumerator OrderedObjectivesAndEnemyDefeatGateSkylight()
         {
             mission.Intro.Skip();
+            mission.CompleteBriefing();
             Assert.That(mission.TryCheckpoint(mission.Checkpoints[mission.Checkpoints.Length - 1]), Is.False);
             yield return ReachBank();
             Assert.That(mission.Player.Motor.ArenaLocked, Is.True);
@@ -61,6 +67,35 @@ namespace SpiderManRebuild.Tests
             mission.Player.Motor.ResetPlayer();
             Assert.That(mission.Skylight.TryInteract(), Is.True);
             Assert.That(mission.Stage, Is.EqualTo(MissionStage.Complete));
+        }
+        [UnityTest] public IEnumerator NaturalIntroCompletionStartsBriefingOnceAndKeepsInputsBlocked()
+        {
+            Assert.That(mission.Lifecycle, Is.EqualTo(MissionLifecycle.IntroCinematic));
+            int completed = 0; mission.Intro.OnIntroFinished += () => completed++;
+            Vector3 before = mission.Player.transform.position;
+            mission.Player.Tick(new MissionInputCommand { Move = Vector2.one, Jump = true, Web = true }, .1f, Time.time);
+            Assert.That(mission.Player.transform.position, Is.EqualTo(before));
+            if (DialogueManager.Instance != null && DialogueManager.Instance.ActiveClipId != null)
+                Assert.That(DialogueManager.Instance.Play(DialogueManager.Instance.ActiveClipId), Is.False);
+            var director = mission.Intro.GetComponent<UnityEngine.Playables.PlayableDirector>();
+            director.time = director.duration - .01; director.Evaluate();
+            for (int frame = 0; frame < 120 && mission.Lifecycle == MissionLifecycle.IntroCinematic; frame++) yield return null;
+            Assert.That(completed, Is.EqualTo(1));
+            Assert.That(mission.Lifecycle, Is.EqualTo(MissionLifecycle.MissionBriefing));
+            mission.Intro.Skip(); Assert.That(completed, Is.EqualTo(1));
+            mission.Player.Tick(new MissionInputCommand { Move = Vector2.one, Jump = true }, .1f, Time.time);
+            Assert.That(mission.Player.transform.position, Is.EqualTo(before));
+            mission.BriefingSeconds = .25f;
+            yield return new WaitForSeconds(.3f);
+            Assert.That(mission.Lifecycle, Is.EqualTo(MissionLifecycle.GameplayActive));
+            Assert.That(mission.Intro.Presenter.Subtitle, Is.Empty);
+        }
+        [UnityTest] public IEnumerator AbortingIntroCannotStartBriefing()
+        {
+            mission.Intro.Abort(); yield return null;
+            Assert.That(mission.Lifecycle, Is.EqualTo(MissionLifecycle.IntroCinematic));
+            Assert.That(mission.Intro.Presenter.Subtitle, Is.Empty);
+            Assert.That(mission.Player.Motor.Session.ControlBlocked, Is.True);
         }
         [UnityTest] public IEnumerator DeathDuringEncounterRestoresApproachAndEnemies()
         {

@@ -5,6 +5,7 @@ using UnityEngine;
 namespace SpiderManRebuild
 {
     public enum MissionStage { Intro, RooftopRoute, BankEncounter, Skylight, Recovering, Complete }
+    public enum MissionLifecycle { Inactive, IntroCinematic, MissionBriefing, GameplayActive }
     public sealed class MissionManager : MonoBehaviour
     {
         public PlayerStateMachine Player;
@@ -13,6 +14,11 @@ namespace SpiderManRebuild
         public EncounterDirector Encounter;
         public SkylightInteraction Skylight;
         public CutsceneSequence Intro;
+        [TextArea] public string BriefingText = "Cross the rooftops to the bank. Clear the guards, then enter through the skylight.";
+        [Min(.25f)] public float BriefingSeconds = 5;
+        public MissionLifecycle Lifecycle { get; private set; }
+        public bool GameplayActive => Lifecycle == MissionLifecycle.GameplayActive;
+        public event Action<MissionLifecycle> LifecycleChanged;
         public MissionStage Stage { get; private set; }
         public int NextCheckpoint { get; private set; }
         public int SavedCheckpoint => checkpointProgress;
@@ -23,9 +29,10 @@ namespace SpiderManRebuild
         int checkpointProgress;
         bool subscriptionsReady;
         Coroutine recovery;
+        Coroutine briefing;
         public string Objective => Stage switch
         {
-            MissionStage.Intro => "Bank Heist / Rooftops — Enter / A to skip",
+            MissionStage.Intro => "",
             MissionStage.RooftopRoute => NextCheckpoint < Checkpoints.Length ? Checkpoints[NextCheckpoint].ObjectiveLabel : "Reach the bank rooftop",
             MissionStage.BankEncounter => "Clear the bank rooftop — " + Encounter.Remaining + " thugs remaining",
             MissionStage.Skylight => Skylight.InRange ? "E / Y — enter the skylight" : "Find the bank skylight",
@@ -39,11 +46,12 @@ namespace SpiderManRebuild
             Player.RecoveryRequested += RequestRecovery; Player.InteractRequested += Interact;
             Player.Health.Died += RequestRecovery; Encounter.Cleared += OnEncounterCleared;
             foreach (var enemy in Encounter.Enemies) enemy.Defeated += EnemyCountChanged;
-            if (Intro != null) Intro.Finished += IntroFinished;
+            if (Intro != null) Intro.OnIntroFinished += IntroFinished;
             subscriptionsReady = true; BeginMission();
         }
         public void BeginMission()
         {
+            CancelBriefing();
             if (recovery != null) { StopCoroutine(recovery); recovery = null; }
             if (Intro != null && Intro.Playing) Intro.Abort();
             Player.Motor.Session.SetControlLock(this, false);
@@ -56,10 +64,16 @@ namespace SpiderManRebuild
             FaceObjective();
             SetStage(MissionStage.Intro);
             bool skipIntro = SkipIntroOnNextBegin; SkipIntroOnNextBegin = false;
-            if (skipIntro || Intro == null || !Intro.TryPlay()) SetStage(MissionStage.RooftopRoute);
+            if (skipIntro || Intro == null) EnterGameplay();
+            else
+            {
+                SetLifecycle(MissionLifecycle.IntroCinematic); Intro.ExclusiveDialogue = true;
+                if (!Intro.TryPlay()) Intro.CompleteWithoutPlayback();
+            }
         }
         public void RestoreCheckpoint(int progress, bool bankCleared)
         {
+            CancelBriefing();
             if (recovery != null) { StopCoroutine(recovery); recovery = null; }
             if (Intro != null) Intro.Abort();
             Encounter.ResetEncounter();
@@ -72,10 +86,48 @@ namespace SpiderManRebuild
             Player.Motor.SpawnPosition = checkpointPosition; Player.Motor.ResetPlayer();
             Player.Motor.Simulate(Vector3.zero, false, false, Time.time, .05f);
             Player.Motor.Session.SetControlLock(this, false); Player.Motor.Session.SetMenuMode(false);
+            SetLifecycle(MissionLifecycle.GameplayActive);
             FaceObjective(); SetStage(bankCleared ? MissionStage.Skylight : MissionStage.RooftopRoute);
         }
-        void IntroFinished(bool completed)
-        { if (completed && Stage == MissionStage.Intro) SetStage(MissionStage.RooftopRoute); }
+        void IntroFinished()
+        {
+            if (Lifecycle != MissionLifecycle.IntroCinematic || Stage != MissionStage.Intro) return;
+            SetLifecycle(MissionLifecycle.MissionBriefing);
+            briefing = StartCoroutine(PresentBriefing());
+        }
+        IEnumerator PresentBriefing()
+        {
+            while (!Intro.Presenter.TryAcquire(this)) yield return null;
+            Intro.Presenter.PresentText(this, "MISSION BRIEFING", BriefingText);
+            float elapsed = 0;
+            var input = Player.GetComponent<TraversalInput>();
+            while (Lifecycle == MissionLifecycle.MissionBriefing && elapsed < BriefingSeconds)
+            {
+                yield return null;
+                if (Player.Motor.Session.Paused) continue;
+                elapsed += Time.deltaTime;
+                if (elapsed > .2f && !input.Automation && input.SkipPressed) break;
+            }
+            briefing = null; CompleteBriefing();
+        }
+        public void CompleteBriefing()
+        {
+            if (Lifecycle != MissionLifecycle.MissionBriefing) return;
+            CancelBriefing(); EnterGameplay();
+        }
+        void CancelBriefing()
+        {
+            if (briefing != null) { StopCoroutine(briefing); briefing = null; }
+            if (Intro != null && Intro.Presenter != null) Intro.Presenter.Release(this);
+        }
+        void EnterGameplay()
+        { SetLifecycle(MissionLifecycle.GameplayActive); SetStage(MissionStage.RooftopRoute); }
+        void SetLifecycle(MissionLifecycle lifecycle)
+        {
+            Lifecycle = lifecycle;
+            Player.Motor.Session.SetControlLock(this, lifecycle == MissionLifecycle.IntroCinematic || lifecycle == MissionLifecycle.MissionBriefing);
+            LifecycleChanged?.Invoke(lifecycle);
+        }
         public bool TryCheckpoint(MissionCheckpoint checkpoint)
         {
             if (Stage != MissionStage.RooftopRoute || checkpoint == null || checkpoint.Index != NextCheckpoint
@@ -112,7 +164,7 @@ namespace SpiderManRebuild
         }
         public void RequestRecovery()
         {
-            if (Stage == MissionStage.Recovering || Stage == MissionStage.Complete) return;
+            if (!GameplayActive || Stage == MissionStage.Recovering || Stage == MissionStage.Complete) return;
             if (Intro != null) Intro.Abort();
             Player.Motor.Session.SetControlLock(this, true); Player.Combat.CancelAttack();
             SetStage(MissionStage.Recovering);
@@ -145,7 +197,8 @@ namespace SpiderManRebuild
             Player.RecoveryRequested -= RequestRecovery; Player.InteractRequested -= Interact; Player.Health.Died -= RequestRecovery;
             Encounter.Cleared -= OnEncounterCleared;
             foreach (var enemy in Encounter.Enemies) if (enemy != null) enemy.Defeated -= EnemyCountChanged;
-            if (Intro != null) Intro.Finished -= IntroFinished;
+            if (Intro != null) Intro.OnIntroFinished -= IntroFinished;
+            CancelBriefing();
             if (Player.Motor.Session != null) Player.Motor.Session.SetControlLock(this, false);
         }
     }

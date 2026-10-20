@@ -47,6 +47,17 @@ namespace SpiderManRebuild.Tests
             manager.EndTimeline(database); Assert.That(manager.ActiveClipId, Is.EqualTo("test"));
             manager.EndTimeline(root); Assert.That(manager.ActiveClipId, Is.Null);
         }
+        [UnityTest] public IEnumerator CinematicOwnerBlocksObjectiveDialogueUntilReleased()
+        {
+            Assert.That(manager.BeginCinematic(root), Is.True);
+            Assert.That(manager.Play("test"), Is.False);
+            Assert.That(manager.BeginTimeline("test", database, "", ""), Is.False);
+            Assert.That(manager.BeginTimeline("test", root, "", ""), Is.True);
+            yield return null;
+            manager.EndCinematic(database); Assert.That(manager.CinematicDialogueActive, Is.True);
+            manager.EndCinematic(root); Assert.That(manager.ActiveClipId, Is.Null);
+            Assert.That(manager.Play("test"), Is.True);
+        }
         [UnityTearDown] public IEnumerator Cleanup()
         {
             AudioListener.pause = false;
