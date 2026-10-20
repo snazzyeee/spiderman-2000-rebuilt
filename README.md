@@ -1,7 +1,7 @@
 # Spider-Man 2000 revamp — Godot 4
 
-The active engine is **Godot 4.7.2**, with Mobile as the default renderer and
-Forward+ available through the launcher. The project contains a playable
+The active engine is **Godot 4.7.2**, with Forward+ as the default renderer and
+Mobile kept as a supported fallback through the launcher. The project contains a playable
 Mission 1 rooftop slice using locally extracted original PC models, textures
 and audio. Mechanical fidelity and complete dialogue verification remain goals.
 
@@ -17,7 +17,7 @@ From this repository root:
 
 ```powershell
 ./tools/pipeline/run_godot.ps1
-./tools/pipeline/run_godot.ps1 -Renderer forward_plus
+./tools/pipeline/run_godot.ps1 -Renderer mobile
 ./tools/pipeline/run_godot.ps1 -Editor
 ```
 

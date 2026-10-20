@@ -1,8 +1,8 @@
 # Godot migration and reproduction
 
 The active project is the repository root, pinned to official Godot 4.7.2 stable
-(ed1daf0bf). Mobile is the default renderer. Forward+ is supported through
-the launcher; it enables SSAO and volumetric fog. Both use original low-poly
+(ed1daf0bf). Forward+ is the default renderer; it enables SSAO and volumetric
+fog. Mobile remains supported through the launcher as a fallback. Both use original low-poly
 meshes, lit glTF materials, shadows and fog. Neither renderer implies a measured
 frame-time guarantee. Unity remains an archived implementation reference.
 
@@ -12,7 +12,7 @@ From this repository root:
 
 ```powershell
 .\tools\pipeline\run_godot.ps1
-.\tools\pipeline\run_godot.ps1 -Renderer forward_plus
+.\tools\pipeline\run_godot.ps1 -Renderer mobile
 .\tools\pipeline\run_godot.ps1 -Editor
 ```
 

@@ -1,4 +1,4 @@
-param([ValidateSet('mobile', 'forward_plus')][string]$Renderer = 'mobile', [switch]$Editor, [switch]$SmokeTest, [switch]$Headless)
+param([ValidateSet('mobile', 'forward_plus')][string]$Renderer = 'forward_plus', [switch]$Editor, [switch]$SmokeTest, [switch]$Headless)
 $ErrorActionPreference = 'Stop'
 $projectRoot = (Resolve-Path (Join-Path $PSScriptRoot '../..')).Path
 $executable = Join-Path $projectRoot 'tools/third_party/godot-4.7.2/Godot_v4.7.2-stable_win64_console.exe'
