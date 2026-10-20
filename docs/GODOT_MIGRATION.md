@@ -208,3 +208,46 @@ source code, settings, synthetic tests and documentation are pushed. A public
 source clone requires local archive conversion to assemble the original art.
 
 Smoke PNGs and reports now live exclusively in staging/validation/smoke/. The launcher checks their six exact paths against every preservation target. Run tools/pipeline/run_regression.ps1 -Milestone <name> for Python, clean import and the full headless/Forward+/Mobile smoke and traversal matrix; private logs/reports live under staging/validation/regression/<name>/.
+
+
+## Current milestone commands and results
+
+Phase 0 deletion is complete. Preserve audit evidence remains private under
+staging/migration_audit/. The shared converter digest is in
+ tools/reference/pinned_tools.py; the Unity-only prepare_* scripts are removed.
+The historical validation counts above describe the earlier promotion checkpoint.
+Current results are 47 Python tests, 42 smoke checks (all original 40 plus two
+native-audio checks) and 150 traversal checks on all three targets. The original
+units gate remains 19/21, supporting only 28/146 landmarks.
+
+With Godot's editor closed, rebuild exact audio identity catalogs and the registry:
+
+```powershell
+./tools/third_party/audio-python/Scripts/python.exe tools/reference/extract_native_voice_catalog.py
+./tools/third_party/audio-python/Scripts/python.exe tools/reference/decode_sfx_ids.py
+./tools/third_party/audio-python/Scripts/python.exe tools/pipeline/build_dialogue_manifest.py --offline
+./tools/pipeline/run_regression.ps1 -Milestone audio-identities
+```
+
+The first command only statically reads the fingerprinted PC executable. SFX/KAT
+inputs default to staging/raw_extracted/Extracted/data/data; use --directory to
+select a different extraction. Catalogs remain private. Exact source path and
+WAV SHA-256 joins produce 901 XA registry entries and 1,993 SFX entries; missing
+KATs and invalid sample references stay unresolved. See behavior_ledger/audio_ids.md.
+prepare_godot.ps1 now performs these identity steps before registry generation,
+then uses the guarded launcher for import and route generation.
+
+Landmark diagnostics retain the failing original gate:
+
+```powershell
+./tools/pipeline/run_godot.ps1 -Headless -Script res://src/diagnostics/verify_units.gd
+./tools/third_party/audio-python/Scripts/python.exe tools/reference/analyze_landmarks.py
+./tools/third_party/audio-python/Scripts/python.exe tools/reference/prepare_landmark_geometry.py
+./tools/pipeline/run_godot.ps1 -Headless -Script res://src/diagnostics/verify_extra_geometry.gd
+```
+
+The first command intentionally exits nonzero while the original gate fails.
+Per-node diagnostics and supplemental geometry observations are private:
+staging/validation/units-landmark.json, units-extra-geometry.json and
+staging/reference/landmark_geometry/manifest.json. The supplemental result never
+replaces the original gate or enables TRG placement. No height or offset was fitted.

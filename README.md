@@ -66,11 +66,12 @@ not invent playback conditions. See [native ID evidence](docs/NATIVE_VOICE_IDS.m
 
 ## Public source and private data
 
-Validation: 40 Godot integration checks and 143 synthetic traversal checks passed
-headlessly and on both real Mobile and Forward+ Vulkan renderers on the RX 580.
-All 37 Python pipeline and reference-tool tests passed. Unity deletion remains
-blocked by five preservation screenshot mismatches; Level 1 landmark alignment
-still fails two criteria. See the [Phase 2 report](docs/PHASE2_REPORT.md) for scope.
+Validation: all 40 original integration checks plus two native-audio checks
+(42 total), and all 150 synthetic traversal checks passed headlessly and on real
+Mobile and Forward+ Vulkan on the RX 580. All 47 Python tests passed. Phase 0
+Unity deletion is complete. The original landmark gate remains 19/21; TRG
+placement is still unverified. See [current handoff](docs/HANDOFF.md) and the
+[historical Phase 2 report](docs/PHASE2_REPORT.md).
 
 Public synthetic traversal scenes require no original assets:
 
