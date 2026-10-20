@@ -1,6 +1,24 @@
 # Unity purge and Godot promotion report (2026-10-20)
 
-## Outcome
+## Follow-up verification (2026-10-20)
+
+The verifier now accepts only the explicitly authorized regenerated
+`TestResults/godot-smoke.json` -> `staging/validation/godot-smoke.json` identity,
+recording its original inventory SHA-256, current SHA-256 and reason in
+`accepted_exceptions`. The inventory is unchanged. Synthetic coverage proves a
+different source or a missing destination still fails. All 34 Python tests pass
+with TEMP/TMP under ignored staging/test_tmp (the sandbox's default temp path
+denied writes).
+
+Running the resumable purge revealed **five additional mismatches**:
+`TestResults/godot-{briefing,intro,menu,mission,rooftop}.png`. The full private
+evidence is staging/migration_audit/final_verification.json. These screenshots
+are outside the authorized exception. Verification failed before deletion;
+purge_operations.json was not produced and the Unity directories remain.
+Phase 0 deletion is therefore still blocked. Neither the allowlist nor the
+preservation criteria was broadened. The 40-check headless smoke passes.
+
+## Prior outcome
 
 | Step | Status |
 |---|---|
