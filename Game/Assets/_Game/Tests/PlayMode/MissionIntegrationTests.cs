@@ -75,6 +75,12 @@ namespace SpiderManRebuild.Tests
             Vector3 before = mission.Player.transform.position;
             mission.Player.Tick(new MissionInputCommand { Move = Vector2.one, Jump = true, Web = true }, .1f, Time.time);
             Assert.That(mission.Player.transform.position, Is.EqualTo(before));
+            float energy = mission.Player.Combat.WebEnergy;
+            Assert.That(mission.Player.Combat.FireWebAt(before + Vector3.forward * 5, Time.time), Is.False);
+            Assert.That(mission.Player.Combat.WebDome(Time.time), Is.False);
+            Assert.That(mission.Player.Combat.WebEnergy, Is.EqualTo(energy));
+            Assert.That(Physics.Raycast(before + Vector3.up * 2, Vector3.down, out var roof, 4, 1), Is.True);
+            Assert.That(mission.Player.BeginZip(new WebAnchor(roof)), Is.False);
             if (DialogueManager.Instance != null && DialogueManager.Instance.ActiveClipId != null)
                 Assert.That(DialogueManager.Instance.Play(DialogueManager.Instance.ActiveClipId), Is.False);
             var director = mission.Intro.GetComponent<UnityEngine.Playables.PlayableDirector>();

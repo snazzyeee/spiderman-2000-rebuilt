@@ -170,7 +170,10 @@ namespace SpiderManRebuild
             SetState(PlayerState.Swinging); return true;
         }
         public bool BeginZip(WebAnchor target)
-        { if (!target.Valid) return false; anchor = target; velocity = Motor.Velocity; SetState(PlayerState.Zipping); return true; }
+        {
+            if (!target.Valid || (Motor.Session != null && Motor.Session.ControlBlocked)) return false;
+            anchor = target; velocity = Motor.Velocity; SetState(PlayerState.Zipping); return true;
+        }
         public void Release()
         {
             Motor.SetVelocity(velocity); anchor = default;

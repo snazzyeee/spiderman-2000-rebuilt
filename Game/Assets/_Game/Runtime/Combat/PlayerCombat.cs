@@ -23,6 +23,8 @@ namespace SpiderManRebuild
         Vector3 domeOffset;
         float domeHideAt;
         readonly float[] windup = { .13f, .16f, .2f }, recovery = { .28f, .3f, .4f }, damage = { 20, 25, 35 };
+        bool CanAct => Player != null && !Player.Health.Defeated && Player.State != PlayerState.HitStun
+            && (Player.Motor.Session == null || !Player.Motor.Session.ControlBlocked);
         void Update()
         {
             if (WebTracer != null) WebTracer.enabled = Time.time < tracerUntil;
@@ -30,7 +32,7 @@ namespace SpiderManRebuild
         }
         public void Tick(MissionInputCommand command, float dt, float now)
         {
-            if (Player.Health.Defeated) { CancelAttack(); return; }
+            if (!CanAct) { CancelAttack(); return; }
             WebEnergy = Mathf.Min(100, WebEnergy + 14 * dt);
             if (command.Web && now >= shotAt && WebEnergy >= 7) FireWeb(now);
             if (command.Dome && now >= domeAt && WebEnergy >= 30) WebDome(now);
@@ -78,7 +80,7 @@ namespace SpiderManRebuild
         }
         public bool FireWeb(float now)
         {
-            if (AimCamera == null || WebEnergy < 7 || now < shotAt) return false;
+            if (!CanAct || AimCamera == null || WebEnergy < 7 || now < shotAt) return false;
             WebEnergy -= 7; shotAt = now + .22f;
             Vector3 origin = transform.position + Vector3.up * 1.15f;
             Vector3 destination = AimCamera.transform.position + AimCamera.transform.forward * 65;
@@ -88,7 +90,7 @@ namespace SpiderManRebuild
         }
         public bool FireWebAt(Vector3 destination, float now)
         {
-            if (WebEnergy < 7 || now < shotAt) return false;
+            if (!CanAct || WebEnergy < 7 || now < shotAt) return false;
             WebEnergy -= 7; shotAt = now + .22f;
             return Shoot(destination, transform.position + Vector3.up * 1.15f, now);
         }
@@ -109,7 +111,7 @@ namespace SpiderManRebuild
         }
         public bool WebDome(float now)
         {
-            if (now < domeAt || WebEnergy < 30) return false;
+            if (!CanAct || now < domeAt || WebEnergy < 30) return false;
             WebEnergy -= 30; domeAt = now + 4;
             Player.Health.InvulnerableUntil = Mathf.Max(Player.Health.InvulnerableUntil, now + .8f);
             int count = Physics.OverlapSphereNonAlloc(transform.position + Vector3.up, 3.4f, contacts, EnemyMask, QueryTriggerInteraction.Ignore);

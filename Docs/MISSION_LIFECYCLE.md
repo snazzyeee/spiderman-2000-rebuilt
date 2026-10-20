@@ -7,7 +7,9 @@ MissionManager owns a lifecycle independent of rooftop objective progression:
 New Game enters IntroCinematic before starting the PlayableDirector. The mission
 control lock and the cutscene's own control lock overlap, so releasing the
 cutscene cannot briefly enable movement. The orbital camera and combat already
-respect the session control lock. Intro HUD headers, objective markers, controls,
+respect the session control lock. Direct web-shot, web-dome, combat tick and zip
+APIs also reject locked actions; they cannot spend web energy or start traversal
+through an alternate caller. Intro HUD headers, objective markers, controls,
 vitals and subtitle/briefing popups are suppressed. Pause/skip remain cinematic
 transport controls, not gameplay commands.
 
