@@ -1,210 +1,201 @@
 # Handoff — 2026-10-21
 
-## Repository and scope
+## Current state and scope
 
-Branch main; latest implementation HEAD at handoff preparation:
-`a3bdc28778e9a5d98c485ff021954a94202beb40`. This document is committed next.
-Use `git rev-parse HEAD` for the final handoff commit. All task commits are
-pushed normally; no force-push. No task changes should remain after handoff.
+Branch main; implementation HEAD at handoff preparation:
+`85fba40d1725324c1dd99c2ff756b2a2fafdcd6a`. This handoff is the following
+docs-only commit; `git rev-parse HEAD` identifies its final hash. Commits were
+pushed normally, without force. Status was clean before this handoff edit.
 
-Unrelated untracked `docs/gemini/GEMINI_BRIEF.md` remains untouched, unread and
-unstaged. Status therefore contains `?? docs/gemini/`; the requested completely
-clean status is not claimed. Do not delete user material to manufacture it.
+This run completed section 0 and the original-font pipeline/theme milestone.
+New sections were stopped to reserve context for the required handoff.
+Sections 2–7 remain pending; do not infer their completion from font progress.
 
-This run completed the editor-folder/CI infrastructure milestone and the sound
-part of the offset investigation. New sections were stopped to preserve time
-and context for the required handoff. Fonts, texture enhancement, presentation,
-dynamic menu and stretch lighting have NOT been implemented.
-
-| Current request | Result |
+| Requested section | Result |
 |---|---|
-| 0 Sync / Unity purge | Prior deletion verified complete; no duplicate deletion or move |
-| 0 Editor folders | Cause documented; self-contained editor paths; empty leftovers removed |
-| 0 CI | Workflow pushed, downloads verified, source-only local import/traversal pass; remote run status blocked by authentication |
-| 0.4 / 6 previous carryovers | Audio done previously; other outstanding work listed below |
-| 1 Offset files | Bounded CRC-checked decoder and synthetic tests committed; spatial correction blocked by missing semantics |
-| 2 Fonts | Not started |
-| 3 Textures | Not started; no enhancement tools/models fetched |
-| 4 Display / 5 Dynamic menu | Not started; existing menu and viewport retained |
-| 7 Lighting | Not started |
-| 8 Docs | Commands, tool licenses/pins, migration guide, ledger/index and this handoff updated for completed work |
-| 9 Final gate | Local regression passes; landmark gate fails, remote CI unverified, unrelated untracked user folder remains |
-| 10 Handoff | This document |
+| 0 Sync / CI | Authenticated gh session works; prior and new Linux runs are green; README badge added |
+| Gemini brief exception | Committed once, as-is, in ad207fd; no other owner/Gemini file edited |
+| 1 Fonts | Six fonts decoded/exported, five sheets inventoried, Faithful/Enhanced resources, optional theme/options and tests implemented |
+| 2 Texture enhancement | Not started; no upscaler or model downloaded |
+| 3 Display / 4 Dynamic menu | Not started; current viewport/layout and existing menu flow retained |
+| 5 Human transcript review | Not started; no Gemini proposal approved or promoted |
+| 6 Landmark investigation | Not started; unchanged existing gate rerun and reported below |
+| 7 Carryovers | Not started this run |
+| 8 Docs | Font commands, controls, current menu status, licenses, ledger/index, CI badge and this handoff updated |
+| 9 Final gate / handoff | Local matrix and runtime CI pass; known landmark failure and limitations retained |
 
-## Exact validation
+Gemini brief SHA-256 before and after the as-is commit:
+`89c62f79ae23ef4547d2103849ce280b861a67ee78089a7e44038fb1abb5ffb6`.
+Never edit/delete docs/gemini/ or staging/gemini/. No staging/gemini input or
+optional menu style guide was read or used by this milestone.
 
-Final matrix: `staging/validation/regression/offsets-final/summary.json` and
-per-target logs/reports. Python: **41 reference + 11 pipeline = 52 passing**.
+## Exact gates
 
-| Target | Smoke | Traversal | Engine/script errors |
-|---|---:|---:|---:|
-| Headless, forward_plus | 42/42 | 150/150 | 0 |
-| Real Vulkan Forward+ | 42/42 | 150/150 | 0 |
-| Real Vulkan Mobile | 42/42 | 150/150 | 0 |
+Final local evidence: `staging/validation/regression/fonts-section-final/`.
+Python: **47 reference + 11 pipeline = 58 passing**.
 
-Import passes. Real renderer logs identify Vulkan on AMD Radeon RX 580 2048SP.
-All original 40 smoke and 143 traversal checks remain; no threshold was lowered.
-No new menu suite, human playtest, 1080p performance capture or visual QA is claimed.
+| Target | Smoke | Traversal | Fonts | Engine/script errors |
+|---|---:|---:|---:|---:|
+| Headless, forward_plus | 44/44 | 150/150 | 29/29 | 0 |
+| Real Vulkan Forward+ | 44/44 | 150/150 | 29/29 | 0 |
+| Real Vulkan Mobile | 44/44 | 150/150 | 29/29 | 0 |
 
-The source-only copy in `staging/ci-clean-room/` contains tracked source and the
-pinned remake engine, without assets or private level graphs. Its Windows
-headless import and 150/150 traversal passed with zero engine/script errors.
-Evidence: `staging/validation/ci-{import,traversal}.log` and `ci-summary.json`.
-This verifies missing private assets locally, not Linux/GitHub execution.
+Import passes in the final matrix. Real GPU logs identify the RX 580 2048SP.
+All previous 42 smoke labels are retained; two original-font assertions are
+added. Evidence: staging/validation/fonts/retained-smoke-checks.json.
+The original 150 traversal checks and every existing gate stay in place.
+No human playtest, new dynamic-menu suite, 1080p layout certification or steady
+60 fps benchmark has been claimed.
 
-An initial direct Python test invocation hit the known sandbox TEMP permission
-problem. The successful final matrix used TEMP/TMP=`staging/test_tmp` via the
-regression launcher. The failed invocation is not reported as passing.
+CI is green for runtime commit 85fba40:
+[run 39480489642](https://github.com/snazzyeee/spiderman-2000-revamp/actions/runs/39480489642).
+Downloaded reports: `staging/validation/ci-fonts-runtime/`. Linux CI passes all
+58 Python tests, 150 traversal checks and 10 font variant/fallback checks.
+Private-font loading/metrics and the 44-check private smoke suite are explicitly
+skipped with reasons; they remain mandatory locally. The final docs-only
+handoff push triggers another run, checked after pushing and reported in chat.
+
+The owner's gh login resolved the old authentication blocker. Only the gh
+session was used; no stored Git credential was accessed. Earlier runs for
+98e5b52, the brief/badge and font-pipeline commits were also confirmed green.
 
 ```powershell
 ./tools/pipeline/run_regression.ps1 -Milestone next-section
+./tools/pipeline/run_godot.ps1 -Headless -Script res://src/diagnostics/font_tests.gd
 ```
 
-## CI status and tool pins
+Regression now includes the font suite on all three targets. It verifies fresh
+reports, existing renderer/Vulkan evidence and zero engine/script errors.
 
-Workflow: [Synthetic regression](https://github.com/snazzyeee/spiderman-2000-revamp/actions/workflows/synthetic-regression.yml).
-**CI run link unavailable; no green remote run has been observed.**
-`gh run list` reports no authenticated session. An unauthenticated public API
-request cannot see this private repository. Remote evidence is recorded in
-`staging/validation/ci-remote-status.log`.
+## Recovered font facts and authored presentation
 
-Automatic approval review rejected an attempt to repurpose Git's stored
-credential for GitHub API access, calling it credential probing from an
-unintended source. That action did not execute and was not retried or bypassed.
-An authorized authenticated `gh` session is required to finish remote inspection;
-then run `gh run list` and `gh run view <id> --log-failed`, fix any failure,
-and check the final pushed commit. No secrets are required by the workflow.
+New ledger: docs/behavior_ledger/fonts.md, added before implementation.
+FNT is self-contained: count, sixteen-byte glyph records, sixteen-color palette
+and aligned packed four-bit bitmaps. Width/height/baseline/slice widths are
+bounded and checked; file accounting must be exact. The five BMP companions
+are independently CRC-checked paletted authoring sheets; their per-glyph sheet
+mapping remains unverified and is not guessed from names.
 
-The workflow runs Python synthetic fixtures and guarded Godot headless import /
-all synthetic traversal suites on Ubuntu 24.04. It explicitly records the
-42-check private-asset smoke suite as skipped, with a reason, in its JSON
-summary. The full local private gate remains unchanged. Artifacts contain logs
-and reports. Actions use immutable commit pins. The hosted Python/PowerShell
-are used directly; there is no extra interpreter download. Python dependencies
-have exact universal-wheel hashes; a complete `pip download --require-hashes`
-succeeded. Download log: `staging/validation/ci-dependency-download.log`.
+A bounded static read of the canonical fingerprinted executable recovered the
+normal ASCII index map and nominal advances/space width. The decomp's
+getCharIndex body is a stub despite its tag, so it was not used as proof.
+Private static audits remain staging/reference/font-{charmap,width,constructor}-static.txt.
+No original program or decomp build was executed, and no disassembly or raw
+original-program data was copied into src/, tests or comments.
 
-`tools/pipeline/setup_godot_linux.py` downloaded and verified the official Linux
-4.7.2 archive, SHA-256
-`cadd3204e728a35d3f13adb7fd0d7902636b79f6b95c40c265eb73b6c35329e4`.
-It bounds the archive/binary and accepts only the expected single member.
-Linux execution itself has not been tested on this Windows host. Tool/setup
-pins and licenses are in `docs/THIRD_PARTY.md`.
+Faithful: decoded RGBA pixels in original and integer nearest-neighbor 4x
+BMFont atlases. Enhanced: union boundaries traced independently per visible
+palette color into layered COLR/CPAL TrueType outlines. Every layer's polygon
+area must equal its original pixel count; all advances are checked exactly
+against source metrics. Per-glyph trace failures fail conversion and are
+recorded in the private manifest. Final conversion: six fonts, five sheets,
+zero tracing failures, exact variant metrics. All derived fonts/art stay private.
 
-## Unity purge and editor folders
+Authored: scalable palette-outline presentation; theme/default sizes; UI-role
+selection, Enhanced default, user-setting policy and filtering. Title/menu/HUD/
+captions use sp_fnt00; subtitles use sp_fnt02. Shell font helper choices are
+recovered, but exact original title/HUD/subtitle/button roles remain partly
+unknown. Nominal metrics are preserved; original global scale is a separate
+runtime setting and is not claimed as the remake's UI scale.
 
-The existing purge audit records exactly Game, Builds, Logs, tools/Unity,
-tools/Build and tools/third_party/unity-cli. All six remain absent, tracked
-Unity deletions were already committed, and no temporary Unity .gdignore or
-Unity-era ignore block remains. Phase 0 is complete in PURGE_REPORT.md.
+Options → Font variant selects Faithful / Enhanced, persists under video in
+user://settings.cfg and applies live to registered controls. Missing private
+fonts and unsupported characters retain the existing fallback. Tests restore
+the user's settings file after checking persistence.
 
-Prior preservation evidence: 22,579 entries, 22,573 exact matches plus six
-accepted regenerated reports/captures. Immutable inventory SHA-256:
-`70f05392d00b6d67a52f4e0413dc07fd26b8690e490c37ef77738f119a90e892`.
-Private audits remain in staging/migration_audit/. Smoke writes only under
-staging/validation/smoke/ and the launcher checks preservation collisions.
+## Limitations and failed evidence retained
 
-Godot 4.7.2's EditorPaths constructor creates the four observed subfolder names
-relative to its working directory if changing to the host config/data path
-fails. The launchers now put the supported `_sc_` marker beside the pinned
-editor: editor data goes under the ignored installation's editor_data/.
-All four verified-empty root folders were removed and did not recur through
-both full matrices. Their exact fallback names are explicitly ignored.
-Existing host editor settings were not moved or deleted. Details/source link:
-GODOT_MIGRATION.md, “Editor paths and public CI”.
+- The initial monochrome luminance-threshold experiment lost dark underline
+  glyphs. It failed; the threshold was not lowered and no glyph was omitted.
+  Palette-layer tracing replaces that approach and preserves all visible colors.
+  The failed trial log and explanation remain private / in the ledger.
+- Visual QA found font_big's generic map inappropriate for the mixed title/year:
+  its specialized glyph binding remains unresolved. That bank's raw/outline
+  exports support structural/metric diagnostics, not a claim of correct imagery
+  for every generic codepoint. It is not used in the live theme. The title uses
+  sp_fnt00 without guessing font_big indices. Other unused specialized mappings,
+  accents and dynamic button prompts still require evidence.
+- Palette high bits are retained in the manifest. Color-key transparency is
+  preserved; original semi-transparency behavior beyond that remains partial.
+- The first import of newly created font resources emitted two dummy-renderer
+  texture errors. Failed evidence is in regression/fonts-pipeline/import.log.
+  An unchanged import recheck and subsequent full matrices passed with zero
+  errors. The cold-cache cause is unresolved; do not claim first-import
+  cleanliness. Reproduce and fix it without suppressing engine errors.
+- The original landmark gate was rerun unchanged and remains **19/21**:
+  28/146 supported (19.18%) versus runner-up 1/146 (0.68%). The >=80% support
+  and >=30-point margin criteria fail. TRG placement stays unverified.
+  Current reports: units-fonts-final.log, units-landmark.json and
+  units-fonts-analysis.log under staging/validation/. No spatial correction
+  was applied and no new landmark subset/gate was substituted.
 
-## Offset investigation and failing landmark gate
+## Private outputs and regeneration
 
-New ledger: `docs/behavior_ledger/offset_files.md`, indexed and linked from
-units.md. Decoder: `tools/reference/decode_level_offsets.py`; three synthetic
-tests cover signed field order, malformed/overflow/duplicate input, compression,
-CRC, lengths and read budgets. Private report: `staging/reference/level-offsets.json`.
+Prerequisites: canonical staging/raw_extracted/PC/app/data.pkr; the canonical
+SpideyPC.exe only for bounded fingerprint-gated static audits; raw extracted
+PSX/SFX/KAT/fonts, private assets/ and levels/*/trg_graph.json, existing audio
+source WAV manifest/tree and exact native catalogs. Keep staging/migration_audit/
+and the prior landmark evidence. Existing Unity deletion remains complete.
 
-Nine archive members / 34 records passed CRC and bounded decoding. Each is a
-count plus triples. The reference loader stores an integer key and two signed
-short parameters, swapping their storage order relative to the text. All keys
-fit both the matching G object and model ranges. There is no L1A1 member.
-The consumer, units and spatial interpretation remain unknown; the available
-decomp exposes loading/freeing but no consuming C++ body. Treating the triples
-as XYZ would invent a transform. No geometry or TRG coordinate was modified.
-L1A3/L1A4 with/without geometric-offset testing is blocked by that missing
-interpretation; it was not run using an invented mapping.
-
-The original L1A1 gate was rerun unchanged: **19/21**. Configured mapping is
-best, but support is **28/146 (19.18%)** versus runner-up **1/146 (0.68%)**;
-80% support and a 30-point margin both fail. Classification remains 82 outside
-XZ geometry, 36 over geometry with unsupported gaps, 28 supported. TRG-derived
-placement remains unverified. All seven former G-origin mismatches already
-match O-bank objects; the offset files do not justify changing those origins.
+Use the pinned audio Python interpreter:
 
 ```powershell
-./tools/third_party/audio-python/Scripts/python.exe tools/reference/decode_level_offsets.py
-./tools/pipeline/run_godot.ps1 -Headless -Script res://src/diagnostics/verify_units.gd
-# The unchanged landmark gate intentionally exits nonzero.
-./tools/third_party/audio-python/Scripts/python.exe tools/reference/analyze_landmarks.py
+./tools/third_party/audio-python/Scripts/python.exe tools/pipeline/setup_font_tools.py
+./tools/third_party/audio-python/Scripts/python.exe tools/pipeline/convert_fonts.py
+./tools/pipeline/run_godot.ps1 -Import
+./tools/pipeline/run_regression.ps1 -Milestone fonts-section-final
 ```
 
-## Recovered versus authored; existing carryovers
+prepare_godot.ps1 includes setup/conversion before import. Setup fetches only
+version/hash-pinned wheels into tools/third_party/font-tools/: Pillow 11.3.0,
+fontTools 4.60.1, Capstone 5.0.6. Licenses and SHA pins are in THIRD_PARTY.md and
+the setup script. Conversion itself is entirely local/offline.
 
-Recovered observations this run: CRC-checked offset grammar/field sizes/order,
-archive coverage and key ranges. Loader semantics are partial (@NotOk), and
-the signed-token helper's assertions conflict with negative input; the ledger
-records this rather than claiming full recovery. Authored: decoder budgets,
-fail-closed policy, CI evidence checks and editor installation isolation.
-No new game mechanic, art/font transformation or gameplay tuning was added.
+New private outputs:
 
-Previously completed: modular PlayerMotor/state resources, CameraRig/Director,
-synthetic traversal and exact XA/SFX identity binding. Audio joins bind 901 XA
-registry entries / 1,249 catalog identities and 1,993 SFX entries. Five KATs
-are absent and one bank has an invalid sample index; they remain unresolved.
-Level SFX aliases require an explicit/active bank. Missing registries fail cleanly.
+- assets/ui/fonts/: six original/4x BMFont resources, palette-layer TTFs,
+  source-sheet PNGs and font_manifest.json with source hashes, palette words,
+  glyph metrics, generic mapping and variant advances.
+- staging/validation/fonts/: comparison renders for each font at 1280x720,
+  1920x1080 and 2560x1440, plus retained-smoke-label evidence. Comparison text
+  is neutral test text; the original authoring sheets are exported separately.
+- staging/validation/smoke/: menu/mission captures now show original fonts.
+- staging/validation/regression/fonts-section-final/: exact final logs/reports;
+  staging/validation/ci-fonts-runtime/: downloaded green CI evidence.
 
-Still outstanding from the previous request: animation alias/provenance import
-postprocessor, materials ledger/visual QA, private Level 1 L1A2–L1A4 asset pipeline
-and collision, Bink-to-Theora cinematic playback, opcode ledger/MissionRuntime
-with logic-only harness/default-off integration, debug overlay, controls/human
-playtest checklist expansion, InputRecorder/replayer and explicit-update goldens.
-Existing authored wall attach, pendulum tuning, input assignments, probe/grace
-rules, swing binding and meter calibration remain labeled authored in the ledger.
-No unknown placement or mission rule has been promoted to recovered.
+No original or derived art/font/audio/video/game text was committed. All public
+fixtures are synthetic. No enhancement model or cloud service was used.
 
-## Private inputs and regeneration
+## Remaining sections and next three tasks
 
-- `staging/raw_extracted/PC/app/{data.pkr,SpideyPC.exe}`; executable is static,
-  bounded and fingerprint-gated only. Never run it.
-- `staging/raw_extracted/Extracted/data/data/` including raw PSX/OFF/SFX/KAT/fonts.
-- `assets/`, all private level graphs, native voice/SFX catalogs and audio source
-  WAV manifest/tree. See GODOT_MIGRATION.md for exact audio rebuild commands.
-- `staging/reference/{l1a1-regions.json,l1a1-o-regions.json,landmark_geometry/}`,
-  original units reports, and migration preservation/purge audit.
-- New: `staging/reference/level-offsets.json`, generated by the decoder command
-  above; full matrix regenerated with run_regression.ps1 -Milestone <name>.
-- `tools/third_party/` contains pinned Godot/converter/Python/FFmpeg/read-only
-  decomp. New Linux Godot is regenerated by setup_godot_linux.py; dependency
-  wheels by pip download --require-hashes -r tools/pipeline/ci-requirements.txt
-  --dest tools/third_party/ci-wheels. No game data is needed by CI.
+1. Reproduce the font cold-cache import errors and fix their cause, then start
+   section 2: private texture inventory, pinned offline RX 580 upscaler/models,
+   wrap/alpha processing, HD/hand-curated override provenance, runtime texture
+   choice and VRAM/visual QA. No part of this enhancement pipeline exists yet.
+2. Section 3: 1080p/adaptive UI, live persisted renderer-aware Video options and
+   layout checks at the four requested resolutions. Current 1280x720 viewport
+   and authored menu placement have not been changed by typography work.
+3. Section 4: dynamic menu/transition/attract/gallery/costume/accessibility work
+   with honest frame-time evidence. Then section 5's local human transcript
+   review tool and approved-only registry merge, followed by the time-boxed
+   restart/SCRIPTONLYBADDY investigation and ordered section 7 carryovers.
 
-No original/derived game art, fonts, text, audio or video was committed. No
-original executable/decomp build ran and no tools/functions/*.bin was vendored.
-
-## Next three tasks
-
-1. Provide an authorized `gh` login, observe the pushed workflow, fix any Linux
-   failure without weakening gates, and record a green run URL for the final commit.
-2. Resume requested section 2: decode original font metrics/sheets into a ledger,
-   build private faithful/enhanced resources, integrate the theme/options and add
-   synthetic decoder and original-font smoke checks with full renderer gates.
-3. Proceed through texture enhancement, display options and dynamic menu in the
-   requested order, with pinned offline tools, private QA and honest RX 580
-   performance measurements. Carry over the remaining Phase 3/runtime/recorder
-   work afterward; do not enable TRG placement while its gate fails.
+Carryovers still include alias/provenance import processing, remaining Level 1
+asset conversion/collision, Theora cinematics, opcode ledger/MissionRuntime
+logic-only/default-off integration, debug overlay, human playtest checklist and
+InputRecorder/replayer. Audio XA/SFX identity binding was completed previously;
+Gemini transcript proposals must never become verified without human decisions.
+BATCH_AUDIO.md remains the existing audio workflow; no review-tool command is
+advertised as implemented.
 
 ## Permissions and operational notes
 
-Elevated execution was used for public release/source/PyPI reads, pinned tool
-and dependency downloads, Git index/commit/push, process inspection and full
-Godot import/runtime matrices. The credential-reuse action was rejected by
-automatic review as described above; no other approval was solicited.
-Keep the editor closed before import. Set TEMP/TMP to staging/test_tmp (the
-regression launcher does this). Do not count sandbox permission failures,
-stale output, local source-only execution or an unobserved CI run as a pass.
+Elevated execution was used for gh auth/status/run/download, normal Git
+commit/push, public PyPI metadata and pinned setup downloads, process inspection
+and Godot import/runtime matrices. No automatic-review rejection occurred this
+run; the historical stored-credential action was not repeated.
+
+Use run_regression.ps1 so TEMP/TMP point to staging/test_tmp. Close the editor
+before import. Leave owner/Gemini files alone; the single authorized as-is
+brief commit is complete. Keep every existing gate and distinguish the passing
+warm-cache regression from unresolved cold-cache and landmark limitations.
