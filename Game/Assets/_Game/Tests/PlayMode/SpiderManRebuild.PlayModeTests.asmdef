@@ -1,0 +1,5 @@
+{
+  "name": "SpiderManRebuild.PlayModeTests",
+  "references": ["SpiderManRebuild.Runtime", "Unity.Cinemachine", "Unity.InputSystem"],
+  "optionalUnityReferences": ["TestAssemblies"]
+}

@@ -1,0 +1,32 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements">
+    <Style src="PrototypeHud.uss" />
+    <ui:VisualElement class="screen" picking-mode="Ignore">
+        <ui:VisualElement class="header" picking-mode="Ignore">
+            <ui:VisualElement class="title-card" picking-mode="Ignore">
+                <ui:Label text="TRAVERSAL LAB / 01" class="eyebrow" />
+                <ui:Label text="ROOFTOP RUN" class="title" />
+                <ui:Label name="objective" text="Reach the cyan beacon on the far rooftop." class="objective" />
+            </ui:VisualElement>
+            <ui:VisualElement class="stats" picking-mode="Ignore">
+                <ui:Label name="state" text="GROUNDED" class="eyebrow" />
+                <ui:Label name="speed" text="0.0 m/s" class="speed" />
+                <ui:Label name="fps" text="WARMING UP" class="muted" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:Label text="+" class="crosshair" picking-mode="Ignore" />
+        <ui:VisualElement class="footer" picking-mode="Ignore">
+            <ui:Label text="WASD  MOVE     MOUSE  LOOK     SHIFT  RUN     SPACE  JUMP     R  RESET     ESC  PAUSE" />
+            <ui:Label text="PLACEHOLDER COURSE / ORIGINAL CODE AND GEOMETRY" class="muted fine" />
+        </ui:VisualElement>
+        <ui:VisualElement name="pause-panel" class="pause-screen">
+            <ui:VisualElement class="pause-card">
+                <ui:Label text="TAKE A BREATHER" class="eyebrow" />
+                <ui:Label text="PAUSED" class="title" />
+                <ui:Label text="Escape returns to the rooftops." class="objective" />
+                <ui:Button name="resume" text="RESUME" />
+                <ui:Button name="restart" text="RESTART COURSE" />
+                <ui:Button name="quit" text="QUIT" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

@@ -1,0 +1,11 @@
+{
+  "name": "SpiderManRebuild.Editor",
+  "rootNamespace": "SpiderManRebuild.Editor",
+  "references": [
+    "SpiderManRebuild.Runtime",
+    "Unity.InputSystem",
+    "Unity.Cinemachine",
+    "Unity.RenderPipelines.Universal.Runtime"
+  ],
+  "includePlatforms": ["Editor"]
+}

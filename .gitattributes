@@ -1,0 +1,17 @@
+* text=auto eol=lf
+*.cs text eol=lf
+*.json text eol=lf
+*.md text eol=lf
+*.asmdef text eol=lf
+*.inputactions text eol=lf
+*.uxml text eol=lf
+*.uss text eol=lf
+*.ps1 text eol=crlf
+*.unity text
+*.prefab text
+*.asset text
+*.mat text
+*.meta text
+*.png binary
+*.jpg binary
+*.ttf binary
