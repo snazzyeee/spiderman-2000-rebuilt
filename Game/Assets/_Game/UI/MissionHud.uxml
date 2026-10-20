@@ -23,7 +23,7 @@
         <ui:VisualElement name="pause-panel" class="pause-screen">
             <ui:VisualElement class="pause-card">
                 <ui:Label text="PAUSED" class="title" />
-                <ui:Button name="resume" text="RESUME" /><ui:Button name="restart" text="RESTART CHECKPOINT" /><ui:Button name="quit" text="QUIT" />
+                <ui:Button name="resume" text="RESUME" /><ui:Button name="restart" text="RESTART CHECKPOINT" /><ui:Button name="return-menu" text="MAIN MENU" /><ui:Button name="quit" text="QUIT" />
             </ui:VisualElement>
         </ui:VisualElement>
         <ui:VisualElement name="complete-panel" class="pause-screen">
@@ -32,6 +32,7 @@
                 <ui:Label text="MISSION COMPLETE" class="title" />
                 <ui:Label text="The skylight is clear. Time to head inside." class="objective" />
                 <ui:Button name="replay" text="REPLAY MISSION" />
+                <ui:Button name="complete-menu" text="MAIN MENU" />
             </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>

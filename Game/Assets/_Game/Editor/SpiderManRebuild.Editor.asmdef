@@ -6,7 +6,9 @@
     "Unity.InputSystem",
     "Unity.Cinemachine",
     "Unity.RenderPipelines.Universal.Runtime",
-    "Unity.Timeline"
+    "Unity.Timeline",
+    "UnityEngine.UI",
+    "Unity.TextMeshPro"
   ],
   "includePlatforms": ["Editor"]
 }

@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UIElements;
+using UnityEngine.SceneManagement;
 
 namespace SpiderManRebuild
 {
@@ -11,6 +12,7 @@ namespace SpiderManRebuild
         Label objective, state, vitals, subtitle, speaker, marker;
         VisualElement pausePanel, completePanel, subtitlePanel;
         double refresh;
+        Button returnMenuButton, completeMenuButton;
         void OnEnable()
         {
             var root = GetComponent<UIDocument>().rootVisualElement;
@@ -22,6 +24,10 @@ namespace SpiderManRebuild
             root.Q<Button>("restart").clicked += Recover;
             root.Q<Button>("replay").clicked += Replay;
             root.Q<Button>("quit").clicked += Quit;
+            returnMenuButton = root.Q<Button>("return-menu"); completeMenuButton = root.Q<Button>("complete-menu");
+            bool canReturn = Application.CanStreamedLevelBeLoaded("MainMenu");
+            if (returnMenuButton != null) { returnMenuButton.style.display = canReturn ? DisplayStyle.Flex : DisplayStyle.None; returnMenuButton.clicked += ReturnToMenu; }
+            if (completeMenuButton != null) { completeMenuButton.style.display = canReturn ? DisplayStyle.Flex : DisplayStyle.None; completeMenuButton.clicked += ReturnToMenu; }
         }
         void Start()
         { Dialogue.SubtitleChanged += OnSubtitle; Mission.ObjectiveChanged += RefreshObjective; }
@@ -32,6 +38,14 @@ namespace SpiderManRebuild
         void Recover() { Mission.RequestRecovery(); Resume(); }
         void Replay() { Mission.BeginMission(); Resume(); }
         void Quit() => Application.Quit();
+        void ReturnToMenu()
+        {
+            if (!Application.CanStreamedLevelBeLoaded("MainMenu")) return;
+            returnMenuButton?.SetEnabled(false); completeMenuButton?.SetEnabled(false);
+            Mission.Player.Motor.Session.SetPaused(false);
+            if (DialogueManager.Instance != null) DialogueManager.Instance.StopDialogue();
+            SceneManager.LoadSceneAsync("MainMenu");
+        }
         void Update()
         {
             if (Mission == null) return;
@@ -56,6 +70,8 @@ namespace SpiderManRebuild
         }
         void OnDisable()
         {
+            if (returnMenuButton != null) returnMenuButton.clicked -= ReturnToMenu;
+            if (completeMenuButton != null) completeMenuButton.clicked -= ReturnToMenu;
             var root = GetComponent<UIDocument>().rootVisualElement;
             if (root == null) return;
             root.Q<Button>("resume").clicked -= Resume; root.Q<Button>("restart").clicked -= Recover;

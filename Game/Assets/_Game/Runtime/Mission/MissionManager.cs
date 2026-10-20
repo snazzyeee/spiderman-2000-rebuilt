@@ -15,6 +15,8 @@ namespace SpiderManRebuild
         public CutsceneSequence Intro;
         public MissionStage Stage { get; private set; }
         public int NextCheckpoint { get; private set; }
+        public int SavedCheckpoint => checkpointProgress;
+        public bool SkipIntroOnNextBegin { get; set; }
         public event Action<MissionStage> StageChanged;
         public event Action ObjectiveChanged;
         Vector3 checkpointPosition;
@@ -53,7 +55,24 @@ namespace SpiderManRebuild
             Player.Motor.Simulate(Vector3.zero, false, false, Time.time, .05f);
             FaceObjective();
             SetStage(MissionStage.Intro);
-            if (Intro == null || !Intro.TryPlay()) SetStage(MissionStage.RooftopRoute);
+            bool skipIntro = SkipIntroOnNextBegin; SkipIntroOnNextBegin = false;
+            if (skipIntro || Intro == null || !Intro.TryPlay()) SetStage(MissionStage.RooftopRoute);
+        }
+        public void RestoreCheckpoint(int progress, bool bankCleared)
+        {
+            if (recovery != null) { StopCoroutine(recovery); recovery = null; }
+            if (Intro != null) Intro.Abort();
+            Encounter.ResetEncounter();
+            checkpointProgress = bankCleared ? Checkpoints.Length : Mathf.Clamp(progress, 0, Checkpoints.Length - 1);
+            NextCheckpoint = checkpointProgress;
+            checkpointPosition = checkpointProgress == 0 ? StartingSpawn.position : Checkpoints[checkpointProgress - 1].SafeSpawn.position;
+            if (bankCleared) foreach (var enemy in Encounter.Enemies)
+                enemy.Health.Apply(new DamageHit(enemy.Health.Maximum, Team.Player, DamageKind.Melee));
+            Player.Health.Restore(); Player.Combat.Restore();
+            Player.Motor.SpawnPosition = checkpointPosition; Player.Motor.ResetPlayer();
+            Player.Motor.Simulate(Vector3.zero, false, false, Time.time, .05f);
+            Player.Motor.Session.SetControlLock(this, false); Player.Motor.Session.SetMenuMode(false);
+            FaceObjective(); SetStage(bankCleared ? MissionStage.Skylight : MissionStage.RooftopRoute);
         }
         void IntroFinished(bool completed)
         { if (completed && Stage == MissionStage.Intro) SetStage(MissionStage.RooftopRoute); }

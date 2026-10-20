@@ -39,3 +39,7 @@ __pycache__/
 # Optional private research imports, including the folder's adjacent meta
 /Game/Assets/_LocalReference/
 /Game/Assets/_LocalReference.meta
+
+# Editor-bundled TMP essentials are imported reproducibly; do not vendor font binaries.
+/Game/Assets/TextMesh Pro/
+/Game/Assets/TextMesh Pro.meta

@@ -19,7 +19,7 @@ namespace SpiderManRebuild
         public string ActiveClipId { get; private set; }
         public string Speaker { get; private set; } = "";
         public string Subtitle { get; private set; } = "";
-        public bool IsSpeaking => dialogue != null && (dialogue.isPlaying || loading != null);
+        public bool IsSpeaking => ActiveClipId != null && (began || loading != null);
         public AudioSource DialogueSource => dialogue;
         AudioSource dialogue, music;
         AudioSource[] effects;
@@ -130,6 +130,7 @@ namespace SpiderManRebuild
             if (music.clip == clip && music.isPlaying) return true;
             music.clip = clip; music.Play(); return true;
         }
+        public void StopMusic() { if (music != null) music.Stop(); }
         public void SetVolume(string channel, float normalized)
         {
             normalized = Mathf.Clamp01(normalized);
