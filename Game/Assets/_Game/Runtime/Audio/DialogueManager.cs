@@ -132,7 +132,8 @@ namespace SpiderManRebuild
         }
         public bool PlaySfx(string id, Vector3? position = null)
         {
-            if (Database == null || !Database.TryResolve(id, out _, out AudioClip clip)) return false;
+            if (Database == null || !Database.TryResolve(id, out DialogueEntry entry, out AudioClip clip)
+                || (CinematicDialogueActive && entry.category == "Dialogue")) return false;
             AudioSource source = effects[effectCursor]; effectCursor = (effectCursor + 1) % effects.Length; source.Stop();
             source.spatialBlend = position.HasValue ? 1 : 0;
             if (position.HasValue) source.transform.position = position.Value;

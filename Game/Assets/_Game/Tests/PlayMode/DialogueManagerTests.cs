@@ -18,7 +18,7 @@ namespace SpiderManRebuild.Tests
             yield return null;
             database = ScriptableObject.CreateInstance<DialogueDatabase>();
             clip = AudioClip.Create("Synthetic speech", 44100, 1, 44100, false);
-            manifest = new TextAsset("{\"schema_version\":1,\"clips\":[{\"clip_id\":\"test\",\"file_name\":\"Wav/test.wav\",\"speaker\":\"Test speaker\",\"subtitle_text\":\"Test subtitle\",\"subtitle_status\":\"verified\"}]}");
+            manifest = new TextAsset("{\"schema_version\":1,\"clips\":[{\"clip_id\":\"test\",\"file_name\":\"Wav/test.wav\",\"category\":\"Dialogue\",\"speaker\":\"Test speaker\",\"subtitle_text\":\"Test subtitle\",\"subtitle_status\":\"verified\"}]}");
             database.Initialize(manifest, new[] { new DialogueAudioBinding("test", clip) });
             root = new GameObject("Audio service test"); root.SetActive(false);
             manager = root.AddComponent<DialogueManager>(); manager.Database = database;
@@ -51,6 +51,7 @@ namespace SpiderManRebuild.Tests
         {
             Assert.That(manager.BeginCinematic(root), Is.True);
             Assert.That(manager.Play("test"), Is.False);
+            Assert.That(manager.PlaySfx("test"), Is.False);
             Assert.That(manager.BeginTimeline("test", database, "", ""), Is.False);
             Assert.That(manager.BeginTimeline("test", root, "", ""), Is.True);
             yield return null;
