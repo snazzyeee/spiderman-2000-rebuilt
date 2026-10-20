@@ -28,10 +28,14 @@ or run Builds/Mission1/SpiderManMission1.exe.
 | Pause | Escape | Start |
 | Recover checkpoint | R | Back / Select |
 | Skip intro | Enter | A / Cross during intro |
+| Advance separate mission briefing | Enter after 0.2 seconds | A / Cross |
 
 Follow the rooftop objective markers. Aim toward building geometry for swing
 and zip. Hold latch when approaching a wall, then move up to crawl and mantle
 its lip. Swing requires a visible elevated surface within range.
+The opening recording and the authored briefing are separate phases, both
+blocking gameplay. The briefing advances automatically after five seconds or
+with Enter/A. Movement, combat and objective UI begin afterward.
 
 The final rooftop starts the encounter and constrains movement to its arena.
 Defeat all three guards with web capture or melee to unlock the entry prompt.

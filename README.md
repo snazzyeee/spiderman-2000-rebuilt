@@ -32,6 +32,13 @@ verified semantic mappings. Menu sound roles and Stan_00's remake intro binding
 are authored associations. The original recording plays; the visible mission
 briefing is authored text, not a verified transcript.
 
+The opening now follows IntroCinematic -> MissionBriefing -> GameplayActive.
+The recording has exclusive dialogue ownership and a hidden objective HUD;
+the separate briefing starts only after the intro completion event. See
+[Docs/MISSION_LIFECYCLE.md](Docs/MISSION_LIFECYCLE.md).
+[Docs/MENU_AND_PENDULUM.md](Docs/MENU_AND_PENDULUM.md) describes the enforced
+five-item menu and fixed-length kinematic swing/collision rules.
+
 See [Docs/FRONTEND_VALIDATION.md](Docs/FRONTEND_VALIDATION.md) for current test
 results, rendered checks and remaining limits.
 

@@ -114,10 +114,12 @@ namespace SpiderManRebuild
             Check("original Stan stream routed from registry", DialogueManager.Instance.ActiveClipId != null
                 && DialogueManager.Instance.Database.TryGet(DialogueManager.Instance.ActiveClipId, out var narration)
                 && narration.source_path.EndsWith("/stan_00.bik", StringComparison.OrdinalIgnoreCase));
+            yield return Capture("intro");
             mission.Intro.Skip(); yield return null; yield return null;
             Check("intro completion exclusively begins blocked briefing", mission.Lifecycle == MissionLifecycle.MissionBriefing
                 && mission.Player.Motor.Session.ControlBlocked && DialogueManager.Instance.ActiveClipId == null
                 && mission.Intro.Presenter.Subtitle == mission.BriefingText);
+            yield return Capture("briefing");
             mission.CompleteBriefing(); yield return null;
             Check("briefing completion releases gameplay", mission.Stage == MissionStage.RooftopRoute
                 && !mission.Player.Motor.Session.ControlBlocked && DialogueManager.Instance.ActiveClipId == null);

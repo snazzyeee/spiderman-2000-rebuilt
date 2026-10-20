@@ -79,3 +79,7 @@ unsupported inputs. All 991 dialogue entries still require complete verified
 semantic annotation; successful decoding does not mean exact mapping is known.
 
 Decoder reference: [Neversoft Multitool](https://github.com/slfx77/neversoft-multitool).
+
+Local ASR, requested filename speaker rules, level/TRG candidate joins and
+resumable processing are implemented in [BATCH_AUDIO.md](BATCH_AUDIO.md).
+Draft transcription does not satisfy the verified-complete semantic gate.

@@ -33,9 +33,9 @@ are distinguished from verified original behavior in the private manifest.
 
 ## Unity and standalone coverage
 
-Validated results: 36 Unity tests passed (10 EditMode, 26 PlayMode), with zero
-failures or skips; eight Python tests passed. The rendered standalone player
-passed 26 checks with an empty error list. Its complete directory is about
+Validated results: 42 Unity tests passed (10 EditMode, 32 PlayMode), with zero
+failures or skips; 12 Python tests passed. The rendered standalone player
+passed 29 checks with an empty error list. Its complete directory is about
 273 MB; extracted WAVs and Unity caches are additional local storage.
 
 The Unity suite includes the earlier traversal, combat, mission, Timeline and
@@ -50,16 +50,22 @@ gamepad navigation/submit/cancel, persisted volume changes, gallery content,
 credits directive parsing, controls layout, narrated New Game, skip cleanup,
 checkpoint persistence and Load Game without replaying the intro.
 
-The main menu, Options, Gallery, Credits and Controls captures were inspected.
+The main menu, Options, Gallery, Credits, Controls, intro and briefing captures were inspected.
 The credits use 22 layout-derived pages. Submenu descriptions are confined to
 the left area, and reading pages hide that description to keep their text clear.
+The intro frame shows only cinematic scenery; the subsequent briefing frame
+shows the authored instructions after narration has released its dialogue owner.
+Lifecycle checks include natural completion, skip, abort and competing speech.
+Additional traversal regressions enforce fixed rope length, tangent velocity,
+kinematic body settings, invalid/disabled anchors and wall-collision release.
 
 Local machine-readable results and private images:
 
 - TestResults/frontend-editmode.xml and frontend-playmode.xml
 - TestResults/menu-smoke.json
 - TestResults/menu-private.png, menu-private-options.png,
-  menu-private-gallery.png, menu-private-credits.png and menu-private-controls.png
+  menu-private-gallery.png, menu-private-credits.png, menu-private-controls.png,
+  menu-private-intro.png and menu-private-briefing.png
 - Logs/frontend-*.log and Logs/menu-smoke.log
 
 Build: Builds/Frontend/SpiderManRevamp.exe with its accompanying data/runtime
@@ -72,8 +78,8 @@ These are functional and rendered checks, not a sustained frame-time benchmark
 or a guarantee of bug-free play. Audio was decoded and routed successfully;
 the full corpus has not been manually listened to or transcribed.
 
-The visible mission briefing is authored text. It is not a transcript of the
-original Stan recording. The menu implements the requested modernized five
+The visible mission briefing is authored text, shown after the cinematic. It is
+not a transcript of the original Stan recording. The menu implements the requested modernized five
 branches with original art/audio and procedural texture detail; it does not
 establish pixel parity, original unlock rules, every original submenu or a
 high-resolution repaint of all source art. Training uses the remake rooftop
