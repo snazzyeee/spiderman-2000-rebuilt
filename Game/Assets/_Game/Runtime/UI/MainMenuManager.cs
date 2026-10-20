@@ -84,6 +84,9 @@ namespace SpiderManRebuild
             foreach (GameObject row in generatedRows) { row.SetActive(false); Destroy(row); }
             generatedRows.Clear(); selections.Clear(); highlighted = null;
             CurrentPage = page; MainRoot.SetActive(page == "Main"); PageRoot.SetActive(page != "Main");
+            Description.gameObject.SetActive(page != "Credits" && page != "Controls");
+            Description.rectTransform.anchoredPosition = page == "Main" ? new Vector2(0, -360) : new Vector2(-460, -415);
+            Description.rectTransform.sizeDelta = page == "Main" ? new Vector2(1400, 80) : new Vector2(780, 80);
             GalleryImage.gameObject.SetActive(page == "Gallery"); Body.gameObject.SetActive(page == "Credits" || page == "Controls");
             Body.transform.parent.gameObject.SetActive(page == "Credits" || page == "Controls");
             PageTitle.text = page.ToUpperInvariant(); Status.text = "";
