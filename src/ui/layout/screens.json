@@ -137,12 +137,12 @@
             "height": 3.8,
             "camera": [
               0,
-              1.9,
-              6.5
+              1.5,
+              7.0
             ],
             "target": [
               0,
-              1.8,
+              1.3,
               0
             ],
             "yaw": -18,
@@ -166,7 +166,7 @@
             "breathing_amplitude": 0.012,
             "breathing_period": 2.7,
             "parallax_pixels": 5,
-            "ground_size": 8
+            "ground_size": 5
           }
         },
         "enhanced": {
@@ -279,12 +279,12 @@
             "height": 3.8,
             "camera": [
               0,
-              1.9,
-              6.5
+              1.5,
+              4.6
             ],
             "target": [
               0,
-              1.8,
+              1.3,
               0
             ],
             "yaw": -18,
@@ -308,7 +308,7 @@
             "breathing_amplitude": 0.012,
             "breathing_period": 2.7,
             "parallax_pixels": 5,
-            "ground_size": 8
+            "ground_size": 5
           }
         }
       },
@@ -436,12 +436,12 @@
             "height": 3.8,
             "camera": [
               0,
-              1.9,
-              6.5
+              1.5,
+              7.0
             ],
             "target": [
               0,
-              1.8,
+              1.3,
               0
             ],
             "yaw": -18,
@@ -465,7 +465,7 @@
             "breathing_amplitude": 0.012,
             "breathing_period": 2.7,
             "parallax_pixels": 5,
-            "ground_size": 8
+            "ground_size": 5
           }
         },
         "enhanced": {
@@ -578,12 +578,12 @@
             "height": 3.8,
             "camera": [
               0,
-              1.9,
-              6.5
+              1.5,
+              4.6
             ],
             "target": [
               0,
-              1.8,
+              1.3,
               0
             ],
             "yaw": -18,
@@ -607,7 +607,7 @@
             "breathing_amplitude": 0.012,
             "breathing_period": 2.7,
             "parallax_pixels": 5,
-            "ground_size": 8
+            "ground_size": 5
           }
         }
       },
@@ -762,12 +762,12 @@
             "height": 3.8,
             "camera": [
               0,
-              1.9,
-              6.5
+              1.5,
+              7.0
             ],
             "target": [
               0,
-              1.8,
+              1.3,
               0
             ],
             "yaw": -18,
@@ -791,7 +791,7 @@
             "breathing_amplitude": 0.012,
             "breathing_period": 2.7,
             "parallax_pixels": 5,
-            "ground_size": 8
+            "ground_size": 5
           }
         },
         "enhanced": {
@@ -930,12 +930,12 @@
             "height": 3.8,
             "camera": [
               0,
-              1.9,
-              6.5
+              1.5,
+              4.6
             ],
             "target": [
               0,
-              1.8,
+              1.3,
               0
             ],
             "yaw": -18,
@@ -959,7 +959,7 @@
             "breathing_amplitude": 0.012,
             "breathing_period": 2.7,
             "parallax_pixels": 5,
-            "ground_size": 8
+            "ground_size": 5
           }
         }
       },
@@ -1068,7 +1068,7 @@
               "rect": [
                 102.4,
                 153.6,
-                422.4,
+                243.2,
                 278.4
               ],
               "anchor": "top_left",
@@ -1087,6 +1087,32 @@
               ],
               "confidence": "authored",
               "focus": true
+            },
+            {
+              "id": "actor",
+              "type": "3d_actor",
+              "rect": [
+                384.0,
+                134.4,
+                172.8,
+                292.8
+              ],
+              "anchor": "top_left",
+              "z": 2,
+              "overlay": false,
+              "asset": "res://assets/characters/spidey.glb",
+              "font": "sp_fnt00",
+              "font_size": 18,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored",
+              "focus": false
             }
           ],
           "focus_order": [
@@ -1106,12 +1132,12 @@
             "height": 3.8,
             "camera": [
               0,
-              1.9,
-              6.5
+              1.5,
+              7.0
             ],
             "target": [
               0,
-              1.8,
+              1.3,
               0
             ],
             "yaw": -18,
@@ -1135,7 +1161,7 @@
             "breathing_amplitude": 0.012,
             "breathing_period": 2.7,
             "parallax_pixels": 5,
-            "ground_size": 8
+            "ground_size": 5
           }
         },
         "enhanced": {
@@ -1211,7 +1237,7 @@
               "rect": [
                 307.2,
                 345.6,
-                1267.2,
+                729.6,
                 626.4
               ],
               "anchor": "top_left",
@@ -1230,6 +1256,32 @@
               ],
               "confidence": "authored",
               "focus": true
+            },
+            {
+              "id": "actor",
+              "type": "3d_actor",
+              "rect": [
+                1152.0,
+                302.40000000000003,
+                518.4000000000001,
+                658.8
+              ],
+              "anchor": "top_left",
+              "z": 2,
+              "overlay": false,
+              "asset": "res://assets/characters/spidey.glb",
+              "font": "sp_fnt00",
+              "font_size": 30,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored",
+              "focus": false
             }
           ],
           "focus_order": [
@@ -1249,12 +1301,12 @@
             "height": 3.8,
             "camera": [
               0,
-              1.9,
-              6.5
+              1.5,
+              4.6
             ],
             "target": [
               0,
-              1.8,
+              1.3,
               0
             ],
             "yaw": -18,
@@ -1278,7 +1330,7 @@
             "breathing_amplitude": 0.012,
             "breathing_period": 2.7,
             "parallax_pixels": 5,
-            "ground_size": 8
+            "ground_size": 5
           }
         }
       },
@@ -1416,12 +1468,12 @@
             "height": 3.8,
             "camera": [
               0,
-              1.9,
-              6.5
+              1.5,
+              7.0
             ],
             "target": [
               0,
-              1.8,
+              1.3,
               0
             ],
             "yaw": -18,
@@ -1445,7 +1497,7 @@
             "breathing_amplitude": 0.012,
             "breathing_period": 2.7,
             "parallax_pixels": 5,
-            "ground_size": 8
+            "ground_size": 5
           }
         },
         "enhanced": {
@@ -1559,12 +1611,12 @@
             "height": 3.8,
             "camera": [
               0,
-              1.9,
-              6.5
+              1.5,
+              4.6
             ],
             "target": [
               0,
-              1.8,
+              1.3,
               0
             ],
             "yaw": -18,
@@ -1588,7 +1640,7 @@
             "breathing_amplitude": 0.012,
             "breathing_period": 2.7,
             "parallax_pixels": 5,
-            "ground_size": 8
+            "ground_size": 5
           }
         }
       },
@@ -1723,12 +1775,12 @@
             "height": 3.8,
             "camera": [
               0,
-              1.9,
-              6.5
+              1.5,
+              7.0
             ],
             "target": [
               0,
-              1.8,
+              1.3,
               0
             ],
             "yaw": -18,
@@ -1752,7 +1804,7 @@
             "breathing_amplitude": 0.012,
             "breathing_period": 2.7,
             "parallax_pixels": 5,
-            "ground_size": 8
+            "ground_size": 5
           }
         },
         "enhanced": {
@@ -1866,12 +1918,12 @@
             "height": 3.8,
             "camera": [
               0,
-              1.9,
-              6.5
+              1.5,
+              4.6
             ],
             "target": [
               0,
-              1.8,
+              1.3,
               0
             ],
             "yaw": -18,
@@ -1895,7 +1947,7 @@
             "breathing_amplitude": 0.012,
             "breathing_period": 2.7,
             "parallax_pixels": 5,
-            "ground_size": 8
+            "ground_size": 5
           }
         }
       },
@@ -1991,7 +2043,7 @@
               "rect": [
                 102.4,
                 153.6,
-                422.4,
+                345.6,
                 278.4
               ],
               "anchor": "top_left",
@@ -2010,6 +2062,32 @@
               ],
               "confidence": "authored",
               "focus": true
+            },
+            {
+              "id": "actor",
+              "type": "3d_actor",
+              "rect": [
+                467.2,
+                134.4,
+                140.8,
+                292.8
+              ],
+              "anchor": "top_left",
+              "z": 2,
+              "overlay": false,
+              "asset": "res://assets/characters/spidey.glb",
+              "font": "sp_fnt00",
+              "font_size": 11,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored",
+              "focus": false
             }
           ],
           "focus_order": [
@@ -2029,12 +2107,12 @@
             "height": 3.8,
             "camera": [
               0,
-              1.9,
-              6.5
+              1.5,
+              7.0
             ],
             "target": [
               0,
-              1.8,
+              1.3,
               0
             ],
             "yaw": -18,
@@ -2058,7 +2136,7 @@
             "breathing_amplitude": 0.012,
             "breathing_period": 2.7,
             "parallax_pixels": 5,
-            "ground_size": 8
+            "ground_size": 5
           }
         },
         "enhanced": {
@@ -2134,7 +2212,7 @@
               "rect": [
                 307.2,
                 345.6,
-                1267.2,
+                729.6,
                 626.4
               ],
               "anchor": "top_left",
@@ -2153,6 +2231,32 @@
               ],
               "confidence": "authored",
               "focus": true
+            },
+            {
+              "id": "actor",
+              "type": "3d_actor",
+              "rect": [
+                1152.0,
+                302.40000000000003,
+                518.4000000000001,
+                658.8
+              ],
+              "anchor": "top_left",
+              "z": 2,
+              "overlay": false,
+              "asset": "res://assets/characters/spidey.glb",
+              "font": "sp_fnt00",
+              "font_size": 23,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored",
+              "focus": false
             }
           ],
           "focus_order": [
@@ -2172,12 +2276,12 @@
             "height": 3.8,
             "camera": [
               0,
-              1.9,
-              6.5
+              1.5,
+              4.6
             ],
             "target": [
               0,
-              1.8,
+              1.3,
               0
             ],
             "yaw": -18,
@@ -2201,7 +2305,7 @@
             "breathing_amplitude": 0.012,
             "breathing_period": 2.7,
             "parallax_pixels": 5,
-            "ground_size": 8
+            "ground_size": 5
           }
         }
       },
@@ -2321,7 +2425,7 @@
               "rect": [
                 102.4,
                 153.6,
-                422.4,
+                243.2,
                 278.4
               ],
               "anchor": "top_left",
@@ -2340,6 +2444,32 @@
               ],
               "confidence": "authored",
               "focus": true
+            },
+            {
+              "id": "actor",
+              "type": "3d_actor",
+              "rect": [
+                384.0,
+                134.4,
+                172.8,
+                292.8
+              ],
+              "anchor": "top_left",
+              "z": 2,
+              "overlay": false,
+              "asset": "res://assets/characters/spidey.glb",
+              "font": "sp_fnt00",
+              "font_size": 11,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored",
+              "focus": false
             }
           ],
           "focus_order": [
@@ -2359,12 +2489,12 @@
             "height": 3.8,
             "camera": [
               0,
-              1.9,
-              6.5
+              1.5,
+              7.0
             ],
             "target": [
               0,
-              1.8,
+              1.3,
               0
             ],
             "yaw": -18,
@@ -2388,7 +2518,7 @@
             "breathing_amplitude": 0.012,
             "breathing_period": 2.7,
             "parallax_pixels": 5,
-            "ground_size": 8
+            "ground_size": 5
           }
         },
         "enhanced": {
@@ -2464,7 +2594,7 @@
               "rect": [
                 307.2,
                 345.6,
-                1267.2,
+                729.6,
                 626.4
               ],
               "anchor": "top_left",
@@ -2483,6 +2613,32 @@
               ],
               "confidence": "authored",
               "focus": true
+            },
+            {
+              "id": "actor",
+              "type": "3d_actor",
+              "rect": [
+                1152.0,
+                302.40000000000003,
+                518.4000000000001,
+                658.8
+              ],
+              "anchor": "top_left",
+              "z": 2,
+              "overlay": false,
+              "asset": "res://assets/characters/spidey.glb",
+              "font": "sp_fnt00",
+              "font_size": 23,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored",
+              "focus": false
             }
           ],
           "focus_order": [
@@ -2502,12 +2658,12 @@
             "height": 3.8,
             "camera": [
               0,
-              1.9,
-              6.5
+              1.5,
+              4.6
             ],
             "target": [
               0,
-              1.8,
+              1.3,
               0
             ],
             "yaw": -18,
@@ -2531,7 +2687,7 @@
             "breathing_amplitude": 0.012,
             "breathing_period": 2.7,
             "parallax_pixels": 5,
-            "ground_size": 8
+            "ground_size": 5
           }
         }
       },
@@ -2652,7 +2808,7 @@
               "rect": [
                 102.4,
                 153.6,
-                422.4,
+                243.2,
                 278.4
               ],
               "anchor": "top_left",
@@ -2671,6 +2827,32 @@
               ],
               "confidence": "authored",
               "focus": true
+            },
+            {
+              "id": "actor",
+              "type": "3d_actor",
+              "rect": [
+                384.0,
+                134.4,
+                172.8,
+                292.8
+              ],
+              "anchor": "top_left",
+              "z": 2,
+              "overlay": false,
+              "asset": "res://assets/characters/spidey.glb",
+              "font": "sp_fnt00",
+              "font_size": 18,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored",
+              "focus": false
             }
           ],
           "focus_order": [
@@ -2690,12 +2872,12 @@
             "height": 3.8,
             "camera": [
               0,
-              1.9,
-              6.5
+              1.5,
+              7.0
             ],
             "target": [
               0,
-              1.8,
+              1.3,
               0
             ],
             "yaw": -18,
@@ -2719,7 +2901,7 @@
             "breathing_amplitude": 0.012,
             "breathing_period": 2.7,
             "parallax_pixels": 5,
-            "ground_size": 8
+            "ground_size": 5
           }
         },
         "enhanced": {
@@ -2795,7 +2977,7 @@
               "rect": [
                 307.2,
                 345.6,
-                1267.2,
+                729.6,
                 626.4
               ],
               "anchor": "top_left",
@@ -2814,6 +2996,32 @@
               ],
               "confidence": "authored",
               "focus": true
+            },
+            {
+              "id": "actor",
+              "type": "3d_actor",
+              "rect": [
+                1152.0,
+                302.40000000000003,
+                518.4000000000001,
+                658.8
+              ],
+              "anchor": "top_left",
+              "z": 2,
+              "overlay": false,
+              "asset": "res://assets/characters/spidey.glb",
+              "font": "sp_fnt00",
+              "font_size": 30,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored",
+              "focus": false
             }
           ],
           "focus_order": [
@@ -2833,12 +3041,12 @@
             "height": 3.8,
             "camera": [
               0,
-              1.9,
-              6.5
+              1.5,
+              4.6
             ],
             "target": [
               0,
-              1.8,
+              1.3,
               0
             ],
             "yaw": -18,
@@ -2862,7 +3070,7 @@
             "breathing_amplitude": 0.012,
             "breathing_period": 2.7,
             "parallax_pixels": 5,
-            "ground_size": 8
+            "ground_size": 5
           }
         }
       },
@@ -3025,12 +3233,12 @@
             "height": 3.8,
             "camera": [
               0,
-              1.9,
-              6.5
+              1.5,
+              7.0
             ],
             "target": [
               0,
-              1.8,
+              1.3,
               0
             ],
             "yaw": -18,
@@ -3054,7 +3262,7 @@
             "breathing_amplitude": 0.012,
             "breathing_period": 2.7,
             "parallax_pixels": 5,
-            "ground_size": 8
+            "ground_size": 5
           }
         },
         "enhanced": {
@@ -3193,12 +3401,12 @@
             "height": 3.8,
             "camera": [
               0,
-              1.9,
-              6.5
+              1.5,
+              4.6
             ],
             "target": [
               0,
-              1.8,
+              1.3,
               0
             ],
             "yaw": -18,
@@ -3222,7 +3430,7 @@
             "breathing_amplitude": 0.012,
             "breathing_period": 2.7,
             "parallax_pixels": 5,
-            "ground_size": 8
+            "ground_size": 5
           }
         }
       },
@@ -3383,12 +3591,12 @@
             "height": 3.8,
             "camera": [
               0,
-              1.9,
-              6.5
+              1.5,
+              7.0
             ],
             "target": [
               0,
-              1.8,
+              1.3,
               0
             ],
             "yaw": -18,
@@ -3412,7 +3620,7 @@
             "breathing_amplitude": 0.012,
             "breathing_period": 2.7,
             "parallax_pixels": 5,
-            "ground_size": 8
+            "ground_size": 5
           }
         },
         "enhanced": {
@@ -3552,12 +3760,12 @@
             "height": 3.8,
             "camera": [
               0,
-              1.9,
-              6.5
+              1.5,
+              4.6
             ],
             "target": [
               0,
-              1.8,
+              1.3,
               0
             ],
             "yaw": -18,
@@ -3581,7 +3789,7 @@
             "breathing_amplitude": 0.012,
             "breathing_period": 2.7,
             "parallax_pixels": 5,
-            "ground_size": 8
+            "ground_size": 5
           }
         }
       },
@@ -3679,9 +3887,9 @@
               "id": "content",
               "type": "menu_list",
               "rect": [
-                179.2,
+                108.80000000000001,
                 144.0,
-                281.6,
+                422.40000000000003,
                 288.0
               ],
               "anchor": "top_left",
@@ -3719,12 +3927,12 @@
             "height": 3.8,
             "camera": [
               0,
-              1.9,
-              6.5
+              1.5,
+              7.0
             ],
             "target": [
               0,
-              1.8,
+              1.3,
               0
             ],
             "yaw": -18,
@@ -3748,7 +3956,7 @@
             "breathing_amplitude": 0.012,
             "breathing_period": 2.7,
             "parallax_pixels": 5,
-            "ground_size": 8
+            "ground_size": 5
           }
         },
         "enhanced": {
@@ -3822,9 +4030,9 @@
               "id": "content",
               "type": "menu_list",
               "rect": [
-                537.6,
+                326.40000000000003,
                 324.0,
-                844.8,
+                1267.2,
                 648.0
               ],
               "anchor": "top_left",
@@ -3862,12 +4070,12 @@
             "height": 3.8,
             "camera": [
               0,
-              1.9,
-              6.5
+              1.5,
+              4.6
             ],
             "target": [
               0,
-              1.8,
+              1.3,
               0
             ],
             "yaw": -18,
@@ -3891,7 +4099,7 @@
             "breathing_amplitude": 0.012,
             "breathing_period": 2.7,
             "parallax_pixels": 5,
-            "ground_size": 8
+            "ground_size": 5
           }
         }
       },
@@ -4029,12 +4237,12 @@
             "height": 3.8,
             "camera": [
               0,
-              1.9,
-              6.5
+              1.5,
+              7.0
             ],
             "target": [
               0,
-              1.8,
+              1.3,
               0
             ],
             "yaw": -18,
@@ -4058,7 +4266,7 @@
             "breathing_amplitude": 0.012,
             "breathing_period": 2.7,
             "parallax_pixels": 5,
-            "ground_size": 8
+            "ground_size": 5
           }
         },
         "enhanced": {
@@ -4172,12 +4380,12 @@
             "height": 3.8,
             "camera": [
               0,
-              1.9,
-              6.5
+              1.5,
+              4.6
             ],
             "target": [
               0,
-              1.8,
+              1.3,
               0
             ],
             "yaw": -18,
@@ -4201,7 +4409,7 @@
             "breathing_amplitude": 0.012,
             "breathing_period": 2.7,
             "parallax_pixels": 5,
-            "ground_size": 8
+            "ground_size": 5
           }
         }
       },
@@ -4305,9 +4513,9 @@
               "id": "content",
               "type": "menu_list",
               "rect": [
-                179.2,
+                108.80000000000001,
                 144.0,
-                281.6,
+                422.40000000000003,
                 288.0
               ],
               "anchor": "top_left",
@@ -4345,12 +4553,12 @@
             "height": 3.8,
             "camera": [
               0,
-              1.9,
-              6.5
+              1.5,
+              7.0
             ],
             "target": [
               0,
-              1.8,
+              1.3,
               0
             ],
             "yaw": -18,
@@ -4374,7 +4582,7 @@
             "breathing_amplitude": 0.012,
             "breathing_period": 2.7,
             "parallax_pixels": 5,
-            "ground_size": 8
+            "ground_size": 5
           }
         },
         "enhanced": {
@@ -4448,9 +4656,9 @@
               "id": "content",
               "type": "menu_list",
               "rect": [
-                537.6,
+                326.40000000000003,
                 324.0,
-                844.8,
+                1267.2,
                 648.0
               ],
               "anchor": "top_left",
@@ -4488,12 +4696,12 @@
             "height": 3.8,
             "camera": [
               0,
-              1.9,
-              6.5
+              1.5,
+              4.6
             ],
             "target": [
               0,
-              1.8,
+              1.3,
               0
             ],
             "yaw": -18,
@@ -4517,7 +4725,7 @@
             "breathing_amplitude": 0.012,
             "breathing_period": 2.7,
             "parallax_pixels": 5,
-            "ground_size": 8
+            "ground_size": 5
           }
         }
       },
@@ -4654,12 +4862,12 @@
             "height": 3.8,
             "camera": [
               0,
-              1.9,
-              6.5
+              1.5,
+              7.0
             ],
             "target": [
               0,
-              1.8,
+              1.3,
               0
             ],
             "yaw": -18,
@@ -4683,7 +4891,7 @@
             "breathing_amplitude": 0.012,
             "breathing_period": 2.7,
             "parallax_pixels": 5,
-            "ground_size": 8
+            "ground_size": 5
           }
         },
         "enhanced": {
@@ -4796,12 +5004,12 @@
             "height": 3.8,
             "camera": [
               0,
-              1.9,
-              6.5
+              1.5,
+              4.6
             ],
             "target": [
               0,
-              1.8,
+              1.3,
               0
             ],
             "yaw": -18,
@@ -4825,7 +5033,7 @@
             "breathing_amplitude": 0.012,
             "breathing_period": 2.7,
             "parallax_pixels": 5,
-            "ground_size": 8
+            "ground_size": 5
           }
         }
       },
@@ -4950,12 +5158,12 @@
             "height": 3.8,
             "camera": [
               0,
-              1.9,
-              6.5
+              1.5,
+              7.0
             ],
             "target": [
               0,
-              1.8,
+              1.3,
               0
             ],
             "yaw": -18,
@@ -4979,7 +5187,7 @@
             "breathing_amplitude": 0.012,
             "breathing_period": 2.7,
             "parallax_pixels": 5,
-            "ground_size": 8
+            "ground_size": 5
           }
         },
         "enhanced": {
@@ -5092,12 +5300,12 @@
             "height": 3.8,
             "camera": [
               0,
-              1.9,
-              6.5
+              1.5,
+              4.6
             ],
             "target": [
               0,
-              1.8,
+              1.3,
               0
             ],
             "yaw": -18,
@@ -5121,7 +5329,7 @@
             "breathing_amplitude": 0.012,
             "breathing_period": 2.7,
             "parallax_pixels": 5,
-            "ground_size": 8
+            "ground_size": 5
           }
         }
       },
@@ -5131,10 +5339,6 @@
       ],
       "proposal_status": "Gemini proposal (unverified)",
       "actions": [
-        [
-          "Unverified",
-          "info"
-        ],
         [
           "Back",
           "back"
@@ -5255,12 +5459,12 @@
             "height": 3.8,
             "camera": [
               0,
-              1.9,
-              6.5
+              1.5,
+              7.0
             ],
             "target": [
               0,
-              1.8,
+              1.3,
               0
             ],
             "yaw": -18,
@@ -5284,7 +5488,7 @@
             "breathing_amplitude": 0.012,
             "breathing_period": 2.7,
             "parallax_pixels": 5,
-            "ground_size": 8
+            "ground_size": 5
           }
         },
         "enhanced": {
@@ -5398,12 +5602,12 @@
             "height": 3.8,
             "camera": [
               0,
-              1.9,
-              6.5
+              1.5,
+              4.6
             ],
             "target": [
               0,
-              1.8,
+              1.3,
               0
             ],
             "yaw": -18,
@@ -5427,7 +5631,7 @@
             "breathing_amplitude": 0.012,
             "breathing_period": 2.7,
             "parallax_pixels": 5,
-            "ground_size": 8
+            "ground_size": 5
           }
         }
       },
@@ -5523,7 +5727,7 @@
               "rect": [
                 102.4,
                 153.6,
-                422.4,
+                243.2,
                 278.4
               ],
               "anchor": "top_left",
@@ -5542,6 +5746,32 @@
               ],
               "confidence": "authored",
               "focus": true
+            },
+            {
+              "id": "actor",
+              "type": "3d_actor",
+              "rect": [
+                384.0,
+                134.4,
+                172.8,
+                292.8
+              ],
+              "anchor": "top_left",
+              "z": 2,
+              "overlay": false,
+              "asset": "res://assets/characters/spidey.glb",
+              "font": "sp_fnt00",
+              "font_size": 18,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored",
+              "focus": false
             }
           ],
           "focus_order": [
@@ -5561,12 +5791,12 @@
             "height": 3.8,
             "camera": [
               0,
-              1.9,
-              6.5
+              1.5,
+              7.0
             ],
             "target": [
               0,
-              1.8,
+              1.3,
               0
             ],
             "yaw": -18,
@@ -5590,7 +5820,7 @@
             "breathing_amplitude": 0.012,
             "breathing_period": 2.7,
             "parallax_pixels": 5,
-            "ground_size": 8
+            "ground_size": 5
           }
         },
         "enhanced": {
@@ -5666,7 +5896,7 @@
               "rect": [
                 307.2,
                 345.6,
-                1267.2,
+                729.6,
                 626.4
               ],
               "anchor": "top_left",
@@ -5685,6 +5915,32 @@
               ],
               "confidence": "authored",
               "focus": true
+            },
+            {
+              "id": "actor",
+              "type": "3d_actor",
+              "rect": [
+                1152.0,
+                302.40000000000003,
+                518.4000000000001,
+                658.8
+              ],
+              "anchor": "top_left",
+              "z": 2,
+              "overlay": false,
+              "asset": "res://assets/characters/spidey.glb",
+              "font": "sp_fnt00",
+              "font_size": 30,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored",
+              "focus": false
             }
           ],
           "focus_order": [
@@ -5704,12 +5960,12 @@
             "height": 3.8,
             "camera": [
               0,
-              1.9,
-              6.5
+              1.5,
+              4.6
             ],
             "target": [
               0,
-              1.8,
+              1.3,
               0
             ],
             "yaw": -18,
@@ -5733,7 +5989,7 @@
             "breathing_amplitude": 0.012,
             "breathing_period": 2.7,
             "parallax_pixels": 5,
-            "ground_size": 8
+            "ground_size": 5
           }
         }
       },
@@ -5830,7 +6086,7 @@
               "rect": [
                 102.4,
                 153.6,
-                422.4,
+                345.6,
                 278.4
               ],
               "anchor": "top_left",
@@ -5849,6 +6105,32 @@
               ],
               "confidence": "authored",
               "focus": true
+            },
+            {
+              "id": "actor",
+              "type": "3d_actor",
+              "rect": [
+                467.2,
+                134.4,
+                140.8,
+                292.8
+              ],
+              "anchor": "top_left",
+              "z": 2,
+              "overlay": false,
+              "asset": "res://assets/characters/spidey.glb",
+              "font": "sp_fnt00",
+              "font_size": 11,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored",
+              "focus": false
             }
           ],
           "focus_order": [
@@ -5868,12 +6150,12 @@
             "height": 3.8,
             "camera": [
               0,
-              1.9,
-              6.5
+              1.5,
+              7.0
             ],
             "target": [
               0,
-              1.8,
+              1.3,
               0
             ],
             "yaw": -18,
@@ -5897,7 +6179,7 @@
             "breathing_amplitude": 0.012,
             "breathing_period": 2.7,
             "parallax_pixels": 5,
-            "ground_size": 8
+            "ground_size": 5
           }
         },
         "enhanced": {
@@ -5973,7 +6255,7 @@
               "rect": [
                 307.2,
                 345.6,
-                1267.2,
+                729.6,
                 626.4
               ],
               "anchor": "top_left",
@@ -5992,6 +6274,32 @@
               ],
               "confidence": "authored",
               "focus": true
+            },
+            {
+              "id": "actor",
+              "type": "3d_actor",
+              "rect": [
+                1152.0,
+                302.40000000000003,
+                518.4000000000001,
+                658.8
+              ],
+              "anchor": "top_left",
+              "z": 2,
+              "overlay": false,
+              "asset": "res://assets/characters/spidey.glb",
+              "font": "sp_fnt00",
+              "font_size": 23,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored",
+              "focus": false
             }
           ],
           "focus_order": [
@@ -6011,12 +6319,12 @@
             "height": 3.8,
             "camera": [
               0,
-              1.9,
-              6.5
+              1.5,
+              4.6
             ],
             "target": [
               0,
-              1.8,
+              1.3,
               0
             ],
             "yaw": -18,
@@ -6040,7 +6348,7 @@
             "breathing_amplitude": 0.012,
             "breathing_period": 2.7,
             "parallax_pixels": 5,
-            "ground_size": 8
+            "ground_size": 5
           }
         }
       },
@@ -6145,7 +6453,7 @@
               "rect": [
                 102.4,
                 153.6,
-                422.4,
+                345.6,
                 278.4
               ],
               "anchor": "top_left",
@@ -6164,6 +6472,32 @@
               ],
               "confidence": "authored",
               "focus": true
+            },
+            {
+              "id": "actor",
+              "type": "3d_actor",
+              "rect": [
+                467.2,
+                134.4,
+                140.8,
+                292.8
+              ],
+              "anchor": "top_left",
+              "z": 2,
+              "overlay": false,
+              "asset": "res://assets/characters/spidey.glb",
+              "font": "sp_fnt00",
+              "font_size": 11,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored",
+              "focus": false
             }
           ],
           "focus_order": [
@@ -6183,12 +6517,12 @@
             "height": 3.8,
             "camera": [
               0,
-              1.9,
-              6.5
+              1.5,
+              7.0
             ],
             "target": [
               0,
-              1.8,
+              1.3,
               0
             ],
             "yaw": -18,
@@ -6212,7 +6546,7 @@
             "breathing_amplitude": 0.012,
             "breathing_period": 2.7,
             "parallax_pixels": 5,
-            "ground_size": 8
+            "ground_size": 5
           }
         },
         "enhanced": {
@@ -6288,7 +6622,7 @@
               "rect": [
                 307.2,
                 345.6,
-                1267.2,
+                729.6,
                 626.4
               ],
               "anchor": "top_left",
@@ -6307,6 +6641,32 @@
               ],
               "confidence": "authored",
               "focus": true
+            },
+            {
+              "id": "actor",
+              "type": "3d_actor",
+              "rect": [
+                1152.0,
+                302.40000000000003,
+                518.4000000000001,
+                658.8
+              ],
+              "anchor": "top_left",
+              "z": 2,
+              "overlay": false,
+              "asset": "res://assets/characters/spidey.glb",
+              "font": "sp_fnt00",
+              "font_size": 23,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored",
+              "focus": false
             }
           ],
           "focus_order": [
@@ -6326,12 +6686,12 @@
             "height": 3.8,
             "camera": [
               0,
-              1.9,
-              6.5
+              1.5,
+              4.6
             ],
             "target": [
               0,
-              1.8,
+              1.3,
               0
             ],
             "yaw": -18,
@@ -6355,7 +6715,7 @@
             "breathing_amplitude": 0.012,
             "breathing_period": 2.7,
             "parallax_pixels": 5,
-            "ground_size": 8
+            "ground_size": 5
           }
         }
       },
@@ -6467,9 +6827,9 @@
               "type": "menu_list",
               "rect": [
                 102.4,
-                153.6,
+                393.59999999999997,
                 192.0,
-                278.4
+                38.4
               ],
               "anchor": "top_left",
               "z": 2,
@@ -6513,6 +6873,32 @@
               ],
               "confidence": "authored",
               "focus": false
+            },
+            {
+              "id": "actor",
+              "type": "3d_actor",
+              "rect": [
+                102.4,
+                134.4,
+                172.8,
+                240.0
+              ],
+              "anchor": "top_left",
+              "z": 2,
+              "overlay": false,
+              "asset": "res://assets/characters/spidey.glb",
+              "font": "sp_fnt00",
+              "font_size": 18,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored",
+              "focus": false
             }
           ],
           "focus_order": [
@@ -6532,12 +6918,12 @@
             "height": 3.8,
             "camera": [
               0,
-              1.9,
-              6.5
+              1.5,
+              7.0
             ],
             "target": [
               0,
-              1.8,
+              1.3,
               0
             ],
             "yaw": -18,
@@ -6561,7 +6947,7 @@
             "breathing_amplitude": 0.012,
             "breathing_period": 2.7,
             "parallax_pixels": 5,
-            "ground_size": 8
+            "ground_size": 5
           }
         },
         "enhanced": {
@@ -6636,9 +7022,9 @@
               "type": "menu_list",
               "rect": [
                 307.2,
-                345.6,
+                885.5999999999999,
                 576.0,
-                626.4
+                86.4
               ],
               "anchor": "top_left",
               "z": 2,
@@ -6682,6 +7068,32 @@
               ],
               "confidence": "authored",
               "focus": false
+            },
+            {
+              "id": "actor",
+              "type": "3d_actor",
+              "rect": [
+                307.2,
+                302.40000000000003,
+                518.4000000000001,
+                540.0
+              ],
+              "anchor": "top_left",
+              "z": 2,
+              "overlay": false,
+              "asset": "res://assets/characters/spidey.glb",
+              "font": "sp_fnt00",
+              "font_size": 30,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored",
+              "focus": false
             }
           ],
           "focus_order": [
@@ -6701,12 +7113,12 @@
             "height": 3.8,
             "camera": [
               0,
-              1.9,
-              6.5
+              1.5,
+              4.6
             ],
             "target": [
               0,
-              1.8,
+              1.3,
               0
             ],
             "yaw": -18,
@@ -6730,7 +7142,7 @@
             "breathing_amplitude": 0.012,
             "breathing_period": 2.7,
             "parallax_pixels": 5,
-            "ground_size": 8
+            "ground_size": 5
           }
         }
       },

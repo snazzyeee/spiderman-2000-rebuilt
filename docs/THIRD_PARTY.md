@@ -28,3 +28,11 @@ metadata includes upstream license notices. No original font or glyph is public.
 No upscaler or enhancement model has been downloaded by this milestone.
 Existing private audio tool installations predate this inventory;
 their provenance still needs consolidation before new download/setup changes.
+
+Frontend validation uses the desktop's already bundled dependency runtime
+26.1015.12040 (no download): Sharp under the bundled Node.js packages, Apache-2.0,
+https://github.com/lovell/sharp/blob/main/LICENSE . Exact installed version is
+recorded in private staging/validation/menu/overlay-manifest.json. It rasterizes
+the generated SVGs, crops their canvas, applies 40% alpha and produces private
+comparison sheets. Runtime art decoding continues to use the existing SHA-pinned
+MIT Neversoft Multitool; no new executable or model was downloaded.

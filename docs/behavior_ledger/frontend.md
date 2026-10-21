@@ -140,3 +140,30 @@ layout loader while preserving cinematic transport locks. Loading uses private
 cover art during the asynchronous scene request; hints/spinner behaviour remain
 unverified and are omitted. Comic intro/death screen wording, timing and flow
 from the proposals are unverified and not adopted.
+
+Evidence `pkr:cover-family-inventory-20261021`, confidence **recovered**: this archive has BMP covers for levels 1,2,4,5,7,8 only. No BMP for 3/6; never synthesize an original cover. The conversion gate uses this exact inspected inventory.
+
+Evidence `remake:frontend-art-visual-inspection-20261021`, confidence **recovered
+visual observation**: decoded logo.rle is the Neversoft publisher emblem, not
+Spider-Man title lettering. Title.bmp contains the game-title lettering at the
+top of the full title illustration. Authored header crop uses x=110,y=18,w=294,
+h=68 source pixels; retain full Title for the title screen and never replace
+the game title with the publisher emblem. All pixels remain private. Exported
+GLB animation names preserve numeric source slots (spidey_anim_N); use name N,
+not array ordinal, because missing slots shift indices. For the authored menu
+reaction use the recovered cycle 0/100, sound once at animation frame 7;
+original main-menu staging association remains unverified. Breathing transforms,
+three lights, plane, camera and parallax are authored tuning in screens.json.
+
+Authored action routes (`remake:frontend-actions-v1`): preserve Game/New Game/
+Load Game, Training/Rooftop Practice/Controls, Special/Replay Opening/Controls,
+Gallery/Previous/Next and Back. Options adds style/font/audio and accessibility
+choices. Controls describe the remake bindings, never original configuration
+text. These routes preserve the working remake while original shell flow is
+unknown. Remembered-cheat preference has no activation effect until table
+recovery. Phased training currently exposes only converted practice. Placeholder
+screens are explicit unverified regions. Do not call these original page flow.
+Design QA measures region bounds, sibling intersection, safe-area enclosure,
+focus border geometry and declared foreground against actual backdrop pixels.
+Palette outline/antialiasing contrast is not certified. The real-renderer
+benchmark records 180 uncapped 1080p menu frame intervals after 60 warm-up frames.

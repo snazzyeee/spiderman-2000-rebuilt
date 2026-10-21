@@ -442,12 +442,12 @@
 <text x="430.4" y="119.4" fill="#253039">422.4,86.4 1075.2×183.6</text>
 <text x="430.4" y="134.4" fill="#253039">sp_fnt00 30 px | z 1</text>
 </g>
-<g><rect x="537.6" y="324.0" width="844.8" height="648.0" fill="#296b4f" fill-opacity="0.06" stroke="#2361a1" stroke-width="1.5" stroke-dasharray="2 4"/>
-<text x="545.6" y="342.0" fill="#253039">content | menu_list</text>
-<text x="545.6" y="357.0" fill="#253039">537.6,324 844.8×648</text>
-<text x="545.6" y="372.0" fill="#253039">sp_fnt00 30 px | z 2</text>
+<g><rect x="326.40000000000003" y="324.0" width="1267.2" height="648.0" fill="#296b4f" fill-opacity="0.06" stroke="#2361a1" stroke-width="1.5" stroke-dasharray="2 4"/>
+<text x="334.40000000000003" y="342.0" fill="#253039">content | menu_list</text>
+<text x="334.40000000000003" y="357.0" fill="#253039">326.4,324 1267.2×648</text>
+<text x="334.40000000000003" y="372.0" fill="#253039">sp_fnt00 30 px | z 2</text>
 </g>
-<circle cx="555.6" cy="956.0" r="12" fill="#fff" stroke="#333"/><text x="551.6" y="960.0" fill="#222">1</text>
+<circle cx="344.40000000000003" cy="956.0" r="12" fill="#fff" stroke="#333"/><text x="340.40000000000003" y="960.0" fill="#222">1</text>
 <text x="8" y="1105" fill="#222">Back → gameplay | pause_menu / enhanced</text>
 <text x="8" y="1130" fill="#222">Evidence: solid dark = verified/recovered; dashed orange = Gemini proposal; dotted blue = authored</text>
 <text x="8" y="1153" fill="#222">Types: image • text • menu list • button • 3D actor • HUD meter (outlined or 6% tint)</text>

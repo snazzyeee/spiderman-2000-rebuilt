@@ -1,211 +1,226 @@
 extends Node3D
 
-const ITEMS := ["Game", "Options", "Training", "Special", "Gallery"]
-var panel := VBoxContainer.new()
+const PAGE_IDS := {"Main":"main_menu","Game":"game_menu","Options":"options_menu","Training":"training","Special":"special_menu","Gallery":"gallery_menu","Controls":"controls_options","Audio":"audio"}
+const PAGE_NAMES := {"main_menu":"Main","game_menu":"Game","options_menu":"Options","training":"Training","special_menu":"Special","gallery_menu":"Gallery","controls_options":"Controls","audio":"Audio"}
+var panel: VBoxContainer
 var page := "Main"
+var current_id := "main_menu"
 var gallery_index := 0
-var art := TextureRect.new()
-var background := Node3D.new()
+var art: TextureRect
 var visual: Node3D
-var navigating := false
 var settings := ConfigFile.new()
-var backdrop: MeshInstance3D
 var menu_audio := MenuAudio.new()
+var view: LayoutScreen
+var layer := CanvasLayer.new()
+var transition: Tween
+var idle_seconds := 0.0
+var attract := false
+var previous_page := "Main"
+var loading := false
 
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-	RevampAssets.lighting(self)
-	add_child(background)
-	if ResourceLoader.exists("res://assets/ui/shell_bg.png"):
-		backdrop = MeshInstance3D.new()
-		var quad := QuadMesh.new()
-		quad.size = Vector2(40, 30)
-		backdrop.mesh = quad
-		var material := StandardMaterial3D.new()
-		material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
-		material.albedo_texture = load("res://assets/ui/shell_bg.png")
-		material.disable_fog = true
-		backdrop.material_override = material
-		backdrop.position.z = -5
-		background.add_child(backdrop)
-	visual = RevampAssets.instantiate_model("res://assets/characters/spidey.glb")
-	if visual:
-		background.add_child(visual)
-		RevampAssets.fit_character(visual, 3.8)
-		visual.rotation_degrees.y = -30
-		var animation := RevampAssets.animation_player(visual)
-		if animation:
-			for clip in animation.get_animation_list():
-				if clip != "RESET":
-					animation.get_animation(clip).loop_mode = Animation.LOOP_LINEAR
-					animation.play(clip)
-					break
-	var camera := Camera3D.new()
-	add_child(camera)
-	camera.position = Vector3(-1, 1.6, 5.5)
-	camera.look_at(Vector3(-.7, 1.4, 0))
-	camera.current = true
-	if backdrop:
-		backdrop.reparent(camera)
-		backdrop.position = Vector3(0, 0, -10)
-		backdrop.rotation = Vector3.ZERO
-	var layer := CanvasLayer.new()
 	add_child(layer)
-	var title := Label.new()
-	title.text = "SPIDER-MAN\n2000 REVAMP"
-	OriginalFonts.bind(title, "title")
-	title.position = Vector2(55, 35)
-	title.add_theme_font_size_override("font_size", 44)
-	title.add_theme_color_override("font_color", Color(1, .83, .1))
-	title.add_theme_color_override("font_shadow_color", Color(.8, .03, .03))
-	title.add_theme_constant_override("shadow_offset_x", 3)
-	title.add_theme_constant_override("shadow_offset_y", 3)
-	layer.add_child(title)
-	panel.position = Vector2(60, 200)
-	OriginalFonts.bind(panel, "menu")
-	panel.custom_minimum_size = Vector2(360, 400)
-	layer.add_child(panel)
-	art.position = Vector2(550, 70)
-	art.size = Vector2(650, 580)
-	art.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
-	art.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-	layer.add_child(art)
 	settings.load("user://settings.cfg")
-	for bus in ["Dialogue", "Music", "SFX"]:
-		AudioServer.set_bus_volume_db(AudioServer.get_bus_index(bus), linear_to_db(float(settings.get_value("audio", bus, .8))))
+	for bus in ["Dialogue","Music","SFX"]:
+		AudioServer.set_bus_volume_db(AudioServer.get_bus_index(bus),linear_to_db(float(settings.get_value("audio",bus,.8))))
 	show_page("Main")
 	_start_music()
 
 func menu_sound(event: String) -> void:
-	menu_audio.request(event, Dialogue)
+	menu_audio.request(event,Dialogue)
 
 func _start_music() -> void:
 	for key in Dialogue.registry:
 		var entry: Dictionary = Dialogue.registry[key]
-		if str(entry.get("source_path", "")).to_lower().ends_with("/song_full.bik"):
+		if str(entry.get("source_path","")).to_lower().ends_with("/song_full.bik"):
 			Dialogue.music.stream = load(entry.file)
 			Dialogue.music.play()
-			if not Dialogue.music.finished.is_connected(_start_music):
-				Dialogue.music.finished.connect(_start_music)
+			if not Dialogue.music.finished.is_connected(_start_music): Dialogue.music.finished.connect(_start_music)
 			break
-
-func clear_panel() -> void:
-	for child in panel.get_children():
-		panel.remove_child(child)
-		child.queue_free()
-	art.visible = false
-	navigating = false
-	menu_audio.reset_focus()
-
-func button(text: String, callback: Callable, disabled: bool = false) -> Button:
-	var control := Button.new()
-	control.text = text
-	control.custom_minimum_size = Vector2(360, 58)
-	control.disabled = disabled
-	control.add_theme_font_size_override("font_size", 26)
-	control.add_theme_color_override("font_focus_color", Color(1, .86, .1))
-	var focus := StyleBoxFlat.new()
-	focus.bg_color = Color(.35, .02, .04, .95)
-	focus.border_color = Color(1, .8, .05)
-	focus.set_border_width_all(3)
-	control.add_theme_stylebox_override("focus", focus)
-	control.pressed.connect(func():
-		menu_sound("back" if text == "Back" else "confirm")
-		callback.call())
-	control.focus_entered.connect(func():
-		menu_audio.focus(control, Dialogue)
-		navigating = true)
-	control.mouse_entered.connect(func():
-		if not control.disabled and not control.has_focus(): control.grab_focus())
-	panel.add_child(control)
-	return control
 
 func show_page(name_of_page: String) -> void:
-	page = name_of_page
-	clear_panel()
-	match page:
-		"Main":
-			for item in ITEMS:
-				button(item, func(): show_page(item))
-		"Game":
-			button("New Game", func(): launch(false))
-			button("Load Game", func(): launch(false, true), GameSession.load_checkpoint() < 0)
-			button("Back", func(): show_page("Main"))
-		"Options":
-			button("Audio", func(): show_page("Audio"))
-			var font_label := Label.new()
-			font_label.text = "Font variant"
-			panel.add_child(font_label)
-			var font_choice := OptionButton.new()
-			for variant in OriginalFonts.VARIANTS: font_choice.add_item(variant)
-			font_choice.select(OriginalFonts.VARIANTS.find(OriginalFonts.get_variant()))
-			font_choice.item_selected.connect(func(index: int):
-				OriginalFonts.set_variant(font_choice.get_item_text(index))
-				settings.load("user://settings.cfg"))
-			panel.add_child(font_choice)
-			for bus in ["Dialogue", "Music", "SFX"]:
-				var label := Label.new()
-				label.text = bus
-				panel.add_child(label)
-				var slider := HSlider.new()
-				slider.max_value = 1.0
-				slider.step = .01
-				slider.value = settings.get_value("audio", bus, .8)
-				slider.custom_minimum_size.y = 35
-				slider.value_changed.connect(func(value: float):
-					AudioServer.set_bus_volume_db(AudioServer.get_bus_index(bus), linear_to_db(maxf(.0001, value)))
-					settings.set_value("audio", bus, value)
-					settings.save("user://settings.cfg"))
-				panel.add_child(slider)
-			button("Back", func(): show_page("Main"))
-		"Audio":
-			var label := Label.new()
-			label.text = "Menu sounds"
-			panel.add_child(label)
-			var choice := OptionButton.new()
-			for mode in MenuAudio.MODES: choice.add_item(mode)
-			choice.select(MenuAudio.MODES.find(MenuAudio.get_mode()))
-			choice.item_selected.connect(func(index: int): MenuAudio.set_mode(choice.get_item_text(index)))
-			panel.add_child(choice)
-			button("Back", func(): show_page("Options"))
-		"Training":
-			button("Rooftop Practice", func(): launch(true))
-			button("Controls", func(): show_page("Controls"))
-			button("Back", func(): show_page("Main"))
-		"Special":
-			button("Replay Opening", func(): launch(false))
-			button("Controls", func(): show_page("Controls"))
-			button("Back", func(): show_page("Main"))
-		"Controls":
-			var label := Label.new()
-			label.text = "WASD / Left stick: Move\nMouse / Right stick: Look\nSpace / A: Jump\nRMB / RT: Swing\nQ / RB: Zip · C / LB: Crawl\nF / X: Melee · R / Y: Web\nE / B: Interact\nEscape / Start: Pause"
-			label.add_theme_font_size_override("font_size", 20)
-			panel.add_child(label)
-			button("Back", func(): show_page("Main"))
-		"Gallery":
-			show_art()
-			button("Previous", func(): gallery_index = posmod(gallery_index-1, 32); show_art())
-			button("Next", func(): gallery_index = (gallery_index+1)%32; show_art())
-			button("Back", func(): show_page("Main"))
-	var focusable := panel.find_children("*", "Control", false, false)
-	for child in focusable:
-		if child.focus_mode != Control.FOCUS_NONE and not (child is Button and child.disabled):
-			child.grab_focus()
-			break
+	var id: String = PAGE_IDS.get(name_of_page,name_of_page)
+	current_id = id
+	page = PAGE_NAMES.get(id,id)
+	menu_audio.reset_focus()
+	if transition and transition.is_valid(): transition.kill()
+	var old_view := view
+	view = LayoutScreen.new()
+	layer.add_child(view)
+	view.build(id,FrontendSettings.get_value("style"))
+	if is_instance_valid(old_view):
+		if old_view.stage and view.stage:
+			var container := view.stage.get_parent()
+			view.stage.free()
+			old_view.stage.reparent(container)
+			view.stage = old_view.stage
+			view.actor_root = old_view.actor_root
+			view.visual = old_view.visual
+			view.animation = old_view.animation
+			view.reaction = old_view.reaction
+			view.punch_sound_sent = old_view.punch_sound_sent
+		layer.remove_child(old_view)
+		old_view.queue_free()
+	panel = view.nodes.get("content") as VBoxContainer
+	visual = view.visual
+	if view.nodes.has("gallery_art"):
+		art = view.nodes.gallery_art as TextureRect
+	else:
+		art = TextureRect.new()
+		view.add_child(art)
+		art.hide()
+	if panel:
+		for screen in FrontendSettings.document().screens:
+			if screen.id == id:
+				for action in screen.actions: _add_action(str(action[0]),str(action[1]))
+		var controls := panel.find_children("*","Control",false,false)
+		for control in controls:
+			if control.focus_mode != Control.FOCUS_NONE and not (control is Button and control.disabled):
+				control.grab_focus()
+				break
+	if id == "gallery_menu" or id == "attract": show_art()
+	view.modulate.a = 0.0
+	transition = create_tween()
+	transition.tween_property(view,"modulate:a",1.0,.1 if FrontendSettings.get_value("reduced_motion") == "On" else float(view.layout.transition_seconds))
 
+func _style(control: Control) -> void:
+	var e: Dictionary = view.layout.elements.filter(func(row): return row.id == "content")[0]
+	control.custom_minimum_size.y = float(view.layout.row_height)
+	control.add_theme_font_size_override("font_size",int(e.font_size))
+	control.add_theme_color_override("font_color",Color(e.colours.text))
+	control.add_theme_color_override("font_focus_color",Color(e.colours.focus))
+	if control is Button:
+		var normal := StyleBoxFlat.new()
+		normal.bg_color = Color(e.colours.backdrop)
+		normal.border_color = Color(.36,.36,.43)
+		normal.set_border_width_all(1)
+		control.add_theme_stylebox_override("normal",normal)
+		var focus := normal.duplicate() as StyleBoxFlat
+		focus.border_color = Color(e.colours.focus)
+		focus.set_border_width_all(3)
+		focus.border_width_left = 9
+		control.add_theme_stylebox_override("focus",focus)
+
+func _add_action(caption: String, action: String) -> void:
+	if action in ["font","style","menu_sounds"] or action.begins_with("pref:"):
+		var row := HBoxContainer.new()
+		var label := Label.new()
+		label.text = caption
+		label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		_style(label)
+		row.add_child(label)
+		var choice := OptionButton.new()
+		choice.fit_to_longest_item = false
+		var key := action.trim_prefix("pref:")
+		var options: Array = OriginalFonts.VARIANTS if action == "font" else MenuAudio.MODES if action == "menu_sounds" else FrontendSettings.choices(key)
+		for option in options: choice.add_item(option)
+		var value: String = OriginalFonts.get_variant() if action == "font" else MenuAudio.get_mode() if action == "menu_sounds" else FrontendSettings.get_value(key)
+		choice.select(options.find(value))
+		_style(choice)
+		choice.item_selected.connect(_choice_changed.bind(action,options))
+		row.add_child(choice)
+		panel.add_child(row)
+		return
+	if action.begins_with("volume:"):
+		var bus := action.trim_prefix("volume:")
+		var label := Label.new()
+		label.text = caption
+		_style(label)
+		panel.add_child(label)
+		var slider := HSlider.new()
+		slider.max_value = 1.0
+		slider.step = .01
+		slider.value = settings.get_value("audio",bus,.8)
+		_style(slider)
+		slider.value_changed.connect(_volume_changed.bind(bus))
+		panel.add_child(slider)
+		return
+	if action == "info":
+		var label := Label.new()
+		label.text = caption
+		_style(label)
+		panel.add_child(label)
+		return
+	var control := Button.new()
+	control.text = caption
+	control.disabled = action == "resume" and GameSession.load_checkpoint() < 0
+	_style(control)
+	control.pressed.connect(_activate.bind(action))
+	control.focus_entered.connect(_focus.bind(control))
+	control.mouse_entered.connect(_hover.bind(control))
+	panel.add_child(control)
+
+func _focus(control: Control) -> void: menu_audio.focus(control,Dialogue)
+func _hover(control: Control) -> void:
+	if not (control is Button and control.disabled) and not control.has_focus(): control.grab_focus()
+func _choice_changed(index: int, action: String, options: Array) -> void:
+	if action == "font": OriginalFonts.set_variant(options[index])
+	elif action == "menu_sounds": MenuAudio.set_mode(options[index])
+	else: FrontendSettings.set_value(action.trim_prefix("pref:"),options[index])
+	settings.load("user://settings.cfg")
+	if action == "style": show_page(page)
+func _volume_changed(value: float, bus: String) -> void:
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index(bus),linear_to_db(maxf(.0001,value)))
+	settings.load("user://settings.cfg")
+	settings.set_value("audio",bus,value)
+	settings.save("user://settings.cfg")
+func _activate(action: String) -> void:
+	menu_sound("back" if action == "back" else "confirm")
+	if action != "back": view.react()
+	if action.begins_with("page:"): show_page(action.trim_prefix("page:"))
+	elif action == "back": go_back()
+	elif action in ["launch","practice","resume"]: launch(action == "practice",action == "resume")
+	elif action == "previous": gallery_index = posmod(gallery_index-1,32); show_art()
+	elif action == "next": gallery_index = (gallery_index+1)%32; show_art()
+	else: view.react()
+func go_back() -> void:
+	if attract: exit_attract(); return
+	var target: String = view.layout.back
+	if target not in ["none","gameplay"]: show_page(target)
 func show_art() -> void:
 	var path := "res://assets/ui/cb%02d.png" % gallery_index
 	art.texture = load(path) if ResourceLoader.exists(path) else null
 	art.visible = art.texture != null
-
 func launch(practice: bool, resume_game: bool = false) -> void:
 	GameSession.training = practice
 	GameSession.resume_checkpoint = GameSession.load_checkpoint() if resume_game else -1
 	Dialogue.music.stop()
+	# Immediate path is retained for the existing two-frame lifecycle smoke gate.
 	get_tree().change_scene_to_file("res://scenes/mission1.tscn")
-
+func enter_attract() -> void:
+	previous_page = page
+	attract = true
+	show_page("attract")
+func exit_attract() -> void:
+	attract = false
+	idle_seconds = 0.0
+	show_page(previous_page)
+func _input(event: InputEvent) -> void:
+	if event is InputEventMouseMotion:
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	elif event is InputEventKey or event is InputEventJoypadButton or event is InputEventJoypadMotion:
+		if FrontendSettings.get_value("cursor_policy") == "Hybrid": Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
+	if event is InputEventMouseMotion or event.is_pressed():
+		idle_seconds = 0.0
+		if attract:
+			exit_attract()
+			get_viewport().set_input_as_handled()
 func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("ui_cancel") and page != "Main":
+	if event.is_action_pressed("ui_cancel"):
 		menu_sound("back")
-		show_page("Main")
+		go_back()
 		get_viewport().set_input_as_handled()
+	if event.is_action_pressed("ui_accept") and transition and transition.is_running():
+		transition.kill()
+		view.modulate.a = 1.0
+func _process(delta: float) -> void:
+	idle_seconds += delta
+	if not attract and not loading and idle_seconds >= 60.0: enter_attract()
+	if attract:
+		if view.nodes.has("actor"):
+			var carousel := FrontendSettings.get_value("attract_media") == "Carousel"
+			view.nodes.actor.visible = carousel and int(idle_seconds/10.0)%2 == 0
+			art.visible = not view.nodes.actor.visible
+		var next_index := int(idle_seconds/10.0)%32
+		if next_index != gallery_index: gallery_index = next_index; show_art()

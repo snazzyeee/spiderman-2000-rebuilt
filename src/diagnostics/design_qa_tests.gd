@@ -1,0 +1,130 @@
+extends SceneTree
+var checks: Array = []
+var samples: Array = []
+var screenshots: Array = []
+var menu: Node
+func _initialize() -> void: call_deferred("run")
+func check(value: bool, label: String) -> void:
+	checks.append({"passed":value,"label":label})
+	if not value: print("DESIGN_QA FAIL ",label)
+func luminance(c: Color) -> float:
+	var v := c.srgb_to_linear()
+	return .2126*v.r+.7152*v.g+.0722*v.b
+func ratio(a: Color,b: Color) -> float:
+	var x := luminance(a); var y := luminance(b)
+	return (maxf(x,y)+.05)/(minf(x,y)+.05)
+func descendants(node: Node) -> Array[Control]:
+	var result: Array[Control] = []
+	for child in node.get_children():
+		if child is Control: result.append(child)
+		result.append_array(descendants(child))
+	return result
+func run() -> void:
+	DirAccess.make_dir_recursive_absolute("res://staging/validation/menu")
+	var saved := FrontendSettings.values.duplicate()
+	var audio_mode := MenuAudio.get_mode()
+	MenuAudio.set_mode("Off",false)
+	menu = load("res://scenes/main_menu.tscn").instantiate()
+	root.add_child(menu)
+	current_scene = menu
+	await process_frame
+	await process_frame
+	menu.show_page("Main")
+	var event := InputEventJoypadButton.new()
+	event.button_index = JOY_BUTTON_DPAD_DOWN
+	event.pressed = true
+	Input.parse_input_event(event)
+	await process_frame
+	event.pressed = false
+	Input.parse_input_event(event)
+	await process_frame
+	var focused := root.gui_get_focus_owner()
+	check(focused is Button and focused.text == "Options","gamepad moves menu focus")
+	menu.show_page("Options")
+	menu.go_back()
+	check(menu.page == "Main","back follows layout target")
+	menu.idle_seconds = 60.0
+	menu._process(0.0)
+	check(menu.attract,"attract enters at 60 seconds")
+	var key := InputEventKey.new();key.keycode=KEY_SPACE;key.pressed=true
+	menu._input(key)
+	check(not menu.attract and menu.page == "Main","attract exits on input and restores prior page")
+	FrontendSettings.set_value("reduced_motion","On",false)
+	menu.show_page("Main")
+	check(menu.transition != null,"reduced motion retains skippable transition")
+	FrontendSettings.set_value("reduced_motion","Off",false)
+	for resolution in [Vector2i(1280,720),Vector2i(1920,1080),Vector2i(2560,1440)]:
+		root.size = resolution
+		await process_frame
+		for style in ["classic","enhanced"]:
+			FrontendSettings.set_value("style",style,false)
+			for screen in FrontendSettings.document().screens:
+				menu.show_page(screen.id)
+				if menu.transition and menu.transition.is_valid(): menu.transition.kill()
+				menu.view.modulate.a = 1.0
+				await process_frame
+				await process_frame
+				var frame: Rect2 = menu.view.canvas.get_global_rect()
+				var safe: Rect2 = frame.grow_individual(-frame.size.x*.05,-frame.size.y*.05,-frame.size.x*.05,-frame.size.y*.05)
+				var content: Control = menu.panel
+				var authored: Array = menu.view.layout.elements.filter(func(row): return row.id == "content")[0].rect
+				var expected := Vector2(authored[2],authored[3])
+				check(content.size.x <= expected.x+.5 and content.size.y <= expected.y+.5,screen.id+" "+style+" "+str(resolution)+" controls fit authored region")
+				var safe_text := true
+				var no_overlap := true
+				var actual := descendants(content)
+				for c in actual:
+					if c is Label or c is Button:
+						safe_text = safe_text and safe.encloses(c.get_global_rect())
+				for i in range(content.get_child_count()):
+					for j in range(i+1,content.get_child_count()):
+						no_overlap = no_overlap and not content.get_child(i).get_rect().intersects(content.get_child(j).get_rect())
+				check(safe_text,screen.id+" "+style+" "+str(resolution)+" text controls inside title safe area")
+				check(no_overlap,screen.id+" "+style+" "+str(resolution)+" sibling controls do not overlap")
+				if DisplayServer.get_name() != "headless":
+					await RenderingServer.frame_post_draw
+					var image := root.get_texture().get_image()
+					var filename: String = screen.id+"_"+style+"_"+RenderingServer.get_current_rendering_method()+"_"+str(resolution.x)+"x"+str(resolution.y)+".png"
+					image.save_png("res://staging/validation/menu/"+filename)
+					screenshots.append(filename)
+					var contrast_ok := true
+					for c in actual:
+						if not (c is Button or c is Label): continue
+						var rect := c.get_global_rect()
+						var pos := Vector2(rect.end.x-12,rect.position.y+8)
+						pos *= Vector2(image.get_width(),image.get_height())/root.get_visible_rect().size
+						var pixel := image.get_pixel(clampi(int(pos.x),0,image.get_width()-1),clampi(int(pos.y),0,image.get_height()-1))
+						contrast_ok = contrast_ok and ratio(Color("FFF4CF"),pixel) >= 4.5
+					check(contrast_ok,screen.id+" "+style+" "+str(resolution)+" foreground contrast against captured backdrop >=4.5")
+				for c in actual:
+					if c is Button:
+						var focus := c.get_theme_stylebox("focus") as StyleBoxFlat
+						var normal := c.get_theme_stylebox("normal") as StyleBoxFlat
+						check(focus != null and normal != null and focus.border_width_left > normal.border_width_left,screen.id+" "+style+" focus has shape distinction")
+	if DisplayServer.get_name() != "headless":
+		root.size = Vector2i(1920,1080)
+		FrontendSettings.set_value("style","enhanced",false)
+		menu.show_page("Main")
+		Engine.max_fps = 0
+		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
+		for frame in range(60): await process_frame
+		for frame in range(180):
+			await process_frame
+			samples.append(root.get_process_delta_time())
+		var ordered := samples.duplicate();ordered.sort()
+		check(float(ordered[int(ordered.size()*.95)]) <= 1.0/60.0,"1080p 95th percentile frame interval <=16.667ms on real renderer")
+	FrontendSettings.values = saved
+	MenuAudio.set_mode(audio_mode,false)
+	root.get_node("Dialogue").music.stop()
+	root.get_node("Dialogue").music.stream = null
+	root.get_node("Dialogue").sfx.stop()
+	root.get_node("Dialogue").sfx.stream = null
+	await create_timer(.1).timeout
+	menu.queue_free()
+	await process_frame
+	var failed := checks.filter(func(row): return not row.passed)
+	var report := {"passed":failed.is_empty(),"checks":checks,"failures":failed,"screenshots":screenshots,"frame_intervals_seconds":samples,"renderer":RenderingServer.get_current_rendering_method(),"display_driver":DisplayServer.get_name(),"contrast_scope":"Declared foreground against actual captured backdrop; original palette outlines/antialiasing not certified", "proposal_screens":"Unverified content is shown only as authored placeholder regions; no historical fidelity claim"}
+	var file := FileAccess.open("res://staging/validation/design-qa-tests.json",FileAccess.WRITE)
+	file.store_string(JSON.stringify(report,"  "));file.close()
+	print("DESIGN_QA checks=",checks.size()," failures=",failed.size())
+	quit(0 if failed.is_empty() else 1)

@@ -442,12 +442,17 @@
 <text x="430.4" y="119.4" fill="#253039">422.4,86.4 1075.2×183.6</text>
 <text x="430.4" y="134.4" fill="#253039">sp_fnt00 30 px | z 1</text>
 </g>
-<g><rect x="307.2" y="345.6" width="1267.2" height="626.4" fill="#296b4f" fill-opacity="0.06" stroke="#2361a1" stroke-width="1.5" stroke-dasharray="2 4"/>
+<g><rect x="307.2" y="345.6" width="729.6" height="626.4" fill="#296b4f" fill-opacity="0.06" stroke="#2361a1" stroke-width="1.5" stroke-dasharray="2 4"/>
 <text x="315.2" y="363.6" fill="#253039">content | menu_list</text>
-<text x="315.2" y="378.6" fill="#253039">307.2,345.6 1267.2×626.4</text>
+<text x="315.2" y="378.6" fill="#253039">307.2,345.6 729.6×626.4</text>
 <text x="315.2" y="393.6" fill="#253039">sp_fnt00 30 px | z 2</text>
 </g>
-<circle cx="325.2" cy="956.0" r="12" fill="#fff" stroke="#333"/><text x="321.2" y="960.0" fill="#222">1</text>
+<g><rect x="1152.0" y="302.40000000000003" width="518.4000000000001" height="658.8" fill="#775020" fill-opacity="0.06" stroke="#2361a1" stroke-width="1.5" stroke-dasharray="2 4"/>
+<text x="1160.0" y="320.40000000000003" fill="#253039">actor | 3d_actor</text>
+<text x="1160.0" y="335.40000000000003" fill="#253039">1152,302.4 518.4×658.8</text>
+<text x="1160.0" y="350.40000000000003" fill="#253039">sp_fnt00 30 px | z 2</text>
+</g>
+<circle cx="325.2" cy="988.4" r="12" fill="#fff" stroke="#333"/><text x="321.2" y="992.4" fill="#222">1</text>
 <text x="8" y="1105" fill="#222">Back → main_menu | training / enhanced</text>
 <text x="8" y="1130" fill="#222">Evidence: solid dark = verified/recovered; dashed orange = Gemini proposal; dotted blue = authored</text>
 <text x="8" y="1153" fill="#222">Types: image • text • menu list • button • 3D actor • HUD meter (outlined or 6% tint)</text>

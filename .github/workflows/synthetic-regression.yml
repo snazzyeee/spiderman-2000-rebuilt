@@ -32,6 +32,7 @@ jobs:
           ./tools/pipeline/run_godot.ps1 -Headless -Script res://src/diagnostics/font_tests.gd *> staging/validation/ci-fonts.log
           ./tools/pipeline/run_godot.ps1 -Headless -Script res://src/diagnostics/menu_audio_tests.gd *> staging/validation/ci-menu-audio.log
           ./tools/pipeline/run_godot.ps1 -Headless -Script res://src/diagnostics/layout_tests.gd *> staging/validation/ci-layout.log
+          ./tools/pipeline/run_godot.ps1 -Headless -Script res://src/diagnostics/design_qa_tests.gd *> staging/validation/ci-design.log
       - name: Validate reports and report private-asset skip
         run: python3 tools/pipeline/ci_report.py
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4

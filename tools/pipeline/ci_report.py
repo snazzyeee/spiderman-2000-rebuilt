@@ -41,15 +41,20 @@ def validate_menu_audio(report):
 if __name__ == '__main__':
     evidence = ROOT / 'staging/validation'
     report = json.loads((evidence / 'traversal-tests.json').read_text())
-    validate(report, [(evidence / name).read_text() for name in ('ci-import.log', 'ci-traversal.log', 'ci-fonts.log', 'ci-menu-audio.log', 'ci-layout.log')])
+    validate(report, [(evidence / name).read_text() for name in ('ci-import.log', 'ci-traversal.log', 'ci-fonts.log', 'ci-menu-audio.log', 'ci-layout.log', 'ci-design.log')])
     fonts = json.loads((evidence / 'font-tests.json').read_text())
     validate_fonts(fonts)
     layout = json.loads((evidence / 'layout-tests.json').read_text())
     if not layout.get('passed') or len(layout.get('checks', [])) < 50 or any(not r.get('passed') for r in layout['checks']):
         raise ValueError('Layout checks failed or incomplete')
+    design = json.loads((evidence / 'design-qa-tests.json').read_text())
+    if not design.get('passed') or len(design.get('checks', [])) < 600 or any(not r.get('passed') for r in design['checks']):
+        raise ValueError('Design checks failed or incomplete')
     menu_audio = json.loads((evidence / 'menu-audio-tests.json').read_text())
     validate_menu_audio(menu_audio)
     result = {'synthetic_traversal': {'passed': True, 'checks': len(report['checks'])},
+              'design_checks': {'passed': True, 'checks': len(design['checks'])},
+              'layout_checks': {'passed': True, 'checks': len(layout['checks'])},
               'font_checks': {'passed': True, 'checks': len(fonts['checks']), 'skips': fonts.get('skips', [])},
               'menu_audio_checks': {'passed': True, 'checks': len(menu_audio['checks']), 'skips': menu_audio.get('skips', [])},
               'private_asset_smoke': {'status': 'skipped', 'minimum_checks': 44,
