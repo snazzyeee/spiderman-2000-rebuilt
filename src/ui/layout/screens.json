@@ -2522,6 +2522,10 @@
           "page:audio"
         ],
         [
+          "Video",
+          "page:video"
+        ],
+        [
           "Font variant",
           "font"
         ],
@@ -7559,6 +7563,420 @@
       "proposal_elements": [],
       "proposal_status": "Gemini proposal (unverified)",
       "actions": [
+        [
+          "Back",
+          "back"
+        ]
+      ]
+    },
+    {
+      "id": "video",
+      "styles": {
+        "classic": {
+          "canvas": [
+            640,
+            480
+          ],
+          "virtual_frame": [
+            512,
+            240
+          ],
+          "presentation_aspect": [
+            4,
+            3
+          ],
+          "safe_title": 0.9,
+          "safe_action": 0.93,
+          "elements": [
+            {
+              "id": "canvas_backdrop",
+              "type": "image",
+              "rect": [
+                0,
+                0,
+                640,
+                480
+              ],
+              "anchor": "top_left",
+              "z": 0,
+              "overlay": true,
+              "asset": "res://assets/ui/frontend/menubg.png",
+              "font": "sp_fnt00",
+              "font_size": 11,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:video-options-v1"
+              ],
+              "confidence": "authored",
+              "virtual_raster": true
+            },
+            {
+              "id": "heading",
+              "type": "text",
+              "rect": [
+                140.8,
+                38.4,
+                358.4,
+                81.6
+              ],
+              "anchor": "top_left",
+              "z": 1,
+              "overlay": false,
+              "asset": "",
+              "font": "sp_fnt00",
+              "font_size": 11,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:video-options-v1"
+              ],
+              "confidence": "authored",
+              "text": "VIDEO"
+            },
+            {
+              "id": "content",
+              "type": "menu_list",
+              "rect": [
+                80,
+                140,
+                380,
+                300
+              ],
+              "anchor": "top_left",
+              "z": 2,
+              "overlay": false,
+              "asset": "",
+              "font": "sp_fnt00",
+              "font_size": 10,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:video-options-v1"
+              ],
+              "confidence": "authored",
+              "focus": true
+            },
+            {
+              "id": "actor",
+              "type": "3d_actor",
+              "rect": [
+                480,
+                145,
+                125,
+                280
+              ],
+              "anchor": "top_left",
+              "z": 2,
+              "overlay": false,
+              "asset": "res://assets/characters/spidey.glb",
+              "font": "sp_fnt00",
+              "font_size": 11,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:video-options-v1"
+              ],
+              "confidence": "authored",
+              "focus": false
+            }
+          ],
+          "focus_order": [
+            "content"
+          ],
+          "back": "options_menu",
+          "sounds": {
+            "move": 41,
+            "confirm": 31,
+            "back": 35,
+            "reject": 27
+          },
+          "transition_seconds": 0.25,
+          "row_height": 14,
+          "gap": 3,
+          "actor_stage": {
+            "height": 3.8,
+            "camera": [
+              0,
+              1.5,
+              7.0
+            ],
+            "target": [
+              0,
+              1.3,
+              0
+            ],
+            "yaw": -18,
+            "key_rotation": [
+              -40,
+              -30,
+              0
+            ],
+            "fill_rotation": [
+              -15,
+              120,
+              0
+            ],
+            "rim_rotation": [
+              -25,
+              170,
+              0
+            ],
+            "idle_slot": "spidey_anim_0",
+            "punch_slot": "spidey_anim_100",
+            "breathing_amplitude": 0.012,
+            "breathing_period": 2.7,
+            "parallax_pixels": 5,
+            "ground_size": 5,
+            "contact_shadow": true
+          },
+          "pillarbox_frame": [
+            0.0,
+            0,
+            640.0,
+            480
+          ]
+        },
+        "enhanced": {
+          "canvas": [
+            1920,
+            1080
+          ],
+          "virtual_frame": [
+            1920,
+            1080
+          ],
+          "presentation_aspect": [
+            16,
+            9
+          ],
+          "safe_title": 0.9,
+          "safe_action": 0.93,
+          "elements": [
+            {
+              "id": "canvas_backdrop",
+              "type": "image",
+              "rect": [
+                0,
+                0,
+                1920,
+                1080
+              ],
+              "anchor": "top_left",
+              "z": 0,
+              "overlay": true,
+              "asset": "",
+              "font": "sp_fnt00",
+              "font_size": 23,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:video-options-v1"
+              ],
+              "confidence": "authored"
+            },
+            {
+              "id": "heading",
+              "type": "text",
+              "rect": [
+                422.4,
+                86.4,
+                1075.2,
+                183.6
+              ],
+              "anchor": "top_left",
+              "z": 1,
+              "overlay": false,
+              "asset": "",
+              "font": "sp_fnt00",
+              "font_size": 23,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:video-options-v1"
+              ],
+              "confidence": "authored",
+              "text": "VIDEO"
+            },
+            {
+              "id": "content",
+              "type": "menu_list",
+              "rect": [
+                200,
+                310,
+                1000,
+                660
+              ],
+              "anchor": "top_left",
+              "z": 2,
+              "overlay": false,
+              "asset": "",
+              "font": "sp_fnt00",
+              "font_size": 23,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:video-options-v1"
+              ],
+              "confidence": "authored",
+              "focus": true
+            },
+            {
+              "id": "actor",
+              "type": "3d_actor",
+              "rect": [
+                1300,
+                310,
+                500,
+                660
+              ],
+              "anchor": "top_left",
+              "z": 2,
+              "overlay": false,
+              "asset": "res://assets/characters/spidey.glb",
+              "font": "sp_fnt00",
+              "font_size": 23,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:video-options-v1"
+              ],
+              "confidence": "authored",
+              "focus": false
+            }
+          ],
+          "focus_order": [
+            "content"
+          ],
+          "back": "options_menu",
+          "sounds": {
+            "move": 41,
+            "confirm": 31,
+            "back": 35,
+            "reject": 27
+          },
+          "transition_seconds": 0.25,
+          "row_height": 38,
+          "gap": 3,
+          "actor_stage": {
+            "height": 3.8,
+            "camera": [
+              0,
+              1.5,
+              4.6
+            ],
+            "target": [
+              0,
+              1.3,
+              0
+            ],
+            "yaw": -18,
+            "key_rotation": [
+              -40,
+              -30,
+              0
+            ],
+            "fill_rotation": [
+              -15,
+              120,
+              0
+            ],
+            "rim_rotation": [
+              -25,
+              170,
+              0
+            ],
+            "idle_slot": "spidey_anim_0",
+            "punch_slot": "spidey_anim_100",
+            "breathing_amplitude": 0.012,
+            "breathing_period": 2.7,
+            "parallax_pixels": 5,
+            "ground_size": 5,
+            "contact_shadow": true
+          },
+          "pillarbox_frame": [
+            240.0,
+            0,
+            1440.0,
+            1080
+          ]
+        }
+      },
+      "proposal_elements": [],
+      "proposal_status": "authored",
+      "actions": [
+        [
+          "Window mode",
+          "video:window_mode"
+        ],
+        [
+          "Resolution",
+          "video:resolution"
+        ],
+        [
+          "VSync",
+          "video:vsync"
+        ],
+        [
+          "Frame cap",
+          "video:frame_cap"
+        ],
+        [
+          "Render scale",
+          "video:render_scale"
+        ],
+        [
+          "Anti-aliasing",
+          "video:aa"
+        ],
+        [
+          "Anisotropic filter",
+          "video:anisotropy"
+        ],
+        [
+          "Texture quality",
+          "texture_quality"
+        ],
+        [
+          "Font variant",
+          "font"
+        ],
+        [
+          "Shadow quality",
+          "video:shadows"
+        ],
+        [
+          "SSAO",
+          "video:ssao"
+        ],
+        [
+          "Volumetric fog",
+          "video:volumetric_fog"
+        ],
         [
           "Back",
           "back"

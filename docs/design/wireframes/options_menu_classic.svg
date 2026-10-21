@@ -192,16 +192,18 @@
 <circle cx="432.0" cy="179.1" r="6" fill="#fff" stroke="#333"/><text x="429.0" y="182.1" fill="#222">2</text>
 <path d="M432.0,179.1 L432.0,197.1" stroke="#333" marker-end="url(#arrow)"/>
 <circle cx="432.0" cy="197.1" r="6" fill="#fff" stroke="#333"/><text x="429.0" y="200.1" fill="#222">3</text>
-<path d="M432.0,197.1 L432.0,233.1" stroke="#333" marker-end="url(#arrow)"/>
-<circle cx="432.0" cy="233.1" r="6" fill="#fff" stroke="#333"/><text x="429.0" y="236.1" fill="#222">4</text>
-<path d="M432.0,233.1 L432.0,269.1" stroke="#333" marker-end="url(#arrow)"/>
-<circle cx="432.0" cy="269.1" r="6" fill="#fff" stroke="#333"/><text x="429.0" y="272.1" fill="#222">5</text>
-<path d="M432.0,269.1 L432.0,305.1" stroke="#333" marker-end="url(#arrow)"/>
-<circle cx="432.0" cy="305.1" r="6" fill="#fff" stroke="#333"/><text x="429.0" y="308.1" fill="#222">6</text>
-<path d="M432.0,305.1 L432.0,323.1" stroke="#333" marker-end="url(#arrow)"/>
+<path d="M432.0,197.1 L432.0,215.1" stroke="#333" marker-end="url(#arrow)"/>
+<circle cx="432.0" cy="215.1" r="6" fill="#fff" stroke="#333"/><text x="429.0" y="218.1" fill="#222">4</text>
+<path d="M432.0,215.1 L432.0,251.1" stroke="#333" marker-end="url(#arrow)"/>
+<circle cx="432.0" cy="251.1" r="6" fill="#fff" stroke="#333"/><text x="429.0" y="254.1" fill="#222">5</text>
+<path d="M432.0,251.1 L432.0,287.1" stroke="#333" marker-end="url(#arrow)"/>
+<circle cx="432.0" cy="287.1" r="6" fill="#fff" stroke="#333"/><text x="429.0" y="290.1" fill="#222">6</text>
+<path d="M432.0,287.1 L432.0,323.1" stroke="#333" marker-end="url(#arrow)"/>
 <circle cx="432.0" cy="323.1" r="6" fill="#fff" stroke="#333"/><text x="429.0" y="326.1" fill="#222">7</text>
 <path d="M432.0,323.1 L432.0,341.1" stroke="#333" marker-end="url(#arrow)"/>
 <circle cx="432.0" cy="341.1" r="6" fill="#fff" stroke="#333"/><text x="429.0" y="344.1" fill="#222">8</text>
+<path d="M432.0,341.1 L432.0,359.1" stroke="#333" marker-end="url(#arrow)"/>
+<circle cx="432.0" cy="359.1" r="6" fill="#fff" stroke="#333"/><text x="429.0" y="362.1" fill="#222">9</text>
 <text x="8" y="505" fill="#222">Back → main_menu | options_menu / classic</text>
 <text x="8" y="530" fill="#222">Evidence: solid dark = verified/recovered; dashed orange = Gemini proposal; dotted blue = authored</text>
 <text x="8" y="553" fill="#222">Types: image • text • menu list • button • 3D actor • HUD meter (outlined or 6% tint)</text>

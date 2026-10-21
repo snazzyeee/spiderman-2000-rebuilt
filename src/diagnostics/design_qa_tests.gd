@@ -2,6 +2,7 @@ extends SceneTree
 var checks: Array = []
 var samples: Array = []
 var screenshots: Array = []
+var video_memory_bytes := 0
 var menu: Node
 func _initialize() -> void: call_deferred("run")
 func check(value: bool, label: String) -> void:
@@ -44,6 +45,18 @@ func run() -> void:
 	await process_frame
 	var focused := root.gui_get_focus_owner()
 	check(focused is Button and focused.text == "Options","gamepad moves menu focus")
+	var metrics_path := "res://assets/ui/fonts/font_manifest.json"
+	if FileAccess.file_exists(metrics_path):
+		var manifest: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(metrics_path))
+		var record: Dictionary = manifest.fonts.filter(func(row): return row.name == "sp_fnt00")[0]
+		for button in menu.panel.get_children():
+			if not button is Button: continue
+			var expected_width := 0.0
+			for character in button.text:
+				expected_width += float(record.original_advances[str(character.unicode_at(0))])
+			expected_width *= float(button.get_theme_font_size("font_size"))/float(record.line_height)
+			var rendered_width: float = button.get_theme_font("font").get_string_size(button.text,HORIZONTAL_ALIGNMENT_LEFT,-1,button.get_theme_font_size("font_size")).x
+			check(absf(rendered_width-expected_width) <= 2.0,"main caption width matches recovered advances: "+button.text)
 	menu.show_page("Options")
 	menu.go_back()
 	check(menu.page == "Main","back follows layout target")
@@ -59,6 +72,13 @@ func run() -> void:
 	check(menu.transition != null,"reduced motion retains skippable transition")
 	FrontendSettings.set_value("reduced_motion","Off",false)
 	if menu.view.visual:
+		var enhanced_surfaces := 0
+		for mesh in menu.view.visual.find_children("*","MeshInstance3D",true,false):
+			for surface in range(mesh.mesh.get_surface_count()):
+				var material := mesh.get_surface_override_material(surface) as StandardMaterial3D
+				var original := mesh.mesh.surface_get_material(surface) as StandardMaterial3D
+				if material and original and material.albedo_texture and material.albedo_texture != original.albedo_texture: enhanced_surfaces += 1
+		check(enhanced_surfaces > 0,"menu rig textures bind through decoded pixel identity")
 		menu.view._process(.5)
 		check(menu.view.visual.scale.y != menu.view.rest_scale.y and menu.view.actor_root.position == Vector3.ZERO,"breathing changes rig relative to fixed camera and ground")
 		FrontendSettings.set_value("reduced_motion","On",false)
@@ -74,7 +94,7 @@ func run() -> void:
 		menu.view._process(0.0)
 		check(not menu.view.reaction,"reaction returns to idle after original punch clip")
 
-	for resolution in [Vector2i(1280,720),Vector2i(1920,1080),Vector2i(2560,1440)]:
+	for resolution in [Vector2i(1280,720),Vector2i(1920,1080),Vector2i(2560,1440),Vector2i(1920,1200)]:
 		root.size = resolution
 		await process_frame
 		for style in ["classic","enhanced"]:
@@ -140,6 +160,8 @@ func run() -> void:
 			previous_tick = tick
 		var ordered := samples.duplicate();ordered.sort()
 		check(float(ordered[int(ordered.size()*.95)]) <= 1.0/60.0,"1080p 95th percentile frame interval <=16.667ms on real renderer")
+		video_memory_bytes = RenderingServer.get_rendering_info(RenderingServer.RENDERING_INFO_VIDEO_MEM_USED)
+		check(video_memory_bytes > 0 and video_memory_bytes < 4*1024*1024*1024,"Godot reported video memory below 4 GiB")
 	FrontendSettings.values = saved
 	MenuAudio.set_mode(audio_mode,false)
 	root.get_node("Dialogue").music.stop()
@@ -150,7 +172,7 @@ func run() -> void:
 	menu.queue_free()
 	await process_frame
 	var failed := checks.filter(func(row): return not row.passed)
-	var report := {"passed":failed.is_empty(),"checks":checks,"failures":failed,"screenshots":screenshots,"frame_intervals_seconds":samples,"renderer":RenderingServer.get_current_rendering_method(),"display_driver":DisplayServer.get_name(),"contrast_scope":"Declared foreground against actual captured backdrop; original palette outlines/antialiasing not certified", "proposal_screens":"Unverified content is shown only as authored placeholder regions; no historical fidelity claim"}
+	var report := {"passed":failed.is_empty(),"checks":checks,"failures":failed,"screenshots":screenshots,"frame_intervals_seconds":samples,"video_memory_bytes":video_memory_bytes,"renderer":RenderingServer.get_current_rendering_method(),"display_driver":DisplayServer.get_name(),"contrast_scope":"Declared foreground against actual captured backdrop; original palette outlines/antialiasing not certified", "proposal_screens":"Unverified content is shown only as authored placeholder regions; no historical fidelity claim"}
 	var file := FileAccess.open("res://staging/validation/design-qa-tests.json",FileAccess.WRITE)
 	file.store_string(JSON.stringify(report,"  "));file.close()
 	print("DESIGN_QA checks=",checks.size()," failures=",failed.size())

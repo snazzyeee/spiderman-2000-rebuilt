@@ -26,6 +26,7 @@ func run() -> void:
 	check(OriginalFonts.set_variant("Enhanced", false) and control.theme != previous, "variant applies to existing control live")
 	check(OriginalFonts.font_for("menu","res://assets/ui/fonts/definitely_missing") == null, "absent private font returns clean fallback")
 	check(OriginalFonts.theme_for("menu","res://assets/ui/fonts/definitely_missing").default_font == null, "missing font leaves existing default font")
+	check(OriginalFonts.set_variant("Remastered",false),"Remastered variant applies live")
 	check(OriginalFonts.set_variant("Faithful"), "font selection persists")
 	var config := ConfigFile.new()
 	config.load(config_path)
@@ -63,6 +64,10 @@ func run() -> void:
 				var b := outline.get_string_size("AB 01",HORIZONTAL_ALIGNMENT_LEFT,-1,size_of_font).x
 				check(absf(a-expected) <= 0.01 and absf(b-expected) <= 0.01, record.name+" Godot preserves exact advances in both variants")
 				check(outline.get_palette_count() > 0, record.name+" enhanced palette layers loaded")
+				var remastered_path: String = "res://assets/ui/fonts/"+str(record.name)+"_remastered.fnt"
+				if ResourceLoader.exists(remastered_path):
+					var remastered := load(remastered_path) as Font
+					check(remastered != null and absf(remastered.get_string_size("AB 01",HORIZONTAL_ALIGNMENT_LEFT,-1,size_of_font).x-expected) <= .01,record.name+" Remastered preserves original advances exactly")
 	else:
 		skips.append("Private font resources absent; original-font load/metrics checks skipped")
 	if existed:

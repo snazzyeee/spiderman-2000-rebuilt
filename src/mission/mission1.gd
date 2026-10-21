@@ -29,6 +29,7 @@ func vector(value: Array) -> Vector3:
 
 func _ready() -> void:
 	RevampAssets.lighting(self)
+	VideoSettings.apply(get_tree())
 	_build_hud()
 	if not FileAccess.file_exists("res://assets/environments/mission1_layout.json"):
 		missing_assets = true

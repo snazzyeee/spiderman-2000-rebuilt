@@ -35,7 +35,7 @@ const out = path.join(folder,'overlays'); fs.mkdirSync(out,{recursive:true});
    await sharp(file).composite([{input:data,raw:{width:info.width,height:info.height,channels:4},left,top}]).png().toFile(path.join(out,name));count++;
   }
  }
- for(const renderer of ['forward_plus','mobile']) for(const resolution of ['1280x720','1920x1080','2560x1440']) {
+ for(const renderer of ['forward_plus','mobile']) for(const resolution of ['1280x720','1920x1080','2560x1440','1920x1200']) {
   const tiles=[];const tileW=400,tileH=250;
   for(let row=0;row<doc.screens.length;row++) for(let col=0;col<2;col++) {
    const style=['classic','enhanced'][col];const name=`${doc.screens[row].id}_${style}_${renderer}_${resolution}.png`;

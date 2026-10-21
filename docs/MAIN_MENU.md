@@ -82,3 +82,21 @@ scale-pop and exact rendered-width QA are also outstanding; the enhanced plates
 currently have ink borders/skew/shadows only. Hint labels are ASCII controls,
 not recovered device glyph art. These limitations prevent calling the entire
 owner polish acceptance complete even when the retained regression suites pass.
+
+Texture/display milestone: the initial offline enhancement batch contains 59
+private images (menu/comic art, eight Spider-Man textures and original font
+atlases). Enhanced art prefers hand-curated hd_overrides, then generated hd;
+Original bypasses both. Rig bindings use decoded RGBA hashes, not material order.
+The third font variant, Remastered, doubles original converter cells/advances.
+Options > Video persists/applies window mode, resolution including 16:10, VSync,
+frame cap, renderer-specific scaling/AA, anisotropy, texture/font variants,
+shadows and Forward+-only SSAO/fog. Existing Options audio sliders remain.
+
+The pipeline inventories all private PNGs; run enhance_textures.py --all for the
+remaining batch. Explicit repeatable --tiling and --scissor names select wrap
+padding and binary alpha, rather than guessing material semantics from filenames.
+Private category sheets and texture-budget estimates are in
+staging/validation/textures/. The full environment/character enhancement batch
+and individual atlas-edge/art quality review are still outstanding. Godot video
+memory telemetry excludes driver/OS allocations; neither it nor the conservative
+RGBA8 estimate certifies total dedicated GPU residency under every setting.

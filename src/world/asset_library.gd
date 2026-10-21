@@ -8,7 +8,9 @@ static func instantiate_model(path: String) -> Node3D:
 	var packed = load(path)
 	if not packed is PackedScene:
 		return null
-	return packed.instantiate()
+	var instance: Node3D = packed.instantiate()
+	TextureQuality.apply_to_model(instance)
+	return instance
 
 static func bounds_of(root: Node3D) -> AABB:
 	var result := AABB()
@@ -69,3 +71,4 @@ static func lighting(root: Node3D) -> void:
 	sun.shadow_enabled = true
 	sun.directional_shadow_max_distance = 120.0
 	root.add_child(sun)
+	VideoSettings.apply_scene(root)

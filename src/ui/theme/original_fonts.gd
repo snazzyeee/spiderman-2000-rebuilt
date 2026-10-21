@@ -4,7 +4,7 @@ extends RefCounted
 # Recovered metrics/mapping and authored role/variant policy: fonts.md.
 const BASE := "res://assets/ui/fonts"
 const ROLES := {"title":"sp_fnt00", "menu":"sp_fnt00", "hud":"sp_fnt00", "caption":"sp_fnt00", "subtitle":"sp_fnt02"}
-const VARIANTS := ["Faithful", "Enhanced"]
+const VARIANTS := ["Faithful", "Enhanced", "Remastered"]
 static var selected := ""
 static var bindings: Array[Dictionary] = []
 static var fonts := {}
@@ -19,7 +19,7 @@ static func get_variant() -> String:
 
 static func font_for(role: String, directory: String = BASE) -> Font:
 	var stem: String = ROLES.get(role, "sp_fnt00")
-	var suffix := "_faithful.fnt" if get_variant() == "Faithful" else "_enhanced.ttf"
+	var suffix := "_faithful.fnt" if get_variant() == "Faithful" else "_remastered.fnt" if get_variant() == "Remastered" else "_enhanced.ttf"
 	var path := directory+"/"+stem+suffix
 	if not ResourceLoader.exists(path): return null
 	if not fonts.has(path):

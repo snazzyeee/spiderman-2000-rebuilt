@@ -30,6 +30,7 @@ func _ready() -> void:
 		AudioServer.set_bus_volume_db(AudioServer.get_bus_index(bus),linear_to_db(float(settings.get_value("audio",bus,.8))))
 	show_page("Main")
 	_start_music()
+	VideoSettings.apply(get_tree())
 
 func menu_sound(event: String) -> void:
 	menu_audio.request(event,Dialogue)
@@ -126,7 +127,7 @@ func _style(control: Control) -> void:
 		control.add_theme_stylebox_override("focus",focus)
 
 func _add_action(caption: String, action: String) -> void:
-	if action in ["font","style","menu_sounds"] or action.begins_with("pref:"):
+	if action in ["font","style","menu_sounds","texture_quality"] or action.begins_with("pref:") or action.begins_with("video:"):
 		var row := HBoxContainer.new()
 		var label := Label.new()
 		label.text = caption
@@ -136,11 +137,12 @@ func _add_action(caption: String, action: String) -> void:
 		var choice := OptionButton.new()
 		choice.fit_to_longest_item = false
 		var key := action.trim_prefix("pref:")
-		var options: Array = OriginalFonts.VARIANTS if action == "font" else MenuAudio.MODES if action == "menu_sounds" else FrontendSettings.choices(key)
+		var options: Array = VideoSettings.choices(action.trim_prefix("video:")) if action.begins_with("video:") else OriginalFonts.VARIANTS if action == "font" else TextureQuality.MODES if action == "texture_quality" else MenuAudio.MODES if action == "menu_sounds" else FrontendSettings.choices(key)
 		for option in options: choice.add_item(option)
-		var value: String = OriginalFonts.get_variant() if action == "font" else MenuAudio.get_mode() if action == "menu_sounds" else FrontendSettings.get_value(key)
+		var value: String = VideoSettings.get_value(action.trim_prefix("video:")) if action.begins_with("video:") else OriginalFonts.get_variant() if action == "font" else TextureQuality.get_mode() if action == "texture_quality" else MenuAudio.get_mode() if action == "menu_sounds" else FrontendSettings.get_value(key)
 		choice.select(options.find(value))
 		_style(choice)
+		choice.disabled = options.size() < 2
 		choice.item_selected.connect(_choice_changed.bind(action,options))
 		row.add_child(choice)
 		panel.add_child(row)
@@ -179,7 +181,14 @@ func _focus(control: Control) -> void: menu_audio.focus(control,Dialogue)
 func _hover(control: Control) -> void:
 	if not (control is Button and control.disabled) and not control.has_focus(): control.grab_focus()
 func _choice_changed(index: int, action: String, options: Array) -> void:
-	if action == "font": OriginalFonts.set_variant(options[index])
+	if action.begins_with("video:"):
+		VideoSettings.set_value(action.trim_prefix("video:"),options[index])
+		VideoSettings.apply(get_tree())
+	elif action == "font": OriginalFonts.set_variant(options[index])
+	elif action == "texture_quality":
+		TextureQuality.set_mode(options[index])
+		show_page(page)
+		if view.visual: TextureQuality.apply_to_model(view.visual)
 	elif action == "menu_sounds":
 		MenuAudio.set_mode(options[index])
 		if options[index] == "Off": Dialogue.sfx.stop()
@@ -207,7 +216,7 @@ func go_back() -> void:
 	if target not in ["none","gameplay"]: show_page(target)
 func show_art() -> void:
 	var path := "res://assets/ui/cb%02d.png" % gallery_index
-	art.texture = load(path) if ResourceLoader.exists(path) else null
+	art.texture = TextureQuality.load_texture(path)
 	art.visible = art.texture != null
 func _update_hints() -> void:
 	if not view or not view.nodes.has("input_hints"): return
@@ -216,7 +225,7 @@ func _update_hints() -> void:
 func _update_teaser() -> void:
 	if not view or not view.nodes.has("gallery_teaser"): return
 	var path := "res://assets/ui/cb%02d.png" % gallery_index
-	view.nodes.gallery_teaser.texture = load(path) if ResourceLoader.exists(path) else null
+	view.nodes.gallery_teaser.texture = TextureQuality.load_texture(path)
 func launch(practice: bool, resume_game: bool = false) -> void:
 	GameSession.training = practice
 	GameSession.resume_checkpoint = GameSession.load_checkpoint() if resume_game else -1

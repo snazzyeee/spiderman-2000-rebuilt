@@ -25,7 +25,16 @@ Pillow supports private visual QA; fontTools builds outlines/fonts; Capstone is
 used only for bounded static analysis of the fingerprinted executable. Wheel
 metadata includes upstream license notices. No original font or glyph is public.
 
-No upscaler or enhancement model has been downloaded by this milestone.
+Texture setup now pins **waifu2x-ncnn-vulkan 20250915 Windows**, including its
+bundled CUnet illustration and upconv_7 photo models, to the official GitHub
+release asset SHA-256
+`7425be94b94e4c8f37a1e433ac0e0100c43790e2c37418f4b65d8235adfbdc87`.
+`tools/pipeline/setup_texture_tools.py` bounds download/extraction, checks every
+installed binary/model against the pinned archive, and retains bundled licenses
+privately. [Upstream MIT license](https://github.com/nihui/waifu2x-ncnn-vulkan/blob/20250915/LICENSE)
+and [waifu2x model/project notices](https://github.com/nagadomi/waifu2x) apply;
+the package also includes ncnn and codec dependency notices. Inference is local
+and offline; only the explicit setup script downloads this pinned archive.
 Existing private audio tool installations predate this inventory;
 their provenance still needs consolidation before new download/setup changes.
 

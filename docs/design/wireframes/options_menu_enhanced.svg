@@ -457,16 +457,18 @@
 <circle cx="1020.8" cy="405.6" r="10" fill="#fff" stroke="#333"/><text x="1017.8" y="408.6" fill="#222">2</text>
 <path d="M1020.8,405.6 L1020.8,446.6" stroke="#333" marker-end="url(#arrow)"/>
 <circle cx="1020.8" cy="446.6" r="10" fill="#fff" stroke="#333"/><text x="1017.8" y="449.6" fill="#222">3</text>
-<path d="M1020.8,446.6 L1020.8,528.6" stroke="#333" marker-end="url(#arrow)"/>
-<circle cx="1020.8" cy="528.6" r="10" fill="#fff" stroke="#333"/><text x="1017.8" y="531.6" fill="#222">4</text>
-<path d="M1020.8,528.6 L1020.8,610.6" stroke="#333" marker-end="url(#arrow)"/>
-<circle cx="1020.8" cy="610.6" r="10" fill="#fff" stroke="#333"/><text x="1017.8" y="613.6" fill="#222">5</text>
-<path d="M1020.8,610.6 L1020.8,692.6" stroke="#333" marker-end="url(#arrow)"/>
-<circle cx="1020.8" cy="692.6" r="10" fill="#fff" stroke="#333"/><text x="1017.8" y="695.6" fill="#222">6</text>
-<path d="M1020.8,692.6 L1020.8,733.6" stroke="#333" marker-end="url(#arrow)"/>
+<path d="M1020.8,446.6 L1020.8,487.6" stroke="#333" marker-end="url(#arrow)"/>
+<circle cx="1020.8" cy="487.6" r="10" fill="#fff" stroke="#333"/><text x="1017.8" y="490.6" fill="#222">4</text>
+<path d="M1020.8,487.6 L1020.8,569.6" stroke="#333" marker-end="url(#arrow)"/>
+<circle cx="1020.8" cy="569.6" r="10" fill="#fff" stroke="#333"/><text x="1017.8" y="572.6" fill="#222">5</text>
+<path d="M1020.8,569.6 L1020.8,651.6" stroke="#333" marker-end="url(#arrow)"/>
+<circle cx="1020.8" cy="651.6" r="10" fill="#fff" stroke="#333"/><text x="1017.8" y="654.6" fill="#222">6</text>
+<path d="M1020.8,651.6 L1020.8,733.6" stroke="#333" marker-end="url(#arrow)"/>
 <circle cx="1020.8" cy="733.6" r="10" fill="#fff" stroke="#333"/><text x="1017.8" y="736.6" fill="#222">7</text>
 <path d="M1020.8,733.6 L1020.8,774.6" stroke="#333" marker-end="url(#arrow)"/>
 <circle cx="1020.8" cy="774.6" r="10" fill="#fff" stroke="#333"/><text x="1017.8" y="777.6" fill="#222">8</text>
+<path d="M1020.8,774.6 L1020.8,815.6" stroke="#333" marker-end="url(#arrow)"/>
+<circle cx="1020.8" cy="815.6" r="10" fill="#fff" stroke="#333"/><text x="1017.8" y="818.6" fill="#222">9</text>
 <text x="8" y="1105" fill="#222">Back → main_menu | options_menu / enhanced</text>
 <text x="8" y="1130" fill="#222">Evidence: solid dark = verified/recovered; dashed orange = Gemini proposal; dotted blue = authored</text>
 <text x="8" y="1153" fill="#222">Types: image • text • menu list • button • 3D actor • HUD meter (outlined or 6% tint)</text>

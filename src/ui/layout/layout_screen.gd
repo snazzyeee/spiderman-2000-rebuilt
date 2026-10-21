@@ -60,7 +60,8 @@ func build(id: String, selected_style: String, dimmed: bool = false) -> void:
 		if control is TextureRect:
 			control.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 			control.stretch_mode = TextureRect.STRETCH_SCALE if e.get("virtual_raster",false) else TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-			if ResourceLoader.exists(e.asset): control.texture = load(e.asset)
+			control.texture = TextureQuality.load_texture(e.asset) if e.asset != "" else null
+			control.texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS_ANISOTROPIC
 		if control is Label:
 			control.text = e.get("text", "")
 			control.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
@@ -96,12 +97,17 @@ func _build_actor(container: SubViewportContainer, path: String) -> void:
 	stage.render_target_update_mode = SubViewport.UPDATE_ALWAYS
 	container.stretch = true
 	container.add_child(stage)
+	VideoSettings.apply_viewport(stage)
 	actor_root = Node3D.new()
 	stage.add_child(actor_root)
+	var environment := WorldEnvironment.new()
+	environment.environment = Environment.new()
+	actor_root.add_child(environment)
 	var config: Dictionary = layout.actor_stage
 	if ResourceLoader.exists(path):
 		visual = (load(path) as PackedScene).instantiate()
 		actor_root.add_child(visual)
+		TextureQuality.apply_to_model(visual)
 		RevampAssets.fit_character(visual,float(config.height))
 		rest_scale = visual.scale
 		rest_position = visual.position
@@ -133,6 +139,7 @@ func _build_actor(container: SubViewportContainer, path: String) -> void:
 	floor_mesh.material_override = material
 	floor_mesh.position.y = .01
 	actor_root.add_child(floor_mesh)
+	VideoSettings.apply_scene(actor_root)
 
 func react() -> void:
 	if FrontendSettings.get_value("reduced_motion") == "On": return

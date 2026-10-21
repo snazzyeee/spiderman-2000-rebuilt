@@ -36,6 +36,35 @@ tools/design/render_wireframes.py --overlays. No media or Gemini files tracked.
 The sections below describe the preceding run; this run's final section will
 replace these provisional counts/HEAD when later milestones are complete.
 
+Polish implementation commit f2387874c63d9534e82a83984954665ad4e84928 passed
+CI: https://github.com/snazzyeee/spiderman-2000-revamp/actions/runs/39538061382.
+
+Section 2 implementation: pinned waifu2x 20250915 runs locally on the RX 580;
+59 menu/rig/font images enhanced, original files preserved, exact pixel-hash
+material joins, deterministic cache, explicit wrap/scissor flags, curated
+override priority, runtime quality choice, Remastered font, live Video options
+and 16:10 captures. Conservative RGBA8 texture estimate: 292,334,680 bytes;
+Godot runtime video memory is also gated below 4 GiB. Full remaining texture
+batch and image/glyph-cell quality review are not complete. Default --all is
+explicitly opt-in; setup downloads only the pinned release, inference is offline.
+
+Section-2 gate: staging/validation/regression/texture-video-release/; **52 + 26
+= 78 Python tests**. Headless / Forward+ / Mobile counts: smoke **51/51/51**,
+traversal **150/150/150**, fonts **46/46/46**, audio **32/32/32**, layout
+**90/90/90**, design **1039/1217/1217**, loading **7/7/7**, zero errors. Failed
+intermediate evidence retained: startup display changes disturbed native focus;
+fixed by avoiding unnecessary OS-window changes; existing smoke assertions pass.
+An early ZIP test normalized its malicious backslash name; fixture corrected,
+path/link guards retained, complete release gate rerun.
+
+Regenerate: setup_texture_tools.py once, enhance_textures.py (or --all and
+explicit repeatable --tiling/--scissor asset-relative names). Outputs in assets/hd,
+assets/hd_overrides, staging/cache/textures and staging/validation/textures;
+illustration-contact-sheet.png and general-contact-sheet.png are private review
+sheets. Remastered .fnt/.png files sit beside existing private converted fonts.
+Wireframe index now includes Video (44 diagrams); latest real screenshots and
+352 overlays cover 720p/1080p/1440p/1920x1200 on both renderers.
+
 ## HEAD and scope
 
 Branch main; implementation HEAD: `3ebb7e39f37025ca6ccd9471327df411a9365a5a`.
