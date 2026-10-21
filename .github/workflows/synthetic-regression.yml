@@ -12,6 +12,8 @@ jobs:
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          lfs: false
       - name: Check hosted Python (no additional interpreter download)
         run: python3 -c "import sys; assert sys.version_info >= (3, 11); print(sys.version)"
       - name: Install test dependencies

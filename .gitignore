@@ -2,6 +2,10 @@
 /assets/
 /staging/
 
+# Locally supplied original game files; never commit them.
+/Spider.Man.2000/
+/Spider.Man.2000.zip
+
 # Private derived level data (generated from original TRG files)
 /levels/**/trg_graph.json
 
