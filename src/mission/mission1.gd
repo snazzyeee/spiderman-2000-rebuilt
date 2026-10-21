@@ -16,7 +16,7 @@ var encounter_started := false
 var hud := Label.new()
 var prompt := Label.new()
 var subtitles := Label.new()
-var pause_panel := PanelContainer.new()
+var pause_panel: LayoutScreen
 var intro_camera := Camera3D.new()
 var intro_tween: Tween
 var intro_clip := ""
@@ -98,25 +98,23 @@ func _build_hud() -> void:
 	subtitles.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	subtitles.add_theme_font_size_override("font_size", 22)
 	layer.add_child(subtitles)
-	pause_panel.position = Vector2(470, 190)
-	pause_panel.custom_minimum_size = Vector2(340, 260)
-	var column := VBoxContainer.new()
-	pause_panel.add_child(column)
-	for caption in ["Resume", "Recover to checkpoint", "Main Menu"]:
-		var button := Button.new()
-		button.text = caption
-		button.custom_minimum_size.y = 65
-		column.add_child(button)
-		button.pressed.connect(func():
-			if caption == "Main Menu":
-				Dialogue.release_cinematic(self)
-				get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
-			else:
-				set_paused(false)
-				if caption == "Recover to checkpoint":
-					recover())
-	pause_panel.visible = false
+	pause_panel = LayoutScreen.new()
 	layer.add_child(pause_panel)
+	pause_panel.build("pause",FrontendSettings.get_value("style"),true)
+	for screen in FrontendSettings.document().screens:
+		if screen.id == "pause":
+			for action in screen.actions:
+				pause_panel.action_button(str(action[0]),_pause_action.bind(str(action[1])))
+	pause_panel.visible = false
+
+func _pause_action(action: String) -> void:
+	MenuAudio.new().request("confirm",Dialogue)
+	if action == "main":
+		Dialogue.release_cinematic(self)
+		get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
+	else:
+		set_paused(false)
+		if action == "recover": recover()
 
 func _show_subtitle(speaker: String, text: String) -> void:
 	# Objective speech cannot replace the cinematic or authored briefing UI.
@@ -205,7 +203,7 @@ func set_paused(value: bool) -> void:
 		intro_tween.pause() if value else intro_tween.play()
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE if value or lifecycle != Lifecycle.GAMEPLAY_ACTIVE else Input.MOUSE_MODE_CAPTURED
 	if value:
-		pause_panel.get_child(0).get_child(0).grab_focus()
+		pause_panel.nodes.content.get_child(0).grab_focus()
 
 func _process(delta: float) -> void:
 	if missing_assets or paused_game:

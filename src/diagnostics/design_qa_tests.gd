@@ -53,6 +53,22 @@ func run() -> void:
 	menu.show_page("Main")
 	check(menu.transition != null,"reduced motion retains skippable transition")
 	FrontendSettings.set_value("reduced_motion","Off",false)
+	if menu.view.visual:
+		menu.view._process(.5)
+		check(menu.view.visual.scale.y != menu.view.rest_scale.y and menu.view.actor_root.position == Vector3.ZERO,"breathing changes rig relative to fixed camera and ground")
+		FrontendSettings.set_value("reduced_motion","On",false)
+		menu.view._process(0.0)
+		check(menu.view.visual.scale == menu.view.rest_scale,"reduced motion restores still rig scale")
+		FrontendSettings.set_value("reduced_motion","Off",false)
+		menu.view.react()
+		check(menu.view.reaction,"confirmed frontend punch animation is available")
+		menu.view.animation.seek(.3,true)
+		menu.view._process(0.0)
+		check(menu.view.punch_sound_sent,"reaction reaches one-shot frame cue")
+		menu.view.animation.advance(menu.view.animation.current_animation_length+.1)
+		menu.view._process(0.0)
+		check(not menu.view.reaction,"reaction returns to idle after original punch clip")
+
 	for resolution in [Vector2i(1280,720),Vector2i(1920,1080),Vector2i(2560,1440)]:
 		root.size = resolution
 		await process_frame
@@ -90,6 +106,7 @@ func run() -> void:
 					var contrast_ok := true
 					for c in actual:
 						if not (c is Button or c is Label): continue
+						if c.text.is_empty(): continue
 						var rect := c.get_global_rect()
 						var pos := Vector2(rect.end.x-12,rect.position.y+8)
 						pos *= Vector2(image.get_width(),image.get_height())/root.get_visible_rect().size
@@ -108,9 +125,12 @@ func run() -> void:
 		Engine.max_fps = 0
 		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
 		for frame in range(60): await process_frame
+		var previous_tick := Time.get_ticks_usec()
 		for frame in range(180):
-			await process_frame
-			samples.append(root.get_process_delta_time())
+			await RenderingServer.frame_post_draw
+			var tick := Time.get_ticks_usec()
+			samples.append(float(tick-previous_tick)/1000000.0)
+			previous_tick = tick
 		var ordered := samples.duplicate();ordered.sort()
 		check(float(ordered[int(ordered.size()*.95)]) <= 1.0/60.0,"1080p 95th percentile frame interval <=16.667ms on real renderer")
 	FrontendSettings.values = saved

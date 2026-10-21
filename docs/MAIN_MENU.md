@@ -52,3 +52,12 @@ contrast test compares specified foreground colours with captured backdrop
 pixels; original palette outline/antialiasing contrast remains outside that
 measurement. Frame-interval evidence is a local menu benchmark, not a gameplay
 performance claim. See HANDOFF.md for exact results and remaining limits.
+
+Pause now uses the same loader, fonts, action data and focus treatment over a
+70% dimmed live scene. Resume/recovery/menu callbacks retain existing cinematic
+transport and control locks. User-triggered launches display the original L1Cov
+loading view before a threaded scene request; loading hints/spinner remain
+unverified and are omitted. The retained low-level direct-launch API supports
+the existing lifecycle smoke gate, while a new synthetic scene verifies the
+asynchronous user path. Original HUD code is unchanged; HUD/comic/death proposal
+claims and gaps are recorded in the ledger and claim audit.

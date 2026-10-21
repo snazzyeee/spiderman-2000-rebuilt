@@ -167,3 +167,31 @@ Design QA measures region bounds, sibling intersection, safe-area enclosure,
 focus border geometry and declared foreground against actual backdrop pixels.
 Palette outline/antialiasing contrast is not certified. The real-renderer
 benchmark records 180 uncapped 1080p menu frame intervals after 60 warm-up frames.
+
+Evidence `remake:pause-loading-routing-v1`, confidence **authored**: pause buttons
+come from screens.json and preserve existing mission resume/recover/menu and
+cinematic-lock behaviour. The pause backdrop dims the live scene by 70%.
+User-triggered launch shows loading, yields a frame, requests a threaded scene,
+and changes scene only on successful completion. On request failure it returns
+to Game with the recovered reject event. A synthetic target tests this without
+original assets; retain the existing direct-launch lifecycle gate separately.
+Loading art is L1Cov for the current L1A1 slice, with no fabricated hints/spinner.
+The Black side-fill alternative uses the explicit 4:3 frame stored in layout
+data. Performance gate samples wall-clock rendered-frame intervals, not only
+simulation delta; 95th percentile <=16.667 ms after warm-up.
+
+Authored image presentation derived from the recovered virtual-coordinate map:
+full Title/LegalPC artwork fills the central 4:3 display frame, mapping the
+512x240 virtual raster independently on x/y rather than keeping its raw pixel
+aspect. Loading covers use an inset 4:3 display rectangle. Record this as an
+explicit virtual_raster flag per image in layout data. The title's input target
+is a transparent button over the baked original prompt, with no duplicated typed
+caption. The separately authored cropped main-menu header is not this full-screen
+mapping. Baked image typography is not included in the Control-text contrast test.
+
+Authored breathing validation: scale only the rig vertically about its fitted
+foot baseline, keeping the camera and ground fixed; moving the whole stage
+would be visually inert. Reduced motion restores rest scale/position. Explicit
+private checks exercise relative rig movement, stillness, punch availability,
+one-shot cue and return to idle. No original animation semantics are inferred
+from a generic crouch pose; slots are selected by the recovered numeric names.

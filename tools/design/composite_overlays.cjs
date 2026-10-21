@@ -13,9 +13,14 @@ const out = path.join(folder,'overlays'); fs.mkdirSync(out,{recursive:true});
   const diagram=await sharp(svg).extract({left:48,top:48,width:p.canvas[0],height:p.canvas[1]}).png().toBuffer();
   for(const name of files.filter(n=>n.startsWith(`${screen.id}_${style}_`))) {
    const file=path.join(folder,name); const meta=await sharp(file).metadata();
-   const {data,info}=await sharp(diagram).resize(meta.width,meta.height).ensureAlpha().raw().toBuffer({resolveWithObject:true});
+   const expected=name.match(/_(\d+)x(\d+)\.png$/);
+   if(!expected || meta.width!==Number(expected[1]) || meta.height!==Number(expected[2])) throw new Error('Capture dimensions differ from requested resolution: '+name);
+   const scale=Math.min(meta.width/p.canvas[0],meta.height/p.canvas[1]);
+   const drawWidth=Math.round(p.canvas[0]*scale),drawHeight=Math.round(p.canvas[1]*scale);
+   const left=Math.round((meta.width-drawWidth)/2),top=Math.round((meta.height-drawHeight)/2);
+   const {data,info}=await sharp(diagram).resize(drawWidth,drawHeight).ensureAlpha().raw().toBuffer({resolveWithObject:true});
    for(let i=3;i<data.length;i+=4) data[i]=Math.round(data[i]*.4);
-   await sharp(file).composite([{input:data,raw:{width:info.width,height:info.height,channels:4}}]).png().toFile(path.join(out,name));count++;
+   await sharp(file).composite([{input:data,raw:{width:info.width,height:info.height,channels:4},left,top}]).png().toFile(path.join(out,name));count++;
   }
  }
  for(const renderer of ['forward_plus','mobile']) for(const resolution of ['1280x720','1920x1080','2560x1440']) {
@@ -29,6 +34,6 @@ const out = path.join(folder,'overlays'); fs.mkdirSync(out,{recursive:true});
   }
   if(tiles.length) await sharp({create:{width:800,height:doc.screens.length*tileH,channels:3,background:'#eee'}}).composite(tiles).png().toFile(path.join(folder,`contact-sheet-${renderer}-${resolution}.png`));
  }
- fs.writeFileSync(path.join(folder,'overlay-manifest.json'),JSON.stringify({count,opacity:.4,source:'exact generated SVG cropped to canvas; bundled Sharp '+sharp.versions.sharp},null,2));
+ fs.writeFileSync(path.join(folder,'overlay-manifest.json'),JSON.stringify({count,opacity:.4,validatedCaptureDimensions:count,source:'exact generated SVG cropped to canvas; bundled Sharp '+sharp.versions.sharp},null,2));
  console.log('Exact SVG overlays:',count,'Sharp:',sharp.versions.sharp);
 })().catch(e=>{console.error(e);process.exit(1)});

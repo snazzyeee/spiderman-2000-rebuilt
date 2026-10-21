@@ -17,6 +17,8 @@ var idle_seconds := 0.0
 var attract := false
 var previous_page := "Main"
 var loading := false
+var pending_scene := ""
+var load_requested := false
 
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
@@ -60,6 +62,9 @@ func show_page(name_of_page: String) -> void:
 			view.animation = old_view.animation
 			view.reaction = old_view.reaction
 			view.punch_sound_sent = old_view.punch_sound_sent
+			view.rest_scale = old_view.rest_scale
+			view.rest_position = old_view.rest_position
+			view.clock_time = old_view.clock_time
 		layer.remove_child(old_view)
 		old_view.queue_free()
 	panel = view.nodes.get("content") as VBoxContainer
@@ -92,7 +97,7 @@ func _style(control: Control) -> void:
 	control.add_theme_color_override("font_focus_color",Color(e.colours.focus))
 	if control is Button:
 		var normal := StyleBoxFlat.new()
-		normal.bg_color = Color(e.colours.backdrop)
+		normal.bg_color = Color.TRANSPARENT if view.layout.get("picture_action",false) else Color(e.colours.backdrop)
 		normal.border_color = Color(.36,.36,.43)
 		normal.set_border_width_all(1)
 		control.add_theme_stylebox_override("normal",normal)
@@ -143,7 +148,8 @@ func _add_action(caption: String, action: String) -> void:
 		panel.add_child(label)
 		return
 	var control := Button.new()
-	control.text = caption
+	control.text = "" if view.layout.get("picture_action",false) else caption
+	control.tooltip_text = caption
 	control.disabled = action == "resume" and GameSession.load_checkpoint() < 0
 	_style(control)
 	control.pressed.connect(_activate.bind(action))
@@ -156,10 +162,13 @@ func _hover(control: Control) -> void:
 	if not (control is Button and control.disabled) and not control.has_focus(): control.grab_focus()
 func _choice_changed(index: int, action: String, options: Array) -> void:
 	if action == "font": OriginalFonts.set_variant(options[index])
-	elif action == "menu_sounds": MenuAudio.set_mode(options[index])
+	elif action == "menu_sounds":
+		MenuAudio.set_mode(options[index])
+		if options[index] == "Off": Dialogue.sfx.stop()
 	else: FrontendSettings.set_value(action.trim_prefix("pref:"),options[index])
 	settings.load("user://settings.cfg")
-	if action == "style": show_page(page)
+	if action in ["style","pref:side_fill"]: show_page(page)
+	if action == "pref:cursor_policy" and options[index] == "Visible": Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 func _volume_changed(value: float, bus: String) -> void:
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index(bus),linear_to_db(maxf(.0001,value)))
 	settings.load("user://settings.cfg")
@@ -170,7 +179,7 @@ func _activate(action: String) -> void:
 	if action != "back": view.react()
 	if action.begins_with("page:"): show_page(action.trim_prefix("page:"))
 	elif action == "back": go_back()
-	elif action in ["launch","practice","resume"]: launch(action == "practice",action == "resume")
+	elif action in ["launch","practice","resume"]: begin_launch(action == "practice",action == "resume")
 	elif action == "previous": gallery_index = posmod(gallery_index-1,32); show_art()
 	elif action == "next": gallery_index = (gallery_index+1)%32; show_art()
 	else: view.react()
@@ -188,6 +197,23 @@ func launch(practice: bool, resume_game: bool = false) -> void:
 	Dialogue.music.stop()
 	# Immediate path is retained for the existing two-frame lifecycle smoke gate.
 	get_tree().change_scene_to_file("res://scenes/mission1.tscn")
+func begin_launch(practice: bool, resume_game: bool = false, scene_path: String = "res://scenes/mission1.tscn") -> void:
+	if loading: return
+	GameSession.training = practice
+	GameSession.resume_checkpoint = GameSession.load_checkpoint() if resume_game else -1
+	Dialogue.music.stop()
+	loading = true
+	load_requested = false
+	pending_scene = scene_path
+	show_page("loading")
+	await get_tree().process_frame
+	var status := ResourceLoader.load_threaded_request(scene_path)
+	load_requested = status == OK
+	if not load_requested:
+		loading = false
+		show_page("Game")
+		menu_sound("reject")
+
 func enter_attract() -> void:
 	previous_page = page
 	attract = true
@@ -215,6 +241,18 @@ func _unhandled_input(event: InputEvent) -> void:
 		transition.kill()
 		view.modulate.a = 1.0
 func _process(delta: float) -> void:
+	if loading:
+		if not load_requested: return
+		var status := ResourceLoader.load_threaded_get_status(pending_scene)
+		if status == ResourceLoader.THREAD_LOAD_LOADED:
+			var packed := ResourceLoader.load_threaded_get(pending_scene) as PackedScene
+			loading = false
+			get_tree().change_scene_to_packed(packed)
+		elif status in [ResourceLoader.THREAD_LOAD_FAILED,ResourceLoader.THREAD_LOAD_INVALID_RESOURCE]:
+			loading = false
+			show_page("Game")
+			menu_sound("reject")
+		return
 	idle_seconds += delta
 	if not attract and not loading and idle_seconds >= 60.0: enter_attract()
 	if attract:

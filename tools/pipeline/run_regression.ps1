@@ -19,7 +19,7 @@ foreach ($suite in @('reference','pipeline')) {
 & (Join-Path $PSScriptRoot 'run_godot.ps1') -Import *> (Join-Path $evidence 'import.log')
 foreach ($target in @('headless','forward_plus','mobile')) {
     $arguments = @{ Renderer= $(if ($target -eq 'headless') { 'forward_plus' } else { $target }); Headless=($target -eq 'headless') }
-    foreach ($suite in @('smoke','traversal','fonts','menu-audio','layout','design')) {
+    foreach ($suite in @('smoke','traversal','fonts','menu-audio','layout','design','loading')) {
         $log = Join-Path $evidence "$suite-$target.log"
         if ($suite -eq 'smoke') {
             & (Join-Path $PSScriptRoot 'run_godot.ps1') @arguments -SmokeTest *> $log
@@ -48,13 +48,20 @@ foreach ($target in @('headless','forward_plus','mobile')) {
             if (-not (Test-Path $reportPath) -or (Get-Item $reportPath).LastWriteTimeUtc -lt $startedLayout) { throw 'Missing fresh layout report' }
             $layoutReport = Get-Content $reportPath -Raw | ConvertFrom-Json
             if (-not $layoutReport.passed -or $layoutReport.checks.Count -lt 50) { throw 'Layout suite failed or incomplete' }
-        } else {
+        } elseif ($suite -eq 'design') {
             $startedDesign = [DateTime]::UtcNow
             & (Join-Path $PSScriptRoot 'run_godot.ps1') @arguments -Script 'res://src/diagnostics/design_qa_tests.gd' *> $log
             $reportPath = Join-Path $projectRoot 'staging/validation/design-qa-tests.json'
             if (-not (Test-Path $reportPath) -or (Get-Item $reportPath).LastWriteTimeUtc -lt $startedDesign) { throw 'Missing fresh design report' }
             $designReport = Get-Content $reportPath -Raw | ConvertFrom-Json
             if (-not $designReport.passed -or $designReport.checks.Count -lt 600) { throw 'Design suite failed or incomplete' }
+        } else {
+            $startedLoading = [DateTime]::UtcNow
+            & (Join-Path $PSScriptRoot 'run_godot.ps1') @arguments -Script 'res://src/diagnostics/loading_tests.gd' *> $log
+            $reportPath = Join-Path $projectRoot 'staging/validation/loading-tests.json'
+            if (-not (Test-Path $reportPath) -or (Get-Item $reportPath).LastWriteTimeUtc -lt $startedLoading) { throw 'Missing fresh loading report' }
+            $loadingReport = Get-Content $reportPath -Raw | ConvertFrom-Json
+            if (-not $loadingReport.passed -or $loadingReport.checks.Count -lt 6) { throw 'Loading suite failed or incomplete' }
         }
         $report = Get-Content $reportPath -Raw | ConvertFrom-Json
         if ($report.renderer -ne $arguments.Renderer -or ($target -ne 'headless' -and $report.display_driver -eq 'headless')) { throw "Wrong renderer/display for $target" }

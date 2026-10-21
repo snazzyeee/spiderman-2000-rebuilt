@@ -165,24 +165,23 @@
 <text x="-40" y="388" fill="#333">384</text>
 <text x="-40" y="452" fill="#333">448</text>
 <rect width="640" height="480" fill="none" stroke="#20282e"/>
-<rect x="32" y="24" width="576" height="432" fill="none" stroke="#727b83" stroke-dasharray="5 5"/><text x="36" y="37" fill="#58626b">title safe 90%</text>
-<rect x="22.4" y="16.8" width="595.2" height="446.4" fill="none" stroke="#727b83" stroke-dasharray="5 5"/><text x="26.4" y="29.8" fill="#58626b">action safe 93%</text>
+<rect x="32" y="24" width="576" height="432" fill="none" stroke="#727b83" stroke-dasharray="5 5"/><text x="352" y="37" fill="#58626b">title safe 90%</text>
+<rect x="22.4" y="16.8" width="595.2" height="446.4" fill="none" stroke="#727b83" stroke-dasharray="5 5"/><text x="480" y="29.8" fill="#58626b">action safe 93%</text>
 <g><rect x="0" y="0" width="640" height="480" fill="#7c8c97" fill-opacity="0.06" stroke="#2361a1" stroke-width="1.5" stroke-dasharray="2 4"/>
-<text x="8" y="18" fill="#253039">canvas_backdrop | image</text>
-<text x="8" y="33" fill="#253039">0,0 640×480</text>
-<text x="8" y="48" fill="#253039">sp_fnt00 18 px | z 0</text>
+<text x="8" y="12" fill="#253039">canvas_backdrop | image</text>
+<text x="8" y="23" fill="#253039">0,0 640×480</text>
+<text x="8" y="34" fill="#253039">sp_fnt00 18 px | z 0</text>
 </g>
-<g><rect x="115.2" y="28.8" width="409.6" height="374.4" fill="#7c8c97" fill-opacity="0.06" stroke="#2361a1" stroke-width="1.5" stroke-dasharray="2 4"/>
-<text x="123.2" y="46.8" fill="#253039">art | image</text>
-<text x="123.2" y="61.8" fill="#253039">115.2,28.8 409.6×374.4</text>
-<text x="123.2" y="76.8" fill="#253039">sp_fnt00 18 px | z 1</text>
+<g><rect x="64.0" y="24.0" width="512.0" height="384.0" fill="#7c8c97" fill-opacity="0.06" stroke="#2361a1" stroke-width="1.5" stroke-dasharray="2 4"/>
+<text x="72.0" y="36.0" fill="#253039">art | image</text>
+<text x="72.0" y="47.0" fill="#253039">64,24 512×384</text>
+<text x="72.0" y="58.0" fill="#253039">sp_fnt00 18 px | z 1</text>
 </g>
 <g><rect x="192.0" y="412.8" width="256.0" height="38.4" fill="#296b4f" fill-opacity="0.06" stroke="#2361a1" stroke-width="1.5" stroke-dasharray="2 4"/>
-<text x="200.0" y="430.8" fill="#253039">content | button</text>
-<text x="200.0" y="445.8" fill="#253039">192,412.8 256×38.4</text>
-<text x="200.0" y="460.8" fill="#253039">sp_fnt00 18 px | z 2</text>
+<text x="200.0" y="424.8" fill="#253039">content | button</text>
+<text x="200.0" y="435.8" fill="#253039">192,412.8 256×38.4</text>
+<text x="200.0" y="446.8" fill="#253039">sp_fnt00 18 px | z 2</text>
 </g>
-<circle cx="210.0" cy="435.2" r="12" fill="#fff" stroke="#333"/><text x="206.0" y="439.2" fill="#222">1</text>
 <text x="8" y="505" fill="#222">Back → gameplay | loading / classic</text>
 <text x="8" y="530" fill="#222">Evidence: solid dark = verified/recovered; dashed orange = Gemini proposal; dotted blue = authored</text>
 <text x="8" y="553" fill="#222">Types: image • text • menu list • button • 3D actor • HUD meter (outlined or 6% tint)</text>

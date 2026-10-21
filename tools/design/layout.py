@@ -41,6 +41,10 @@ def validate(document):
 
 def audit_proposal(document, root=ROOT):
     errors=[]; rows=[]
+    converted={}
+    manifest=root/'assets/ui/frontend/manifest.json'
+    if manifest.is_file() and manifest.stat().st_size <= 1024*1024:
+        converted={row['member'].casefold():row for row in json.loads(manifest.read_text())}
     if document.get('schema_version')!=1 or not isinstance(document.get('screens'),list):
         return {'valid':False,'errors':['schema/version/screens'],'elements':[]}
     for screen in document['screens']:
@@ -55,7 +59,10 @@ def audit_proposal(document, root=ROOT):
             asset_status='not specified'
             if asset:
                 asset_status='exists' if (root/asset).is_file() else 'unresolved path or archive/resource identity'
-                if asset_status!='exists': issues.append('unresolved asset')
+                record=converted.get(asset.casefold())
+                if record and (root/record['output']).is_file():
+                    asset_status='exists: CRC-verified archive member and converted output'
+                if not asset_status.startswith('exists'): issues.append('unresolved asset')
             row=dict(screen=screen['id'],element=e.get('id'),evidence=e.get('evidence',[]),proposal_confidence=e.get('confidence'),grade='Gemini proposal (unverified)',asset=asset,asset_status=asset_status,issues=issues)
             rows.append(row); errors.extend(screen['id']+'/'+str(e.get('id'))+': '+i for i in issues)
     return dict(valid=not errors,errors=errors,elements=rows)

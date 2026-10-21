@@ -17,4 +17,7 @@ class WireframeTests(unittest.TestCase):
      name=screen['id']+'_'+style+'.svg';source=(Path(folder)/name).read_text();ET.fromstring(source)
      self.assertEqual(source,(ROOT/'docs/design/wireframes'/name).read_text())
      self.assertNotIn('<image',source)
+     if screen['id']=='main_menu':
+      self.assertEqual(source.count('<circle'),5)
+      self.assertEqual(source.count('marker-end='),4)
    self.assertEqual(len(list(Path(folder).glob('*.svg'))),len(doc['screens'])*2)
