@@ -1,272 +1,163 @@
-# Handoff — scoped frontend run, 2026-10-21
+# Handoff — polish, texture/font/video run, 2026-10-21
 
-## Current polish run (supersedes implementation status below)
+## Validated HEAD and scope
 
-Section 0 synced clean at 5df8e54. Section 1 is a passing regression foundation,
-but its full visual acceptance is **incomplete**: the logo candidate still needs
-background/occlusion correction and filled high-resolution reconstruction;
-caption focus halftone/pop and exact menu-string width QA remain. Existing font
-tests still check converted advances exactly. ASCII device hints are implemented,
-not original glyph art. Classic uses an authored underline in addition to colour
-to preserve the mandatory non-colour focus gate. No gate was dropped.
+Implementation HEAD: `e020d46fc24a8459d910480ada40d7c4ab0f90ef` on main.
+This handoff follows as a docs-only commit; final HEAD and its checked CI URL
+are recorded in `staging/validation/final-run.json` and reported in chat.
+Implementation CI is green:
+https://github.com/snazzyeee/spiderman-2000-revamp/actions/runs/39540814070.
+Earlier milestones also passed CI: f238787 / run 39538061382 and dfdda24 /
+run 39539724190. All pushes were normal fast-forwards to main.
 
-menubg **was found and independently bound**: one frame in shell.psx points to
-texture index 88; the texture header at 327388 declares index 88. Classic now
-uses it with the recovered virtual-frame mapping. See frontend ledger for exact
-CRC/hash and regeneration. Other changes: centered Classic list, transparent
-normal item styles, authored Enhanced skyline/caption plates, radial contact
-shadow, last-device hints and rotating comic teaser. Full original Title is kept.
+Section 0 synced clean at 5df8e54 and read the requested handoff/menu/ledger.
+Section 1 shipped a verified resource binding and a polish foundation, with
+visual acceptance gaps below. Section 2 shipped the offline pipeline, initial
+59-image batch, Remastered font and live video options. Section 3 (transcript
+review) was **not started**; section 4 research/renders was not started. Stopped
+starting sections to preserve context for this handoff, as requested. This is
+not a claim that the whole requested run is complete.
 
-Section-1 gate: staging/validation/regression/polish-menubg/; Python **52 reference
-+ 22 pipeline = 74**. Per headless / real Vulkan Forward+ / real Vulkan Mobile:
-smoke **51/51/51**, traversal **150/150/150**, fonts **39/39/39**, menu audio
-**32/32/32**, layout **58/58/58**, design **676/803/803**, loading **7/7/7**;
-zero engine/script/shader errors. New tests cover synthetic animation metadata,
-segmentation boundaries and correction-mask preservation, centering and hints.
+Commits: f238787 frontend/resource polish; dfdda24 offline enhancement/video;
+e020d46 physical capture and 16:10 correction. No Gemini files edited, no
+original program executed, no original/derived media or game text committed.
+All original assets remain private; public fixtures are synthetic.
 
-Private review: assets/ui/frontend/title_logo_mask.png (existing masks win),
-staging/validation/menu/logo-review/ (candidate alpha zooms/report),
-staging/validation/menu/polish_before/ (preserved input captures),
-staging/validation/menu/polish_before_after.png, refreshed screenshot/contact-sheet
-and overlays folders. Tracked wireframes: docs/design/wireframes/index.html.
-Regenerate resource with tools/reference/find_frontend_background.py, candidate
-with tools/pipeline/extract_title_logo.py, and diagrams/overlays with
-tools/design/render_wireframes.py --overlays. No media or Gemini files tracked.
+## Exact final gate
 
-The sections below describe the preceding run; this run's final section will
-replace these provisional counts/HEAD when later milestones are complete.
+`tools/pipeline/run_regression.ps1 -Milestone physical-capture-final`
+Evidence: `staging/validation/regression/physical-capture-final/`.
+Python: **52 reference + 26 pipeline = 78 passing**.
 
-Polish implementation commit f2387874c63d9534e82a83984954665ad4e84928 passed
-CI: https://github.com/snazzyeee/spiderman-2000-revamp/actions/runs/39538061382.
-
-Section 2 implementation: pinned waifu2x 20250915 runs locally on the RX 580;
-59 menu/rig/font images enhanced, original files preserved, exact pixel-hash
-material joins, deterministic cache, explicit wrap/scissor flags, curated
-override priority, runtime quality choice, Remastered font, live Video options
-and 16:10 captures. Conservative RGBA8 texture estimate: 292,334,680 bytes;
-Godot runtime video memory is also gated below 4 GiB. Full remaining texture
-batch and image/glyph-cell quality review are not complete. Default --all is
-explicitly opt-in; setup downloads only the pinned release, inference is offline.
-
-Section-2 gate: staging/validation/regression/texture-video-release/; **52 + 26
-= 78 Python tests**. Headless / Forward+ / Mobile counts: smoke **51/51/51**,
-traversal **150/150/150**, fonts **46/46/46**, audio **32/32/32**, layout
-**90/90/90**, design **1039/1217/1217**, loading **7/7/7**, zero errors. Failed
-intermediate evidence retained: startup display changes disturbed native focus;
-fixed by avoiding unnecessary OS-window changes; existing smoke assertions pass.
-An early ZIP test normalized its malicious backslash name; fixture corrected,
-path/link guards retained, complete release gate rerun.
-
-Regenerate: setup_texture_tools.py once, enhance_textures.py (or --all and
-explicit repeatable --tiling/--scissor asset-relative names). Outputs in assets/hd,
-assets/hd_overrides, staging/cache/textures and staging/validation/textures;
-illustration-contact-sheet.png and general-contact-sheet.png are private review
-sheets. Remastered .fnt/.png files sit beside existing private converted fonts.
-Wireframe index now includes Video (44 diagrams); latest real screenshots and
-352 overlays cover 720p/1080p/1440p/1920x1200 on both renderers.
-
-## HEAD and scope
-
-Branch main; implementation HEAD: `3ebb7e39f37025ca6ccd9471327df411a9365a5a`.
-This handoff is the following docs-only commit; `git rev-parse HEAD` gives its
-final hash. Normal pushes only. Final docs CI is checked after pushing and its
-exact URL is reported in chat and saved privately with the downloaded reports.
-
-| Section | Result |
-|---|---|
-| 0 Sync | Clean at 83a6822; ten commits, prior handoff and preliminary frontend ledger read |
-| 1 Audio decision | Original/Short/Off persisted; recovered sounds play full length by default; no stacking retained |
-| 2 Claim audit/layout | Both proposal schemas/normalized rects checked; all 48 element claims re-graded; 21 authored screen plans in two styles; unsupported content not adopted |
-| 3 Wireframes | 42 SVGs/index generated from layout data, per-action focus arrows; 252 aligned 40% exact-SVG private overlays |
-| 4 Frontend | Shared loader, original title/fonts/rig/sounds, style/preferences, staged animation/lighting/shadow, motion/attract and automated QA implemented; historical-fidelity gaps below |
-| 5 Pause/loading | Shared layout pause and asynchronous original-cover loading; synthetic transition tests and retained cinematic locks; HUD unchanged |
-| 6 Final gate | All local suites pass on all targets; implementation CI checked before final handoff push |
-
-The result is a working authored frontend foundation with recovered components.
-It is NOT a claim that every original page/rectangle/unlock has been recovered.
-Unknown screens remain explicit proposal regions; full historical fidelity is
-blocked on the evidence listed below, not silently substituted.
-
-Commits this run:
-- 0fc26f7: persistent Original/Short/Off menu sound modes.
-- 1fd65c1: claim audit, layout data, preference storage and layout gates.
-- 7a9918f: generated annotated blueprints and completeness/XML tests.
-- c7c6dc9: responsive frontend, staged actor, private-art conversion and design QA.
-- 3ebb7e3: shared pause/loading, strengthened final validation and artifacts.
-
-No docs/gemini/ or staging/gemini/ files edited. No original program executed.
-No original/derived media, transcripts, private graph/registry or raw functions
-tracked. No new executable/model downloaded. Public fixtures are synthetic.
-
-## Exact gates and CI
-
-Final local evidence: `staging/validation/regression/scoped-handoff/`.
-Python: **50 reference + 19 pipeline = 69 passing**. Generator/audit refinements
-also rerun through the entire Python pipeline suite, with logs under
-staging/validation/last-pipeline.log and final-audit-pipeline.log.
-
-| Target | Smoke | Traversal | Fonts | Audio | Layout | Design | Loading | Engine/script errors |
+| Target | Smoke | Traversal | Fonts | Menu audio | Layout/video | Design | Loading | Errors |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|
-| Headless Forward+ | 51 | 150 | 39 | 32 | 58 | 670 | 7 | 0 |
-| Real Vulkan Forward+ | 51 | 150 | 39 | 32 | 58 | 797 | 7 | 0 |
-| Real Vulkan Mobile | 51 | 150 | 39 | 32 | 58 | 797 | 7 | 0 |
+| Headless Forward+ | 51 | 150 | 46 | 32 | 90 | 1039 | 7 | 0 |
+| Real Vulkan Forward+ | 51 | 150 | 46 | 32 | 90 | 1393 | 7 | 0 |
+| Real Vulkan Mobile | 51 | 150 | 46 | 32 | 90 | 1393 | 7 | 0 |
 
-All prior smoke labels, traversal/font/audio assertions retained. Duration-cap
-assertions now explicitly run in Short mode, matching the owner's revised rule.
-Smoke completeness strengthened to 51. Layout/design/loading suites added
-alongside old gates, on all targets and headless Linux CI. Import passes.
+Real device: AMD Radeon RX 580 2048SP. Default 1080p menu frame-interval P95:
+Forward+ **1.082 ms**, Mobile **0.960 ms**. Godot-reported video memory:
+**94,349,696 / 89,387,088 bytes** respectively. Conservative all-original plus
+first-batch enhanced RGBA8+mipmap estimate: **292,334,680 bytes**, below 4 GiB.
+These measurements exclude some driver/OS allocations; they do not certify
+worst-case residency or performance with every optional effect enabled.
 
-Real Vulkan logs identify AMD Radeon RX 580 2048SP. At 1920x1080, after 60 warm-up
-frames, 180 uncapped rendered-frame wall-clock samples give 95th percentile
-Forward+ **1.075 ms**, Mobile **1.013 ms**, against <=16.667 ms. This is a local
-menu benchmark, not a gameplay or whole-system latency claim.
-
-Implementation CI: https://github.com/snazzyeee/spiderman-2000-revamp/actions/runs/39522540911.
-Downloaded evidence: staging/validation/ci-scoped-runtime/. Linux passes
-69 Python, 150 traversal, 14 font, 24 audio, 58 layout, 665 design and 6 loading
-checks, with the explicit private-asset skips recorded in ci-summary.json.
-Earlier milestones green:
-- https://github.com/snazzyeee/spiderman-2000-revamp/actions/runs/39518623846 (audio)
-- https://github.com/snazzyeee/spiderman-2000-revamp/actions/runs/39518993322 (layout)
-- https://github.com/snazzyeee/spiderman-2000-revamp/actions/runs/39519449596 (wireframes)
-- https://github.com/snazzyeee/spiderman-2000-revamp/actions/runs/39520424073 (frontend)
-
-CI has no private assets: private smoke/fonts/native audio/actor/cover checks
-are explicitly skipped there. Local real/private checks above remain mandatory.
-CI exact counts and skips are in the downloaded ci-summary.json; no skip is
-presented as a private-asset pass.
-
-```powershell
-./tools/pipeline/run_regression.ps1 -Milestone next-section
-```
+All retained assertions remain, including five menu entries/order, keyboard,
+mouse, traversal, font advances, Original/Short/Off audio/no-stacking, safe areas,
+contrast >=4.5, non-colour focus and frame interval. New checks add correctable
+mask handling, bounded PSX metadata, tool archive guards, cache identity, font
+cell scaling, live/persisted renderer options, texture priority and rig pixel
+joins, main-caption advances and actual capture sizes at every real target.
 
 ## Recovered versus authored
 
-Ledger: docs/behavior_ledger/frontend.md. Claim matrix:
-docs/design/claim_audit.md. Private proposal audit:
-staging/validation/menu/proposal-audit.json.
+**menubg was found and independently bound.** CRC-checked shell.psx animation
+metadata has one frame referencing texture index 88; the texture header at
+327388 independently declares index 88, 512x512. Classic uses that raster with
+the recovered 512x240 virtual draw and 4:3 presentation. It is a static frame,
+not a moving background. See frontend.md for hashes/evidence and parser bounds.
 
-Both Gemini schemas and all normalized rectangles pass structural validation.
-Frontend assets resolve either as files or exact CRC-verified archive members;
-8 in-game symbolic assets remain unresolved as usable paths. A cited helper
-proves only that helper, not a screen's rectangle/list/flow. All unproven
-screen-specific claims stay Gemini proposal (unverified). No owner screenshots
-were present at staging/reference/menu_original/.
+Recovered components: original private title image, menu/fonts and their
+advances, rig and numeric animation slots, comic art, SFX IDs, CMenu centring
+formula, menubg binding and previously verified loading-cover resources.
+Authored: caller line separation (16 virtual pixels), page rectangles/unknown
+page placeholders, Enhanced skyline/halftone, caption ink/skew/shadow, radial
+contact shadow, device hint labels, teaser rotation, animation staging/motion,
+texture enhancement/category choices, font variant and modern video settings.
+No unverified original strings/unlock rules or Gemini layout claims adopted.
 
-Recovered: 512x240 virtual coordinate mapping; generic menu centering; font
-helpers and selected palette facts; native move/select/back/reject IDs;
-frontend actor cycle 0/100, punch cue/family; original source asset identity/CRC.
+Classic main list is centred within 2 physical pixels on all tested sizes and
+normal items are transparent text. Its authored focus underline retains the
+mandatory non-colour gate; this deviates from the requested colour-only fallback.
+Other Classic focus boxes have a thinner top border and keep their left marker.
+Enhanced uses ink caption plates; no extra theme tracking is introduced. Main
+caption advances match converter metrics within 2 pixels. The grey ground mesh
+is replaced with an unlit radial-alpha shadow; existing punch cue is retained.
 
-Authored: screen rectangles/working remake branch flow; normal/small UI roles;
-header crop; three lights, camera, ground/contact shadow, rig-only breathing,
-parallax/ink backdrop and focus border; transitions, preferences and carousel.
-The model and original animation slots are preserved; slot names, not array
-ordinals, select animations. Actor reactions continue across compatible pages.
+## Open acceptance gates and incomplete work
 
-Original sounds: 0x29 move (0.303333 s), 0x1F confirm (1.367 s), 0x23 back
-(1.111 s), 0x1B reject. Original mode plays recovered clips at full length;
-Short caps all at 0.6 s; Off stops/plays none. Unknown, looping, empty or
-non-finite streams are rejected; every distinct event stops previous SFX.
-Initial focus and repeated hover stay silent. No bank-order guesses or trimming.
+- **Logo remains incomplete.** The private automatic mask removes visible colour
+  regions but does not certify absence of every background/hand-outline pixel.
+  The hand occludes lettering. Existing correction masks always win on rerun.
+  Candidate is not installed: the old cropped banner remains live. High-res
+  alpha review rasters and a traced alpha SVG exist; sampled-colour filled
+  high-res reconstruction is not implemented. The existing font tracer is an
+  in-repo contour tracer; there was no pinned Potrace installation to reuse.
+- Enhanced focus halftone/scale pop and larger actor framing remain. Device
+  hints switch ASCII labels by last-used device, not recovered glyph artwork.
+- First enhancement batch is 59 images: menu/comics, eight rig textures and six
+  original font atlases. The rest of the inventoried library is not enhanced;
+  use --all explicitly. Original-only override list currently has no exclusions.
+  Category/art/face/glyph-edge review is outstanding. Packed atlas inference can
+  affect gutters even though cell coordinates and advances are exact.
+- Fullscreen uses the desktop mode. The resolution selector is disabled there;
+  it applies live to Windowed/Borderless. Exclusive display-mode switching is
+  not implemented. FSR2 reduced scaling, TAA, SSAO and volumetric fog are limited
+  to Forward+; Mobile offers its supported choices. No HUD rewrite performed.
+- Historical exact main/page flow, highlight visuals and unsupported HUD/comic/
+  death proposals remain unverified as described in the existing frontend ledger.
+- Transcript review UI/decision merge is still needed. No human approvals were
+  created or inferred; Gemini proposals remain unverified.
 
-Title/Legal art uses the recovered virtual raster mapped to a 4:3 display frame,
-not its raw 512x240 pixel aspect. Full Title remains intact; a transparent input
-target uses its baked prompt. The authored main header is a separate crop of
-original title lettering. Decoded logo.rle is the Neversoft emblem, not the
-game logo, and is not substituted. Six BMP level covers exist (1,2,4,5,7,8);
-no cover fabricated for 3/6. The current L1A1 loading path uses L1Cov.
+Failed intermediate evidence is retained. An initial native-window startup
+change disturbed keyboard focus; unnecessary native calls were removed and the
+unchanged smoke checks pass. A ZIP fixture initially normalized a malicious
+name; corrected raw-name/link fixtures pass. Overlay validation then rejected
+nominal 1920x1200 files that were actually 1920x1080: root aspect expansion and
+an explicit capture-size gate fixed that. True 16:10 exposed six border samples
+below 4.5. The UI border was thinned and the original contrast point/threshold
+retained. Automatic approval review rejected an attempted sampling-point change
+as a possible gate bypass; that change was removed. The safer rendering fix and
+full final matrix passed. No approval or gate relaxation is pending.
 
-## Owner-question defaults taken
+## Owner review and regeneration
 
-All have persisted switchable choices under Options > Accessibility:
+- Logo mask: `assets/ui/frontend/title_logo_mask.png`; candidate PNG/alpha SVG
+  beside it. Alpha 4x/6x zooms and report: `staging/validation/menu/logo-review/`.
+  Run `tools/pipeline/extract_title_logo.py`; existing masks are never replaced.
+- Before/after: `staging/validation/menu/polish_before_after.png`; preserved
+  initial 1080p captures under `polish_before/`.
+- Screenshots: `staging/validation/menu/<screen>_<style>_<renderer>_<size>.png`.
+  **352** real captures: 22 screens x two styles x four sizes x two renderers.
+  Eight `contact-sheet-<renderer>-<size>.png` files in that folder.
+- **352 exact-SVG 40% overlays**: `staging/validation/menu/overlays/`; manifest
+  checks physical dimensions. Tracked **44** diagrams and review index:
+  `docs/design/wireframes/index.html`.
+- Texture sheets: `staging/validation/textures/illustration-contact-sheet.png`
+  and `general-contact-sheet.png`; inventory.json and vram.json beside them.
+- `find_frontend_background.py` CRC-extracts, bounds/parses and decodes menubg
+  through the hash-pinned tool; private evidence in reference/frontend-background.
+- `setup_texture_tools.py` installs waifu2x 20250915 with published archive SHA
+  and verifies installed models/binaries. `enhance_textures.py` runs offline;
+  --all processes remaining PNGs; repeat --tiling / --scissor with exact
+  assets-relative names to opt into wrap padding / binary alpha. Originals and
+  `assets/hd_overrides/` are preserved. Cache: staging/cache/textures; generated
+  images/manifest: assets/hd. Remastered is built from convert_fonts.py output
+  metrics and sits beside existing private fonts. License/pin: THIRD_PARTY.md.
+- Run the regression above before `render_wireframes.py --overlays` so diagrams,
+  private captures, sheets and overlays correspond to current implementation.
 
-| Decision | Default / alternative | Qualification |
-|---|---|---|
-| Widescreen fill | Authored Wings / Black 4:3 frame | Original art geometry retained; exact menubg association pending |
-| Cursor | Hybrid / Visible | Uses OS pointer; original cursor art not yet verified |
-| Cheat persistence | On / Off | Preference stored; no cheat activation until verified table recovery |
-| Attract media | Character/comic Carousel / Comics | 60 s owner timeout, immediate wake; no unverified biographies/FMVs |
-| Training scope | Phased / Practice | Only the existing converted practice slice is functional; no invented challenges |
+## Decisions/defaults retained
 
-Options also offers Classic/Enhanced (Enhanced default), Faithful/Enhanced
-fonts, audio levels and Original/Short/Off menu sounds. Reduced motion restores
-the rig's rest scale/position, stops animation/parallax and uses 0.1 s fades;
-normal transitions are 0.25 s and skippable. No owner confirmation was required.
+Enhanced menu default; Classic switchable. Original menu sounds default, Short
+caps all at 0.6 s, Off silences; no stacking. Original texture bypasses generated
+and curated art; Enhanced (default) chooses curated then generated then original.
+Faithful/Enhanced/Remastered fonts selectable. Wings/Black side fill, Hybrid/
+Visible cursor, Carousel/Comics attract, reduced motion, and Phased/Practice
+training choices persist. Cheat persistence is only a stored preference until
+verified cheat-table recovery. Attract timeout remains 60 s, transitions 0.25 s
+or 0.1 s reduced-motion and skippable. Original cursor artwork is unverified.
 
-## Review outputs and regeneration
+## Next run, in order
 
-- Tracked blueprint index: `docs/design/wireframes/index.html` (42 SVGs, no original art).
-- Private screenshots: `staging/validation/menu/<screen>_<style>_<renderer>_<resolution>.png`.
-  21 screens x 2 styles x 3 resolutions x 2 real renderers = **252 captures**.
-- Private contact sheets: `staging/validation/menu/contact-sheet-<renderer>-<resolution>.png`.
-  Six sheets; the Forward+ 1920x1080 sheet is the convenient starting point.
-- Exact-SVG 40% overlays: `staging/validation/menu/overlays/`, **252** outputs;
-  Classic is aligned to its centered 4:3 frame, not stretched across pillarboxes.
-  The overlay manifest also validates each capture's actual requested dimensions.
-- In-context mission pause: `staging/validation/smoke/godot-pause.png` (last real target).
-- Art/hash/CRC manifests: `assets/ui/frontend/manifest.json`; inputs/audits under
-  staging/reference/frontend-art/ and staging/validation/frontend-art.log.
+First close this run's incomplete work: logo mask/filled reconstruction and
+remaining caption/actor polish; remaining texture batch and art/glyph quality
+review; then build the transcript review tool and human-approved-only merge
+(section 3 of the current request). These are the next three tasks.
 
-```powershell
-./tools/third_party/audio-python/Scripts/python.exe tools/pipeline/prepare_frontend_art.py
-./tools/third_party/audio-python/Scripts/python.exe tools/design/layout.py --audit
-./tools/third_party/audio-python/Scripts/python.exe tools/design/render_wireframes.py --overlays
-```
-
-Art conversion requires the canonical private data.pkr, existing SHA-pinned
-MIT multitool and pinned font Python dependencies. Inputs <=4 MiB/member,
-CRC/length checked before conversion, decoder timeout 30 s, output dimensions
-<=4096 and <=16 Mi pixels. All outputs remain private. The already bundled
-runtime 26.1015.12040 supplies Sharp 0.35.5 for SVG rasterization/contact sheets;
-no download. See THIRD_PARTY.md. Run regression before regenerating overlays
-so captures and layout refer to the same implementation.
-
-## Failing fidelity gates, limitations and failed evidence
-
-- Exact original page flow and screen-specific rectangles/unlocks remain
-  unverified: several cited shell functions are TODO stubs, generic helpers
-  do not establish their callers, and owner reference screenshots are absent.
-  Unsupported screens show proposal regions rather than invented game content.
-- Shell_DrawBackground references menubg. A verified converted texture binding
-  is still missing. The old stretched shell_bg guess is removed; present
-  dark/halftone backdrop is authored. Classic is not certified pixel-faithful.
-- The contrast gate uses specified foreground colours against actual captured
-  backdrop pixels; original palette outline/antialiasing and baked image text
-  are outside that measurement. Full original-art typography contrast is not
-  certified. Caption/subtitle role recovery remains partial as in fonts.md.
-- Remembered cheats and phased challenge rollout have settings but cannot
-  activate unverified code/unlock tables or unconverted levels. Original cursor
-  art and extended original branches remain pending evidence/conversion.
-- Initial QA caught compact control overflow and detached-view resize callbacks;
-  fixed without lowering bounds/safe-area thresholds. Initial contrast sampling
-  hit focus borders; now samples the actual text backdrop inside borders.
-- Initial audio teardown retained headless mixer resources; tests now let mixer
-  updates drain. Initial loading diagnostic compiled a dependency before the
-  autoload name existed; runtime node lookup fixes it. Failed logs remain under
-  staging/validation/ (sound-modes*, design-*, loading-first.log). No errors hidden.
-- Historical landmark gate remains 19/21: 28/146 support (19.18%) versus
-  runner-up 1/146 (0.68%). Both >=80% support and >=30-point margin fail;
-  not reinvestigated. Original thresholds unchanged.
-- Prior cold-cache font import errors remain unresolved. Current imports/matrices
-  pass; no clean-first-import claim. No human playtest or owner visual approval.
-
-No requested downstream texture/audio-research/import/gameplay milestone was
-started in this scoped run. No automatic approval-review rejection occurred.
-
-## Remaining queue for the next run
-
-Resolve the documented frontend fidelity gaps when evidence becomes available;
-do not mistake authored placeholders for recovered functionality. The owner's
-remaining queue, in order:
-1. Textures + Remastered font + 1080p display options.
-2. Human transcript review tool.
-3. Gemini research checks: act graph and cheat/suit table.
-4. Animation renders for Gemini T6.
-5. Landmark RESTART investigation (gate unchanged).
-6. Animation alias/provenance import post-processor.
-7. L1A2–L1A4 conversion/collision.
-8. Bink to Theora cinematics.
-9. Opcode ledger + default-off logic-only MissionRuntime.
-10. Debug overlay.
-11. Controls and human playtest docs.
-12. InputRecorder/replayer with explicit --update-goldens.
+Then the carried queue: research checks (68-TRG act graph, cheat/suit table);
+300 animation renders for Gemini T6; landmark RESTART investigation; animation
+alias/provenance import post-processor; L1A2-L1A4 conversion/collision;
+Bink-to-Theora; opcode ledger and default-off logic-only MissionRuntime;
+debug overlay; Controls/playtest documentation; InputRecorder/replayer with
+explicit --update-goldens. No optional section-4 output was generated in this run.
