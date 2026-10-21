@@ -1,220 +1,207 @@
-# Handoff — 2026-10-21
+# Handoff — scoped frontend run, 2026-10-21
 
-## HEAD, scope and commits
+## HEAD and scope
 
-Branch: main. Implementation HEAD:
-`0d18ee205d0a0278dd52f932a3f2526c7822c0c4`.
-This handoff and the preliminary ledger audit are the following docs-only
-commit; resolve its final hash with `git rev-parse HEAD`. Normal pushes only.
-The final docs commit's CI result is checked after pushing and reported in chat.
+Branch main; implementation HEAD: `3ebb7e39f37025ca6ccd9471327df411a9365a5a`.
+This handoff is the following docs-only commit; `git rev-parse HEAD` gives its
+final hash. Normal pushes only. Final docs CI is checked after pushing and its
+exact URL is reported in chat and saved privately with the downloaded reports.
 
-| Section | Result this run |
+| Section | Result |
 |---|---|
-| 0 Sync | Status/log/prior handoff read; owner briefs committed as-is; all Gemini WORKLOG summaries and T4 review read |
-| 1 Review findings | Findings 1/2/4 reproduced then fixed; finding 3 disproved as a metric assertion; tests added |
-| 2 Menu audio | Global move/select/back recovered, bank-order guesses removed, duration/non-overlap/hover policy and tests implemented |
-| 3 Layout | Preliminary source audit only; both JSON proposals inspected, no complete schema/asset/claim validation or layout adopted |
-| 4 Wireframes | Not started; no generated wireframes or overlays |
-| 5 Frontend/pause/loading rebuild | Not started; current presentation retained apart from audio/focus fixes |
-| 6 Texture/display | Not started; no upscaler/model download, Remastered font, HD tree or video-options work |
-| 7 Transcript review | Not started; no proposal promoted or human decision created |
-| 8 Campaign/costume research | Not started; no inferred title, objective or suit-name changes |
-| 9 Carryovers | Not started; animation renders and all listed follow-ons remain pending |
-| 10 Final gate | All-target regression passes for implemented scope; remaining requested work explicitly deferred |
+| 0 Sync | Clean at 83a6822; ten commits, prior handoff and preliminary frontend ledger read |
+| 1 Audio decision | Original/Short/Off persisted; recovered sounds play full length by default; no stacking retained |
+| 2 Claim audit/layout | Both proposal schemas/normalized rects checked; all 48 element claims re-graded; 21 authored screen plans in two styles; unsupported content not adopted |
+| 3 Wireframes | 42 SVGs/index generated from layout data, per-action focus arrows; 252 aligned 40% exact-SVG private overlays |
+| 4 Frontend | Shared loader, original title/fonts/rig/sounds, style/preferences, staged animation/lighting/shadow, motion/attract and automated QA implemented; historical-fidelity gaps below |
+| 5 Pause/loading | Shared layout pause and asynchronous original-cover loading; synthetic transition tests and retained cinematic locks; HUD unchanged |
+| 6 Final gate | All local suites pass on all targets; implementation CI checked before final handoff push |
 
-Stopped starting sections to preserve context for this handoff, per owner
-instruction. Sections 3–9 are pending, not certified or declared blocked.
+The result is a working authored frontend foundation with recovered components.
+It is NOT a claim that every original page/rectangle/unlock has been recovered.
+Unknown screens remain explicit proposal regions; full historical fidelity is
+blocked on the evidence listed below, not silently substituted.
 
-- `11114a9 docs(gemini): add art and design briefs` — the three owner files as-is.
-- `479dcf8 fix(fonts): guard bindings and preserve live switching on save failure`.
-- `0d18ee2 fix(ui): recover menu sound ids and enforce bounded non-overlapping playback`.
+Commits this run:
+- 0fc26f7: persistent Original/Short/Off menu sound modes.
+- 1fd65c1: claim audit, layout data, preference storage and layout gates.
+- 7a9918f: generated annotated blueprints and completeness/XML tests.
+- c7c6dc9: responsive frontend, staged actor, private-art conversion and design QA.
+- 3ebb7e3: shared pause/loading, strengthened final validation and artifacts.
 
-No edits to staging/gemini/ or further edits to docs/gemini/. Gemini T7/T8
-produced no usable enhancement assets: exact-size RGBA capability was blocked.
-All texture/font enhancement remains Codex's section 6 responsibility.
+No docs/gemini/ or staging/gemini/ files edited. No original program executed.
+No original/derived media, transcripts, private graph/registry or raw functions
+tracked. No new executable/model downloaded. Public fixtures are synthetic.
 
-## Final local and CI gates
+## Exact gates and CI
 
-Final local evidence: `staging/validation/regression/handoff-final/`.
-Section 2 evidence: `staging/validation/regression/menu-audio-section-final/`.
-Python: **50 reference + 14 pipeline = 64 passing**.
+Final local evidence: `staging/validation/regression/scoped-handoff/`.
+Python: **50 reference + 19 pipeline = 69 passing**. Generator/audit refinements
+also rerun through the entire Python pipeline suite, with logs under
+staging/validation/last-pipeline.log and final-audit-pipeline.log.
 
-| Target | Smoke | Traversal | Fonts | Menu audio | Engine/script errors |
-|---|---:|---:|---:|---:|---:|
-| Headless Forward+ | 49/49 | 150/150 | 39/39 | 23/23 | 0 |
-| Real Vulkan Forward+ | 49/49 | 150/150 | 39/39 | 23/23 | 0 |
-| Real Vulkan Mobile | 49/49 | 150/150 | 39/39 | 23/23 | 0 |
+| Target | Smoke | Traversal | Fonts | Audio | Layout | Design | Loading | Engine/script errors |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| Headless Forward+ | 51 | 150 | 39 | 32 | 58 | 670 | 7 | 0 |
+| Real Vulkan Forward+ | 51 | 150 | 39 | 32 | 58 | 797 | 7 | 0 |
+| Real Vulkan Mobile | 51 | 150 | 39 | 32 | 58 | 797 | 7 | 0 |
 
-RX 580 2048SP identified in real Vulkan logs. Import passes. All 44 prior smoke
-labels, all 150 traversal checks and prior font assertions retained; five smoke
-checks and a separate menu-audio suite added. No existing gate relaxed.
+All prior smoke labels, traversal/font/audio assertions retained. Duration-cap
+assertions now explicitly run in Short mode, matching the owner's revised rule.
+Smoke completeness strengthened to 51. Layout/design/loading suites added
+alongside old gates, on all targets and headless Linux CI. Import passes.
 
-CI green on implementation HEAD 0d18ee2:
-[run 39508563480](https://github.com/snazzyeee/spiderman-2000-revamp/actions/runs/39508563480).
-Private downloaded evidence: `staging/validation/ci-menu-audio-runtime/`.
-Linux CI passes 64 Python, 150 traversal, 14 fallback/font-policy and 17 synthetic
-menu-audio checks. Original-font metrics, private audio identities/durations and
-full private smoke are explicitly skipped in CI; they pass locally as above.
-Section 1 also green for exact 479dcf83699b6e4e5669699b8a3f9b52048eccef:
-[run 39506502708](https://github.com/snazzyeee/spiderman-2000-revamp/actions/runs/39506502708).
+Real Vulkan logs identify AMD Radeon RX 580 2048SP. At 1920x1080, after 60 warm-up
+frames, 180 uncapped rendered-frame wall-clock samples give 95th percentile
+Forward+ **1.075 ms**, Mobile **1.013 ms**, against <=16.667 ms. This is a local
+menu benchmark, not a gameplay or whole-system latency claim.
+
+Implementation CI: https://github.com/snazzyeee/spiderman-2000-revamp/actions/runs/39522540911.
+Downloaded evidence: staging/validation/ci-scoped-runtime/. Linux passes
+69 Python, 150 traversal, 14 font, 24 audio, 58 layout, 665 design and 6 loading
+checks, with the explicit private-asset skips recorded in ci-summary.json.
+Earlier milestones green:
+- https://github.com/snazzyeee/spiderman-2000-revamp/actions/runs/39518623846 (audio)
+- https://github.com/snazzyeee/spiderman-2000-revamp/actions/runs/39518993322 (layout)
+- https://github.com/snazzyeee/spiderman-2000-revamp/actions/runs/39519449596 (wireframes)
+- https://github.com/snazzyeee/spiderman-2000-revamp/actions/runs/39520424073 (frontend)
+
+CI has no private assets: private smoke/fonts/native audio/actor/cover checks
+are explicitly skipped there. Local real/private checks above remain mandatory.
+CI exact counts and skips are in the downloaded ci-summary.json; no skip is
+presented as a private-asset pass.
 
 ```powershell
 ./tools/pipeline/run_regression.ps1 -Milestone next-section
 ```
 
-The runner sets TEMP/TMP to staging/test_tmp, validates fresh reports, renderer
-and real Vulkan evidence, and rejects engine/script errors. Do not infer a
-1080p design certificate, 60 fps benchmark or human playtest from these checks.
+## Recovered versus authored
 
-## Section 1: verified findings
+Ledger: docs/behavior_ledger/frontend.md. Claim matrix:
+docs/design/claim_audit.md. Private proposal audit:
+staging/validation/menu/proposal-audit.json.
 
-Private test-first evidence: `staging/validation/review-reproduction/`.
-1. Confirmed: repeated binding retained dead weakrefs; null binding raised a
-   script error. Bind now prunes dead references and ignores invalid controls.
-2. Confirmed: failed persistence aborted live switching. A valid variant now
-   applies to live controls even on save failure; false return plus a warning
-   reports persistence failure. Invalid existing configs are not overwritten.
-   Optional settings-path injection tests failure without replacing user config.
-3. Disproved as an exported-metric test: all six fonts explicitly map the
-   sampled codepoints, including space advance, and both exports preserve them.
-   Added mapping assertions without removing the metric gate. This does NOT
-   verify font_big imagery or its original specialized character binding;
-   font_big remains unused by the live theme.
-4. Confirmed: setup had no runtime guard. Unsupported OS, Python ABI, machine
-   architecture or pointer width now fail before filesystem/network effects.
-   Synthetic tests cover non-Windows, Python 3.11/3.13, ARM64 and 32-bit cases.
+Both Gemini schemas and all normalized rectangles pass structural validation.
+Frontend assets resolve either as files or exact CRC-verified archive members;
+8 in-game symbolic assets remain unresolved as usable paths. A cited helper
+proves only that helper, not a screen's rectangle/list/flow. All unproven
+screen-specific claims stay Gemini proposal (unverified). No owner screenshots
+were present at staging/reference/menu_original/.
 
-These are authored runtime policies recorded in fonts.md, not new original-game
-behavior. Existing Faithful/Enhanced resources, fallback and role choices remain.
+Recovered: 512x240 virtual coordinate mapping; generic menu centering; font
+helpers and selected palette facts; native move/select/back/reject IDs;
+frontend actor cycle 0/100, punch cue/family; original source asset identity/CRC.
 
-## Section 2: recovered sounds and authored policy
+Authored: screen rectangles/working remake branch flow; normal/small UI roles;
+header crop; three lights, camera, ground/contact shadow, rig-only breathing,
+parallax/ink backdrop and focus border; transitions, preferences and carousel.
+The model and original animation slots are preserved; slot names, not array
+ordinals, select animations. Actor reactions continue across compatible pages.
 
-Ledger: `docs/behavior_ledger/frontend.md`; exact joins: audio_ids.md.
-Read-only, canonical fingerprint-gated scan of 110 named frontend functions
-found 91 positive direct SFX call sites. Each function bounded by the next
-names.json address, at most 65535 bytes; total scan at most 2 MiB.
-Source: decomp f8a039248908e085f8fba8106769aea7f8f9de67. No original program ran.
-Positive branch contexts establish move 0x29, select 0x1F, back 0x23. Cheat
-accept/reject/exit and actor punch events are separately identified, never used
-to guess generic selection. Jump-table gaps mean absence of decoded calls is
-not proof of absence.
+Original sounds: 0x29 move (0.303333 s), 0x1F confirm (1.367 s), 0x23 back
+(1.111 s), 0x1B reject. Original mode plays recovered clips at full length;
+Short caps all at 0.6 s; Off stops/plays none. Unknown, looping, empty or
+non-finite streams are rejected; every distinct event stops previous SFX.
+Initial focus and repeated hover stay silent. No bank-order guesses or trimming.
 
-| Event | Native global ID | Private duration | Remake policy |
-|---|---:|---:|---|
-| Changed focus | 0x29 | 0.303333 s | Plays |
-| Confirm | 0x1F | 1.367 s | Silent: exceeds owner's 0.6 s maximum |
-| Back | 0x23 | 1.111 s | Silent: exceeds owner's 0.6 s maximum |
+Title/Legal art uses the recovered virtual raster mapped to a 4:3 display frame,
+not its raw 512x240 pixel aspect. Full Title remains intact; a transparent input
+target uses its baked prompt. The authored main header is a separate crop of
+original title lettering. Decoded logo.rle is the Neversoft emblem, not the
+game logo, and is not substituted. Six BMP level covers exist (1,2,4,5,7,8);
+no cover fabricated for 3/6. The current L1A1 loading path uses L1Cov.
 
-Removed menu.kat/000 and /001 guesses. Menu requests use Dialogue.play_sfx_id;
-stop previous playback first; reject absent, looping, empty, non-finite or
-long streams. No trimming or unrelated substitution. Initial focus and repeated
-hover on the same enabled item are silent; mouse hover changes focus when needed.
-Confirm and Back have separate events. Tests cover boundaries, overlap, hover,
-loop rejection, native bindings and deliberate private-duration suppression.
+## Owner-question defaults taken
 
-Synthetic scanner tests use no original bytes; all private artifacts stay ignored.
-Regenerate static inventory with the existing pinned Python/Capstone setup:
+All have persisted switchable choices under Options > Accessibility:
+
+| Decision | Default / alternative | Qualification |
+|---|---|---|
+| Widescreen fill | Authored Wings / Black 4:3 frame | Original art geometry retained; exact menubg association pending |
+| Cursor | Hybrid / Visible | Uses OS pointer; original cursor art not yet verified |
+| Cheat persistence | On / Off | Preference stored; no cheat activation until verified table recovery |
+| Attract media | Character/comic Carousel / Comics | 60 s owner timeout, immediate wake; no unverified biographies/FMVs |
+| Training scope | Phased / Practice | Only the existing converted practice slice is functional; no invented challenges |
+
+Options also offers Classic/Enhanced (Enhanced default), Faithful/Enhanced
+fonts, audio levels and Original/Short/Off menu sounds. Reduced motion restores
+the rig's rest scale/position, stops animation/parallax and uses 0.1 s fades;
+normal transitions are 0.25 s and skippable. No owner confirmation was required.
+
+## Review outputs and regeneration
+
+- Tracked blueprint index: `docs/design/wireframes/index.html` (42 SVGs, no original art).
+- Private screenshots: `staging/validation/menu/<screen>_<style>_<renderer>_<resolution>.png`.
+  21 screens x 2 styles x 3 resolutions x 2 real renderers = **252 captures**.
+- Private contact sheets: `staging/validation/menu/contact-sheet-<renderer>-<resolution>.png`.
+  Six sheets; the Forward+ 1920x1080 sheet is the convenient starting point.
+- Exact-SVG 40% overlays: `staging/validation/menu/overlays/`, **252** outputs;
+  Classic is aligned to its centered 4:3 frame, not stretched across pillarboxes.
+  The overlay manifest also validates each capture's actual requested dimensions.
+- In-context mission pause: `staging/validation/smoke/godot-pause.png` (last real target).
+- Art/hash/CRC manifests: `assets/ui/frontend/manifest.json`; inputs/audits under
+  staging/reference/frontend-art/ and staging/validation/frontend-art.log.
 
 ```powershell
-./tools/third_party/audio-python/Scripts/python.exe tools/reference/scan_frontend_sfx.py
+./tools/third_party/audio-python/Scripts/python.exe tools/pipeline/prepare_frontend_art.py
+./tools/third_party/audio-python/Scripts/python.exe tools/design/layout.py --audit
+./tools/third_party/audio-python/Scripts/python.exe tools/design/render_wireframes.py --overlays
 ```
 
-Output: `staging/reference/frontend-sfx-static.json`. Deeper manually inspected
-branch/WAV audit: `staging/reference/frontend-branches-static.txt`; private
-helper scripts remain beside it. Setup uses already pinned tools; no new
-models or libraries were downloaded. Runtime/test code uses ledger facts only.
+Art conversion requires the canonical private data.pkr, existing SHA-pinned
+MIT multitool and pinned font Python dependencies. Inputs <=4 MiB/member,
+CRC/length checked before conversion, decoder timeout 30 s, output dimensions
+<=4096 and <=16 Mi pixels. All outputs remain private. The already bundled
+runtime 26.1015.12040 supplies Sharp 0.35.5 for SVG rasterization/contact sheets;
+no download. See THIRD_PARTY.md. Run regression before regenerating overlays
+so captures and layout refer to the same implementation.
 
-## Preliminary section 3 observations and owner decisions
+## Failing fidelity gates, limitations and failed evidence
 
-No owner reference screenshots found at staging/reference/menu_original/.
-Both Gemini JSON specs inspected: 12 frontend and 5 in-game screens. They are
-still **Gemini proposal (unverified)**; the complete validation report, per-claim
-audit and layout single source of truth are NOT implemented.
+- Exact original page flow and screen-specific rectangles/unlocks remain
+  unverified: several cited shell functions are TODO stubs, generic helpers
+  do not establish their callers, and owner reference screenshots are absent.
+  Unsupported screens show proposal regions rather than invented game content.
+- Shell_DrawBackground references menubg. A verified converted texture binding
+  is still missing. The old stretched shell_bg guess is removed; present
+  dark/halftone backdrop is authored. Classic is not certified pixel-faithful.
+- The contrast gate uses specified foreground colours against actual captured
+  backdrop pixels; original palette outline/antialiasing and baked image text
+  are outside that measurement. Full original-art typography contrast is not
+  certified. Caption/subtitle role recovery remains partial as in fonts.md.
+- Remembered cheats and phased challenge rollout have settings but cannot
+  activate unverified code/unlock tables or unconverted levels. Original cursor
+  art and extended original branches remain pending evidence/conversion.
+- Initial QA caught compact control overflow and detached-view resize callbacks;
+  fixed without lowering bounds/safe-area thresholds. Initial contrast sampling
+  hit focus borders; now samples the actual text backdrop inside borders.
+- Initial audio teardown retained headless mixer resources; tests now let mixer
+  updates drain. Initial loading diagnostic compiled a dependency before the
+  autoload name existed; runtime node lookup fixes it. Failed logs remain under
+  staging/validation/ (sound-modes*, design-*, loading-first.log). No errors hidden.
+- Historical landmark gate remains 19/21: 28/146 support (19.18%) versus
+  runner-up 1/146 (0.68%). Both >=80% support and >=30-point margin fail;
+  not reinvestigated. Original thresholds unchanged.
+- Prior cold-cache font import errors remain unresolved. Current imports/matrices
+  pass; no clean-first-import claim. No human playtest or owner visual approval.
 
-Independently checked generic CMenu centering, output-coordinate scaling,
-control-column origins, title helper, normal/small font helpers, background,
-legal wait and rude-word actor. Own-word facts/confidence now in frontend.md.
-Significant corrections: title helper takes its Y from the caller; several
-flow functions are TODO stubs; shell background references menubg, not proven
-shell_bg equivalence; font helpers do not establish a subtitle role. Legal
-body does not implement the proposal's any-button early skip. Constructor
-placement for the rude-word actor is NotOk and does not prove main-menu staging.
+No requested downstream texture/audio-research/import/gameplay milestone was
+started in this scoped run. No automatic approval-review rejection occurred.
 
-No section 3 owner-question defaults implemented yet. Recommended future
-switchable defaults from owner_questions.md (recommendations, not owner decisions):
+## Remaining queue for the next run
 
-| Question | Recommended default | Qualification |
-|---|---|---|
-| Enhanced side-fill | Centered 4:3 art with authored side wings; strict pillarbox alternative | Preserve original art geometry; no generated art yet |
-| Cursor | Show on mouse movement, hide on keyboard/controller; always-visible alternative | Original cursor mapping still needs evidence |
-| Cheats | Verified classic code entry with optional remembered toggles | Verify table/unlocks first; do not invent entries |
-| Attract | Character/comic carousel, optional converted video | Owner's 60 s trigger overrides Gemini's 50 s; reduced-motion choice |
-| Training | Phased rollout with current traversal practice available | Do not expose invented challenge lists or unlock rules |
-
-## Failed gates, limitations and retained evidence
-
-- Historical landmark gate remains **19/21**, 28/146 support (19.18%) versus
-  runner-up 1/146 (0.68%); >=80% support and >=30-point margin still fail.
-  Not reinvestigated in this run. No spatial correction or substitute gate.
-  Prior evidence remains staging/validation/units-landmark.json and related logs.
-- Prior cold-cache font import error remains unresolved; current imports/matrices
-  pass, which does not certify the first import of a cleared cache.
-- Initial menu integration failed because retained smoke callers still used
-  boolean sound arguments; callers now use named events. Failed log remains
-  regression/menu-audio/. Complete subsequent matrices pass.
-- Direct Python tests outside the runner hit sandbox TEMP permissions. Those
-  logs remain staging/validation/menu-audio-python-*.log. Complete configured
-  runner suites pass; no fixture or gate weakened to work around the failure.
-- Automatic approval review briefly failed due to reviewer usage limits; no
-  rejected command executed and it was not a safety determination. After owner
-  resume, normal approval review succeeded. No bypass or unresolved approval.
-
-No new art, fonts, audio, video, game transcripts, raw functions or private
-registry/graph data tracked. No Gemini proposal promoted to verified dialogue.
-Historical fonts, private conversion and source requirements remain described
-in fonts.md, BATCH_AUDIO.md, THIRD_PARTY.md and Git history of this handoff.
-
-## Review outputs and remaining work
-
-- Current menu smoke screenshots: `staging/validation/smoke/godot-menu.png`
-  and other godot-*.png captures. Existing single-size presentation evidence,
-  NOT the requested per-screen/style/resolution design QA matrix.
-- New menu contact sheet, full screenshot matrix, private overlays and tracked
-  wireframe index: **not generated**. Intended locations remain
-  staging/validation/menu/ and docs/design/wireframes/index.html.
-- Existing font comparison sheets: staging/validation/fonts/; private fonts:
-  assets/ui/fonts/. Regenerate through setup_font_tools.py / convert_fonts.py.
-- No HD textures, Remastered atlas, loading covers, transcript-review page,
-  act graph, cheat table recovery or animation renders created this run.
-
-Next three tasks, in requested section order:
-1. Finish section 3: validate every proposal element/assets/evidence; audit all
-   remaining decomp claims; build classic/enhanced screens.json with nonoverlapping
-   actor/menu regions, verified labels only and explicit authored/proposal grades.
-2. Section 4: generate all blueprint SVGs/index from that data; add bounds/overlap/
-   SVG-completeness checks and honest overlays only where real screens exist.
-3. Section 5: layout-driven frontend plus pause/loading, private bounded logo/
-   cover conversion, style/reduced-motion/attract options and full objective QA.
-   Then section 6 textures/fonts/display, 7 human transcript review, 8 campaign/
-   cheats and all ordered section 9 carryovers. Do not jump to animation renders
-   or edit staging/gemini/ except the explicitly authorized future renders folder.
-
-## Current scoped run: sections 0–2
-
-Synced clean at 83a6822. Section 1 committed 0fc26f7; CI green:
-https://github.com/snazzyeee/spiderman-2000-revamp/actions/runs/39518623846.
-Original/Short/Off now persisted; recovered sounds play full length by default.
-Final sound-mode gate: 50+14 Python; each target 49 smoke,150 traversal,39 fonts,
-32 audio, zero engine/script errors. Headless audio tests allow mixer processing
-before replacing/stopping streams; failed teardown evidence preserved.
-
-Section 2: 27 frontend +21 in-game element claims audited in
- docs/design/claim_audit.md, raw schema/rect/asset report private at
- staging/validation/menu/proposal-audit.json (1 frontend and 8 in-game unresolved
- asset identities). All source-specific screen claims remain Gemini proposal
- unless the ledger explicitly recovers the helper property; authored rectangles
- do not promote original content. Layout data represents all 17 proposal screens
- plus training/audio/accessibility/attract (21 total), both styles, and isolates
- actor/menu regions. Unknown labels/unlocks are not adopted. Preferences have
- validated persisted switchable choices; UI integration follows in section 4.
-Owner-question defaults and qualifications are recorded in frontend.md.
+Resolve the documented frontend fidelity gaps when evidence becomes available;
+do not mistake authored placeholders for recovered functionality. The owner's
+remaining queue, in order:
+1. Textures + Remastered font + 1080p display options.
+2. Human transcript review tool.
+3. Gemini research checks: act graph and cheat/suit table.
+4. Animation renders for Gemini T6.
+5. Landmark RESTART investigation (gate unchanged).
+6. Animation alias/provenance import post-processor.
+7. L1A2–L1A4 conversion/collision.
+8. Bink to Theora cinematics.
+9. Opcode ledger + default-off logic-only MissionRuntime.
+10. Debug overlay.
+11. Controls and human playtest docs.
+12. InputRecorder/replayer with explicit --update-goldens.
