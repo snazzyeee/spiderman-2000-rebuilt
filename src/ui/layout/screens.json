@@ -80,7 +80,7 @@
               "anchor": "top_left",
               "z": 1,
               "overlay": false,
-              "asset": "res://assets/ui/LegalPC.png",
+              "asset": "res://assets/ui/frontend/LegalPC.png",
               "font": "sp_fnt00",
               "font_size": 18,
               "colours": {
@@ -130,7 +130,44 @@
             "back": 35,
             "reject": 27
           },
-          "transition_seconds": 0.25
+          "transition_seconds": 0.25,
+          "row_height": 32,
+          "gap": 5,
+          "actor_stage": {
+            "height": 3.8,
+            "camera": [
+              0,
+              1.9,
+              6.5
+            ],
+            "target": [
+              0,
+              1.8,
+              0
+            ],
+            "yaw": -18,
+            "key_rotation": [
+              -40,
+              -30,
+              0
+            ],
+            "fill_rotation": [
+              -15,
+              120,
+              0
+            ],
+            "rim_rotation": [
+              -25,
+              170,
+              0
+            ],
+            "idle_slot": "spidey_anim_0",
+            "punch_slot": "spidey_anim_100",
+            "breathing_amplitude": 0.012,
+            "breathing_period": 2.7,
+            "parallax_pixels": 5,
+            "ground_size": 8
+          }
         },
         "enhanced": {
           "canvas": [
@@ -185,7 +222,7 @@
               "anchor": "top_left",
               "z": 1,
               "overlay": false,
-              "asset": "res://assets/ui/LegalPC.png",
+              "asset": "res://assets/ui/frontend/LegalPC.png",
               "font": "sp_fnt00",
               "font_size": 30,
               "colours": {
@@ -235,13 +272,56 @@
             "back": 35,
             "reject": 27
           },
-          "transition_seconds": 0.25
+          "transition_seconds": 0.25,
+          "row_height": 68,
+          "gap": 12,
+          "actor_stage": {
+            "height": 3.8,
+            "camera": [
+              0,
+              1.9,
+              6.5
+            ],
+            "target": [
+              0,
+              1.8,
+              0
+            ],
+            "yaw": -18,
+            "key_rotation": [
+              -40,
+              -30,
+              0
+            ],
+            "fill_rotation": [
+              -15,
+              120,
+              0
+            ],
+            "rim_rotation": [
+              -25,
+              170,
+              0
+            ],
+            "idle_slot": "spidey_anim_0",
+            "punch_slot": "spidey_anim_100",
+            "breathing_amplitude": 0.012,
+            "breathing_period": 2.7,
+            "parallax_pixels": 5,
+            "ground_size": 8
+          }
         }
       },
       "proposal_elements": [
         "legal_banner"
       ],
-      "proposal_status": "Gemini proposal (unverified)"
+      "proposal_status": "Gemini proposal (unverified)",
+      "actions": [
+        [
+          "Continue",
+          "page:title"
+        ]
+      ]
     },
     {
       "id": "title",
@@ -349,7 +429,44 @@
             "back": 35,
             "reject": 27
           },
-          "transition_seconds": 0.25
+          "transition_seconds": 0.25,
+          "row_height": 32,
+          "gap": 5,
+          "actor_stage": {
+            "height": 3.8,
+            "camera": [
+              0,
+              1.9,
+              6.5
+            ],
+            "target": [
+              0,
+              1.8,
+              0
+            ],
+            "yaw": -18,
+            "key_rotation": [
+              -40,
+              -30,
+              0
+            ],
+            "fill_rotation": [
+              -15,
+              120,
+              0
+            ],
+            "rim_rotation": [
+              -25,
+              170,
+              0
+            ],
+            "idle_slot": "spidey_anim_0",
+            "punch_slot": "spidey_anim_100",
+            "breathing_amplitude": 0.012,
+            "breathing_period": 2.7,
+            "parallax_pixels": 5,
+            "ground_size": 8
+          }
         },
         "enhanced": {
           "canvas": [
@@ -454,14 +571,57 @@
             "back": 35,
             "reject": 27
           },
-          "transition_seconds": 0.25
+          "transition_seconds": 0.25,
+          "row_height": 68,
+          "gap": 12,
+          "actor_stage": {
+            "height": 3.8,
+            "camera": [
+              0,
+              1.9,
+              6.5
+            ],
+            "target": [
+              0,
+              1.8,
+              0
+            ],
+            "yaw": -18,
+            "key_rotation": [
+              -40,
+              -30,
+              0
+            ],
+            "fill_rotation": [
+              -15,
+              120,
+              0
+            ],
+            "rim_rotation": [
+              -25,
+              170,
+              0
+            ],
+            "idle_slot": "spidey_anim_0",
+            "punch_slot": "spidey_anim_100",
+            "breathing_amplitude": 0.012,
+            "breathing_period": 2.7,
+            "parallax_pixels": 5,
+            "ground_size": 8
+          }
         }
       },
       "proposal_elements": [
         "title_illustration",
         "press_enter_label"
       ],
-      "proposal_status": "Gemini proposal (unverified)"
+      "proposal_status": "Gemini proposal (unverified)",
+      "actions": [
+        [
+          "Continue",
+          "page:main_menu"
+        ]
+      ]
     },
     {
       "id": "main_menu",
@@ -519,7 +679,7 @@
               "anchor": "top_left",
               "z": 1,
               "overlay": false,
-              "asset": "res://assets/ui/Title.png",
+              "asset": "res://assets/ui/frontend/title_mark.png",
               "font": "sp_fnt00",
               "font_size": 18,
               "colours": {
@@ -595,7 +755,44 @@
             "back": 35,
             "reject": 27
           },
-          "transition_seconds": 0.25
+          "transition_seconds": 0.25,
+          "row_height": 32,
+          "gap": 5,
+          "actor_stage": {
+            "height": 3.8,
+            "camera": [
+              0,
+              1.9,
+              6.5
+            ],
+            "target": [
+              0,
+              1.8,
+              0
+            ],
+            "yaw": -18,
+            "key_rotation": [
+              -40,
+              -30,
+              0
+            ],
+            "fill_rotation": [
+              -15,
+              120,
+              0
+            ],
+            "rim_rotation": [
+              -25,
+              170,
+              0
+            ],
+            "idle_slot": "spidey_anim_0",
+            "punch_slot": "spidey_anim_100",
+            "breathing_amplitude": 0.012,
+            "breathing_period": 2.7,
+            "parallax_pixels": 5,
+            "ground_size": 8
+          }
         },
         "enhanced": {
           "canvas": [
@@ -650,7 +847,7 @@
               "anchor": "top_left",
               "z": 1,
               "overlay": false,
-              "asset": "res://assets/ui/Title.png",
+              "asset": "res://assets/ui/frontend/title_mark.png",
               "font": "sp_fnt00",
               "font_size": 30,
               "colours": {
@@ -726,7 +923,44 @@
             "back": 35,
             "reject": 27
           },
-          "transition_seconds": 0.25
+          "transition_seconds": 0.25,
+          "row_height": 68,
+          "gap": 12,
+          "actor_stage": {
+            "height": 3.8,
+            "camera": [
+              0,
+              1.9,
+              6.5
+            ],
+            "target": [
+              0,
+              1.8,
+              0
+            ],
+            "yaw": -18,
+            "key_rotation": [
+              -40,
+              -30,
+              0
+            ],
+            "fill_rotation": [
+              -15,
+              120,
+              0
+            ],
+            "rim_rotation": [
+              -25,
+              170,
+              0
+            ],
+            "idle_slot": "spidey_anim_0",
+            "punch_slot": "spidey_anim_100",
+            "breathing_amplitude": 0.012,
+            "breathing_period": 2.7,
+            "parallax_pixels": 5,
+            "ground_size": 8
+          }
         }
       },
       "proposal_elements": [
@@ -734,7 +968,29 @@
         "items",
         "spidey_actor"
       ],
-      "proposal_status": "Gemini proposal (unverified)"
+      "proposal_status": "Gemini proposal (unverified)",
+      "actions": [
+        [
+          "Game",
+          "page:game_menu"
+        ],
+        [
+          "Options",
+          "page:options_menu"
+        ],
+        [
+          "Training",
+          "page:training"
+        ],
+        [
+          "Special",
+          "page:special_menu"
+        ],
+        [
+          "Gallery",
+          "page:gallery_menu"
+        ]
+      ]
     },
     {
       "id": "game_menu",
@@ -843,7 +1099,44 @@
             "back": 35,
             "reject": 27
           },
-          "transition_seconds": 0.25
+          "transition_seconds": 0.25,
+          "row_height": 32,
+          "gap": 5,
+          "actor_stage": {
+            "height": 3.8,
+            "camera": [
+              0,
+              1.9,
+              6.5
+            ],
+            "target": [
+              0,
+              1.8,
+              0
+            ],
+            "yaw": -18,
+            "key_rotation": [
+              -40,
+              -30,
+              0
+            ],
+            "fill_rotation": [
+              -15,
+              120,
+              0
+            ],
+            "rim_rotation": [
+              -25,
+              170,
+              0
+            ],
+            "idle_slot": "spidey_anim_0",
+            "punch_slot": "spidey_anim_100",
+            "breathing_amplitude": 0.012,
+            "breathing_period": 2.7,
+            "parallax_pixels": 5,
+            "ground_size": 8
+          }
         },
         "enhanced": {
           "canvas": [
@@ -949,14 +1242,65 @@
             "back": 35,
             "reject": 27
           },
-          "transition_seconds": 0.25
+          "transition_seconds": 0.25,
+          "row_height": 68,
+          "gap": 12,
+          "actor_stage": {
+            "height": 3.8,
+            "camera": [
+              0,
+              1.9,
+              6.5
+            ],
+            "target": [
+              0,
+              1.8,
+              0
+            ],
+            "yaw": -18,
+            "key_rotation": [
+              -40,
+              -30,
+              0
+            ],
+            "fill_rotation": [
+              -15,
+              120,
+              0
+            ],
+            "rim_rotation": [
+              -25,
+              170,
+              0
+            ],
+            "idle_slot": "spidey_anim_0",
+            "punch_slot": "spidey_anim_100",
+            "breathing_amplitude": 0.012,
+            "breathing_period": 2.7,
+            "parallax_pixels": 5,
+            "ground_size": 8
+          }
         }
       },
       "proposal_elements": [
         "title_bar",
         "items"
       ],
-      "proposal_status": "Gemini proposal (unverified)"
+      "proposal_status": "Gemini proposal (unverified)",
+      "actions": [
+        [
+          "New Game",
+          "launch"
+        ],
+        [
+          "Load Game",
+          "resume"
+        ],
+        [
+          "Back",
+          "back"
+        ]
+      ]
     },
     {
       "id": "difficulty_select",
@@ -1065,7 +1409,44 @@
             "back": 35,
             "reject": 27
           },
-          "transition_seconds": 0.25
+          "transition_seconds": 0.25,
+          "row_height": 32,
+          "gap": 5,
+          "actor_stage": {
+            "height": 3.8,
+            "camera": [
+              0,
+              1.9,
+              6.5
+            ],
+            "target": [
+              0,
+              1.8,
+              0
+            ],
+            "yaw": -18,
+            "key_rotation": [
+              -40,
+              -30,
+              0
+            ],
+            "fill_rotation": [
+              -15,
+              120,
+              0
+            ],
+            "rim_rotation": [
+              -25,
+              170,
+              0
+            ],
+            "idle_slot": "spidey_anim_0",
+            "punch_slot": "spidey_anim_100",
+            "breathing_amplitude": 0.012,
+            "breathing_period": 2.7,
+            "parallax_pixels": 5,
+            "ground_size": 8
+          }
         },
         "enhanced": {
           "canvas": [
@@ -1171,7 +1552,44 @@
             "back": 35,
             "reject": 27
           },
-          "transition_seconds": 0.25
+          "transition_seconds": 0.25,
+          "row_height": 68,
+          "gap": 12,
+          "actor_stage": {
+            "height": 3.8,
+            "camera": [
+              0,
+              1.9,
+              6.5
+            ],
+            "target": [
+              0,
+              1.8,
+              0
+            ],
+            "yaw": -18,
+            "key_rotation": [
+              -40,
+              -30,
+              0
+            ],
+            "fill_rotation": [
+              -15,
+              120,
+              0
+            ],
+            "rim_rotation": [
+              -25,
+              170,
+              0
+            ],
+            "idle_slot": "spidey_anim_0",
+            "punch_slot": "spidey_anim_100",
+            "breathing_amplitude": 0.012,
+            "breathing_period": 2.7,
+            "parallax_pixels": 5,
+            "ground_size": 8
+          }
         }
       },
       "proposal_elements": [
@@ -1179,7 +1597,17 @@
         "items",
         "description"
       ],
-      "proposal_status": "Gemini proposal (unverified)"
+      "proposal_status": "Gemini proposal (unverified)",
+      "actions": [
+        [
+          "Unverified",
+          "info"
+        ],
+        [
+          "Back",
+          "back"
+        ]
+      ]
     },
     {
       "id": "load_game",
@@ -1288,7 +1716,44 @@
             "back": 35,
             "reject": 27
           },
-          "transition_seconds": 0.25
+          "transition_seconds": 0.25,
+          "row_height": 32,
+          "gap": 5,
+          "actor_stage": {
+            "height": 3.8,
+            "camera": [
+              0,
+              1.9,
+              6.5
+            ],
+            "target": [
+              0,
+              1.8,
+              0
+            ],
+            "yaw": -18,
+            "key_rotation": [
+              -40,
+              -30,
+              0
+            ],
+            "fill_rotation": [
+              -15,
+              120,
+              0
+            ],
+            "rim_rotation": [
+              -25,
+              170,
+              0
+            ],
+            "idle_slot": "spidey_anim_0",
+            "punch_slot": "spidey_anim_100",
+            "breathing_amplitude": 0.012,
+            "breathing_period": 2.7,
+            "parallax_pixels": 5,
+            "ground_size": 8
+          }
         },
         "enhanced": {
           "canvas": [
@@ -1394,14 +1859,61 @@
             "back": 35,
             "reject": 27
           },
-          "transition_seconds": 0.25
+          "transition_seconds": 0.25,
+          "row_height": 68,
+          "gap": 12,
+          "actor_stage": {
+            "height": 3.8,
+            "camera": [
+              0,
+              1.9,
+              6.5
+            ],
+            "target": [
+              0,
+              1.8,
+              0
+            ],
+            "yaw": -18,
+            "key_rotation": [
+              -40,
+              -30,
+              0
+            ],
+            "fill_rotation": [
+              -15,
+              120,
+              0
+            ],
+            "rim_rotation": [
+              -25,
+              170,
+              0
+            ],
+            "idle_slot": "spidey_anim_0",
+            "punch_slot": "spidey_anim_100",
+            "breathing_amplitude": 0.012,
+            "breathing_period": 2.7,
+            "parallax_pixels": 5,
+            "ground_size": 8
+          }
         }
       },
       "proposal_elements": [
         "title_bar",
         "slot_list"
       ],
-      "proposal_status": "Gemini proposal (unverified)"
+      "proposal_status": "Gemini proposal (unverified)",
+      "actions": [
+        [
+          "Unverified",
+          "info"
+        ],
+        [
+          "Back",
+          "back"
+        ]
+      ]
     },
     {
       "id": "options_menu",
@@ -1436,7 +1948,7 @@
               "overlay": true,
               "asset": "",
               "font": "sp_fnt00",
-              "font_size": 18,
+              "font_size": 11,
               "colours": {
                 "text": "#FFF4CF",
                 "backdrop": "#100E1B",
@@ -1461,7 +1973,7 @@
               "overlay": false,
               "asset": "",
               "font": "sp_fnt00",
-              "font_size": 18,
+              "font_size": 11,
               "colours": {
                 "text": "#FFF4CF",
                 "backdrop": "#100E1B",
@@ -1487,7 +1999,7 @@
               "overlay": false,
               "asset": "",
               "font": "sp_fnt00",
-              "font_size": 18,
+              "font_size": 11,
               "colours": {
                 "text": "#FFF4CF",
                 "backdrop": "#100E1B",
@@ -1510,7 +2022,44 @@
             "back": 35,
             "reject": 27
           },
-          "transition_seconds": 0.25
+          "transition_seconds": 0.25,
+          "row_height": 15,
+          "gap": 3,
+          "actor_stage": {
+            "height": 3.8,
+            "camera": [
+              0,
+              1.9,
+              6.5
+            ],
+            "target": [
+              0,
+              1.8,
+              0
+            ],
+            "yaw": -18,
+            "key_rotation": [
+              -40,
+              -30,
+              0
+            ],
+            "fill_rotation": [
+              -15,
+              120,
+              0
+            ],
+            "rim_rotation": [
+              -25,
+              170,
+              0
+            ],
+            "idle_slot": "spidey_anim_0",
+            "punch_slot": "spidey_anim_100",
+            "breathing_amplitude": 0.012,
+            "breathing_period": 2.7,
+            "parallax_pixels": 5,
+            "ground_size": 8
+          }
         },
         "enhanced": {
           "canvas": [
@@ -1542,7 +2091,7 @@
               "overlay": true,
               "asset": "",
               "font": "sp_fnt00",
-              "font_size": 30,
+              "font_size": 23,
               "colours": {
                 "text": "#FFF4CF",
                 "backdrop": "#100E1B",
@@ -1567,7 +2116,7 @@
               "overlay": false,
               "asset": "",
               "font": "sp_fnt00",
-              "font_size": 30,
+              "font_size": 23,
               "colours": {
                 "text": "#FFF4CF",
                 "backdrop": "#100E1B",
@@ -1593,7 +2142,7 @@
               "overlay": false,
               "asset": "",
               "font": "sp_fnt00",
-              "font_size": 30,
+              "font_size": 23,
               "colours": {
                 "text": "#FFF4CF",
                 "backdrop": "#100E1B",
@@ -1616,14 +2165,85 @@
             "back": 35,
             "reject": 27
           },
-          "transition_seconds": 0.25
+          "transition_seconds": 0.25,
+          "row_height": 38,
+          "gap": 3,
+          "actor_stage": {
+            "height": 3.8,
+            "camera": [
+              0,
+              1.9,
+              6.5
+            ],
+            "target": [
+              0,
+              1.8,
+              0
+            ],
+            "yaw": -18,
+            "key_rotation": [
+              -40,
+              -30,
+              0
+            ],
+            "fill_rotation": [
+              -15,
+              120,
+              0
+            ],
+            "rim_rotation": [
+              -25,
+              170,
+              0
+            ],
+            "idle_slot": "spidey_anim_0",
+            "punch_slot": "spidey_anim_100",
+            "breathing_amplitude": 0.012,
+            "breathing_period": 2.7,
+            "parallax_pixels": 5,
+            "ground_size": 8
+          }
         }
       },
       "proposal_elements": [
         "title_bar",
         "items"
       ],
-      "proposal_status": "Gemini proposal (unverified)"
+      "proposal_status": "Gemini proposal (unverified)",
+      "actions": [
+        [
+          "Audio",
+          "page:audio"
+        ],
+        [
+          "Font variant",
+          "font"
+        ],
+        [
+          "Menu style",
+          "style"
+        ],
+        [
+          "Dialogue",
+          "volume:Dialogue"
+        ],
+        [
+          "Music",
+          "volume:Music"
+        ],
+        [
+          "SFX",
+          "volume:SFX"
+        ],
+        [
+          "Accessibility",
+          "page:accessibility"
+        ],
+        [
+          "Back",
+          "back"
+        ]
+      ]
     },
     {
       "id": "controls_options",
@@ -1658,7 +2278,7 @@
               "overlay": true,
               "asset": "",
               "font": "sp_fnt00",
-              "font_size": 18,
+              "font_size": 11,
               "colours": {
                 "text": "#FFF4CF",
                 "backdrop": "#100E1B",
@@ -1683,7 +2303,7 @@
               "overlay": false,
               "asset": "",
               "font": "sp_fnt00",
-              "font_size": 18,
+              "font_size": 11,
               "colours": {
                 "text": "#FFF4CF",
                 "backdrop": "#100E1B",
@@ -1709,7 +2329,7 @@
               "overlay": false,
               "asset": "",
               "font": "sp_fnt00",
-              "font_size": 18,
+              "font_size": 11,
               "colours": {
                 "text": "#FFF4CF",
                 "backdrop": "#100E1B",
@@ -1732,7 +2352,44 @@
             "back": 35,
             "reject": 27
           },
-          "transition_seconds": 0.25
+          "transition_seconds": 0.25,
+          "row_height": 15,
+          "gap": 3,
+          "actor_stage": {
+            "height": 3.8,
+            "camera": [
+              0,
+              1.9,
+              6.5
+            ],
+            "target": [
+              0,
+              1.8,
+              0
+            ],
+            "yaw": -18,
+            "key_rotation": [
+              -40,
+              -30,
+              0
+            ],
+            "fill_rotation": [
+              -15,
+              120,
+              0
+            ],
+            "rim_rotation": [
+              -25,
+              170,
+              0
+            ],
+            "idle_slot": "spidey_anim_0",
+            "punch_slot": "spidey_anim_100",
+            "breathing_amplitude": 0.012,
+            "breathing_period": 2.7,
+            "parallax_pixels": 5,
+            "ground_size": 8
+          }
         },
         "enhanced": {
           "canvas": [
@@ -1764,7 +2421,7 @@
               "overlay": true,
               "asset": "",
               "font": "sp_fnt00",
-              "font_size": 30,
+              "font_size": 23,
               "colours": {
                 "text": "#FFF4CF",
                 "backdrop": "#100E1B",
@@ -1789,7 +2446,7 @@
               "overlay": false,
               "asset": "",
               "font": "sp_fnt00",
-              "font_size": 30,
+              "font_size": 23,
               "colours": {
                 "text": "#FFF4CF",
                 "backdrop": "#100E1B",
@@ -1815,7 +2472,7 @@
               "overlay": false,
               "asset": "",
               "font": "sp_fnt00",
-              "font_size": 30,
+              "font_size": 23,
               "colours": {
                 "text": "#FFF4CF",
                 "backdrop": "#100E1B",
@@ -1838,7 +2495,44 @@
             "back": 35,
             "reject": 27
           },
-          "transition_seconds": 0.25
+          "transition_seconds": 0.25,
+          "row_height": 38,
+          "gap": 3,
+          "actor_stage": {
+            "height": 3.8,
+            "camera": [
+              0,
+              1.9,
+              6.5
+            ],
+            "target": [
+              0,
+              1.8,
+              0
+            ],
+            "yaw": -18,
+            "key_rotation": [
+              -40,
+              -30,
+              0
+            ],
+            "fill_rotation": [
+              -15,
+              120,
+              0
+            ],
+            "rim_rotation": [
+              -25,
+              170,
+              0
+            ],
+            "idle_slot": "spidey_anim_0",
+            "punch_slot": "spidey_anim_100",
+            "breathing_amplitude": 0.012,
+            "breathing_period": 2.7,
+            "parallax_pixels": 5,
+            "ground_size": 8
+          }
         }
       },
       "proposal_elements": [
@@ -1846,7 +2540,41 @@
         "actions_column",
         "bindings_column"
       ],
-      "proposal_status": "Gemini proposal (unverified)"
+      "proposal_status": "Gemini proposal (unverified)",
+      "actions": [
+        [
+          "Move: WASD / Left stick",
+          "info"
+        ],
+        [
+          "Jump: Space / A",
+          "info"
+        ],
+        [
+          "Swing: RMB / RT",
+          "info"
+        ],
+        [
+          "Zip: Q / RB",
+          "info"
+        ],
+        [
+          "Crawl: C / LB",
+          "info"
+        ],
+        [
+          "Melee: F / X",
+          "info"
+        ],
+        [
+          "Web: R / Y",
+          "info"
+        ],
+        [
+          "Back",
+          "back"
+        ]
+      ]
     },
     {
       "id": "special_menu",
@@ -1955,7 +2683,44 @@
             "back": 35,
             "reject": 27
           },
-          "transition_seconds": 0.25
+          "transition_seconds": 0.25,
+          "row_height": 32,
+          "gap": 5,
+          "actor_stage": {
+            "height": 3.8,
+            "camera": [
+              0,
+              1.9,
+              6.5
+            ],
+            "target": [
+              0,
+              1.8,
+              0
+            ],
+            "yaw": -18,
+            "key_rotation": [
+              -40,
+              -30,
+              0
+            ],
+            "fill_rotation": [
+              -15,
+              120,
+              0
+            ],
+            "rim_rotation": [
+              -25,
+              170,
+              0
+            ],
+            "idle_slot": "spidey_anim_0",
+            "punch_slot": "spidey_anim_100",
+            "breathing_amplitude": 0.012,
+            "breathing_period": 2.7,
+            "parallax_pixels": 5,
+            "ground_size": 8
+          }
         },
         "enhanced": {
           "canvas": [
@@ -2061,14 +2826,65 @@
             "back": 35,
             "reject": 27
           },
-          "transition_seconds": 0.25
+          "transition_seconds": 0.25,
+          "row_height": 68,
+          "gap": 12,
+          "actor_stage": {
+            "height": 3.8,
+            "camera": [
+              0,
+              1.9,
+              6.5
+            ],
+            "target": [
+              0,
+              1.8,
+              0
+            ],
+            "yaw": -18,
+            "key_rotation": [
+              -40,
+              -30,
+              0
+            ],
+            "fill_rotation": [
+              -15,
+              120,
+              0
+            ],
+            "rim_rotation": [
+              -25,
+              170,
+              0
+            ],
+            "idle_slot": "spidey_anim_0",
+            "punch_slot": "spidey_anim_100",
+            "breathing_amplitude": 0.012,
+            "breathing_period": 2.7,
+            "parallax_pixels": 5,
+            "ground_size": 8
+          }
         }
       },
       "proposal_elements": [
         "title_bar",
         "items"
       ],
-      "proposal_status": "Gemini proposal (unverified)"
+      "proposal_status": "Gemini proposal (unverified)",
+      "actions": [
+        [
+          "Replay Opening",
+          "launch"
+        ],
+        [
+          "Controls",
+          "page:controls_options"
+        ],
+        [
+          "Back",
+          "back"
+        ]
+      ]
     },
     {
       "id": "cheats_screen",
@@ -2202,7 +3018,44 @@
             "back": 35,
             "reject": 27
           },
-          "transition_seconds": 0.25
+          "transition_seconds": 0.25,
+          "row_height": 32,
+          "gap": 5,
+          "actor_stage": {
+            "height": 3.8,
+            "camera": [
+              0,
+              1.9,
+              6.5
+            ],
+            "target": [
+              0,
+              1.8,
+              0
+            ],
+            "yaw": -18,
+            "key_rotation": [
+              -40,
+              -30,
+              0
+            ],
+            "fill_rotation": [
+              -15,
+              120,
+              0
+            ],
+            "rim_rotation": [
+              -25,
+              170,
+              0
+            ],
+            "idle_slot": "spidey_anim_0",
+            "punch_slot": "spidey_anim_100",
+            "breathing_amplitude": 0.012,
+            "breathing_period": 2.7,
+            "parallax_pixels": 5,
+            "ground_size": 8
+          }
         },
         "enhanced": {
           "canvas": [
@@ -2333,7 +3186,44 @@
             "back": 35,
             "reject": 27
           },
-          "transition_seconds": 0.25
+          "transition_seconds": 0.25,
+          "row_height": 68,
+          "gap": 12,
+          "actor_stage": {
+            "height": 3.8,
+            "camera": [
+              0,
+              1.9,
+              6.5
+            ],
+            "target": [
+              0,
+              1.8,
+              0
+            ],
+            "yaw": -18,
+            "key_rotation": [
+              -40,
+              -30,
+              0
+            ],
+            "fill_rotation": [
+              -15,
+              120,
+              0
+            ],
+            "rim_rotation": [
+              -25,
+              170,
+              0
+            ],
+            "idle_slot": "spidey_anim_0",
+            "punch_slot": "spidey_anim_100",
+            "breathing_amplitude": 0.012,
+            "breathing_period": 2.7,
+            "parallax_pixels": 5,
+            "ground_size": 8
+          }
         }
       },
       "proposal_elements": [
@@ -2341,7 +3231,17 @@
         "input_prompt",
         "rude_spidey_actor"
       ],
-      "proposal_status": "Gemini proposal (unverified)"
+      "proposal_status": "Gemini proposal (unverified)",
+      "actions": [
+        [
+          "Unverified",
+          "info"
+        ],
+        [
+          "Back",
+          "back"
+        ]
+      ]
     },
     {
       "id": "gallery_menu",
@@ -2419,7 +3319,7 @@
               "rect": [
                 102.4,
                 153.6,
-                422.4,
+                192.0,
                 278.4
               ],
               "anchor": "top_left",
@@ -2438,6 +3338,32 @@
               ],
               "confidence": "authored",
               "focus": true
+            },
+            {
+              "id": "gallery_art",
+              "type": "image",
+              "rect": [
+                332.8,
+                139.2,
+                211.20000000000002,
+                288.0
+              ],
+              "anchor": "top_left",
+              "z": 2,
+              "overlay": false,
+              "asset": "res://assets/ui/cb00.png",
+              "font": "sp_fnt00",
+              "font_size": 18,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored",
+              "focus": false
             }
           ],
           "focus_order": [
@@ -2450,7 +3376,44 @@
             "back": 35,
             "reject": 27
           },
-          "transition_seconds": 0.25
+          "transition_seconds": 0.25,
+          "row_height": 32,
+          "gap": 5,
+          "actor_stage": {
+            "height": 3.8,
+            "camera": [
+              0,
+              1.9,
+              6.5
+            ],
+            "target": [
+              0,
+              1.8,
+              0
+            ],
+            "yaw": -18,
+            "key_rotation": [
+              -40,
+              -30,
+              0
+            ],
+            "fill_rotation": [
+              -15,
+              120,
+              0
+            ],
+            "rim_rotation": [
+              -25,
+              170,
+              0
+            ],
+            "idle_slot": "spidey_anim_0",
+            "punch_slot": "spidey_anim_100",
+            "breathing_amplitude": 0.012,
+            "breathing_period": 2.7,
+            "parallax_pixels": 5,
+            "ground_size": 8
+          }
         },
         "enhanced": {
           "canvas": [
@@ -2525,7 +3488,7 @@
               "rect": [
                 307.2,
                 345.6,
-                1267.2,
+                576.0,
                 626.4
               ],
               "anchor": "top_left",
@@ -2544,6 +3507,32 @@
               ],
               "confidence": "authored",
               "focus": true
+            },
+            {
+              "id": "gallery_art",
+              "type": "image",
+              "rect": [
+                998.4000000000001,
+                313.2,
+                633.6,
+                648.0
+              ],
+              "anchor": "top_left",
+              "z": 2,
+              "overlay": false,
+              "asset": "res://assets/ui/cb00.png",
+              "font": "sp_fnt00",
+              "font_size": 30,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored",
+              "focus": false
             }
           ],
           "focus_order": [
@@ -2556,14 +3545,65 @@
             "back": 35,
             "reject": 27
           },
-          "transition_seconds": 0.25
+          "transition_seconds": 0.25,
+          "row_height": 68,
+          "gap": 12,
+          "actor_stage": {
+            "height": 3.8,
+            "camera": [
+              0,
+              1.9,
+              6.5
+            ],
+            "target": [
+              0,
+              1.8,
+              0
+            ],
+            "yaw": -18,
+            "key_rotation": [
+              -40,
+              -30,
+              0
+            ],
+            "fill_rotation": [
+              -15,
+              120,
+              0
+            ],
+            "rim_rotation": [
+              -25,
+              170,
+              0
+            ],
+            "idle_slot": "spidey_anim_0",
+            "punch_slot": "spidey_anim_100",
+            "breathing_amplitude": 0.012,
+            "breathing_period": 2.7,
+            "parallax_pixels": 5,
+            "ground_size": 8
+          }
         }
       },
       "proposal_elements": [
         "title_bar",
         "items"
       ],
-      "proposal_status": "Gemini proposal (unverified)"
+      "proposal_status": "Gemini proposal (unverified)",
+      "actions": [
+        [
+          "Previous",
+          "previous"
+        ],
+        [
+          "Next",
+          "next"
+        ],
+        [
+          "Back",
+          "back"
+        ]
+      ]
     },
     {
       "id": "pause_menu",
@@ -2672,7 +3712,44 @@
             "back": 35,
             "reject": 27
           },
-          "transition_seconds": 0.25
+          "transition_seconds": 0.25,
+          "row_height": 32,
+          "gap": 5,
+          "actor_stage": {
+            "height": 3.8,
+            "camera": [
+              0,
+              1.9,
+              6.5
+            ],
+            "target": [
+              0,
+              1.8,
+              0
+            ],
+            "yaw": -18,
+            "key_rotation": [
+              -40,
+              -30,
+              0
+            ],
+            "fill_rotation": [
+              -15,
+              120,
+              0
+            ],
+            "rim_rotation": [
+              -25,
+              170,
+              0
+            ],
+            "idle_slot": "spidey_anim_0",
+            "punch_slot": "spidey_anim_100",
+            "breathing_amplitude": 0.012,
+            "breathing_period": 2.7,
+            "parallax_pixels": 5,
+            "ground_size": 8
+          }
         },
         "enhanced": {
           "canvas": [
@@ -2778,14 +3855,65 @@
             "back": 35,
             "reject": 27
           },
-          "transition_seconds": 0.25
+          "transition_seconds": 0.25,
+          "row_height": 68,
+          "gap": 12,
+          "actor_stage": {
+            "height": 3.8,
+            "camera": [
+              0,
+              1.9,
+              6.5
+            ],
+            "target": [
+              0,
+              1.8,
+              0
+            ],
+            "yaw": -18,
+            "key_rotation": [
+              -40,
+              -30,
+              0
+            ],
+            "fill_rotation": [
+              -15,
+              120,
+              0
+            ],
+            "rim_rotation": [
+              -25,
+              170,
+              0
+            ],
+            "idle_slot": "spidey_anim_0",
+            "punch_slot": "spidey_anim_100",
+            "breathing_amplitude": 0.012,
+            "breathing_period": 2.7,
+            "parallax_pixels": 5,
+            "ground_size": 8
+          }
         }
       },
       "proposal_elements": [
         "paused_header",
         "items"
       ],
-      "proposal_status": "Gemini proposal (unverified)"
+      "proposal_status": "Gemini proposal (unverified)",
+      "actions": [
+        [
+          "Resume",
+          "resume_game"
+        ],
+        [
+          "Recover to checkpoint",
+          "recover"
+        ],
+        [
+          "Main Menu",
+          "main"
+        ]
+      ]
     },
     {
       "id": "hud",
@@ -2894,7 +4022,44 @@
             "back": 35,
             "reject": 27
           },
-          "transition_seconds": 0.25
+          "transition_seconds": 0.25,
+          "row_height": 32,
+          "gap": 5,
+          "actor_stage": {
+            "height": 3.8,
+            "camera": [
+              0,
+              1.9,
+              6.5
+            ],
+            "target": [
+              0,
+              1.8,
+              0
+            ],
+            "yaw": -18,
+            "key_rotation": [
+              -40,
+              -30,
+              0
+            ],
+            "fill_rotation": [
+              -15,
+              120,
+              0
+            ],
+            "rim_rotation": [
+              -25,
+              170,
+              0
+            ],
+            "idle_slot": "spidey_anim_0",
+            "punch_slot": "spidey_anim_100",
+            "breathing_amplitude": 0.012,
+            "breathing_period": 2.7,
+            "parallax_pixels": 5,
+            "ground_size": 8
+          }
         },
         "enhanced": {
           "canvas": [
@@ -3000,7 +4165,44 @@
             "back": 35,
             "reject": 27
           },
-          "transition_seconds": 0.25
+          "transition_seconds": 0.25,
+          "row_height": 68,
+          "gap": 12,
+          "actor_stage": {
+            "height": 3.8,
+            "camera": [
+              0,
+              1.9,
+              6.5
+            ],
+            "target": [
+              0,
+              1.8,
+              0
+            ],
+            "yaw": -18,
+            "key_rotation": [
+              -40,
+              -30,
+              0
+            ],
+            "fill_rotation": [
+              -15,
+              120,
+              0
+            ],
+            "rim_rotation": [
+              -25,
+              170,
+              0
+            ],
+            "idle_slot": "spidey_anim_0",
+            "punch_slot": "spidey_anim_100",
+            "breathing_amplitude": 0.012,
+            "breathing_period": 2.7,
+            "parallax_pixels": 5,
+            "ground_size": 8
+          }
         }
       },
       "proposal_elements": [
@@ -3017,7 +4219,17 @@
         "subtitles",
         "stan_lee_caption"
       ],
-      "proposal_status": "Gemini proposal (unverified)"
+      "proposal_status": "Gemini proposal (unverified)",
+      "actions": [
+        [
+          "Unverified",
+          "info"
+        ],
+        [
+          "Back",
+          "back"
+        ]
+      ]
     },
     {
       "id": "pause",
@@ -3126,7 +4338,44 @@
             "back": 35,
             "reject": 27
           },
-          "transition_seconds": 0.25
+          "transition_seconds": 0.25,
+          "row_height": 32,
+          "gap": 5,
+          "actor_stage": {
+            "height": 3.8,
+            "camera": [
+              0,
+              1.9,
+              6.5
+            ],
+            "target": [
+              0,
+              1.8,
+              0
+            ],
+            "yaw": -18,
+            "key_rotation": [
+              -40,
+              -30,
+              0
+            ],
+            "fill_rotation": [
+              -15,
+              120,
+              0
+            ],
+            "rim_rotation": [
+              -25,
+              170,
+              0
+            ],
+            "idle_slot": "spidey_anim_0",
+            "punch_slot": "spidey_anim_100",
+            "breathing_amplitude": 0.012,
+            "breathing_period": 2.7,
+            "parallax_pixels": 5,
+            "ground_size": 8
+          }
         },
         "enhanced": {
           "canvas": [
@@ -3232,14 +4481,65 @@
             "back": 35,
             "reject": 27
           },
-          "transition_seconds": 0.25
+          "transition_seconds": 0.25,
+          "row_height": 68,
+          "gap": 12,
+          "actor_stage": {
+            "height": 3.8,
+            "camera": [
+              0,
+              1.9,
+              6.5
+            ],
+            "target": [
+              0,
+              1.8,
+              0
+            ],
+            "yaw": -18,
+            "key_rotation": [
+              -40,
+              -30,
+              0
+            ],
+            "fill_rotation": [
+              -15,
+              120,
+              0
+            ],
+            "rim_rotation": [
+              -25,
+              170,
+              0
+            ],
+            "idle_slot": "spidey_anim_0",
+            "punch_slot": "spidey_anim_100",
+            "breathing_amplitude": 0.012,
+            "breathing_period": 2.7,
+            "parallax_pixels": 5,
+            "ground_size": 8
+          }
         }
       },
       "proposal_elements": [
         "paused_header",
         "pause_items"
       ],
-      "proposal_status": "Gemini proposal (unverified)"
+      "proposal_status": "Gemini proposal (unverified)",
+      "actions": [
+        [
+          "Resume",
+          "resume_game"
+        ],
+        [
+          "Recover to checkpoint",
+          "recover"
+        ],
+        [
+          "Main Menu",
+          "main"
+        ]
+      ]
     },
     {
       "id": "loading",
@@ -3297,7 +4597,7 @@
               "anchor": "top_left",
               "z": 1,
               "overlay": false,
-              "asset": "res://assets/ui/L1Cov.png",
+              "asset": "res://assets/ui/frontend/L1Cov.png",
               "font": "sp_fnt00",
               "font_size": 18,
               "colours": {
@@ -3347,7 +4647,44 @@
             "back": 35,
             "reject": 27
           },
-          "transition_seconds": 0.25
+          "transition_seconds": 0.25,
+          "row_height": 32,
+          "gap": 5,
+          "actor_stage": {
+            "height": 3.8,
+            "camera": [
+              0,
+              1.9,
+              6.5
+            ],
+            "target": [
+              0,
+              1.8,
+              0
+            ],
+            "yaw": -18,
+            "key_rotation": [
+              -40,
+              -30,
+              0
+            ],
+            "fill_rotation": [
+              -15,
+              120,
+              0
+            ],
+            "rim_rotation": [
+              -25,
+              170,
+              0
+            ],
+            "idle_slot": "spidey_anim_0",
+            "punch_slot": "spidey_anim_100",
+            "breathing_amplitude": 0.012,
+            "breathing_period": 2.7,
+            "parallax_pixels": 5,
+            "ground_size": 8
+          }
         },
         "enhanced": {
           "canvas": [
@@ -3402,7 +4739,7 @@
               "anchor": "top_left",
               "z": 1,
               "overlay": false,
-              "asset": "res://assets/ui/L1Cov.png",
+              "asset": "res://assets/ui/frontend/L1Cov.png",
               "font": "sp_fnt00",
               "font_size": 30,
               "colours": {
@@ -3452,7 +4789,44 @@
             "back": 35,
             "reject": 27
           },
-          "transition_seconds": 0.25
+          "transition_seconds": 0.25,
+          "row_height": 68,
+          "gap": 12,
+          "actor_stage": {
+            "height": 3.8,
+            "camera": [
+              0,
+              1.9,
+              6.5
+            ],
+            "target": [
+              0,
+              1.8,
+              0
+            ],
+            "yaw": -18,
+            "key_rotation": [
+              -40,
+              -30,
+              0
+            ],
+            "fill_rotation": [
+              -15,
+              120,
+              0
+            ],
+            "rim_rotation": [
+              -25,
+              170,
+              0
+            ],
+            "idle_slot": "spidey_anim_0",
+            "punch_slot": "spidey_anim_100",
+            "breathing_amplitude": 0.012,
+            "breathing_period": 2.7,
+            "parallax_pixels": 5,
+            "ground_size": 8
+          }
         }
       },
       "proposal_elements": [
@@ -3460,7 +4834,8 @@
         "loading_spinner",
         "hint_label"
       ],
-      "proposal_status": "Gemini proposal (unverified)"
+      "proposal_status": "Gemini proposal (unverified)",
+      "actions": []
     },
     {
       "id": "comic_intro",
@@ -3568,7 +4943,44 @@
             "back": 35,
             "reject": 27
           },
-          "transition_seconds": 0.25
+          "transition_seconds": 0.25,
+          "row_height": 32,
+          "gap": 5,
+          "actor_stage": {
+            "height": 3.8,
+            "camera": [
+              0,
+              1.9,
+              6.5
+            ],
+            "target": [
+              0,
+              1.8,
+              0
+            ],
+            "yaw": -18,
+            "key_rotation": [
+              -40,
+              -30,
+              0
+            ],
+            "fill_rotation": [
+              -15,
+              120,
+              0
+            ],
+            "rim_rotation": [
+              -25,
+              170,
+              0
+            ],
+            "idle_slot": "spidey_anim_0",
+            "punch_slot": "spidey_anim_100",
+            "breathing_amplitude": 0.012,
+            "breathing_period": 2.7,
+            "parallax_pixels": 5,
+            "ground_size": 8
+          }
         },
         "enhanced": {
           "canvas": [
@@ -3673,14 +5085,61 @@
             "back": 35,
             "reject": 27
           },
-          "transition_seconds": 0.25
+          "transition_seconds": 0.25,
+          "row_height": 68,
+          "gap": 12,
+          "actor_stage": {
+            "height": 3.8,
+            "camera": [
+              0,
+              1.9,
+              6.5
+            ],
+            "target": [
+              0,
+              1.8,
+              0
+            ],
+            "yaw": -18,
+            "key_rotation": [
+              -40,
+              -30,
+              0
+            ],
+            "fill_rotation": [
+              -15,
+              120,
+              0
+            ],
+            "rim_rotation": [
+              -25,
+              170,
+              0
+            ],
+            "idle_slot": "spidey_anim_0",
+            "punch_slot": "spidey_anim_100",
+            "breathing_amplitude": 0.012,
+            "breathing_period": 2.7,
+            "parallax_pixels": 5,
+            "ground_size": 8
+          }
         }
       },
       "proposal_elements": [
         "comic_page",
         "page_advance_prompt"
       ],
-      "proposal_status": "Gemini proposal (unverified)"
+      "proposal_status": "Gemini proposal (unverified)",
+      "actions": [
+        [
+          "Unverified",
+          "info"
+        ],
+        [
+          "Back",
+          "back"
+        ]
+      ]
     },
     {
       "id": "death_restart",
@@ -3789,7 +5248,44 @@
             "back": 35,
             "reject": 27
           },
-          "transition_seconds": 0.25
+          "transition_seconds": 0.25,
+          "row_height": 32,
+          "gap": 5,
+          "actor_stage": {
+            "height": 3.8,
+            "camera": [
+              0,
+              1.9,
+              6.5
+            ],
+            "target": [
+              0,
+              1.8,
+              0
+            ],
+            "yaw": -18,
+            "key_rotation": [
+              -40,
+              -30,
+              0
+            ],
+            "fill_rotation": [
+              -15,
+              120,
+              0
+            ],
+            "rim_rotation": [
+              -25,
+              170,
+              0
+            ],
+            "idle_slot": "spidey_anim_0",
+            "punch_slot": "spidey_anim_100",
+            "breathing_amplitude": 0.012,
+            "breathing_period": 2.7,
+            "parallax_pixels": 5,
+            "ground_size": 8
+          }
         },
         "enhanced": {
           "canvas": [
@@ -3895,14 +5391,61 @@
             "back": 35,
             "reject": 27
           },
-          "transition_seconds": 0.25
+          "transition_seconds": 0.25,
+          "row_height": 68,
+          "gap": 12,
+          "actor_stage": {
+            "height": 3.8,
+            "camera": [
+              0,
+              1.9,
+              6.5
+            ],
+            "target": [
+              0,
+              1.8,
+              0
+            ],
+            "yaw": -18,
+            "key_rotation": [
+              -40,
+              -30,
+              0
+            ],
+            "fill_rotation": [
+              -15,
+              120,
+              0
+            ],
+            "rim_rotation": [
+              -25,
+              170,
+              0
+            ],
+            "idle_slot": "spidey_anim_0",
+            "punch_slot": "spidey_anim_100",
+            "breathing_amplitude": 0.012,
+            "breathing_period": 2.7,
+            "parallax_pixels": 5,
+            "ground_size": 8
+          }
         }
       },
       "proposal_elements": [
         "death_header",
         "restart_options"
       ],
-      "proposal_status": "Gemini proposal (unverified)"
+      "proposal_status": "Gemini proposal (unverified)",
+      "actions": [
+        [
+          "Unverified",
+          "info"
+        ],
+        [
+          "Back",
+          "back"
+        ]
+      ]
     },
     {
       "id": "training",
@@ -4011,7 +5554,44 @@
             "back": 35,
             "reject": 27
           },
-          "transition_seconds": 0.25
+          "transition_seconds": 0.25,
+          "row_height": 32,
+          "gap": 5,
+          "actor_stage": {
+            "height": 3.8,
+            "camera": [
+              0,
+              1.9,
+              6.5
+            ],
+            "target": [
+              0,
+              1.8,
+              0
+            ],
+            "yaw": -18,
+            "key_rotation": [
+              -40,
+              -30,
+              0
+            ],
+            "fill_rotation": [
+              -15,
+              120,
+              0
+            ],
+            "rim_rotation": [
+              -25,
+              170,
+              0
+            ],
+            "idle_slot": "spidey_anim_0",
+            "punch_slot": "spidey_anim_100",
+            "breathing_amplitude": 0.012,
+            "breathing_period": 2.7,
+            "parallax_pixels": 5,
+            "ground_size": 8
+          }
         },
         "enhanced": {
           "canvas": [
@@ -4117,11 +5697,62 @@
             "back": 35,
             "reject": 27
           },
-          "transition_seconds": 0.25
+          "transition_seconds": 0.25,
+          "row_height": 68,
+          "gap": 12,
+          "actor_stage": {
+            "height": 3.8,
+            "camera": [
+              0,
+              1.9,
+              6.5
+            ],
+            "target": [
+              0,
+              1.8,
+              0
+            ],
+            "yaw": -18,
+            "key_rotation": [
+              -40,
+              -30,
+              0
+            ],
+            "fill_rotation": [
+              -15,
+              120,
+              0
+            ],
+            "rim_rotation": [
+              -25,
+              170,
+              0
+            ],
+            "idle_slot": "spidey_anim_0",
+            "punch_slot": "spidey_anim_100",
+            "breathing_amplitude": 0.012,
+            "breathing_period": 2.7,
+            "parallax_pixels": 5,
+            "ground_size": 8
+          }
         }
       },
       "proposal_elements": [],
-      "proposal_status": "Gemini proposal (unverified)"
+      "proposal_status": "Gemini proposal (unverified)",
+      "actions": [
+        [
+          "Rooftop Practice",
+          "practice"
+        ],
+        [
+          "Controls",
+          "page:controls_options"
+        ],
+        [
+          "Back",
+          "back"
+        ]
+      ]
     },
     {
       "id": "audio",
@@ -4156,7 +5787,7 @@
               "overlay": true,
               "asset": "",
               "font": "sp_fnt00",
-              "font_size": 18,
+              "font_size": 11,
               "colours": {
                 "text": "#FFF4CF",
                 "backdrop": "#100E1B",
@@ -4181,7 +5812,7 @@
               "overlay": false,
               "asset": "",
               "font": "sp_fnt00",
-              "font_size": 18,
+              "font_size": 11,
               "colours": {
                 "text": "#FFF4CF",
                 "backdrop": "#100E1B",
@@ -4207,7 +5838,7 @@
               "overlay": false,
               "asset": "",
               "font": "sp_fnt00",
-              "font_size": 18,
+              "font_size": 11,
               "colours": {
                 "text": "#FFF4CF",
                 "backdrop": "#100E1B",
@@ -4230,7 +5861,44 @@
             "back": 35,
             "reject": 27
           },
-          "transition_seconds": 0.25
+          "transition_seconds": 0.25,
+          "row_height": 15,
+          "gap": 3,
+          "actor_stage": {
+            "height": 3.8,
+            "camera": [
+              0,
+              1.9,
+              6.5
+            ],
+            "target": [
+              0,
+              1.8,
+              0
+            ],
+            "yaw": -18,
+            "key_rotation": [
+              -40,
+              -30,
+              0
+            ],
+            "fill_rotation": [
+              -15,
+              120,
+              0
+            ],
+            "rim_rotation": [
+              -25,
+              170,
+              0
+            ],
+            "idle_slot": "spidey_anim_0",
+            "punch_slot": "spidey_anim_100",
+            "breathing_amplitude": 0.012,
+            "breathing_period": 2.7,
+            "parallax_pixels": 5,
+            "ground_size": 8
+          }
         },
         "enhanced": {
           "canvas": [
@@ -4262,7 +5930,7 @@
               "overlay": true,
               "asset": "",
               "font": "sp_fnt00",
-              "font_size": 30,
+              "font_size": 23,
               "colours": {
                 "text": "#FFF4CF",
                 "backdrop": "#100E1B",
@@ -4287,7 +5955,7 @@
               "overlay": false,
               "asset": "",
               "font": "sp_fnt00",
-              "font_size": 30,
+              "font_size": 23,
               "colours": {
                 "text": "#FFF4CF",
                 "backdrop": "#100E1B",
@@ -4313,7 +5981,7 @@
               "overlay": false,
               "asset": "",
               "font": "sp_fnt00",
-              "font_size": 30,
+              "font_size": 23,
               "colours": {
                 "text": "#FFF4CF",
                 "backdrop": "#100E1B",
@@ -4336,11 +6004,70 @@
             "back": 35,
             "reject": 27
           },
-          "transition_seconds": 0.25
+          "transition_seconds": 0.25,
+          "row_height": 38,
+          "gap": 3,
+          "actor_stage": {
+            "height": 3.8,
+            "camera": [
+              0,
+              1.9,
+              6.5
+            ],
+            "target": [
+              0,
+              1.8,
+              0
+            ],
+            "yaw": -18,
+            "key_rotation": [
+              -40,
+              -30,
+              0
+            ],
+            "fill_rotation": [
+              -15,
+              120,
+              0
+            ],
+            "rim_rotation": [
+              -25,
+              170,
+              0
+            ],
+            "idle_slot": "spidey_anim_0",
+            "punch_slot": "spidey_anim_100",
+            "breathing_amplitude": 0.012,
+            "breathing_period": 2.7,
+            "parallax_pixels": 5,
+            "ground_size": 8
+          }
         }
       },
       "proposal_elements": [],
-      "proposal_status": "Gemini proposal (unverified)"
+      "proposal_status": "Gemini proposal (unverified)",
+      "actions": [
+        [
+          "Menu sounds",
+          "menu_sounds"
+        ],
+        [
+          "Dialogue",
+          "volume:Dialogue"
+        ],
+        [
+          "Music",
+          "volume:Music"
+        ],
+        [
+          "SFX",
+          "volume:SFX"
+        ],
+        [
+          "Back",
+          "back"
+        ]
+      ]
     },
     {
       "id": "accessibility",
@@ -4375,7 +6102,7 @@
               "overlay": true,
               "asset": "",
               "font": "sp_fnt00",
-              "font_size": 18,
+              "font_size": 11,
               "colours": {
                 "text": "#FFF4CF",
                 "backdrop": "#100E1B",
@@ -4400,7 +6127,7 @@
               "overlay": false,
               "asset": "",
               "font": "sp_fnt00",
-              "font_size": 18,
+              "font_size": 11,
               "colours": {
                 "text": "#FFF4CF",
                 "backdrop": "#100E1B",
@@ -4426,7 +6153,7 @@
               "overlay": false,
               "asset": "",
               "font": "sp_fnt00",
-              "font_size": 18,
+              "font_size": 11,
               "colours": {
                 "text": "#FFF4CF",
                 "backdrop": "#100E1B",
@@ -4449,7 +6176,44 @@
             "back": 35,
             "reject": 27
           },
-          "transition_seconds": 0.25
+          "transition_seconds": 0.25,
+          "row_height": 15,
+          "gap": 3,
+          "actor_stage": {
+            "height": 3.8,
+            "camera": [
+              0,
+              1.9,
+              6.5
+            ],
+            "target": [
+              0,
+              1.8,
+              0
+            ],
+            "yaw": -18,
+            "key_rotation": [
+              -40,
+              -30,
+              0
+            ],
+            "fill_rotation": [
+              -15,
+              120,
+              0
+            ],
+            "rim_rotation": [
+              -25,
+              170,
+              0
+            ],
+            "idle_slot": "spidey_anim_0",
+            "punch_slot": "spidey_anim_100",
+            "breathing_amplitude": 0.012,
+            "breathing_period": 2.7,
+            "parallax_pixels": 5,
+            "ground_size": 8
+          }
         },
         "enhanced": {
           "canvas": [
@@ -4481,7 +6245,7 @@
               "overlay": true,
               "asset": "",
               "font": "sp_fnt00",
-              "font_size": 30,
+              "font_size": 23,
               "colours": {
                 "text": "#FFF4CF",
                 "backdrop": "#100E1B",
@@ -4506,7 +6270,7 @@
               "overlay": false,
               "asset": "",
               "font": "sp_fnt00",
-              "font_size": 30,
+              "font_size": 23,
               "colours": {
                 "text": "#FFF4CF",
                 "backdrop": "#100E1B",
@@ -4532,7 +6296,7 @@
               "overlay": false,
               "asset": "",
               "font": "sp_fnt00",
-              "font_size": 30,
+              "font_size": 23,
               "colours": {
                 "text": "#FFF4CF",
                 "backdrop": "#100E1B",
@@ -4555,11 +6319,78 @@
             "back": 35,
             "reject": 27
           },
-          "transition_seconds": 0.25
+          "transition_seconds": 0.25,
+          "row_height": 38,
+          "gap": 3,
+          "actor_stage": {
+            "height": 3.8,
+            "camera": [
+              0,
+              1.9,
+              6.5
+            ],
+            "target": [
+              0,
+              1.8,
+              0
+            ],
+            "yaw": -18,
+            "key_rotation": [
+              -40,
+              -30,
+              0
+            ],
+            "fill_rotation": [
+              -15,
+              120,
+              0
+            ],
+            "rim_rotation": [
+              -25,
+              170,
+              0
+            ],
+            "idle_slot": "spidey_anim_0",
+            "punch_slot": "spidey_anim_100",
+            "breathing_amplitude": 0.012,
+            "breathing_period": 2.7,
+            "parallax_pixels": 5,
+            "ground_size": 8
+          }
         }
       },
       "proposal_elements": [],
-      "proposal_status": "Gemini proposal (unverified)"
+      "proposal_status": "Gemini proposal (unverified)",
+      "actions": [
+        [
+          "Reduced motion",
+          "pref:reduced_motion"
+        ],
+        [
+          "Side fill",
+          "pref:side_fill"
+        ],
+        [
+          "Cursor",
+          "pref:cursor_policy"
+        ],
+        [
+          "Remember cheats",
+          "pref:remember_cheats"
+        ],
+        [
+          "Attract media",
+          "pref:attract_media"
+        ],
+        [
+          "Training scope",
+          "pref:training_scope"
+        ],
+        [
+          "Back",
+          "back"
+        ]
+      ]
     },
     {
       "id": "attract",
@@ -4637,7 +6468,7 @@
               "rect": [
                 102.4,
                 153.6,
-                243.2,
+                192.0,
                 278.4
               ],
               "anchor": "top_left",
@@ -4658,18 +6489,18 @@
               "focus": true
             },
             {
-              "id": "actor",
-              "type": "3d_actor",
+              "id": "gallery_art",
+              "type": "image",
               "rect": [
-                384.0,
-                134.4,
-                172.8,
-                292.8
+                332.8,
+                139.2,
+                211.20000000000002,
+                288.0
               ],
               "anchor": "top_left",
               "z": 2,
               "overlay": false,
-              "asset": "res://assets/characters/spidey.glb",
+              "asset": "res://assets/ui/cb00.png",
               "font": "sp_fnt00",
               "font_size": 18,
               "colours": {
@@ -4680,7 +6511,8 @@
               "evidence": [
                 "remake:frontend-layout-v1"
               ],
-              "confidence": "authored"
+              "confidence": "authored",
+              "focus": false
             }
           ],
           "focus_order": [
@@ -4693,7 +6525,44 @@
             "back": 35,
             "reject": 27
           },
-          "transition_seconds": 0.25
+          "transition_seconds": 0.25,
+          "row_height": 32,
+          "gap": 5,
+          "actor_stage": {
+            "height": 3.8,
+            "camera": [
+              0,
+              1.9,
+              6.5
+            ],
+            "target": [
+              0,
+              1.8,
+              0
+            ],
+            "yaw": -18,
+            "key_rotation": [
+              -40,
+              -30,
+              0
+            ],
+            "fill_rotation": [
+              -15,
+              120,
+              0
+            ],
+            "rim_rotation": [
+              -25,
+              170,
+              0
+            ],
+            "idle_slot": "spidey_anim_0",
+            "punch_slot": "spidey_anim_100",
+            "breathing_amplitude": 0.012,
+            "breathing_period": 2.7,
+            "parallax_pixels": 5,
+            "ground_size": 8
+          }
         },
         "enhanced": {
           "canvas": [
@@ -4768,7 +6637,7 @@
               "rect": [
                 307.2,
                 345.6,
-                729.6,
+                576.0,
                 626.4
               ],
               "anchor": "top_left",
@@ -4789,18 +6658,18 @@
               "focus": true
             },
             {
-              "id": "actor",
-              "type": "3d_actor",
+              "id": "gallery_art",
+              "type": "image",
               "rect": [
-                1152.0,
-                302.4,
-                518.4,
-                658.8
+                998.4000000000001,
+                313.2,
+                633.6,
+                648.0
               ],
               "anchor": "top_left",
               "z": 2,
               "overlay": false,
-              "asset": "res://assets/characters/spidey.glb",
+              "asset": "res://assets/ui/cb00.png",
               "font": "sp_fnt00",
               "font_size": 30,
               "colours": {
@@ -4811,7 +6680,8 @@
               "evidence": [
                 "remake:frontend-layout-v1"
               ],
-              "confidence": "authored"
+              "confidence": "authored",
+              "focus": false
             }
           ],
           "focus_order": [
@@ -4824,11 +6694,54 @@
             "back": 35,
             "reject": 27
           },
-          "transition_seconds": 0.25
+          "transition_seconds": 0.25,
+          "row_height": 68,
+          "gap": 12,
+          "actor_stage": {
+            "height": 3.8,
+            "camera": [
+              0,
+              1.9,
+              6.5
+            ],
+            "target": [
+              0,
+              1.8,
+              0
+            ],
+            "yaw": -18,
+            "key_rotation": [
+              -40,
+              -30,
+              0
+            ],
+            "fill_rotation": [
+              -15,
+              120,
+              0
+            ],
+            "rim_rotation": [
+              -25,
+              170,
+              0
+            ],
+            "idle_slot": "spidey_anim_0",
+            "punch_slot": "spidey_anim_100",
+            "breathing_amplitude": 0.012,
+            "breathing_period": 2.7,
+            "parallax_pixels": 5,
+            "ground_size": 8
+          }
         }
       },
       "proposal_elements": [],
-      "proposal_status": "Gemini proposal (unverified)"
+      "proposal_status": "Gemini proposal (unverified)",
+      "actions": [
+        [
+          "Back",
+          "back"
+        ]
+      ]
     }
   ]
 }
