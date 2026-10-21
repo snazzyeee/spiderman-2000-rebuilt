@@ -127,6 +127,7 @@ func run() -> void:
 				if DisplayServer.get_name() != "headless":
 					await RenderingServer.frame_post_draw
 					var image := root.get_texture().get_image()
+					check(Vector2i(image.get_width(),image.get_height()) == resolution,screen.id+" "+style+" capture matches requested physical resolution "+str(resolution))
 					var filename: String = screen.id+"_"+style+"_"+RenderingServer.get_current_rendering_method()+"_"+str(resolution.x)+"x"+str(resolution.y)+".png"
 					image.save_png("res://staging/validation/menu/"+filename)
 					screenshots.append(filename)

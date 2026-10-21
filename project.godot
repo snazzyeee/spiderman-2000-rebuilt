@@ -13,6 +13,7 @@ Dialogue="*res://src/services/dialogue_service.gd"
 window/size/viewport_width=1920
 window/size/viewport_height=1080
 window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
 
 [rendering]
 renderer/rendering_method="forward_plus"

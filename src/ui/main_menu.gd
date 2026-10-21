@@ -118,6 +118,7 @@ func _style(control: Control) -> void:
 		focus.border_color = Color(e.colours.focus)
 		focus.set_border_width_all(3)
 		focus.border_width_left = 9
+		if view.style == "classic": focus.border_width_top = 1
 		if view.style == "classic" and current_id == "main_menu":
 			normal.bg_color = Color.TRANSPARENT
 			normal.set_border_width_all(0)
@@ -143,6 +144,7 @@ func _add_action(caption: String, action: String) -> void:
 		choice.select(options.find(value))
 		_style(choice)
 		choice.disabled = options.size() < 2
+		if action == "video:resolution" and VideoSettings.get_value("window_mode") == "Fullscreen": choice.disabled = true
 		choice.item_selected.connect(_choice_changed.bind(action,options))
 		row.add_child(choice)
 		panel.add_child(row)
@@ -184,6 +186,7 @@ func _choice_changed(index: int, action: String, options: Array) -> void:
 	if action.begins_with("video:"):
 		VideoSettings.set_value(action.trim_prefix("video:"),options[index])
 		VideoSettings.apply(get_tree())
+		if action == "video:window_mode": show_page(page)
 	elif action == "font": OriginalFonts.set_variant(options[index])
 	elif action == "texture_quality":
 		TextureQuality.set_mode(options[index])

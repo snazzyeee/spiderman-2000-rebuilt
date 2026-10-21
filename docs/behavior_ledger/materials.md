@@ -46,3 +46,13 @@ world environments; menu creates its own environment. No renderer restart is
 required. Viewport/RenderingServer APIs were checked against the official Godot
 class references (viewport scaling/AA/anisotropy and directional shadow atlas).
 These options describe remake rendering, not recovered original behaviour.
+The root viewport expands to the actual output aspect; each LayoutScreen still
+fits/centres its own reference frame. Without expansion a 16:10 window returns a
+16:9 viewport texture, so physical capture dimensions are explicitly gated.
+At the actual 16:10 scale, Classic fallback focus boxes had thick top borders
+which failed the retained contrast sample. Reduce that authored top border to
+one reference pixel, retaining the thick left marker. Do not move the contrast
+sample or lower its 4.5 threshold. Main Classic still uses its separate underline.
+Fullscreen uses the desktop display mode; the resolution selector applies to
+windowed/borderless modes and is disabled in Fullscreen. Exclusive display-mode
+switching is not implemented or claimed. Render scale remains independently live.
