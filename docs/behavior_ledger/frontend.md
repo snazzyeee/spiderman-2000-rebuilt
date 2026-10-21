@@ -27,15 +27,15 @@ generic confirm ID. Actor punch IDs 0xE..0x11 are corroborated by
 Use audio_ids.md exact global bindings, never menu.kat bank order. Private
 WAV frame counts / sample rates resolve move to 0.303333 s, confirm to 1.367 s,
 back to 1.111 s (`staging/reference/frontend-branches-static.txt`). The owner's
-maximum 0.6 s takes precedence over historical clip length: confirm/back stay
-bound but silent. Do not truncate or substitute an unrelated sound.
-
-Evidence `remake:menu-audio-policy-20261021`, confidence **authored**: stop the
-previous menu sound before a new distinct event, reject absent, looping,
-zero-length, non-finite or overlong streams. Initial focus is silent; hover
-grabs focus only when it changes; repeated hover/focus on the same item is
-silent. Confirm and Back use distinct events. Test with synthetic streams;
-private checks require exact native ID resolution but honor duration rejection.
+revised decision (`owner:menu-audio-modes-20261021`, confidence **authored**)
+supersedes the earlier universal cap: Original (default) plays recovered IDs
+at their full original length; unverified sounds still have a 0.6 s cap.
+Short caps all sounds at 0.6 s; Off plays none. Reject looping, empty, absent
+or non-finite streams in every mode. Do not truncate or substitute sounds.
+Persist mode under audio/menu_sounds, apply live even on a failed save (report
+failure), and stop previous menu playback before every new distinct event.
+Initial focus and repeated hover on the same item remain silent. Reject event
+uses recovered global ID 0x1B. Actor reactions use separate recovered IDs.
 
 ## Preliminary design audit (section 3 remains incomplete)
 
@@ -81,3 +81,4 @@ present in staging/reference/menu_original/ at this inspection.
 
 All enhanced placement, motion, contrast, side-fill and safe-area decisions are
 authored presentation requirements; no runtime layout data has been adopted yet.
+

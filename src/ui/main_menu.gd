@@ -132,6 +132,7 @@ func show_page(name_of_page: String) -> void:
 			button("Load Game", func(): launch(false, true), GameSession.load_checkpoint() < 0)
 			button("Back", func(): show_page("Main"))
 		"Options":
+			button("Audio", func(): show_page("Audio"))
 			var font_label := Label.new()
 			font_label.text = "Font variant"
 			panel.add_child(font_label)
@@ -157,6 +158,16 @@ func show_page(name_of_page: String) -> void:
 					settings.save("user://settings.cfg"))
 				panel.add_child(slider)
 			button("Back", func(): show_page("Main"))
+		"Audio":
+			var label := Label.new()
+			label.text = "Menu sounds"
+			panel.add_child(label)
+			var choice := OptionButton.new()
+			for mode in MenuAudio.MODES: choice.add_item(mode)
+			choice.select(MenuAudio.MODES.find(MenuAudio.get_mode()))
+			choice.item_selected.connect(func(index: int): MenuAudio.set_mode(choice.get_item_text(index)))
+			panel.add_child(choice)
+			button("Back", func(): show_page("Options"))
 		"Training":
 			button("Rooftop Practice", func(): launch(true))
 			button("Controls", func(): show_page("Controls"))

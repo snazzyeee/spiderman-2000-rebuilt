@@ -1,14 +1,10 @@
 # Active Godot menu typography
 
-Menu audio now uses the recovered global move/select/back IDs 0x29/0x1F/0x23
-through Dialogue.play_sfx_id (frontend.md and audio_ids.md), replacing the
-unverified menu.kat sample-order guesses. Distinct events stop previous menu
-playback; repeated hover on the focused item is silent. Maximum length is 0.6 s.
-The private select/back clips exceed that maximum (1.367/1.111 s), so those
-events are deliberately silent; the 0.303 s move clip plays. This is an authored
-duration/accessibility policy applied to recovered bindings, not a claim that
-the original game silenced these events. The historical Unity account below
-does not describe this active Godot audio path.
+Menu audio uses recovered global IDs through Dialogue.play_sfx_id. Options >
+Audio > Menu sounds selects Original (default), Short or Off. Original plays
+recovered sounds at full length; Short limits all sounds to 0.6 s; Off is silent.
+A new event stops the previous sound. First focus/repeated hover stay silent.
+Unknown events never guess a sample. See frontend.md and audio_ids.md.
 
 The five root entries remain Game, Options, Training, Special and Gallery.
 Original art currently used: converted shell_bg and the original Spider-Man

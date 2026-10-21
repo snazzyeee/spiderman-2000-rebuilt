@@ -66,6 +66,8 @@ func run() -> void:
 	check(menu.panel.find_children("*", "HSlider", false, false).size() == 3, "three audio bus sliders")
 	menu.show_page("Gallery")
 	check(menu.art.texture != null, "original comic texture loaded")
+	var saved_audio_mode := MenuAudio.get_mode()
+	MenuAudio.set_mode("Short", false)
 	menu.menu_sound("confirm")
 	check(Dialogue.sfx.stream != null, "original menu confirm audio bound")
 	check(Dialogue.resolve_sfx_id(MenuAudio.IDS.confirm) != "", "confirm resolves exact ledger id without bank-order guesses")
@@ -74,6 +76,7 @@ func run() -> void:
 	check(Dialogue.resolve_sfx_id(MenuAudio.IDS.back) != "" and not Dialogue.sfx.playing, "back resolves ledger id and overlong private clip remains silent")
 	menu.menu_sound("move")
 	check(Dialogue.sfx.stream != null, "original menu shift audio bound")
+	MenuAudio.set_mode(saved_audio_mode, false)
 	var configured_music_volume := AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Music"))
 	menu.launch(false)
 	await get_tree().process_frame

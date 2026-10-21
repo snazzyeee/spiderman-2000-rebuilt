@@ -40,6 +40,8 @@ func fixture(frames: int) -> AudioStreamWAV:
 	return stream
 
 func run() -> void:
+	var original_mode := MenuAudio.get_mode()
+	MenuAudio.set_mode("Short", false)
 	var audio := MenuAudio.new()
 	var service := ServiceProbe.new()
 	service.stream = fixture(600)
@@ -72,6 +74,20 @@ func run() -> void:
 	check(not audio.focus(null, service), "invalid focus ignored")
 	a.free()
 	b.free()
+	service.stream = fixture(1367)
+	MenuAudio.set_mode("Original", false)
+	check(audio.request("confirm", service), "Original plays recovered long confirm")
+	check(audio.request("back", service) and service.overlaps == 0, "Original quick confirm then back never overlaps")
+	check(not MenuAudio.allows(service.stream, false), "Original caps sounds without recovered evidence")
+	MenuAudio.set_mode("Off", false)
+	check(not audio.request("move", service) and not service.sfx.active, "Off stops prior sound and plays none")
+	check(not MenuAudio.set_mode("invalid", false) and MenuAudio.get_mode() == "Off", "invalid audio mode rejected")
+	var config_path := "user://menu-audio-test.cfg"
+	check(MenuAudio.set_mode("Short", true, config_path), "menu sound mode persists")
+	var config := ConfigFile.new()
+	config.load(config_path)
+	check(config.get_value("audio", "menu_sounds", "") == "Short", "menu sound mode reloads exactly")
+	DirAccess.remove_absolute(config_path)
 	var dialogue := root.get_node("Dialogue")
 	if not dialogue.registry.is_empty():
 		for event in ["move", "confirm", "back"]:
@@ -81,9 +97,16 @@ func run() -> void:
 			check(key != "" and stream != null, "private "+event+" resolves recovered ledger id")
 			var played := audio.request(event, dialogue)
 			check(played == (stream != null and stream.get_length() > 0.0 and stream.get_length() <= MenuAudio.MAX_SECONDS), "private "+event+" honors duration limit")
+		MenuAudio.set_mode("Original", false)
+		for event in ["confirm", "back"]:
+			check(audio.request(event, dialogue), "private Original "+event+" plays at recovered length")
+			await create_timer(0.05).timeout
 		dialogue.sfx.stop()
+		dialogue.sfx.stream = null
+		await create_timer(0.1).timeout
 	else:
 		skips.append("Private audio absent; native menu identity/duration checks skipped")
+	MenuAudio.set_mode(original_mode, false)
 	var failures := checks.filter(func(row): return not row.passed)
 	var report := {"passed": failures.is_empty(), "checks": checks, "failures": failures, "skips": skips,
 		"renderer": RenderingServer.get_current_rendering_method(), "display_driver": DisplayServer.get_name()}
