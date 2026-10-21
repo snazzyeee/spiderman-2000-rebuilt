@@ -6,6 +6,18 @@ const doc = JSON.parse(fs.readFileSync(path.join(root,'src/ui/layout/screens.jso
 const folder = path.join(root,'staging/validation/menu');
 const out = path.join(folder,'overlays'); fs.mkdirSync(out,{recursive:true});
 (async()=>{
+ const polish=[];
+ for(let row=0;row<2;row++) for(let col=0;col<2;col++) {
+  const style=['classic','enhanced'][row];
+  const name=`main_menu_${style}_forward_plus_1920x1080.png`;
+  const file=path.join(folder,col===0?'polish_before':'',name);
+  if(fs.existsSync(file)) {
+   polish.push({input:await sharp(file).resize(960,540).png().toBuffer(),left:col*960,top:row*574+34});
+   const label=Buffer.from(`<svg width="960" height="34"><rect width="960" height="34" fill="#eee"/><text x="12" y="23" font-family="Segoe UI,sans-serif" font-size="18">${style} / ${col===0?'before':'after (remaining gates in HANDOFF.md)'}</text></svg>`);
+   polish.push({input:label,left:col*960,top:row*574});
+  }
+ }
+ if(polish.length===8) await sharp({create:{width:1920,height:1148,channels:3,background:'#eee'}}).composite(polish).png().toFile(path.join(folder,'polish_before_after.png'));
  let count=0;
  const files=fs.readdirSync(folder).filter(n=>n.endsWith('.png'));
  for(const screen of doc.screens) for(const [style,p] of Object.entries(screen.styles)) {

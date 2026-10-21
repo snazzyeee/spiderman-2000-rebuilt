@@ -55,7 +55,7 @@
               "anchor": "top_left",
               "z": 0,
               "overlay": true,
-              "asset": "",
+              "asset": "res://assets/ui/frontend/menubg.png",
               "font": "sp_fnt00",
               "font_size": 18,
               "colours": {
@@ -64,9 +64,10 @@
                 "focus": "#FFE16B"
               },
               "evidence": [
-                "remake:frontend-layout-v1"
+                "frontend-menubg-binding-20261021"
               ],
-              "confidence": "authored"
+              "confidence": "recovered",
+              "virtual_raster": true
             },
             {
               "id": "art",
@@ -167,7 +168,8 @@
             "breathing_amplitude": 0.012,
             "breathing_period": 2.7,
             "parallax_pixels": 5,
-            "ground_size": 5
+            "ground_size": 5,
+            "contact_shadow": true
           },
           "pillarbox_frame": [
             0.0,
@@ -316,7 +318,8 @@
             "breathing_amplitude": 0.012,
             "breathing_period": 2.7,
             "parallax_pixels": 5,
-            "ground_size": 5
+            "ground_size": 5,
+            "contact_shadow": true
           },
           "pillarbox_frame": [
             240.0,
@@ -368,7 +371,7 @@
               "anchor": "top_left",
               "z": 0,
               "overlay": true,
-              "asset": "",
+              "asset": "res://assets/ui/frontend/menubg.png",
               "font": "sp_fnt00",
               "font_size": 18,
               "colours": {
@@ -377,9 +380,10 @@
                 "focus": "#FFE16B"
               },
               "evidence": [
-                "remake:frontend-layout-v1"
+                "frontend-menubg-binding-20261021"
               ],
-              "confidence": "authored"
+              "confidence": "recovered",
+              "virtual_raster": true
             },
             {
               "id": "art",
@@ -480,7 +484,8 @@
             "breathing_amplitude": 0.012,
             "breathing_period": 2.7,
             "parallax_pixels": 5,
-            "ground_size": 5
+            "ground_size": 5,
+            "contact_shadow": true
           },
           "pillarbox_frame": [
             0.0,
@@ -630,7 +635,8 @@
             "breathing_amplitude": 0.012,
             "breathing_period": 2.7,
             "parallax_pixels": 5,
-            "ground_size": 5
+            "ground_size": 5,
+            "contact_shadow": true
           },
           "pillarbox_frame": [
             240.0,
@@ -684,7 +690,7 @@
               "anchor": "top_left",
               "z": 0,
               "overlay": true,
-              "asset": "",
+              "asset": "res://assets/ui/frontend/menubg.png",
               "font": "sp_fnt00",
               "font_size": 18,
               "colours": {
@@ -693,9 +699,10 @@
                 "focus": "#FFE16B"
               },
               "evidence": [
-                "remake:frontend-layout-v1"
+                "frontend-menubg-binding-20261021"
               ],
-              "confidence": "authored"
+              "confidence": "recovered",
+              "virtual_raster": true
             },
             {
               "id": "heading",
@@ -727,10 +734,10 @@
               "id": "content",
               "type": "menu_list",
               "rect": [
-                102.4,
-                153.6,
-                243.2,
-                278.4
+                200,
+                176,
+                240,
+                160
               ],
               "anchor": "top_left",
               "z": 2,
@@ -744,7 +751,7 @@
                 "focus": "#FFE16B"
               },
               "evidence": [
-                "remake:frontend-layout-v1"
+                "remake:frontend-polish-v1"
               ],
               "confidence": "authored",
               "focus": true
@@ -753,10 +760,10 @@
               "id": "actor",
               "type": "3d_actor",
               "rect": [
-                384.0,
-                134.4,
-                172.8,
-                292.8
+                480,
+                144,
+                128,
+                280
               ],
               "anchor": "top_left",
               "z": 2,
@@ -773,6 +780,33 @@
                 "remake:frontend-layout-v1"
               ],
               "confidence": "authored"
+            },
+            {
+              "id": "input_hints",
+              "type": "text",
+              "rect": [
+                32,
+                438,
+                576,
+                18
+              ],
+              "anchor": "top_left",
+              "z": 2,
+              "overlay": false,
+              "asset": "",
+              "font": "sp_fnt00",
+              "font_size": 14,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-polish-v1"
+              ],
+              "confidence": "authored",
+              "focus": false,
+              "text": "ENTER SELECT / ESC BACK"
             }
           ],
           "focus_order": [
@@ -787,7 +821,7 @@
           },
           "transition_seconds": 0.25,
           "row_height": 32,
-          "gap": 5,
+          "gap": 0,
           "actor_stage": {
             "height": 3.8,
             "camera": [
@@ -821,14 +855,20 @@
             "breathing_amplitude": 0.012,
             "breathing_period": 2.7,
             "parallax_pixels": 5,
-            "ground_size": 5
+            "ground_size": 5,
+            "contact_shadow": true
           },
           "pillarbox_frame": [
             0.0,
             0,
             640.0,
             480
-          ]
+          ],
+          "input_hints": {
+            "keyboard": "ENTER SELECT / ESC BACK",
+            "mouse": "CLICK SELECT / ESC BACK",
+            "gamepad": "A SELECT / B BACK"
+          }
         },
         "enhanced": {
           "canvas": [
@@ -947,6 +987,60 @@
                 "remake:frontend-layout-v1"
               ],
               "confidence": "authored"
+            },
+            {
+              "id": "input_hints",
+              "type": "text",
+              "rect": [
+                96,
+                990,
+                1728,
+                32
+              ],
+              "anchor": "top_left",
+              "z": 2,
+              "overlay": false,
+              "asset": "",
+              "font": "sp_fnt00",
+              "font_size": 22,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-polish-v1"
+              ],
+              "confidence": "authored",
+              "focus": false,
+              "text": "ENTER SELECT / ESC BACK"
+            },
+            {
+              "id": "gallery_teaser",
+              "type": "image",
+              "rect": [
+                1690,
+                450,
+                128,
+                260
+              ],
+              "anchor": "top_left",
+              "z": 2,
+              "overlay": false,
+              "asset": "res://assets/ui/cb00.png",
+              "font": "sp_fnt00",
+              "font_size": 22,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-polish-v1"
+              ],
+              "confidence": "authored",
+              "focus": false,
+              "text": ""
             }
           ],
           "focus_order": [
@@ -995,14 +1089,20 @@
             "breathing_amplitude": 0.012,
             "breathing_period": 2.7,
             "parallax_pixels": 5,
-            "ground_size": 5
+            "ground_size": 5,
+            "contact_shadow": true
           },
           "pillarbox_frame": [
             240.0,
             0,
             1440.0,
             1080
-          ]
+          ],
+          "input_hints": {
+            "keyboard": "ENTER SELECT / ESC BACK",
+            "mouse": "CLICK SELECT / ESC BACK",
+            "gamepad": "A SELECT / B BACK"
+          }
         }
       },
       "proposal_elements": [
@@ -1065,7 +1165,7 @@
               "anchor": "top_left",
               "z": 0,
               "overlay": true,
-              "asset": "",
+              "asset": "res://assets/ui/frontend/menubg.png",
               "font": "sp_fnt00",
               "font_size": 18,
               "colours": {
@@ -1074,9 +1174,10 @@
                 "focus": "#FFE16B"
               },
               "evidence": [
-                "remake:frontend-layout-v1"
+                "frontend-menubg-binding-20261021"
               ],
-              "confidence": "authored"
+              "confidence": "recovered",
+              "virtual_raster": true
             },
             {
               "id": "heading",
@@ -1203,7 +1304,8 @@
             "breathing_amplitude": 0.012,
             "breathing_period": 2.7,
             "parallax_pixels": 5,
-            "ground_size": 5
+            "ground_size": 5,
+            "contact_shadow": true
           },
           "pillarbox_frame": [
             0.0,
@@ -1378,7 +1480,8 @@
             "breathing_amplitude": 0.012,
             "breathing_period": 2.7,
             "parallax_pixels": 5,
-            "ground_size": 5
+            "ground_size": 5,
+            "contact_shadow": true
           },
           "pillarbox_frame": [
             240.0,
@@ -1439,7 +1542,7 @@
               "anchor": "top_left",
               "z": 0,
               "overlay": true,
-              "asset": "",
+              "asset": "res://assets/ui/frontend/menubg.png",
               "font": "sp_fnt00",
               "font_size": 18,
               "colours": {
@@ -1448,9 +1551,10 @@
                 "focus": "#FFE16B"
               },
               "evidence": [
-                "remake:frontend-layout-v1"
+                "frontend-menubg-binding-20261021"
               ],
-              "confidence": "authored"
+              "confidence": "recovered",
+              "virtual_raster": true
             },
             {
               "id": "heading",
@@ -1551,7 +1655,8 @@
             "breathing_amplitude": 0.012,
             "breathing_period": 2.7,
             "parallax_pixels": 5,
-            "ground_size": 5
+            "ground_size": 5,
+            "contact_shadow": true
           },
           "pillarbox_frame": [
             0.0,
@@ -1700,7 +1805,8 @@
             "breathing_amplitude": 0.012,
             "breathing_period": 2.7,
             "parallax_pixels": 5,
-            "ground_size": 5
+            "ground_size": 5,
+            "contact_shadow": true
           },
           "pillarbox_frame": [
             240.0,
@@ -1758,7 +1864,7 @@
               "anchor": "top_left",
               "z": 0,
               "overlay": true,
-              "asset": "",
+              "asset": "res://assets/ui/frontend/menubg.png",
               "font": "sp_fnt00",
               "font_size": 18,
               "colours": {
@@ -1767,9 +1873,10 @@
                 "focus": "#FFE16B"
               },
               "evidence": [
-                "remake:frontend-layout-v1"
+                "frontend-menubg-binding-20261021"
               ],
-              "confidence": "authored"
+              "confidence": "recovered",
+              "virtual_raster": true
             },
             {
               "id": "heading",
@@ -1870,7 +1977,8 @@
             "breathing_amplitude": 0.012,
             "breathing_period": 2.7,
             "parallax_pixels": 5,
-            "ground_size": 5
+            "ground_size": 5,
+            "contact_shadow": true
           },
           "pillarbox_frame": [
             0.0,
@@ -2019,7 +2127,8 @@
             "breathing_amplitude": 0.012,
             "breathing_period": 2.7,
             "parallax_pixels": 5,
-            "ground_size": 5
+            "ground_size": 5,
+            "contact_shadow": true
           },
           "pillarbox_frame": [
             240.0,
@@ -2076,7 +2185,7 @@
               "anchor": "top_left",
               "z": 0,
               "overlay": true,
-              "asset": "",
+              "asset": "res://assets/ui/frontend/menubg.png",
               "font": "sp_fnt00",
               "font_size": 11,
               "colours": {
@@ -2085,9 +2194,10 @@
                 "focus": "#FFE16B"
               },
               "evidence": [
-                "remake:frontend-layout-v1"
+                "frontend-menubg-binding-20261021"
               ],
-              "confidence": "authored"
+              "confidence": "recovered",
+              "virtual_raster": true
             },
             {
               "id": "heading",
@@ -2214,7 +2324,8 @@
             "breathing_amplitude": 0.012,
             "breathing_period": 2.7,
             "parallax_pixels": 5,
-            "ground_size": 5
+            "ground_size": 5,
+            "contact_shadow": true
           },
           "pillarbox_frame": [
             0.0,
@@ -2389,7 +2500,8 @@
             "breathing_amplitude": 0.012,
             "breathing_period": 2.7,
             "parallax_pixels": 5,
-            "ground_size": 5
+            "ground_size": 5,
+            "contact_shadow": true
           },
           "pillarbox_frame": [
             240.0,
@@ -2470,7 +2582,7 @@
               "anchor": "top_left",
               "z": 0,
               "overlay": true,
-              "asset": "",
+              "asset": "res://assets/ui/frontend/menubg.png",
               "font": "sp_fnt00",
               "font_size": 11,
               "colours": {
@@ -2479,9 +2591,10 @@
                 "focus": "#FFE16B"
               },
               "evidence": [
-                "remake:frontend-layout-v1"
+                "frontend-menubg-binding-20261021"
               ],
-              "confidence": "authored"
+              "confidence": "recovered",
+              "virtual_raster": true
             },
             {
               "id": "heading",
@@ -2608,7 +2721,8 @@
             "breathing_amplitude": 0.012,
             "breathing_period": 2.7,
             "parallax_pixels": 5,
-            "ground_size": 5
+            "ground_size": 5,
+            "contact_shadow": true
           },
           "pillarbox_frame": [
             0.0,
@@ -2783,7 +2897,8 @@
             "breathing_amplitude": 0.012,
             "breathing_period": 2.7,
             "parallax_pixels": 5,
-            "ground_size": 5
+            "ground_size": 5,
+            "contact_shadow": true
           },
           "pillarbox_frame": [
             240.0,
@@ -2865,7 +2980,7 @@
               "anchor": "top_left",
               "z": 0,
               "overlay": true,
-              "asset": "",
+              "asset": "res://assets/ui/frontend/menubg.png",
               "font": "sp_fnt00",
               "font_size": 18,
               "colours": {
@@ -2874,9 +2989,10 @@
                 "focus": "#FFE16B"
               },
               "evidence": [
-                "remake:frontend-layout-v1"
+                "frontend-menubg-binding-20261021"
               ],
-              "confidence": "authored"
+              "confidence": "recovered",
+              "virtual_raster": true
             },
             {
               "id": "heading",
@@ -3003,7 +3119,8 @@
             "breathing_amplitude": 0.012,
             "breathing_period": 2.7,
             "parallax_pixels": 5,
-            "ground_size": 5
+            "ground_size": 5,
+            "contact_shadow": true
           },
           "pillarbox_frame": [
             0.0,
@@ -3178,7 +3295,8 @@
             "breathing_amplitude": 0.012,
             "breathing_period": 2.7,
             "parallax_pixels": 5,
-            "ground_size": 5
+            "ground_size": 5,
+            "contact_shadow": true
           },
           "pillarbox_frame": [
             240.0,
@@ -3239,7 +3357,7 @@
               "anchor": "top_left",
               "z": 0,
               "overlay": true,
-              "asset": "",
+              "asset": "res://assets/ui/frontend/menubg.png",
               "font": "sp_fnt00",
               "font_size": 18,
               "colours": {
@@ -3248,9 +3366,10 @@
                 "focus": "#FFE16B"
               },
               "evidence": [
-                "remake:frontend-layout-v1"
+                "frontend-menubg-binding-20261021"
               ],
-              "confidence": "authored"
+              "confidence": "recovered",
+              "virtual_raster": true
             },
             {
               "id": "heading",
@@ -3376,7 +3495,8 @@
             "breathing_amplitude": 0.012,
             "breathing_period": 2.7,
             "parallax_pixels": 5,
-            "ground_size": 5
+            "ground_size": 5,
+            "contact_shadow": true
           },
           "pillarbox_frame": [
             0.0,
@@ -3550,7 +3670,8 @@
             "breathing_amplitude": 0.012,
             "breathing_period": 2.7,
             "parallax_pixels": 5,
-            "ground_size": 5
+            "ground_size": 5,
+            "contact_shadow": true
           },
           "pillarbox_frame": [
             240.0,
@@ -3608,7 +3729,7 @@
               "anchor": "top_left",
               "z": 0,
               "overlay": true,
-              "asset": "",
+              "asset": "res://assets/ui/frontend/menubg.png",
               "font": "sp_fnt00",
               "font_size": 18,
               "colours": {
@@ -3617,9 +3738,10 @@
                 "focus": "#FFE16B"
               },
               "evidence": [
-                "remake:frontend-layout-v1"
+                "frontend-menubg-binding-20261021"
               ],
-              "confidence": "authored"
+              "confidence": "recovered",
+              "virtual_raster": true
             },
             {
               "id": "heading",
@@ -3746,7 +3868,8 @@
             "breathing_amplitude": 0.012,
             "breathing_period": 2.7,
             "parallax_pixels": 5,
-            "ground_size": 5
+            "ground_size": 5,
+            "contact_shadow": true
           },
           "pillarbox_frame": [
             0.0,
@@ -3921,7 +4044,8 @@
             "breathing_amplitude": 0.012,
             "breathing_period": 2.7,
             "parallax_pixels": 5,
-            "ground_size": 5
+            "ground_size": 5,
+            "contact_shadow": true
           },
           "pillarbox_frame": [
             240.0,
@@ -4094,7 +4218,8 @@
             "breathing_amplitude": 0.012,
             "breathing_period": 2.7,
             "parallax_pixels": 5,
-            "ground_size": 5
+            "ground_size": 5,
+            "contact_shadow": true
           },
           "pillarbox_frame": [
             0.0,
@@ -4243,7 +4368,8 @@
             "breathing_amplitude": 0.012,
             "breathing_period": 2.7,
             "parallax_pixels": 5,
-            "ground_size": 5
+            "ground_size": 5,
+            "contact_shadow": true
           },
           "pillarbox_frame": [
             240.0,
@@ -4416,7 +4542,8 @@
             "breathing_amplitude": 0.012,
             "breathing_period": 2.7,
             "parallax_pixels": 5,
-            "ground_size": 5
+            "ground_size": 5,
+            "contact_shadow": true
           },
           "pillarbox_frame": [
             0.0,
@@ -4565,7 +4692,8 @@
             "breathing_amplitude": 0.012,
             "breathing_period": 2.7,
             "parallax_pixels": 5,
-            "ground_size": 5
+            "ground_size": 5,
+            "contact_shadow": true
           },
           "pillarbox_frame": [
             240.0,
@@ -4744,7 +4872,8 @@
             "breathing_amplitude": 0.012,
             "breathing_period": 2.7,
             "parallax_pixels": 5,
-            "ground_size": 5
+            "ground_size": 5,
+            "contact_shadow": true
           },
           "pillarbox_frame": [
             0.0,
@@ -4893,7 +5022,8 @@
             "breathing_amplitude": 0.012,
             "breathing_period": 2.7,
             "parallax_pixels": 5,
-            "ground_size": 5
+            "ground_size": 5,
+            "contact_shadow": true
           },
           "pillarbox_frame": [
             240.0,
@@ -5066,7 +5196,8 @@
             "breathing_amplitude": 0.012,
             "breathing_period": 2.7,
             "parallax_pixels": 5,
-            "ground_size": 5
+            "ground_size": 5,
+            "contact_shadow": true
           },
           "pillarbox_frame": [
             0.0,
@@ -5215,7 +5346,8 @@
             "breathing_amplitude": 0.012,
             "breathing_period": 2.7,
             "parallax_pixels": 5,
-            "ground_size": 5
+            "ground_size": 5,
+            "contact_shadow": true
           },
           "pillarbox_frame": [
             240.0,
@@ -5264,7 +5396,7 @@
               "anchor": "top_left",
               "z": 0,
               "overlay": true,
-              "asset": "",
+              "asset": "res://assets/ui/frontend/menubg.png",
               "font": "sp_fnt00",
               "font_size": 18,
               "colours": {
@@ -5273,9 +5405,10 @@
                 "focus": "#FFE16B"
               },
               "evidence": [
-                "remake:frontend-layout-v1"
+                "frontend-menubg-binding-20261021"
               ],
-              "confidence": "authored"
+              "confidence": "recovered",
+              "virtual_raster": true
             },
             {
               "id": "art",
@@ -5375,7 +5508,8 @@
             "breathing_amplitude": 0.012,
             "breathing_period": 2.7,
             "parallax_pixels": 5,
-            "ground_size": 5
+            "ground_size": 5,
+            "contact_shadow": true
           },
           "pillarbox_frame": [
             0.0,
@@ -5523,7 +5657,8 @@
             "breathing_amplitude": 0.012,
             "breathing_period": 2.7,
             "parallax_pixels": 5,
-            "ground_size": 5
+            "ground_size": 5,
+            "contact_shadow": true
           },
           "pillarbox_frame": [
             240.0,
@@ -5576,7 +5711,7 @@
               "anchor": "top_left",
               "z": 0,
               "overlay": true,
-              "asset": "",
+              "asset": "res://assets/ui/frontend/menubg.png",
               "font": "sp_fnt00",
               "font_size": 18,
               "colours": {
@@ -5585,9 +5720,10 @@
                 "focus": "#FFE16B"
               },
               "evidence": [
-                "remake:frontend-layout-v1"
+                "frontend-menubg-binding-20261021"
               ],
-              "confidence": "authored"
+              "confidence": "recovered",
+              "virtual_raster": true
             },
             {
               "id": "heading",
@@ -5688,7 +5824,8 @@
             "breathing_amplitude": 0.012,
             "breathing_period": 2.7,
             "parallax_pixels": 5,
-            "ground_size": 5
+            "ground_size": 5,
+            "contact_shadow": true
           },
           "pillarbox_frame": [
             0.0,
@@ -5837,7 +5974,8 @@
             "breathing_amplitude": 0.012,
             "breathing_period": 2.7,
             "parallax_pixels": 5,
-            "ground_size": 5
+            "ground_size": 5,
+            "contact_shadow": true
           },
           "pillarbox_frame": [
             240.0,
@@ -5894,7 +6032,7 @@
               "anchor": "top_left",
               "z": 0,
               "overlay": true,
-              "asset": "",
+              "asset": "res://assets/ui/frontend/menubg.png",
               "font": "sp_fnt00",
               "font_size": 18,
               "colours": {
@@ -5903,9 +6041,10 @@
                 "focus": "#FFE16B"
               },
               "evidence": [
-                "remake:frontend-layout-v1"
+                "frontend-menubg-binding-20261021"
               ],
-              "confidence": "authored"
+              "confidence": "recovered",
+              "virtual_raster": true
             },
             {
               "id": "heading",
@@ -6032,7 +6171,8 @@
             "breathing_amplitude": 0.012,
             "breathing_period": 2.7,
             "parallax_pixels": 5,
-            "ground_size": 5
+            "ground_size": 5,
+            "contact_shadow": true
           },
           "pillarbox_frame": [
             0.0,
@@ -6207,7 +6347,8 @@
             "breathing_amplitude": 0.012,
             "breathing_period": 2.7,
             "parallax_pixels": 5,
-            "ground_size": 5
+            "ground_size": 5,
+            "contact_shadow": true
           },
           "pillarbox_frame": [
             240.0,
@@ -6265,7 +6406,7 @@
               "anchor": "top_left",
               "z": 0,
               "overlay": true,
-              "asset": "",
+              "asset": "res://assets/ui/frontend/menubg.png",
               "font": "sp_fnt00",
               "font_size": 11,
               "colours": {
@@ -6274,9 +6415,10 @@
                 "focus": "#FFE16B"
               },
               "evidence": [
-                "remake:frontend-layout-v1"
+                "frontend-menubg-binding-20261021"
               ],
-              "confidence": "authored"
+              "confidence": "recovered",
+              "virtual_raster": true
             },
             {
               "id": "heading",
@@ -6403,7 +6545,8 @@
             "breathing_amplitude": 0.012,
             "breathing_period": 2.7,
             "parallax_pixels": 5,
-            "ground_size": 5
+            "ground_size": 5,
+            "contact_shadow": true
           },
           "pillarbox_frame": [
             0.0,
@@ -6578,7 +6721,8 @@
             "breathing_amplitude": 0.012,
             "breathing_period": 2.7,
             "parallax_pixels": 5,
-            "ground_size": 5
+            "ground_size": 5,
+            "contact_shadow": true
           },
           "pillarbox_frame": [
             240.0,
@@ -6644,7 +6788,7 @@
               "anchor": "top_left",
               "z": 0,
               "overlay": true,
-              "asset": "",
+              "asset": "res://assets/ui/frontend/menubg.png",
               "font": "sp_fnt00",
               "font_size": 11,
               "colours": {
@@ -6653,9 +6797,10 @@
                 "focus": "#FFE16B"
               },
               "evidence": [
-                "remake:frontend-layout-v1"
+                "frontend-menubg-binding-20261021"
               ],
-              "confidence": "authored"
+              "confidence": "recovered",
+              "virtual_raster": true
             },
             {
               "id": "heading",
@@ -6782,7 +6927,8 @@
             "breathing_amplitude": 0.012,
             "breathing_period": 2.7,
             "parallax_pixels": 5,
-            "ground_size": 5
+            "ground_size": 5,
+            "contact_shadow": true
           },
           "pillarbox_frame": [
             0.0,
@@ -6957,7 +7103,8 @@
             "breathing_amplitude": 0.012,
             "breathing_period": 2.7,
             "parallax_pixels": 5,
-            "ground_size": 5
+            "ground_size": 5,
+            "contact_shadow": true
           },
           "pillarbox_frame": [
             240.0,
@@ -7031,7 +7178,7 @@
               "anchor": "top_left",
               "z": 0,
               "overlay": true,
-              "asset": "",
+              "asset": "res://assets/ui/frontend/menubg.png",
               "font": "sp_fnt00",
               "font_size": 18,
               "colours": {
@@ -7040,9 +7187,10 @@
                 "focus": "#FFE16B"
               },
               "evidence": [
-                "remake:frontend-layout-v1"
+                "frontend-menubg-binding-20261021"
               ],
-              "confidence": "authored"
+              "confidence": "recovered",
+              "virtual_raster": true
             },
             {
               "id": "heading",
@@ -7195,7 +7343,8 @@
             "breathing_amplitude": 0.012,
             "breathing_period": 2.7,
             "parallax_pixels": 5,
-            "ground_size": 5
+            "ground_size": 5,
+            "contact_shadow": true
           },
           "pillarbox_frame": [
             0.0,
@@ -7396,7 +7545,8 @@
             "breathing_amplitude": 0.012,
             "breathing_period": 2.7,
             "parallax_pixels": 5,
-            "ground_size": 5
+            "ground_size": 5,
+            "contact_shadow": true
           },
           "pillarbox_frame": [
             240.0,

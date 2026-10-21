@@ -128,10 +128,10 @@ func _build_actor(container: SubViewportContainer, path: String) -> void:
 	var plane := PlaneMesh.new()
 	plane.size = Vector2.ONE*float(config.ground_size)
 	floor_mesh.mesh = plane
-	var material := StandardMaterial3D.new()
-	material.albedo_color = Color("05050a")
-	material.roughness = .9
+	var material := ShaderMaterial.new()
+	material.shader = load("res://src/ui/layout/contact_shadow.gdshader")
 	floor_mesh.material_override = material
+	floor_mesh.position.y = .01
 	actor_root.add_child(floor_mesh)
 
 func react() -> void:
@@ -149,6 +149,7 @@ func _process(delta: float) -> void:
 		if FrontendSettings.get_value("reduced_motion") != "On":
 			offset = (get_global_mouse_position()/get_viewport_rect().size-Vector2(.5,.5))*float(layout.actor_stage.parallax_pixels)
 		nodes.canvas_backdrop.material.set_shader_parameter("drift",offset)
+		nodes.canvas_backdrop.material.set_shader_parameter("motion_time",0.0 if FrontendSettings.get_value("reduced_motion") == "On" else clock_time)
 	if not visual: return
 	var reduced := FrontendSettings.get_value("reduced_motion") == "On"
 	if animation: animation.speed_scale = 0.0 if reduced else 1.0

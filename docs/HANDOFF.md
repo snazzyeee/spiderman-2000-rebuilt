@@ -1,5 +1,41 @@
 # Handoff — scoped frontend run, 2026-10-21
 
+## Current polish run (supersedes implementation status below)
+
+Section 0 synced clean at 5df8e54. Section 1 is a passing regression foundation,
+but its full visual acceptance is **incomplete**: the logo candidate still needs
+background/occlusion correction and filled high-resolution reconstruction;
+caption focus halftone/pop and exact menu-string width QA remain. Existing font
+tests still check converted advances exactly. ASCII device hints are implemented,
+not original glyph art. Classic uses an authored underline in addition to colour
+to preserve the mandatory non-colour focus gate. No gate was dropped.
+
+menubg **was found and independently bound**: one frame in shell.psx points to
+texture index 88; the texture header at 327388 declares index 88. Classic now
+uses it with the recovered virtual-frame mapping. See frontend ledger for exact
+CRC/hash and regeneration. Other changes: centered Classic list, transparent
+normal item styles, authored Enhanced skyline/caption plates, radial contact
+shadow, last-device hints and rotating comic teaser. Full original Title is kept.
+
+Section-1 gate: staging/validation/regression/polish-menubg/; Python **52 reference
++ 22 pipeline = 74**. Per headless / real Vulkan Forward+ / real Vulkan Mobile:
+smoke **51/51/51**, traversal **150/150/150**, fonts **39/39/39**, menu audio
+**32/32/32**, layout **58/58/58**, design **676/803/803**, loading **7/7/7**;
+zero engine/script/shader errors. New tests cover synthetic animation metadata,
+segmentation boundaries and correction-mask preservation, centering and hints.
+
+Private review: assets/ui/frontend/title_logo_mask.png (existing masks win),
+staging/validation/menu/logo-review/ (candidate alpha zooms/report),
+staging/validation/menu/polish_before/ (preserved input captures),
+staging/validation/menu/polish_before_after.png, refreshed screenshot/contact-sheet
+and overlays folders. Tracked wireframes: docs/design/wireframes/index.html.
+Regenerate resource with tools/reference/find_frontend_background.py, candidate
+with tools/pipeline/extract_title_logo.py, and diagrams/overlays with
+tools/design/render_wireframes.py --overlays. No media or Gemini files tracked.
+
+The sections below describe the preceding run; this run's final section will
+replace these provisional counts/HEAD when later milestones are complete.
+
 ## HEAD and scope
 
 Branch main; implementation HEAD: `3ebb7e39f37025ca6ccd9471327df411a9365a5a`.

@@ -195,3 +195,74 @@ would be visually inert. Reduced motion restores rest scale/position. Explicit
 private checks exercise relative rig movement, stillness, punch availability,
 one-shot cue and return to idle. No original animation semantics are inferred
 from a generic crouch pose; slots are selected by the recovered numeric names.
+
+## Polish investigation, 2026-10-21
+
+`frontend-resource-search-20261021` — high confidence, bounded data evidence:
+the inspected PKR has 2,448 members and no member named menubg. Seven shell/menu
+members were extracted with CRC checks (each at most 4 MiB, aggregate 32 MiB
+budget). The ASCII name occurs at byte 840 in shell.psx (CRC d155391e), at
+480804 in shell.seq, and at 1395848 in the fingerprint-gated executable. No
+original program was run. Reproduce with find_frontend_background.py; private
+search.json includes member hashes, offsets and bounds. The existing pinned
+decoder extracts 89 shell textures and 8 Shell_dc textures. The last shell
+texture is the oval backdrop, 512 square; this is a different raster from the
+640x480 shell_bg PNG. A name hit alone does not establish its texture binding.
+
+`frontend-menubg-frame-20261021` — medium confidence, static data plus decomp
+f8a0392, spool.cpp PreProcessAnimPacket and bit.h SAnimFrame: the name record at
+840 has a single frame, with texture index 88. The packet describes frames
+using two words and resolves texture indices through a texture table. The
+decoder's final shell texture is a strong candidate, but its output ordering
+has not been independently joined to that index. Therefore the resource name
+is located, but the exact decoded binding is still unverified; do not call the
+candidate a recovered animation or claim it animates. Shell_DrawBackground's
+512x240 draw remains the previously recovered fact.
+
+`frontend-title-occlusion-20261021` — high confidence, private Title.png visual
+inspection (source SHA in logo-review/report.json): a red hand crosses the
+lettering. Blue/neutral segmentation can remove visible red pixels but cannot
+recover hidden lettering. extract_title_logo.py writes a private candidate,
+preserves existing correction masks, traces alpha with the bounded in-repo font
+tracer, and saves review crops. It does not certify the clean-logo gate and the
+candidate is not installed. No pinned Potrace executable is present; previous
+fonts used the in-repo pixel boundary tracer, not Potrace.
+
+`remake:frontend-polish-v1` — authored policy: until the menubg texture binding
+is verified, use the owner's best-available shell_bg backdrop in Classic with
+aspect preserved. Main-list horizontal origin follows the recovered x=256
+virtual centre, mapped to x=320 in the 640x480 presentation. Its line separation
+of 16 virtual pixels is authored because the main caller is not recovered;
+the five-item origin is (240 - (5-1)*16)/2. The 32-pixel row boxes start at that
+mapped origin. The actor occupies a separate right region. Remove the lit
+ground mesh in favour of an authored unlit radial-alpha contact shadow. Enhanced
+skyline/halftone treatment and palette choices are authored. Retain the original
+full Title image for its separate PRESS ENTER screen.
+
+Authored composition policy in this pass: main-menu input hints change between
+keyboard, mouse and gamepad labels using the last input event. Enhanced's right
+edge contains a privately loaded comic gallery teaser, cycling every ten seconds
+unless reduced motion is enabled. These are remake navigation aids, not recovered
+original strings or unlock rules. Caption plates use dark palette-inspired ink,
+an offset shadow and skew. Existing menu action order and evidence grading remain.
+Classic main items have transparent text-only normal styles. A thin authored
+focus underline supplements the colour change to retain the existing mandatory
+non-colour focus gate; the exact original highlight remains unverified. This is
+an explicit deviation from the requested colour-only fallback, which conflicts
+with that retained accessibility gate. QA now accepts either a thicker left edge
+or a thicker underline as shape distinction; it still requires visible geometry.
+
+`frontend-menubg-binding-20261021` — high confidence, supersedes the unresolved
+join above: independent bounded parsing of shell.psx's animation packet finds
+ten named animation records; menubg has exactly one frame, offset word zero,
+texture index 88. The texture header at byte 327388 independently declares index
+88, a 256-entry palette, width 512 and height 512. These index fields establish
+the join without relying on output ordering. The pinned decoder's PNG at that
+header offset has SHA-256
+110aba532067a622e2ff85d46b331572715353a50d5290347ff3875aba7f1f37.
+find_frontend_background.py now verifies the packet bounds, frame identity,
+header join and decoder hash, then writes assets/ui/frontend/menubg.png privately.
+The resource IS found and is a single static frame, despite the animation API.
+Classic uses that entire texture mapped to the recovered 512x240 virtual draw,
+then the 4:3 presentation. This original raster mapping intentionally changes
+its square source aspect; the shell_bg fallback is no longer needed here.

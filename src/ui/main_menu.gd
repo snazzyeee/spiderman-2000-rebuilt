@@ -19,6 +19,8 @@ var previous_page := "Main"
 var loading := false
 var pending_scene := ""
 var load_requested := false
+var last_device := "keyboard"
+var teaser_seconds := 0.0
 
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
@@ -85,6 +87,8 @@ func show_page(name_of_page: String) -> void:
 				control.grab_focus()
 				break
 	if id == "gallery_menu" or id == "attract": show_art()
+	_update_hints()
+	_update_teaser()
 	view.modulate.a = 0.0
 	transition = create_tween()
 	transition.tween_property(view,"modulate:a",1.0,.1 if FrontendSettings.get_value("reduced_motion") == "On" else float(view.layout.transition_seconds))
@@ -100,11 +104,25 @@ func _style(control: Control) -> void:
 		normal.bg_color = Color.TRANSPARENT if view.layout.get("picture_action",false) else Color(e.colours.backdrop)
 		normal.border_color = Color(.36,.36,.43)
 		normal.set_border_width_all(1)
+		if view.style == "enhanced" and not view.layout.get("picture_action",false):
+			normal.bg_color = Color("17182b")
+			normal.border_color = Color("030309")
+			normal.set_border_width_all(4)
+			normal.skew = Vector2(.04,0)
+			normal.shadow_color = Color(0,0,0,.8)
+			normal.shadow_size = 4
+			normal.shadow_offset = Vector2(5,5)
 		control.add_theme_stylebox_override("normal",normal)
 		var focus := normal.duplicate() as StyleBoxFlat
 		focus.border_color = Color(e.colours.focus)
 		focus.set_border_width_all(3)
 		focus.border_width_left = 9
+		if view.style == "classic" and current_id == "main_menu":
+			normal.bg_color = Color.TRANSPARENT
+			normal.set_border_width_all(0)
+			focus.bg_color = Color.TRANSPARENT
+			focus.set_border_width_all(0)
+			focus.border_width_bottom = 2
 		control.add_theme_stylebox_override("focus",focus)
 
 func _add_action(caption: String, action: String) -> void:
@@ -191,6 +209,14 @@ func show_art() -> void:
 	var path := "res://assets/ui/cb%02d.png" % gallery_index
 	art.texture = load(path) if ResourceLoader.exists(path) else null
 	art.visible = art.texture != null
+func _update_hints() -> void:
+	if not view or not view.nodes.has("input_hints"): return
+	var hints: Dictionary = view.layout.input_hints
+	view.nodes.input_hints.text = str(hints[last_device])
+func _update_teaser() -> void:
+	if not view or not view.nodes.has("gallery_teaser"): return
+	var path := "res://assets/ui/cb%02d.png" % gallery_index
+	view.nodes.gallery_teaser.texture = load(path) if ResourceLoader.exists(path) else null
 func launch(practice: bool, resume_game: bool = false) -> void:
 	GameSession.training = practice
 	GameSession.resume_checkpoint = GameSession.load_checkpoint() if resume_game else -1
@@ -223,6 +249,10 @@ func exit_attract() -> void:
 	idle_seconds = 0.0
 	show_page(previous_page)
 func _input(event: InputEvent) -> void:
+	if event is InputEventMouseMotion or event is InputEventMouseButton: last_device = "mouse"
+	elif event is InputEventKey: last_device = "keyboard"
+	elif event is InputEventJoypadButton or (event is InputEventJoypadMotion and absf(event.axis_value) > .2): last_device = "gamepad"
+	_update_hints()
 	if event is InputEventMouseMotion:
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	elif event is InputEventKey or event is InputEventJoypadButton or event is InputEventJoypadMotion:
@@ -241,6 +271,12 @@ func _unhandled_input(event: InputEvent) -> void:
 		transition.kill()
 		view.modulate.a = 1.0
 func _process(delta: float) -> void:
+	if current_id == "main_menu" and FrontendSettings.get_value("reduced_motion") != "On":
+		teaser_seconds += delta
+		if teaser_seconds >= 10.0:
+			teaser_seconds = fmod(teaser_seconds,10.0)
+			gallery_index = (gallery_index+1)%32
+			_update_teaser()
 	if loading:
 		if not load_requested: return
 		var status := ResourceLoader.load_threaded_get_status(pending_scene)

@@ -61,3 +61,24 @@ unverified and are omitted. The retained low-level direct-launch API supports
 the existing lifecycle smoke gate, while a new synthetic scene verifies the
 asynchronous user path. Original HUD code is unchanged; HUD/comic/death proposal
 claims and gaps are recorded in the ledger and claim audit.
+
+Polish pass: Classic main items are horizontally centred, with transparent
+normal styles and an authored focus underline preserving the non-colour focus
+gate. The line separation is authored; the centring formula is recovered.
+Classic now uses the CRC-checked shell.psx menubg texture, independently joined
+through frame/header index 88. It contains one frame, not an animated sequence.
+Enhanced's skyline/halftone, ink caption plates, radial contact shadow, input
+device hint labels and rotating right-edge comic teaser are authored. Private
+comic and rig art remain original. No additional font tracking is introduced.
+
+The logo cut-out remains blocked: a colour/edge mask candidate and private
+alpha crops exist, but the hand occludes source lettering and the automatic
+mask is not certified free of background. The old cropped header remains live
+until the candidate passes that gate. The script preserves any existing mask
+so a correction is never silently overwritten. Its high-resolution previews
+are raster enlargements; traced alpha is exported separately, and a filled
+high-resolution vector reconstruction is still outstanding. Focus halftone/
+scale-pop and exact rendered-width QA are also outstanding; the enhanced plates
+currently have ink borders/skew/shadows only. Hint labels are ASCII controls,
+not recovered device glyph art. These limitations prevent calling the entire
+owner polish acceptance complete even when the retained regression suites pass.

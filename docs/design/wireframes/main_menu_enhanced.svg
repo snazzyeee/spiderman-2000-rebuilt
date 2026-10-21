@@ -452,6 +452,16 @@
 <text x="1160.0" y="335.4" fill="#253039">1152,302.4 518.4×658.8</text>
 <text x="1160.0" y="350.4" fill="#253039">sp_fnt00 30 px | z 2</text>
 </g>
+<g><rect x="96" y="990" width="1728" height="32" fill="#6651a5" fill-opacity="0.06" stroke="#2361a1" stroke-width="1.5" stroke-dasharray="2 4"/>
+<text x="104" y="1008" fill="#253039">input_hints | text</text>
+<text x="104" y="1023" fill="#253039">96,990 1728×32</text>
+<text x="104" y="1038" fill="#253039">sp_fnt00 22 px | z 2</text>
+</g>
+<g><rect x="1690" y="450" width="128" height="260" fill="#7c8c97" fill-opacity="0.06" stroke="#2361a1" stroke-width="1.5" stroke-dasharray="2 4"/>
+<text x="1698" y="468" fill="#253039">gallery_teaser | image</text>
+<text x="1698" y="483" fill="#253039">1690,450 128×260</text>
+<text x="1698" y="498" fill="#253039">sp_fnt00 22 px | z 2</text>
+</g>
 <circle cx="1020.8" cy="379.6" r="10" fill="#fff" stroke="#333"/><text x="1017.8" y="382.6" fill="#222">1</text>
 <path d="M1020.8,379.6 L1020.8,459.6" stroke="#333" marker-end="url(#arrow)"/>
 <circle cx="1020.8" cy="459.6" r="10" fill="#fff" stroke="#333"/><text x="1017.8" y="462.6" fill="#222">2</text>

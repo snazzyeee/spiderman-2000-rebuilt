@@ -30,11 +30,15 @@ func run() -> void:
 	await process_frame
 	await process_frame
 	menu.show_page("Main")
+	var mouse := InputEventMouseMotion.new()
+	menu._input(mouse)
+	check(menu.view.nodes.input_hints.text == menu.view.layout.input_hints.mouse,"mouse input selects mouse hints")
 	var event := InputEventJoypadButton.new()
 	event.button_index = JOY_BUTTON_DPAD_DOWN
 	event.pressed = true
 	Input.parse_input_event(event)
 	await process_frame
+	check(menu.view.nodes.input_hints.text == menu.view.layout.input_hints.gamepad,"gamepad input selects gamepad hints")
 	event.pressed = false
 	Input.parse_input_event(event)
 	await process_frame
@@ -49,6 +53,7 @@ func run() -> void:
 	var key := InputEventKey.new();key.keycode=KEY_SPACE;key.pressed=true
 	menu._input(key)
 	check(not menu.attract and menu.page == "Main","attract exits on input and restores prior page")
+	check(menu.view.nodes.input_hints.text == menu.view.layout.input_hints.keyboard,"keyboard input selects keyboard hints")
 	FrontendSettings.set_value("reduced_motion","On",false)
 	menu.show_page("Main")
 	check(menu.transition != null,"reduced motion retains skippable transition")
@@ -85,6 +90,8 @@ func run() -> void:
 				var content: Control = menu.panel
 				var authored: Array = menu.view.layout.elements.filter(func(row): return row.id == "content")[0].rect
 				var expected := Vector2(authored[2],authored[3])
+				if screen.id == "main_menu" and style == "classic":
+					check(absf(content.get_global_rect().get_center().x-frame.get_center().x) <= 2.0,"classic main list centre within 2 pixels "+str(resolution))
 				check(content.size.x <= expected.x+.5 and content.size.y <= expected.y+.5,screen.id+" "+style+" "+str(resolution)+" controls fit authored region")
 				var safe_text := true
 				var no_overlap := true
@@ -117,7 +124,7 @@ func run() -> void:
 					if c is Button:
 						var focus := c.get_theme_stylebox("focus") as StyleBoxFlat
 						var normal := c.get_theme_stylebox("normal") as StyleBoxFlat
-						check(focus != null and normal != null and focus.border_width_left > normal.border_width_left,screen.id+" "+style+" focus has shape distinction")
+						check(focus != null and normal != null and (focus.border_width_left > normal.border_width_left or focus.border_width_bottom > normal.border_width_bottom),screen.id+" "+style+" focus has shape distinction")
 	if DisplayServer.get_name() != "headless":
 		root.size = Vector2i(1920,1080)
 		FrontendSettings.set_value("style","enhanced",false)
