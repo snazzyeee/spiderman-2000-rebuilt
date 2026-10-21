@@ -82,3 +82,61 @@ present in staging/reference/menu_original/ at this inspection.
 All enhanced placement, motion, contrast, side-fill and safe-area decisions are
 authored presentation requirements; no runtime layout data has been adopted yet.
 
+## Layout contract and claim disposition (2026-10-21)
+
+Evidence `remake:frontend-layout-v1`, confidence **authored**: screens.json is
+an explicit presentation plan, not proof of original rectangles/page flow.
+Classic uses a 640x480 presentation of the recovered 512x240 coordinate frame;
+enhanced uses 1920x1080. Store every pixel rectangle, asset path, font role,
+colour, focus/back/sound route and per-element provenance here. Unknown content
+is an empty outlined proposal region; no invented original strings or unlocks.
+The main actor occupies the right region, menu the left, with no intersection.
+Screen/style layout choices and modern controls are authored. Normal font is
+sp_fnt00; small text sp_fnt02 per fonts.md's authored role policy. Specialized
+font_big is not rendered until its mapping is recovered.
+
+Disposition of every Gemini element is in docs/design/claim_audit.md; raw
+schema/rectangle/asset checks go privately to proposal-audit.json. A valid
+normalized rectangle does not verify historical placement. Generic helper
+citations support only those helpers; all screen-specific rectangles, content,
+flow and role inferences remain Gemini proposal (unverified). Archive/resource
+names are not filesystem paths. Missing resources stay disabled, not guessed.
+
+Owner-question defaults: authored wings (switch to black pillarbox), hybrid
+cursor (switch to always visible), remember accepted cheats (switch off;
+cheat activation remains disabled pending verified table), character/comic
+attract carousel (switch to comics only), phased training (switch to practice
+only). Never expose unconverted challenges as working. Attract delay 60 s,
+transition <=0.35 s, reduced motion disables parallax/breathing/focus pulses.
+Persist preferences in frontend settings. Main navigation remains the five
+existing entries in order; unsupported original branches have proposal regions.
+
+## Private art conversion and in-game evidence
+
+Evidence `pkr:frontend-art-inventory-20261021`, confidence **recovered** for
+archive identity/CRC only: data/logo.rle (CRC bd62c269,98090 bytes), Title.bmp
+(CRC 009b2fa6,123960 bytes), LegalPC.bmp (CRC a4ca41b9,123958 bytes), L1Cov.bmp
+(CRC 0dbe6db6,123958 bytes). Level cover family L*Cov.bmp is extracted by exact
+archive-member names, CRC/length checked before decode. No image meaning or
+layout is inferred from filename. Use the existing SHA-pinned MIT multitool
+1.3.4 to decode only these bounded (<4 MiB/member) inputs, with a 30 s timeout;
+verify PNG dimensions <=4096 and pixel budget <=16 Mi pixels. Keep originals,
+PNGs and hash/CRC provenance private. This relies on the pinned decoder; it does
+not claim an independently recovered RLE codec. Title and logo remain separate
+assets; inspect them before choosing the header path.
+
+Evidence `decomp:panel.cpp#Panel_Init@f8a0392 (@Ok, Matching)`, confidence
+**recovered**: initializes Sp, Compass and Webcart animation resources.
+Panel_SetStretchedScreenCoords is a generic caller-coordinate transformation;
+it does not prove the proposed health-meter shape or its normalized rectangle.
+Panel_Display/DisplayCompass/DisplayHealthBar/DisplayTimer are TODO stubs:
+HUD rendering positions, colour thresholds, flashing, wound thresholds and
+format strings remain Gemini proposal (unverified). Panel_CreateCompass stores
+a fixed-point-adjusted world target; this alone does not prove its screen slot.
+Panel_CreateHealthBar selects encounter textures for the listed body types;
+this does not prove normalized bar geometry. No HUD rewrite is authorized here.
+Pause uses authored existing Resume/recovery/Main Menu actions through the
+layout loader while preserving cinematic transport locks. Loading uses private
+cover art during the asynchronous scene request; hints/spinner behaviour remain
+unverified and are omitted. Comic intro/death screen wording, timing and flow
+from the proposals are unverified and not adopted.

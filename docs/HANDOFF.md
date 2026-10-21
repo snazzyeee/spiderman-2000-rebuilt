@@ -198,3 +198,23 @@ Next three tasks, in requested section order:
    Then section 6 textures/fonts/display, 7 human transcript review, 8 campaign/
    cheats and all ordered section 9 carryovers. Do not jump to animation renders
    or edit staging/gemini/ except the explicitly authorized future renders folder.
+
+## Current scoped run: sections 0–2
+
+Synced clean at 83a6822. Section 1 committed 0fc26f7; CI green:
+https://github.com/snazzyeee/spiderman-2000-revamp/actions/runs/39518623846.
+Original/Short/Off now persisted; recovered sounds play full length by default.
+Final sound-mode gate: 50+14 Python; each target 49 smoke,150 traversal,39 fonts,
+32 audio, zero engine/script errors. Headless audio tests allow mixer processing
+before replacing/stopping streams; failed teardown evidence preserved.
+
+Section 2: 27 frontend +21 in-game element claims audited in
+ docs/design/claim_audit.md, raw schema/rect/asset report private at
+ staging/validation/menu/proposal-audit.json (1 frontend and 8 in-game unresolved
+ asset identities). All source-specific screen claims remain Gemini proposal
+ unless the ledger explicitly recovers the helper property; authored rectangles
+ do not promote original content. Layout data represents all 17 proposal screens
+ plus training/audio/accessibility/attract (21 total), both styles, and isolates
+ actor/menu regions. Unknown labels/unlocks are not adopted. Preferences have
+ validated persisted switchable choices; UI integration follows in section 4.
+Owner-question defaults and qualifications are recorded in frontend.md.

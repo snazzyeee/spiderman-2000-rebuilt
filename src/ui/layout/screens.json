@@ -1,0 +1,4834 @@
+{
+  "schema_version": 1,
+  "default_style": "enhanced",
+  "preferences": {
+    "side_fill": [
+      "Wings",
+      "Black"
+    ],
+    "cursor_policy": [
+      "Hybrid",
+      "Visible"
+    ],
+    "remember_cheats": [
+      "On",
+      "Off"
+    ],
+    "attract_media": [
+      "Carousel",
+      "Comics"
+    ],
+    "training_scope": [
+      "Phased",
+      "Practice"
+    ]
+  },
+  "screens": [
+    {
+      "id": "boot_legal",
+      "styles": {
+        "classic": {
+          "canvas": [
+            640,
+            480
+          ],
+          "virtual_frame": [
+            512,
+            240
+          ],
+          "presentation_aspect": [
+            4,
+            3
+          ],
+          "safe_title": 0.9,
+          "safe_action": 0.93,
+          "elements": [
+            {
+              "id": "canvas_backdrop",
+              "type": "image",
+              "rect": [
+                0,
+                0,
+                640,
+                480
+              ],
+              "anchor": "top_left",
+              "z": 0,
+              "overlay": true,
+              "asset": "",
+              "font": "sp_fnt00",
+              "font_size": 18,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored"
+            },
+            {
+              "id": "art",
+              "type": "image",
+              "rect": [
+                115.2,
+                28.8,
+                409.6,
+                374.4
+              ],
+              "anchor": "top_left",
+              "z": 1,
+              "overlay": false,
+              "asset": "res://assets/ui/LegalPC.png",
+              "font": "sp_fnt00",
+              "font_size": 18,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored"
+            },
+            {
+              "id": "content",
+              "type": "button",
+              "rect": [
+                192.0,
+                412.8,
+                256.0,
+                38.4
+              ],
+              "anchor": "top_left",
+              "z": 2,
+              "overlay": false,
+              "asset": "",
+              "font": "sp_fnt00",
+              "font_size": 18,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored",
+              "focus": true
+            }
+          ],
+          "focus_order": [
+            "content"
+          ],
+          "back": "title",
+          "sounds": {
+            "move": 41,
+            "confirm": 31,
+            "back": 35,
+            "reject": 27
+          },
+          "transition_seconds": 0.25
+        },
+        "enhanced": {
+          "canvas": [
+            1920,
+            1080
+          ],
+          "virtual_frame": [
+            1920,
+            1080
+          ],
+          "presentation_aspect": [
+            16,
+            9
+          ],
+          "safe_title": 0.9,
+          "safe_action": 0.93,
+          "elements": [
+            {
+              "id": "canvas_backdrop",
+              "type": "image",
+              "rect": [
+                0,
+                0,
+                1920,
+                1080
+              ],
+              "anchor": "top_left",
+              "z": 0,
+              "overlay": true,
+              "asset": "",
+              "font": "sp_fnt00",
+              "font_size": 30,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored"
+            },
+            {
+              "id": "art",
+              "type": "image",
+              "rect": [
+                345.6,
+                64.8,
+                1228.8,
+                842.4
+              ],
+              "anchor": "top_left",
+              "z": 1,
+              "overlay": false,
+              "asset": "res://assets/ui/LegalPC.png",
+              "font": "sp_fnt00",
+              "font_size": 30,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored"
+            },
+            {
+              "id": "content",
+              "type": "button",
+              "rect": [
+                576.0,
+                928.8,
+                768.0,
+                86.4
+              ],
+              "anchor": "top_left",
+              "z": 2,
+              "overlay": false,
+              "asset": "",
+              "font": "sp_fnt00",
+              "font_size": 30,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored",
+              "focus": true
+            }
+          ],
+          "focus_order": [
+            "content"
+          ],
+          "back": "title",
+          "sounds": {
+            "move": 41,
+            "confirm": 31,
+            "back": 35,
+            "reject": 27
+          },
+          "transition_seconds": 0.25
+        }
+      },
+      "proposal_elements": [
+        "legal_banner"
+      ],
+      "proposal_status": "Gemini proposal (unverified)"
+    },
+    {
+      "id": "title",
+      "styles": {
+        "classic": {
+          "canvas": [
+            640,
+            480
+          ],
+          "virtual_frame": [
+            512,
+            240
+          ],
+          "presentation_aspect": [
+            4,
+            3
+          ],
+          "safe_title": 0.9,
+          "safe_action": 0.93,
+          "elements": [
+            {
+              "id": "canvas_backdrop",
+              "type": "image",
+              "rect": [
+                0,
+                0,
+                640,
+                480
+              ],
+              "anchor": "top_left",
+              "z": 0,
+              "overlay": true,
+              "asset": "",
+              "font": "sp_fnt00",
+              "font_size": 18,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored"
+            },
+            {
+              "id": "art",
+              "type": "image",
+              "rect": [
+                115.2,
+                28.8,
+                409.6,
+                374.4
+              ],
+              "anchor": "top_left",
+              "z": 1,
+              "overlay": false,
+              "asset": "res://assets/ui/Title.png",
+              "font": "sp_fnt00",
+              "font_size": 18,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored"
+            },
+            {
+              "id": "content",
+              "type": "button",
+              "rect": [
+                192.0,
+                412.8,
+                256.0,
+                38.4
+              ],
+              "anchor": "top_left",
+              "z": 2,
+              "overlay": false,
+              "asset": "",
+              "font": "sp_fnt00",
+              "font_size": 18,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored",
+              "focus": true
+            }
+          ],
+          "focus_order": [
+            "content"
+          ],
+          "back": "none",
+          "sounds": {
+            "move": 41,
+            "confirm": 31,
+            "back": 35,
+            "reject": 27
+          },
+          "transition_seconds": 0.25
+        },
+        "enhanced": {
+          "canvas": [
+            1920,
+            1080
+          ],
+          "virtual_frame": [
+            1920,
+            1080
+          ],
+          "presentation_aspect": [
+            16,
+            9
+          ],
+          "safe_title": 0.9,
+          "safe_action": 0.93,
+          "elements": [
+            {
+              "id": "canvas_backdrop",
+              "type": "image",
+              "rect": [
+                0,
+                0,
+                1920,
+                1080
+              ],
+              "anchor": "top_left",
+              "z": 0,
+              "overlay": true,
+              "asset": "",
+              "font": "sp_fnt00",
+              "font_size": 30,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored"
+            },
+            {
+              "id": "art",
+              "type": "image",
+              "rect": [
+                345.6,
+                64.8,
+                1228.8,
+                842.4
+              ],
+              "anchor": "top_left",
+              "z": 1,
+              "overlay": false,
+              "asset": "res://assets/ui/Title.png",
+              "font": "sp_fnt00",
+              "font_size": 30,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored"
+            },
+            {
+              "id": "content",
+              "type": "button",
+              "rect": [
+                576.0,
+                928.8,
+                768.0,
+                86.4
+              ],
+              "anchor": "top_left",
+              "z": 2,
+              "overlay": false,
+              "asset": "",
+              "font": "sp_fnt00",
+              "font_size": 30,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored",
+              "focus": true
+            }
+          ],
+          "focus_order": [
+            "content"
+          ],
+          "back": "none",
+          "sounds": {
+            "move": 41,
+            "confirm": 31,
+            "back": 35,
+            "reject": 27
+          },
+          "transition_seconds": 0.25
+        }
+      },
+      "proposal_elements": [
+        "title_illustration",
+        "press_enter_label"
+      ],
+      "proposal_status": "Gemini proposal (unverified)"
+    },
+    {
+      "id": "main_menu",
+      "styles": {
+        "classic": {
+          "canvas": [
+            640,
+            480
+          ],
+          "virtual_frame": [
+            512,
+            240
+          ],
+          "presentation_aspect": [
+            4,
+            3
+          ],
+          "safe_title": 0.9,
+          "safe_action": 0.93,
+          "elements": [
+            {
+              "id": "canvas_backdrop",
+              "type": "image",
+              "rect": [
+                0,
+                0,
+                640,
+                480
+              ],
+              "anchor": "top_left",
+              "z": 0,
+              "overlay": true,
+              "asset": "",
+              "font": "sp_fnt00",
+              "font_size": 18,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored"
+            },
+            {
+              "id": "heading",
+              "type": "image",
+              "rect": [
+                140.8,
+                38.4,
+                358.4,
+                81.6
+              ],
+              "anchor": "top_left",
+              "z": 1,
+              "overlay": false,
+              "asset": "res://assets/ui/Title.png",
+              "font": "sp_fnt00",
+              "font_size": 18,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored",
+              "text": ""
+            },
+            {
+              "id": "content",
+              "type": "menu_list",
+              "rect": [
+                102.4,
+                153.6,
+                243.2,
+                278.4
+              ],
+              "anchor": "top_left",
+              "z": 2,
+              "overlay": false,
+              "asset": "",
+              "font": "sp_fnt00",
+              "font_size": 18,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored",
+              "focus": true
+            },
+            {
+              "id": "actor",
+              "type": "3d_actor",
+              "rect": [
+                384.0,
+                134.4,
+                172.8,
+                292.8
+              ],
+              "anchor": "top_left",
+              "z": 2,
+              "overlay": false,
+              "asset": "res://assets/characters/spidey.glb",
+              "font": "sp_fnt00",
+              "font_size": 18,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored"
+            }
+          ],
+          "focus_order": [
+            "content"
+          ],
+          "back": "title",
+          "sounds": {
+            "move": 41,
+            "confirm": 31,
+            "back": 35,
+            "reject": 27
+          },
+          "transition_seconds": 0.25
+        },
+        "enhanced": {
+          "canvas": [
+            1920,
+            1080
+          ],
+          "virtual_frame": [
+            1920,
+            1080
+          ],
+          "presentation_aspect": [
+            16,
+            9
+          ],
+          "safe_title": 0.9,
+          "safe_action": 0.93,
+          "elements": [
+            {
+              "id": "canvas_backdrop",
+              "type": "image",
+              "rect": [
+                0,
+                0,
+                1920,
+                1080
+              ],
+              "anchor": "top_left",
+              "z": 0,
+              "overlay": true,
+              "asset": "",
+              "font": "sp_fnt00",
+              "font_size": 30,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored"
+            },
+            {
+              "id": "heading",
+              "type": "image",
+              "rect": [
+                422.4,
+                86.4,
+                1075.2,
+                183.6
+              ],
+              "anchor": "top_left",
+              "z": 1,
+              "overlay": false,
+              "asset": "res://assets/ui/Title.png",
+              "font": "sp_fnt00",
+              "font_size": 30,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored",
+              "text": ""
+            },
+            {
+              "id": "content",
+              "type": "menu_list",
+              "rect": [
+                307.2,
+                345.6,
+                729.6,
+                626.4
+              ],
+              "anchor": "top_left",
+              "z": 2,
+              "overlay": false,
+              "asset": "",
+              "font": "sp_fnt00",
+              "font_size": 30,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored",
+              "focus": true
+            },
+            {
+              "id": "actor",
+              "type": "3d_actor",
+              "rect": [
+                1152.0,
+                302.4,
+                518.4,
+                658.8
+              ],
+              "anchor": "top_left",
+              "z": 2,
+              "overlay": false,
+              "asset": "res://assets/characters/spidey.glb",
+              "font": "sp_fnt00",
+              "font_size": 30,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored"
+            }
+          ],
+          "focus_order": [
+            "content"
+          ],
+          "back": "title",
+          "sounds": {
+            "move": 41,
+            "confirm": 31,
+            "back": 35,
+            "reject": 27
+          },
+          "transition_seconds": 0.25
+        }
+      },
+      "proposal_elements": [
+        "background_emblem",
+        "items",
+        "spidey_actor"
+      ],
+      "proposal_status": "Gemini proposal (unverified)"
+    },
+    {
+      "id": "game_menu",
+      "styles": {
+        "classic": {
+          "canvas": [
+            640,
+            480
+          ],
+          "virtual_frame": [
+            512,
+            240
+          ],
+          "presentation_aspect": [
+            4,
+            3
+          ],
+          "safe_title": 0.9,
+          "safe_action": 0.93,
+          "elements": [
+            {
+              "id": "canvas_backdrop",
+              "type": "image",
+              "rect": [
+                0,
+                0,
+                640,
+                480
+              ],
+              "anchor": "top_left",
+              "z": 0,
+              "overlay": true,
+              "asset": "",
+              "font": "sp_fnt00",
+              "font_size": 18,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored"
+            },
+            {
+              "id": "heading",
+              "type": "text",
+              "rect": [
+                140.8,
+                38.4,
+                358.4,
+                81.6
+              ],
+              "anchor": "top_left",
+              "z": 1,
+              "overlay": false,
+              "asset": "",
+              "font": "sp_fnt00",
+              "font_size": 18,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored",
+              "text": "GAME MENU"
+            },
+            {
+              "id": "content",
+              "type": "menu_list",
+              "rect": [
+                102.4,
+                153.6,
+                422.4,
+                278.4
+              ],
+              "anchor": "top_left",
+              "z": 2,
+              "overlay": false,
+              "asset": "",
+              "font": "sp_fnt00",
+              "font_size": 18,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored",
+              "focus": true
+            }
+          ],
+          "focus_order": [
+            "content"
+          ],
+          "back": "main_menu",
+          "sounds": {
+            "move": 41,
+            "confirm": 31,
+            "back": 35,
+            "reject": 27
+          },
+          "transition_seconds": 0.25
+        },
+        "enhanced": {
+          "canvas": [
+            1920,
+            1080
+          ],
+          "virtual_frame": [
+            1920,
+            1080
+          ],
+          "presentation_aspect": [
+            16,
+            9
+          ],
+          "safe_title": 0.9,
+          "safe_action": 0.93,
+          "elements": [
+            {
+              "id": "canvas_backdrop",
+              "type": "image",
+              "rect": [
+                0,
+                0,
+                1920,
+                1080
+              ],
+              "anchor": "top_left",
+              "z": 0,
+              "overlay": true,
+              "asset": "",
+              "font": "sp_fnt00",
+              "font_size": 30,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored"
+            },
+            {
+              "id": "heading",
+              "type": "text",
+              "rect": [
+                422.4,
+                86.4,
+                1075.2,
+                183.6
+              ],
+              "anchor": "top_left",
+              "z": 1,
+              "overlay": false,
+              "asset": "",
+              "font": "sp_fnt00",
+              "font_size": 30,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored",
+              "text": "GAME MENU"
+            },
+            {
+              "id": "content",
+              "type": "menu_list",
+              "rect": [
+                307.2,
+                345.6,
+                1267.2,
+                626.4
+              ],
+              "anchor": "top_left",
+              "z": 2,
+              "overlay": false,
+              "asset": "",
+              "font": "sp_fnt00",
+              "font_size": 30,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored",
+              "focus": true
+            }
+          ],
+          "focus_order": [
+            "content"
+          ],
+          "back": "main_menu",
+          "sounds": {
+            "move": 41,
+            "confirm": 31,
+            "back": 35,
+            "reject": 27
+          },
+          "transition_seconds": 0.25
+        }
+      },
+      "proposal_elements": [
+        "title_bar",
+        "items"
+      ],
+      "proposal_status": "Gemini proposal (unverified)"
+    },
+    {
+      "id": "difficulty_select",
+      "styles": {
+        "classic": {
+          "canvas": [
+            640,
+            480
+          ],
+          "virtual_frame": [
+            512,
+            240
+          ],
+          "presentation_aspect": [
+            4,
+            3
+          ],
+          "safe_title": 0.9,
+          "safe_action": 0.93,
+          "elements": [
+            {
+              "id": "canvas_backdrop",
+              "type": "image",
+              "rect": [
+                0,
+                0,
+                640,
+                480
+              ],
+              "anchor": "top_left",
+              "z": 0,
+              "overlay": true,
+              "asset": "",
+              "font": "sp_fnt00",
+              "font_size": 18,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored"
+            },
+            {
+              "id": "heading",
+              "type": "text",
+              "rect": [
+                140.8,
+                38.4,
+                358.4,
+                81.6
+              ],
+              "anchor": "top_left",
+              "z": 1,
+              "overlay": false,
+              "asset": "",
+              "font": "sp_fnt00",
+              "font_size": 18,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored",
+              "text": "DIFFICULTY SELECT"
+            },
+            {
+              "id": "content",
+              "type": "menu_list",
+              "rect": [
+                102.4,
+                153.6,
+                422.4,
+                278.4
+              ],
+              "anchor": "top_left",
+              "z": 2,
+              "overlay": false,
+              "asset": "",
+              "font": "sp_fnt00",
+              "font_size": 18,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored",
+              "focus": true
+            }
+          ],
+          "focus_order": [
+            "content"
+          ],
+          "back": "game_menu",
+          "sounds": {
+            "move": 41,
+            "confirm": 31,
+            "back": 35,
+            "reject": 27
+          },
+          "transition_seconds": 0.25
+        },
+        "enhanced": {
+          "canvas": [
+            1920,
+            1080
+          ],
+          "virtual_frame": [
+            1920,
+            1080
+          ],
+          "presentation_aspect": [
+            16,
+            9
+          ],
+          "safe_title": 0.9,
+          "safe_action": 0.93,
+          "elements": [
+            {
+              "id": "canvas_backdrop",
+              "type": "image",
+              "rect": [
+                0,
+                0,
+                1920,
+                1080
+              ],
+              "anchor": "top_left",
+              "z": 0,
+              "overlay": true,
+              "asset": "",
+              "font": "sp_fnt00",
+              "font_size": 30,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored"
+            },
+            {
+              "id": "heading",
+              "type": "text",
+              "rect": [
+                422.4,
+                86.4,
+                1075.2,
+                183.6
+              ],
+              "anchor": "top_left",
+              "z": 1,
+              "overlay": false,
+              "asset": "",
+              "font": "sp_fnt00",
+              "font_size": 30,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored",
+              "text": "DIFFICULTY SELECT"
+            },
+            {
+              "id": "content",
+              "type": "menu_list",
+              "rect": [
+                307.2,
+                345.6,
+                1267.2,
+                626.4
+              ],
+              "anchor": "top_left",
+              "z": 2,
+              "overlay": false,
+              "asset": "",
+              "font": "sp_fnt00",
+              "font_size": 30,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored",
+              "focus": true
+            }
+          ],
+          "focus_order": [
+            "content"
+          ],
+          "back": "game_menu",
+          "sounds": {
+            "move": 41,
+            "confirm": 31,
+            "back": 35,
+            "reject": 27
+          },
+          "transition_seconds": 0.25
+        }
+      },
+      "proposal_elements": [
+        "title_bar",
+        "items",
+        "description"
+      ],
+      "proposal_status": "Gemini proposal (unverified)"
+    },
+    {
+      "id": "load_game",
+      "styles": {
+        "classic": {
+          "canvas": [
+            640,
+            480
+          ],
+          "virtual_frame": [
+            512,
+            240
+          ],
+          "presentation_aspect": [
+            4,
+            3
+          ],
+          "safe_title": 0.9,
+          "safe_action": 0.93,
+          "elements": [
+            {
+              "id": "canvas_backdrop",
+              "type": "image",
+              "rect": [
+                0,
+                0,
+                640,
+                480
+              ],
+              "anchor": "top_left",
+              "z": 0,
+              "overlay": true,
+              "asset": "",
+              "font": "sp_fnt00",
+              "font_size": 18,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored"
+            },
+            {
+              "id": "heading",
+              "type": "text",
+              "rect": [
+                140.8,
+                38.4,
+                358.4,
+                81.6
+              ],
+              "anchor": "top_left",
+              "z": 1,
+              "overlay": false,
+              "asset": "",
+              "font": "sp_fnt00",
+              "font_size": 18,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored",
+              "text": "LOAD GAME"
+            },
+            {
+              "id": "content",
+              "type": "menu_list",
+              "rect": [
+                102.4,
+                153.6,
+                422.4,
+                278.4
+              ],
+              "anchor": "top_left",
+              "z": 2,
+              "overlay": false,
+              "asset": "",
+              "font": "sp_fnt00",
+              "font_size": 18,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored",
+              "focus": true
+            }
+          ],
+          "focus_order": [
+            "content"
+          ],
+          "back": "game_menu",
+          "sounds": {
+            "move": 41,
+            "confirm": 31,
+            "back": 35,
+            "reject": 27
+          },
+          "transition_seconds": 0.25
+        },
+        "enhanced": {
+          "canvas": [
+            1920,
+            1080
+          ],
+          "virtual_frame": [
+            1920,
+            1080
+          ],
+          "presentation_aspect": [
+            16,
+            9
+          ],
+          "safe_title": 0.9,
+          "safe_action": 0.93,
+          "elements": [
+            {
+              "id": "canvas_backdrop",
+              "type": "image",
+              "rect": [
+                0,
+                0,
+                1920,
+                1080
+              ],
+              "anchor": "top_left",
+              "z": 0,
+              "overlay": true,
+              "asset": "",
+              "font": "sp_fnt00",
+              "font_size": 30,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored"
+            },
+            {
+              "id": "heading",
+              "type": "text",
+              "rect": [
+                422.4,
+                86.4,
+                1075.2,
+                183.6
+              ],
+              "anchor": "top_left",
+              "z": 1,
+              "overlay": false,
+              "asset": "",
+              "font": "sp_fnt00",
+              "font_size": 30,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored",
+              "text": "LOAD GAME"
+            },
+            {
+              "id": "content",
+              "type": "menu_list",
+              "rect": [
+                307.2,
+                345.6,
+                1267.2,
+                626.4
+              ],
+              "anchor": "top_left",
+              "z": 2,
+              "overlay": false,
+              "asset": "",
+              "font": "sp_fnt00",
+              "font_size": 30,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored",
+              "focus": true
+            }
+          ],
+          "focus_order": [
+            "content"
+          ],
+          "back": "game_menu",
+          "sounds": {
+            "move": 41,
+            "confirm": 31,
+            "back": 35,
+            "reject": 27
+          },
+          "transition_seconds": 0.25
+        }
+      },
+      "proposal_elements": [
+        "title_bar",
+        "slot_list"
+      ],
+      "proposal_status": "Gemini proposal (unverified)"
+    },
+    {
+      "id": "options_menu",
+      "styles": {
+        "classic": {
+          "canvas": [
+            640,
+            480
+          ],
+          "virtual_frame": [
+            512,
+            240
+          ],
+          "presentation_aspect": [
+            4,
+            3
+          ],
+          "safe_title": 0.9,
+          "safe_action": 0.93,
+          "elements": [
+            {
+              "id": "canvas_backdrop",
+              "type": "image",
+              "rect": [
+                0,
+                0,
+                640,
+                480
+              ],
+              "anchor": "top_left",
+              "z": 0,
+              "overlay": true,
+              "asset": "",
+              "font": "sp_fnt00",
+              "font_size": 18,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored"
+            },
+            {
+              "id": "heading",
+              "type": "text",
+              "rect": [
+                140.8,
+                38.4,
+                358.4,
+                81.6
+              ],
+              "anchor": "top_left",
+              "z": 1,
+              "overlay": false,
+              "asset": "",
+              "font": "sp_fnt00",
+              "font_size": 18,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored",
+              "text": "OPTIONS MENU"
+            },
+            {
+              "id": "content",
+              "type": "menu_list",
+              "rect": [
+                102.4,
+                153.6,
+                422.4,
+                278.4
+              ],
+              "anchor": "top_left",
+              "z": 2,
+              "overlay": false,
+              "asset": "",
+              "font": "sp_fnt00",
+              "font_size": 18,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored",
+              "focus": true
+            }
+          ],
+          "focus_order": [
+            "content"
+          ],
+          "back": "main_menu",
+          "sounds": {
+            "move": 41,
+            "confirm": 31,
+            "back": 35,
+            "reject": 27
+          },
+          "transition_seconds": 0.25
+        },
+        "enhanced": {
+          "canvas": [
+            1920,
+            1080
+          ],
+          "virtual_frame": [
+            1920,
+            1080
+          ],
+          "presentation_aspect": [
+            16,
+            9
+          ],
+          "safe_title": 0.9,
+          "safe_action": 0.93,
+          "elements": [
+            {
+              "id": "canvas_backdrop",
+              "type": "image",
+              "rect": [
+                0,
+                0,
+                1920,
+                1080
+              ],
+              "anchor": "top_left",
+              "z": 0,
+              "overlay": true,
+              "asset": "",
+              "font": "sp_fnt00",
+              "font_size": 30,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored"
+            },
+            {
+              "id": "heading",
+              "type": "text",
+              "rect": [
+                422.4,
+                86.4,
+                1075.2,
+                183.6
+              ],
+              "anchor": "top_left",
+              "z": 1,
+              "overlay": false,
+              "asset": "",
+              "font": "sp_fnt00",
+              "font_size": 30,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored",
+              "text": "OPTIONS MENU"
+            },
+            {
+              "id": "content",
+              "type": "menu_list",
+              "rect": [
+                307.2,
+                345.6,
+                1267.2,
+                626.4
+              ],
+              "anchor": "top_left",
+              "z": 2,
+              "overlay": false,
+              "asset": "",
+              "font": "sp_fnt00",
+              "font_size": 30,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored",
+              "focus": true
+            }
+          ],
+          "focus_order": [
+            "content"
+          ],
+          "back": "main_menu",
+          "sounds": {
+            "move": 41,
+            "confirm": 31,
+            "back": 35,
+            "reject": 27
+          },
+          "transition_seconds": 0.25
+        }
+      },
+      "proposal_elements": [
+        "title_bar",
+        "items"
+      ],
+      "proposal_status": "Gemini proposal (unverified)"
+    },
+    {
+      "id": "controls_options",
+      "styles": {
+        "classic": {
+          "canvas": [
+            640,
+            480
+          ],
+          "virtual_frame": [
+            512,
+            240
+          ],
+          "presentation_aspect": [
+            4,
+            3
+          ],
+          "safe_title": 0.9,
+          "safe_action": 0.93,
+          "elements": [
+            {
+              "id": "canvas_backdrop",
+              "type": "image",
+              "rect": [
+                0,
+                0,
+                640,
+                480
+              ],
+              "anchor": "top_left",
+              "z": 0,
+              "overlay": true,
+              "asset": "",
+              "font": "sp_fnt00",
+              "font_size": 18,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored"
+            },
+            {
+              "id": "heading",
+              "type": "text",
+              "rect": [
+                140.8,
+                38.4,
+                358.4,
+                81.6
+              ],
+              "anchor": "top_left",
+              "z": 1,
+              "overlay": false,
+              "asset": "",
+              "font": "sp_fnt00",
+              "font_size": 18,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored",
+              "text": "CONTROLS OPTIONS"
+            },
+            {
+              "id": "content",
+              "type": "menu_list",
+              "rect": [
+                102.4,
+                153.6,
+                422.4,
+                278.4
+              ],
+              "anchor": "top_left",
+              "z": 2,
+              "overlay": false,
+              "asset": "",
+              "font": "sp_fnt00",
+              "font_size": 18,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored",
+              "focus": true
+            }
+          ],
+          "focus_order": [
+            "content"
+          ],
+          "back": "options_menu",
+          "sounds": {
+            "move": 41,
+            "confirm": 31,
+            "back": 35,
+            "reject": 27
+          },
+          "transition_seconds": 0.25
+        },
+        "enhanced": {
+          "canvas": [
+            1920,
+            1080
+          ],
+          "virtual_frame": [
+            1920,
+            1080
+          ],
+          "presentation_aspect": [
+            16,
+            9
+          ],
+          "safe_title": 0.9,
+          "safe_action": 0.93,
+          "elements": [
+            {
+              "id": "canvas_backdrop",
+              "type": "image",
+              "rect": [
+                0,
+                0,
+                1920,
+                1080
+              ],
+              "anchor": "top_left",
+              "z": 0,
+              "overlay": true,
+              "asset": "",
+              "font": "sp_fnt00",
+              "font_size": 30,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored"
+            },
+            {
+              "id": "heading",
+              "type": "text",
+              "rect": [
+                422.4,
+                86.4,
+                1075.2,
+                183.6
+              ],
+              "anchor": "top_left",
+              "z": 1,
+              "overlay": false,
+              "asset": "",
+              "font": "sp_fnt00",
+              "font_size": 30,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored",
+              "text": "CONTROLS OPTIONS"
+            },
+            {
+              "id": "content",
+              "type": "menu_list",
+              "rect": [
+                307.2,
+                345.6,
+                1267.2,
+                626.4
+              ],
+              "anchor": "top_left",
+              "z": 2,
+              "overlay": false,
+              "asset": "",
+              "font": "sp_fnt00",
+              "font_size": 30,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored",
+              "focus": true
+            }
+          ],
+          "focus_order": [
+            "content"
+          ],
+          "back": "options_menu",
+          "sounds": {
+            "move": 41,
+            "confirm": 31,
+            "back": 35,
+            "reject": 27
+          },
+          "transition_seconds": 0.25
+        }
+      },
+      "proposal_elements": [
+        "title_bar",
+        "actions_column",
+        "bindings_column"
+      ],
+      "proposal_status": "Gemini proposal (unverified)"
+    },
+    {
+      "id": "special_menu",
+      "styles": {
+        "classic": {
+          "canvas": [
+            640,
+            480
+          ],
+          "virtual_frame": [
+            512,
+            240
+          ],
+          "presentation_aspect": [
+            4,
+            3
+          ],
+          "safe_title": 0.9,
+          "safe_action": 0.93,
+          "elements": [
+            {
+              "id": "canvas_backdrop",
+              "type": "image",
+              "rect": [
+                0,
+                0,
+                640,
+                480
+              ],
+              "anchor": "top_left",
+              "z": 0,
+              "overlay": true,
+              "asset": "",
+              "font": "sp_fnt00",
+              "font_size": 18,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored"
+            },
+            {
+              "id": "heading",
+              "type": "text",
+              "rect": [
+                140.8,
+                38.4,
+                358.4,
+                81.6
+              ],
+              "anchor": "top_left",
+              "z": 1,
+              "overlay": false,
+              "asset": "",
+              "font": "sp_fnt00",
+              "font_size": 18,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored",
+              "text": "SPECIAL MENU"
+            },
+            {
+              "id": "content",
+              "type": "menu_list",
+              "rect": [
+                102.4,
+                153.6,
+                422.4,
+                278.4
+              ],
+              "anchor": "top_left",
+              "z": 2,
+              "overlay": false,
+              "asset": "",
+              "font": "sp_fnt00",
+              "font_size": 18,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored",
+              "focus": true
+            }
+          ],
+          "focus_order": [
+            "content"
+          ],
+          "back": "main_menu",
+          "sounds": {
+            "move": 41,
+            "confirm": 31,
+            "back": 35,
+            "reject": 27
+          },
+          "transition_seconds": 0.25
+        },
+        "enhanced": {
+          "canvas": [
+            1920,
+            1080
+          ],
+          "virtual_frame": [
+            1920,
+            1080
+          ],
+          "presentation_aspect": [
+            16,
+            9
+          ],
+          "safe_title": 0.9,
+          "safe_action": 0.93,
+          "elements": [
+            {
+              "id": "canvas_backdrop",
+              "type": "image",
+              "rect": [
+                0,
+                0,
+                1920,
+                1080
+              ],
+              "anchor": "top_left",
+              "z": 0,
+              "overlay": true,
+              "asset": "",
+              "font": "sp_fnt00",
+              "font_size": 30,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored"
+            },
+            {
+              "id": "heading",
+              "type": "text",
+              "rect": [
+                422.4,
+                86.4,
+                1075.2,
+                183.6
+              ],
+              "anchor": "top_left",
+              "z": 1,
+              "overlay": false,
+              "asset": "",
+              "font": "sp_fnt00",
+              "font_size": 30,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored",
+              "text": "SPECIAL MENU"
+            },
+            {
+              "id": "content",
+              "type": "menu_list",
+              "rect": [
+                307.2,
+                345.6,
+                1267.2,
+                626.4
+              ],
+              "anchor": "top_left",
+              "z": 2,
+              "overlay": false,
+              "asset": "",
+              "font": "sp_fnt00",
+              "font_size": 30,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored",
+              "focus": true
+            }
+          ],
+          "focus_order": [
+            "content"
+          ],
+          "back": "main_menu",
+          "sounds": {
+            "move": 41,
+            "confirm": 31,
+            "back": 35,
+            "reject": 27
+          },
+          "transition_seconds": 0.25
+        }
+      },
+      "proposal_elements": [
+        "title_bar",
+        "items"
+      ],
+      "proposal_status": "Gemini proposal (unverified)"
+    },
+    {
+      "id": "cheats_screen",
+      "styles": {
+        "classic": {
+          "canvas": [
+            640,
+            480
+          ],
+          "virtual_frame": [
+            512,
+            240
+          ],
+          "presentation_aspect": [
+            4,
+            3
+          ],
+          "safe_title": 0.9,
+          "safe_action": 0.93,
+          "elements": [
+            {
+              "id": "canvas_backdrop",
+              "type": "image",
+              "rect": [
+                0,
+                0,
+                640,
+                480
+              ],
+              "anchor": "top_left",
+              "z": 0,
+              "overlay": true,
+              "asset": "",
+              "font": "sp_fnt00",
+              "font_size": 18,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored"
+            },
+            {
+              "id": "heading",
+              "type": "text",
+              "rect": [
+                140.8,
+                38.4,
+                358.4,
+                81.6
+              ],
+              "anchor": "top_left",
+              "z": 1,
+              "overlay": false,
+              "asset": "",
+              "font": "sp_fnt00",
+              "font_size": 18,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored",
+              "text": "CHEATS SCREEN"
+            },
+            {
+              "id": "content",
+              "type": "menu_list",
+              "rect": [
+                102.4,
+                153.6,
+                243.2,
+                278.4
+              ],
+              "anchor": "top_left",
+              "z": 2,
+              "overlay": false,
+              "asset": "",
+              "font": "sp_fnt00",
+              "font_size": 18,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored",
+              "focus": true
+            },
+            {
+              "id": "actor",
+              "type": "3d_actor",
+              "rect": [
+                384.0,
+                134.4,
+                172.8,
+                292.8
+              ],
+              "anchor": "top_left",
+              "z": 2,
+              "overlay": false,
+              "asset": "res://assets/characters/spidey.glb",
+              "font": "sp_fnt00",
+              "font_size": 18,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored"
+            }
+          ],
+          "focus_order": [
+            "content"
+          ],
+          "back": "special_menu",
+          "sounds": {
+            "move": 41,
+            "confirm": 31,
+            "back": 35,
+            "reject": 27
+          },
+          "transition_seconds": 0.25
+        },
+        "enhanced": {
+          "canvas": [
+            1920,
+            1080
+          ],
+          "virtual_frame": [
+            1920,
+            1080
+          ],
+          "presentation_aspect": [
+            16,
+            9
+          ],
+          "safe_title": 0.9,
+          "safe_action": 0.93,
+          "elements": [
+            {
+              "id": "canvas_backdrop",
+              "type": "image",
+              "rect": [
+                0,
+                0,
+                1920,
+                1080
+              ],
+              "anchor": "top_left",
+              "z": 0,
+              "overlay": true,
+              "asset": "",
+              "font": "sp_fnt00",
+              "font_size": 30,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored"
+            },
+            {
+              "id": "heading",
+              "type": "text",
+              "rect": [
+                422.4,
+                86.4,
+                1075.2,
+                183.6
+              ],
+              "anchor": "top_left",
+              "z": 1,
+              "overlay": false,
+              "asset": "",
+              "font": "sp_fnt00",
+              "font_size": 30,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored",
+              "text": "CHEATS SCREEN"
+            },
+            {
+              "id": "content",
+              "type": "menu_list",
+              "rect": [
+                307.2,
+                345.6,
+                729.6,
+                626.4
+              ],
+              "anchor": "top_left",
+              "z": 2,
+              "overlay": false,
+              "asset": "",
+              "font": "sp_fnt00",
+              "font_size": 30,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored",
+              "focus": true
+            },
+            {
+              "id": "actor",
+              "type": "3d_actor",
+              "rect": [
+                1152.0,
+                302.4,
+                518.4,
+                658.8
+              ],
+              "anchor": "top_left",
+              "z": 2,
+              "overlay": false,
+              "asset": "res://assets/characters/spidey.glb",
+              "font": "sp_fnt00",
+              "font_size": 30,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored"
+            }
+          ],
+          "focus_order": [
+            "content"
+          ],
+          "back": "special_menu",
+          "sounds": {
+            "move": 41,
+            "confirm": 31,
+            "back": 35,
+            "reject": 27
+          },
+          "transition_seconds": 0.25
+        }
+      },
+      "proposal_elements": [
+        "title_bar",
+        "input_prompt",
+        "rude_spidey_actor"
+      ],
+      "proposal_status": "Gemini proposal (unverified)"
+    },
+    {
+      "id": "gallery_menu",
+      "styles": {
+        "classic": {
+          "canvas": [
+            640,
+            480
+          ],
+          "virtual_frame": [
+            512,
+            240
+          ],
+          "presentation_aspect": [
+            4,
+            3
+          ],
+          "safe_title": 0.9,
+          "safe_action": 0.93,
+          "elements": [
+            {
+              "id": "canvas_backdrop",
+              "type": "image",
+              "rect": [
+                0,
+                0,
+                640,
+                480
+              ],
+              "anchor": "top_left",
+              "z": 0,
+              "overlay": true,
+              "asset": "",
+              "font": "sp_fnt00",
+              "font_size": 18,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored"
+            },
+            {
+              "id": "heading",
+              "type": "text",
+              "rect": [
+                140.8,
+                38.4,
+                358.4,
+                81.6
+              ],
+              "anchor": "top_left",
+              "z": 1,
+              "overlay": false,
+              "asset": "",
+              "font": "sp_fnt00",
+              "font_size": 18,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored",
+              "text": "GALLERY MENU"
+            },
+            {
+              "id": "content",
+              "type": "menu_list",
+              "rect": [
+                102.4,
+                153.6,
+                422.4,
+                278.4
+              ],
+              "anchor": "top_left",
+              "z": 2,
+              "overlay": false,
+              "asset": "",
+              "font": "sp_fnt00",
+              "font_size": 18,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored",
+              "focus": true
+            }
+          ],
+          "focus_order": [
+            "content"
+          ],
+          "back": "main_menu",
+          "sounds": {
+            "move": 41,
+            "confirm": 31,
+            "back": 35,
+            "reject": 27
+          },
+          "transition_seconds": 0.25
+        },
+        "enhanced": {
+          "canvas": [
+            1920,
+            1080
+          ],
+          "virtual_frame": [
+            1920,
+            1080
+          ],
+          "presentation_aspect": [
+            16,
+            9
+          ],
+          "safe_title": 0.9,
+          "safe_action": 0.93,
+          "elements": [
+            {
+              "id": "canvas_backdrop",
+              "type": "image",
+              "rect": [
+                0,
+                0,
+                1920,
+                1080
+              ],
+              "anchor": "top_left",
+              "z": 0,
+              "overlay": true,
+              "asset": "",
+              "font": "sp_fnt00",
+              "font_size": 30,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored"
+            },
+            {
+              "id": "heading",
+              "type": "text",
+              "rect": [
+                422.4,
+                86.4,
+                1075.2,
+                183.6
+              ],
+              "anchor": "top_left",
+              "z": 1,
+              "overlay": false,
+              "asset": "",
+              "font": "sp_fnt00",
+              "font_size": 30,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored",
+              "text": "GALLERY MENU"
+            },
+            {
+              "id": "content",
+              "type": "menu_list",
+              "rect": [
+                307.2,
+                345.6,
+                1267.2,
+                626.4
+              ],
+              "anchor": "top_left",
+              "z": 2,
+              "overlay": false,
+              "asset": "",
+              "font": "sp_fnt00",
+              "font_size": 30,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored",
+              "focus": true
+            }
+          ],
+          "focus_order": [
+            "content"
+          ],
+          "back": "main_menu",
+          "sounds": {
+            "move": 41,
+            "confirm": 31,
+            "back": 35,
+            "reject": 27
+          },
+          "transition_seconds": 0.25
+        }
+      },
+      "proposal_elements": [
+        "title_bar",
+        "items"
+      ],
+      "proposal_status": "Gemini proposal (unverified)"
+    },
+    {
+      "id": "pause_menu",
+      "styles": {
+        "classic": {
+          "canvas": [
+            640,
+            480
+          ],
+          "virtual_frame": [
+            512,
+            240
+          ],
+          "presentation_aspect": [
+            4,
+            3
+          ],
+          "safe_title": 0.9,
+          "safe_action": 0.93,
+          "elements": [
+            {
+              "id": "canvas_backdrop",
+              "type": "image",
+              "rect": [
+                0,
+                0,
+                640,
+                480
+              ],
+              "anchor": "top_left",
+              "z": 0,
+              "overlay": true,
+              "asset": "",
+              "font": "sp_fnt00",
+              "font_size": 18,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored"
+            },
+            {
+              "id": "heading",
+              "type": "text",
+              "rect": [
+                140.8,
+                38.4,
+                358.4,
+                81.6
+              ],
+              "anchor": "top_left",
+              "z": 1,
+              "overlay": false,
+              "asset": "",
+              "font": "sp_fnt00",
+              "font_size": 18,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored",
+              "text": "PAUSE MENU"
+            },
+            {
+              "id": "content",
+              "type": "menu_list",
+              "rect": [
+                179.2,
+                144.0,
+                281.6,
+                288.0
+              ],
+              "anchor": "top_left",
+              "z": 2,
+              "overlay": false,
+              "asset": "",
+              "font": "sp_fnt00",
+              "font_size": 18,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored",
+              "focus": true
+            }
+          ],
+          "focus_order": [
+            "content"
+          ],
+          "back": "gameplay",
+          "sounds": {
+            "move": 41,
+            "confirm": 31,
+            "back": 35,
+            "reject": 27
+          },
+          "transition_seconds": 0.25
+        },
+        "enhanced": {
+          "canvas": [
+            1920,
+            1080
+          ],
+          "virtual_frame": [
+            1920,
+            1080
+          ],
+          "presentation_aspect": [
+            16,
+            9
+          ],
+          "safe_title": 0.9,
+          "safe_action": 0.93,
+          "elements": [
+            {
+              "id": "canvas_backdrop",
+              "type": "image",
+              "rect": [
+                0,
+                0,
+                1920,
+                1080
+              ],
+              "anchor": "top_left",
+              "z": 0,
+              "overlay": true,
+              "asset": "",
+              "font": "sp_fnt00",
+              "font_size": 30,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored"
+            },
+            {
+              "id": "heading",
+              "type": "text",
+              "rect": [
+                422.4,
+                86.4,
+                1075.2,
+                183.6
+              ],
+              "anchor": "top_left",
+              "z": 1,
+              "overlay": false,
+              "asset": "",
+              "font": "sp_fnt00",
+              "font_size": 30,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored",
+              "text": "PAUSE MENU"
+            },
+            {
+              "id": "content",
+              "type": "menu_list",
+              "rect": [
+                537.6,
+                324.0,
+                844.8,
+                648.0
+              ],
+              "anchor": "top_left",
+              "z": 2,
+              "overlay": false,
+              "asset": "",
+              "font": "sp_fnt00",
+              "font_size": 30,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored",
+              "focus": true
+            }
+          ],
+          "focus_order": [
+            "content"
+          ],
+          "back": "gameplay",
+          "sounds": {
+            "move": 41,
+            "confirm": 31,
+            "back": 35,
+            "reject": 27
+          },
+          "transition_seconds": 0.25
+        }
+      },
+      "proposal_elements": [
+        "paused_header",
+        "items"
+      ],
+      "proposal_status": "Gemini proposal (unverified)"
+    },
+    {
+      "id": "hud",
+      "styles": {
+        "classic": {
+          "canvas": [
+            640,
+            480
+          ],
+          "virtual_frame": [
+            512,
+            240
+          ],
+          "presentation_aspect": [
+            4,
+            3
+          ],
+          "safe_title": 0.9,
+          "safe_action": 0.93,
+          "elements": [
+            {
+              "id": "canvas_backdrop",
+              "type": "image",
+              "rect": [
+                0,
+                0,
+                640,
+                480
+              ],
+              "anchor": "top_left",
+              "z": 0,
+              "overlay": true,
+              "asset": "",
+              "font": "sp_fnt00",
+              "font_size": 18,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored"
+            },
+            {
+              "id": "heading",
+              "type": "text",
+              "rect": [
+                140.8,
+                38.4,
+                358.4,
+                81.6
+              ],
+              "anchor": "top_left",
+              "z": 1,
+              "overlay": false,
+              "asset": "",
+              "font": "sp_fnt00",
+              "font_size": 18,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored",
+              "text": "HUD"
+            },
+            {
+              "id": "content",
+              "type": "menu_list",
+              "rect": [
+                102.4,
+                153.6,
+                422.4,
+                278.4
+              ],
+              "anchor": "top_left",
+              "z": 2,
+              "overlay": false,
+              "asset": "",
+              "font": "sp_fnt00",
+              "font_size": 18,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored",
+              "focus": true
+            }
+          ],
+          "focus_order": [
+            "content"
+          ],
+          "back": "gameplay",
+          "sounds": {
+            "move": 41,
+            "confirm": 31,
+            "back": 35,
+            "reject": 27
+          },
+          "transition_seconds": 0.25
+        },
+        "enhanced": {
+          "canvas": [
+            1920,
+            1080
+          ],
+          "virtual_frame": [
+            1920,
+            1080
+          ],
+          "presentation_aspect": [
+            16,
+            9
+          ],
+          "safe_title": 0.9,
+          "safe_action": 0.93,
+          "elements": [
+            {
+              "id": "canvas_backdrop",
+              "type": "image",
+              "rect": [
+                0,
+                0,
+                1920,
+                1080
+              ],
+              "anchor": "top_left",
+              "z": 0,
+              "overlay": true,
+              "asset": "",
+              "font": "sp_fnt00",
+              "font_size": 30,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored"
+            },
+            {
+              "id": "heading",
+              "type": "text",
+              "rect": [
+                422.4,
+                86.4,
+                1075.2,
+                183.6
+              ],
+              "anchor": "top_left",
+              "z": 1,
+              "overlay": false,
+              "asset": "",
+              "font": "sp_fnt00",
+              "font_size": 30,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored",
+              "text": "HUD"
+            },
+            {
+              "id": "content",
+              "type": "menu_list",
+              "rect": [
+                307.2,
+                345.6,
+                1267.2,
+                626.4
+              ],
+              "anchor": "top_left",
+              "z": 2,
+              "overlay": false,
+              "asset": "",
+              "font": "sp_fnt00",
+              "font_size": 30,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored",
+              "focus": true
+            }
+          ],
+          "focus_order": [
+            "content"
+          ],
+          "back": "gameplay",
+          "sounds": {
+            "move": 41,
+            "confirm": 31,
+            "back": 35,
+            "reject": 27
+          },
+          "transition_seconds": 0.25
+        }
+      },
+      "proposal_elements": [
+        "health_gauge",
+        "spidey_portrait",
+        "web_fluid_meter",
+        "web_spares_counter",
+        "spider_sense_indicators",
+        "compass_pointer",
+        "boss_health_bar",
+        "hostage_health_bar",
+        "mission_timer",
+        "trg_objective_message",
+        "subtitles",
+        "stan_lee_caption"
+      ],
+      "proposal_status": "Gemini proposal (unverified)"
+    },
+    {
+      "id": "pause",
+      "styles": {
+        "classic": {
+          "canvas": [
+            640,
+            480
+          ],
+          "virtual_frame": [
+            512,
+            240
+          ],
+          "presentation_aspect": [
+            4,
+            3
+          ],
+          "safe_title": 0.9,
+          "safe_action": 0.93,
+          "elements": [
+            {
+              "id": "canvas_backdrop",
+              "type": "image",
+              "rect": [
+                0,
+                0,
+                640,
+                480
+              ],
+              "anchor": "top_left",
+              "z": 0,
+              "overlay": true,
+              "asset": "",
+              "font": "sp_fnt00",
+              "font_size": 18,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored"
+            },
+            {
+              "id": "heading",
+              "type": "text",
+              "rect": [
+                140.8,
+                38.4,
+                358.4,
+                81.6
+              ],
+              "anchor": "top_left",
+              "z": 1,
+              "overlay": false,
+              "asset": "",
+              "font": "sp_fnt00",
+              "font_size": 18,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored",
+              "text": "PAUSE"
+            },
+            {
+              "id": "content",
+              "type": "menu_list",
+              "rect": [
+                179.2,
+                144.0,
+                281.6,
+                288.0
+              ],
+              "anchor": "top_left",
+              "z": 2,
+              "overlay": false,
+              "asset": "",
+              "font": "sp_fnt00",
+              "font_size": 18,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored",
+              "focus": true
+            }
+          ],
+          "focus_order": [
+            "content"
+          ],
+          "back": "gameplay",
+          "sounds": {
+            "move": 41,
+            "confirm": 31,
+            "back": 35,
+            "reject": 27
+          },
+          "transition_seconds": 0.25
+        },
+        "enhanced": {
+          "canvas": [
+            1920,
+            1080
+          ],
+          "virtual_frame": [
+            1920,
+            1080
+          ],
+          "presentation_aspect": [
+            16,
+            9
+          ],
+          "safe_title": 0.9,
+          "safe_action": 0.93,
+          "elements": [
+            {
+              "id": "canvas_backdrop",
+              "type": "image",
+              "rect": [
+                0,
+                0,
+                1920,
+                1080
+              ],
+              "anchor": "top_left",
+              "z": 0,
+              "overlay": true,
+              "asset": "",
+              "font": "sp_fnt00",
+              "font_size": 30,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored"
+            },
+            {
+              "id": "heading",
+              "type": "text",
+              "rect": [
+                422.4,
+                86.4,
+                1075.2,
+                183.6
+              ],
+              "anchor": "top_left",
+              "z": 1,
+              "overlay": false,
+              "asset": "",
+              "font": "sp_fnt00",
+              "font_size": 30,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored",
+              "text": "PAUSE"
+            },
+            {
+              "id": "content",
+              "type": "menu_list",
+              "rect": [
+                537.6,
+                324.0,
+                844.8,
+                648.0
+              ],
+              "anchor": "top_left",
+              "z": 2,
+              "overlay": false,
+              "asset": "",
+              "font": "sp_fnt00",
+              "font_size": 30,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored",
+              "focus": true
+            }
+          ],
+          "focus_order": [
+            "content"
+          ],
+          "back": "gameplay",
+          "sounds": {
+            "move": 41,
+            "confirm": 31,
+            "back": 35,
+            "reject": 27
+          },
+          "transition_seconds": 0.25
+        }
+      },
+      "proposal_elements": [
+        "paused_header",
+        "pause_items"
+      ],
+      "proposal_status": "Gemini proposal (unverified)"
+    },
+    {
+      "id": "loading",
+      "styles": {
+        "classic": {
+          "canvas": [
+            640,
+            480
+          ],
+          "virtual_frame": [
+            512,
+            240
+          ],
+          "presentation_aspect": [
+            4,
+            3
+          ],
+          "safe_title": 0.9,
+          "safe_action": 0.93,
+          "elements": [
+            {
+              "id": "canvas_backdrop",
+              "type": "image",
+              "rect": [
+                0,
+                0,
+                640,
+                480
+              ],
+              "anchor": "top_left",
+              "z": 0,
+              "overlay": true,
+              "asset": "",
+              "font": "sp_fnt00",
+              "font_size": 18,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored"
+            },
+            {
+              "id": "art",
+              "type": "image",
+              "rect": [
+                115.2,
+                28.8,
+                409.6,
+                374.4
+              ],
+              "anchor": "top_left",
+              "z": 1,
+              "overlay": false,
+              "asset": "res://assets/ui/L1Cov.png",
+              "font": "sp_fnt00",
+              "font_size": 18,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored"
+            },
+            {
+              "id": "content",
+              "type": "button",
+              "rect": [
+                192.0,
+                412.8,
+                256.0,
+                38.4
+              ],
+              "anchor": "top_left",
+              "z": 2,
+              "overlay": false,
+              "asset": "",
+              "font": "sp_fnt00",
+              "font_size": 18,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored",
+              "focus": true
+            }
+          ],
+          "focus_order": [
+            "content"
+          ],
+          "back": "gameplay",
+          "sounds": {
+            "move": 41,
+            "confirm": 31,
+            "back": 35,
+            "reject": 27
+          },
+          "transition_seconds": 0.25
+        },
+        "enhanced": {
+          "canvas": [
+            1920,
+            1080
+          ],
+          "virtual_frame": [
+            1920,
+            1080
+          ],
+          "presentation_aspect": [
+            16,
+            9
+          ],
+          "safe_title": 0.9,
+          "safe_action": 0.93,
+          "elements": [
+            {
+              "id": "canvas_backdrop",
+              "type": "image",
+              "rect": [
+                0,
+                0,
+                1920,
+                1080
+              ],
+              "anchor": "top_left",
+              "z": 0,
+              "overlay": true,
+              "asset": "",
+              "font": "sp_fnt00",
+              "font_size": 30,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored"
+            },
+            {
+              "id": "art",
+              "type": "image",
+              "rect": [
+                345.6,
+                64.8,
+                1228.8,
+                842.4
+              ],
+              "anchor": "top_left",
+              "z": 1,
+              "overlay": false,
+              "asset": "res://assets/ui/L1Cov.png",
+              "font": "sp_fnt00",
+              "font_size": 30,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored"
+            },
+            {
+              "id": "content",
+              "type": "button",
+              "rect": [
+                576.0,
+                928.8,
+                768.0,
+                86.4
+              ],
+              "anchor": "top_left",
+              "z": 2,
+              "overlay": false,
+              "asset": "",
+              "font": "sp_fnt00",
+              "font_size": 30,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored",
+              "focus": true
+            }
+          ],
+          "focus_order": [
+            "content"
+          ],
+          "back": "gameplay",
+          "sounds": {
+            "move": 41,
+            "confirm": 31,
+            "back": 35,
+            "reject": 27
+          },
+          "transition_seconds": 0.25
+        }
+      },
+      "proposal_elements": [
+        "level_cover_art",
+        "loading_spinner",
+        "hint_label"
+      ],
+      "proposal_status": "Gemini proposal (unverified)"
+    },
+    {
+      "id": "comic_intro",
+      "styles": {
+        "classic": {
+          "canvas": [
+            640,
+            480
+          ],
+          "virtual_frame": [
+            512,
+            240
+          ],
+          "presentation_aspect": [
+            4,
+            3
+          ],
+          "safe_title": 0.9,
+          "safe_action": 0.93,
+          "elements": [
+            {
+              "id": "canvas_backdrop",
+              "type": "image",
+              "rect": [
+                0,
+                0,
+                640,
+                480
+              ],
+              "anchor": "top_left",
+              "z": 0,
+              "overlay": true,
+              "asset": "",
+              "font": "sp_fnt00",
+              "font_size": 18,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored"
+            },
+            {
+              "id": "art",
+              "type": "image",
+              "rect": [
+                115.2,
+                28.8,
+                409.6,
+                374.4
+              ],
+              "anchor": "top_left",
+              "z": 1,
+              "overlay": false,
+              "asset": "",
+              "font": "sp_fnt00",
+              "font_size": 18,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored"
+            },
+            {
+              "id": "content",
+              "type": "button",
+              "rect": [
+                192.0,
+                412.8,
+                256.0,
+                38.4
+              ],
+              "anchor": "top_left",
+              "z": 2,
+              "overlay": false,
+              "asset": "",
+              "font": "sp_fnt00",
+              "font_size": 18,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored",
+              "focus": true
+            }
+          ],
+          "focus_order": [
+            "content"
+          ],
+          "back": "gameplay",
+          "sounds": {
+            "move": 41,
+            "confirm": 31,
+            "back": 35,
+            "reject": 27
+          },
+          "transition_seconds": 0.25
+        },
+        "enhanced": {
+          "canvas": [
+            1920,
+            1080
+          ],
+          "virtual_frame": [
+            1920,
+            1080
+          ],
+          "presentation_aspect": [
+            16,
+            9
+          ],
+          "safe_title": 0.9,
+          "safe_action": 0.93,
+          "elements": [
+            {
+              "id": "canvas_backdrop",
+              "type": "image",
+              "rect": [
+                0,
+                0,
+                1920,
+                1080
+              ],
+              "anchor": "top_left",
+              "z": 0,
+              "overlay": true,
+              "asset": "",
+              "font": "sp_fnt00",
+              "font_size": 30,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored"
+            },
+            {
+              "id": "art",
+              "type": "image",
+              "rect": [
+                345.6,
+                64.8,
+                1228.8,
+                842.4
+              ],
+              "anchor": "top_left",
+              "z": 1,
+              "overlay": false,
+              "asset": "",
+              "font": "sp_fnt00",
+              "font_size": 30,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored"
+            },
+            {
+              "id": "content",
+              "type": "button",
+              "rect": [
+                576.0,
+                928.8,
+                768.0,
+                86.4
+              ],
+              "anchor": "top_left",
+              "z": 2,
+              "overlay": false,
+              "asset": "",
+              "font": "sp_fnt00",
+              "font_size": 30,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored",
+              "focus": true
+            }
+          ],
+          "focus_order": [
+            "content"
+          ],
+          "back": "gameplay",
+          "sounds": {
+            "move": 41,
+            "confirm": 31,
+            "back": 35,
+            "reject": 27
+          },
+          "transition_seconds": 0.25
+        }
+      },
+      "proposal_elements": [
+        "comic_page",
+        "page_advance_prompt"
+      ],
+      "proposal_status": "Gemini proposal (unverified)"
+    },
+    {
+      "id": "death_restart",
+      "styles": {
+        "classic": {
+          "canvas": [
+            640,
+            480
+          ],
+          "virtual_frame": [
+            512,
+            240
+          ],
+          "presentation_aspect": [
+            4,
+            3
+          ],
+          "safe_title": 0.9,
+          "safe_action": 0.93,
+          "elements": [
+            {
+              "id": "canvas_backdrop",
+              "type": "image",
+              "rect": [
+                0,
+                0,
+                640,
+                480
+              ],
+              "anchor": "top_left",
+              "z": 0,
+              "overlay": true,
+              "asset": "",
+              "font": "sp_fnt00",
+              "font_size": 18,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored"
+            },
+            {
+              "id": "heading",
+              "type": "text",
+              "rect": [
+                140.8,
+                38.4,
+                358.4,
+                81.6
+              ],
+              "anchor": "top_left",
+              "z": 1,
+              "overlay": false,
+              "asset": "",
+              "font": "sp_fnt00",
+              "font_size": 18,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored",
+              "text": "DEATH RESTART"
+            },
+            {
+              "id": "content",
+              "type": "menu_list",
+              "rect": [
+                102.4,
+                153.6,
+                422.4,
+                278.4
+              ],
+              "anchor": "top_left",
+              "z": 2,
+              "overlay": false,
+              "asset": "",
+              "font": "sp_fnt00",
+              "font_size": 18,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored",
+              "focus": true
+            }
+          ],
+          "focus_order": [
+            "content"
+          ],
+          "back": "main_menu",
+          "sounds": {
+            "move": 41,
+            "confirm": 31,
+            "back": 35,
+            "reject": 27
+          },
+          "transition_seconds": 0.25
+        },
+        "enhanced": {
+          "canvas": [
+            1920,
+            1080
+          ],
+          "virtual_frame": [
+            1920,
+            1080
+          ],
+          "presentation_aspect": [
+            16,
+            9
+          ],
+          "safe_title": 0.9,
+          "safe_action": 0.93,
+          "elements": [
+            {
+              "id": "canvas_backdrop",
+              "type": "image",
+              "rect": [
+                0,
+                0,
+                1920,
+                1080
+              ],
+              "anchor": "top_left",
+              "z": 0,
+              "overlay": true,
+              "asset": "",
+              "font": "sp_fnt00",
+              "font_size": 30,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored"
+            },
+            {
+              "id": "heading",
+              "type": "text",
+              "rect": [
+                422.4,
+                86.4,
+                1075.2,
+                183.6
+              ],
+              "anchor": "top_left",
+              "z": 1,
+              "overlay": false,
+              "asset": "",
+              "font": "sp_fnt00",
+              "font_size": 30,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored",
+              "text": "DEATH RESTART"
+            },
+            {
+              "id": "content",
+              "type": "menu_list",
+              "rect": [
+                307.2,
+                345.6,
+                1267.2,
+                626.4
+              ],
+              "anchor": "top_left",
+              "z": 2,
+              "overlay": false,
+              "asset": "",
+              "font": "sp_fnt00",
+              "font_size": 30,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored",
+              "focus": true
+            }
+          ],
+          "focus_order": [
+            "content"
+          ],
+          "back": "main_menu",
+          "sounds": {
+            "move": 41,
+            "confirm": 31,
+            "back": 35,
+            "reject": 27
+          },
+          "transition_seconds": 0.25
+        }
+      },
+      "proposal_elements": [
+        "death_header",
+        "restart_options"
+      ],
+      "proposal_status": "Gemini proposal (unverified)"
+    },
+    {
+      "id": "training",
+      "styles": {
+        "classic": {
+          "canvas": [
+            640,
+            480
+          ],
+          "virtual_frame": [
+            512,
+            240
+          ],
+          "presentation_aspect": [
+            4,
+            3
+          ],
+          "safe_title": 0.9,
+          "safe_action": 0.93,
+          "elements": [
+            {
+              "id": "canvas_backdrop",
+              "type": "image",
+              "rect": [
+                0,
+                0,
+                640,
+                480
+              ],
+              "anchor": "top_left",
+              "z": 0,
+              "overlay": true,
+              "asset": "",
+              "font": "sp_fnt00",
+              "font_size": 18,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored"
+            },
+            {
+              "id": "heading",
+              "type": "text",
+              "rect": [
+                140.8,
+                38.4,
+                358.4,
+                81.6
+              ],
+              "anchor": "top_left",
+              "z": 1,
+              "overlay": false,
+              "asset": "",
+              "font": "sp_fnt00",
+              "font_size": 18,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored",
+              "text": "TRAINING"
+            },
+            {
+              "id": "content",
+              "type": "menu_list",
+              "rect": [
+                102.4,
+                153.6,
+                422.4,
+                278.4
+              ],
+              "anchor": "top_left",
+              "z": 2,
+              "overlay": false,
+              "asset": "",
+              "font": "sp_fnt00",
+              "font_size": 18,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored",
+              "focus": true
+            }
+          ],
+          "focus_order": [
+            "content"
+          ],
+          "back": "main_menu",
+          "sounds": {
+            "move": 41,
+            "confirm": 31,
+            "back": 35,
+            "reject": 27
+          },
+          "transition_seconds": 0.25
+        },
+        "enhanced": {
+          "canvas": [
+            1920,
+            1080
+          ],
+          "virtual_frame": [
+            1920,
+            1080
+          ],
+          "presentation_aspect": [
+            16,
+            9
+          ],
+          "safe_title": 0.9,
+          "safe_action": 0.93,
+          "elements": [
+            {
+              "id": "canvas_backdrop",
+              "type": "image",
+              "rect": [
+                0,
+                0,
+                1920,
+                1080
+              ],
+              "anchor": "top_left",
+              "z": 0,
+              "overlay": true,
+              "asset": "",
+              "font": "sp_fnt00",
+              "font_size": 30,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored"
+            },
+            {
+              "id": "heading",
+              "type": "text",
+              "rect": [
+                422.4,
+                86.4,
+                1075.2,
+                183.6
+              ],
+              "anchor": "top_left",
+              "z": 1,
+              "overlay": false,
+              "asset": "",
+              "font": "sp_fnt00",
+              "font_size": 30,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored",
+              "text": "TRAINING"
+            },
+            {
+              "id": "content",
+              "type": "menu_list",
+              "rect": [
+                307.2,
+                345.6,
+                1267.2,
+                626.4
+              ],
+              "anchor": "top_left",
+              "z": 2,
+              "overlay": false,
+              "asset": "",
+              "font": "sp_fnt00",
+              "font_size": 30,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored",
+              "focus": true
+            }
+          ],
+          "focus_order": [
+            "content"
+          ],
+          "back": "main_menu",
+          "sounds": {
+            "move": 41,
+            "confirm": 31,
+            "back": 35,
+            "reject": 27
+          },
+          "transition_seconds": 0.25
+        }
+      },
+      "proposal_elements": [],
+      "proposal_status": "Gemini proposal (unverified)"
+    },
+    {
+      "id": "audio",
+      "styles": {
+        "classic": {
+          "canvas": [
+            640,
+            480
+          ],
+          "virtual_frame": [
+            512,
+            240
+          ],
+          "presentation_aspect": [
+            4,
+            3
+          ],
+          "safe_title": 0.9,
+          "safe_action": 0.93,
+          "elements": [
+            {
+              "id": "canvas_backdrop",
+              "type": "image",
+              "rect": [
+                0,
+                0,
+                640,
+                480
+              ],
+              "anchor": "top_left",
+              "z": 0,
+              "overlay": true,
+              "asset": "",
+              "font": "sp_fnt00",
+              "font_size": 18,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored"
+            },
+            {
+              "id": "heading",
+              "type": "text",
+              "rect": [
+                140.8,
+                38.4,
+                358.4,
+                81.6
+              ],
+              "anchor": "top_left",
+              "z": 1,
+              "overlay": false,
+              "asset": "",
+              "font": "sp_fnt00",
+              "font_size": 18,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored",
+              "text": "AUDIO"
+            },
+            {
+              "id": "content",
+              "type": "menu_list",
+              "rect": [
+                102.4,
+                153.6,
+                422.4,
+                278.4
+              ],
+              "anchor": "top_left",
+              "z": 2,
+              "overlay": false,
+              "asset": "",
+              "font": "sp_fnt00",
+              "font_size": 18,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored",
+              "focus": true
+            }
+          ],
+          "focus_order": [
+            "content"
+          ],
+          "back": "options_menu",
+          "sounds": {
+            "move": 41,
+            "confirm": 31,
+            "back": 35,
+            "reject": 27
+          },
+          "transition_seconds": 0.25
+        },
+        "enhanced": {
+          "canvas": [
+            1920,
+            1080
+          ],
+          "virtual_frame": [
+            1920,
+            1080
+          ],
+          "presentation_aspect": [
+            16,
+            9
+          ],
+          "safe_title": 0.9,
+          "safe_action": 0.93,
+          "elements": [
+            {
+              "id": "canvas_backdrop",
+              "type": "image",
+              "rect": [
+                0,
+                0,
+                1920,
+                1080
+              ],
+              "anchor": "top_left",
+              "z": 0,
+              "overlay": true,
+              "asset": "",
+              "font": "sp_fnt00",
+              "font_size": 30,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored"
+            },
+            {
+              "id": "heading",
+              "type": "text",
+              "rect": [
+                422.4,
+                86.4,
+                1075.2,
+                183.6
+              ],
+              "anchor": "top_left",
+              "z": 1,
+              "overlay": false,
+              "asset": "",
+              "font": "sp_fnt00",
+              "font_size": 30,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored",
+              "text": "AUDIO"
+            },
+            {
+              "id": "content",
+              "type": "menu_list",
+              "rect": [
+                307.2,
+                345.6,
+                1267.2,
+                626.4
+              ],
+              "anchor": "top_left",
+              "z": 2,
+              "overlay": false,
+              "asset": "",
+              "font": "sp_fnt00",
+              "font_size": 30,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored",
+              "focus": true
+            }
+          ],
+          "focus_order": [
+            "content"
+          ],
+          "back": "options_menu",
+          "sounds": {
+            "move": 41,
+            "confirm": 31,
+            "back": 35,
+            "reject": 27
+          },
+          "transition_seconds": 0.25
+        }
+      },
+      "proposal_elements": [],
+      "proposal_status": "Gemini proposal (unverified)"
+    },
+    {
+      "id": "accessibility",
+      "styles": {
+        "classic": {
+          "canvas": [
+            640,
+            480
+          ],
+          "virtual_frame": [
+            512,
+            240
+          ],
+          "presentation_aspect": [
+            4,
+            3
+          ],
+          "safe_title": 0.9,
+          "safe_action": 0.93,
+          "elements": [
+            {
+              "id": "canvas_backdrop",
+              "type": "image",
+              "rect": [
+                0,
+                0,
+                640,
+                480
+              ],
+              "anchor": "top_left",
+              "z": 0,
+              "overlay": true,
+              "asset": "",
+              "font": "sp_fnt00",
+              "font_size": 18,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored"
+            },
+            {
+              "id": "heading",
+              "type": "text",
+              "rect": [
+                140.8,
+                38.4,
+                358.4,
+                81.6
+              ],
+              "anchor": "top_left",
+              "z": 1,
+              "overlay": false,
+              "asset": "",
+              "font": "sp_fnt00",
+              "font_size": 18,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored",
+              "text": "ACCESSIBILITY"
+            },
+            {
+              "id": "content",
+              "type": "menu_list",
+              "rect": [
+                102.4,
+                153.6,
+                422.4,
+                278.4
+              ],
+              "anchor": "top_left",
+              "z": 2,
+              "overlay": false,
+              "asset": "",
+              "font": "sp_fnt00",
+              "font_size": 18,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored",
+              "focus": true
+            }
+          ],
+          "focus_order": [
+            "content"
+          ],
+          "back": "options_menu",
+          "sounds": {
+            "move": 41,
+            "confirm": 31,
+            "back": 35,
+            "reject": 27
+          },
+          "transition_seconds": 0.25
+        },
+        "enhanced": {
+          "canvas": [
+            1920,
+            1080
+          ],
+          "virtual_frame": [
+            1920,
+            1080
+          ],
+          "presentation_aspect": [
+            16,
+            9
+          ],
+          "safe_title": 0.9,
+          "safe_action": 0.93,
+          "elements": [
+            {
+              "id": "canvas_backdrop",
+              "type": "image",
+              "rect": [
+                0,
+                0,
+                1920,
+                1080
+              ],
+              "anchor": "top_left",
+              "z": 0,
+              "overlay": true,
+              "asset": "",
+              "font": "sp_fnt00",
+              "font_size": 30,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored"
+            },
+            {
+              "id": "heading",
+              "type": "text",
+              "rect": [
+                422.4,
+                86.4,
+                1075.2,
+                183.6
+              ],
+              "anchor": "top_left",
+              "z": 1,
+              "overlay": false,
+              "asset": "",
+              "font": "sp_fnt00",
+              "font_size": 30,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored",
+              "text": "ACCESSIBILITY"
+            },
+            {
+              "id": "content",
+              "type": "menu_list",
+              "rect": [
+                307.2,
+                345.6,
+                1267.2,
+                626.4
+              ],
+              "anchor": "top_left",
+              "z": 2,
+              "overlay": false,
+              "asset": "",
+              "font": "sp_fnt00",
+              "font_size": 30,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored",
+              "focus": true
+            }
+          ],
+          "focus_order": [
+            "content"
+          ],
+          "back": "options_menu",
+          "sounds": {
+            "move": 41,
+            "confirm": 31,
+            "back": 35,
+            "reject": 27
+          },
+          "transition_seconds": 0.25
+        }
+      },
+      "proposal_elements": [],
+      "proposal_status": "Gemini proposal (unverified)"
+    },
+    {
+      "id": "attract",
+      "styles": {
+        "classic": {
+          "canvas": [
+            640,
+            480
+          ],
+          "virtual_frame": [
+            512,
+            240
+          ],
+          "presentation_aspect": [
+            4,
+            3
+          ],
+          "safe_title": 0.9,
+          "safe_action": 0.93,
+          "elements": [
+            {
+              "id": "canvas_backdrop",
+              "type": "image",
+              "rect": [
+                0,
+                0,
+                640,
+                480
+              ],
+              "anchor": "top_left",
+              "z": 0,
+              "overlay": true,
+              "asset": "",
+              "font": "sp_fnt00",
+              "font_size": 18,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored"
+            },
+            {
+              "id": "heading",
+              "type": "text",
+              "rect": [
+                140.8,
+                38.4,
+                358.4,
+                81.6
+              ],
+              "anchor": "top_left",
+              "z": 1,
+              "overlay": false,
+              "asset": "",
+              "font": "sp_fnt00",
+              "font_size": 18,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored",
+              "text": "ATTRACT"
+            },
+            {
+              "id": "content",
+              "type": "menu_list",
+              "rect": [
+                102.4,
+                153.6,
+                243.2,
+                278.4
+              ],
+              "anchor": "top_left",
+              "z": 2,
+              "overlay": false,
+              "asset": "",
+              "font": "sp_fnt00",
+              "font_size": 18,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored",
+              "focus": true
+            },
+            {
+              "id": "actor",
+              "type": "3d_actor",
+              "rect": [
+                384.0,
+                134.4,
+                172.8,
+                292.8
+              ],
+              "anchor": "top_left",
+              "z": 2,
+              "overlay": false,
+              "asset": "res://assets/characters/spidey.glb",
+              "font": "sp_fnt00",
+              "font_size": 18,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored"
+            }
+          ],
+          "focus_order": [
+            "content"
+          ],
+          "back": "title",
+          "sounds": {
+            "move": 41,
+            "confirm": 31,
+            "back": 35,
+            "reject": 27
+          },
+          "transition_seconds": 0.25
+        },
+        "enhanced": {
+          "canvas": [
+            1920,
+            1080
+          ],
+          "virtual_frame": [
+            1920,
+            1080
+          ],
+          "presentation_aspect": [
+            16,
+            9
+          ],
+          "safe_title": 0.9,
+          "safe_action": 0.93,
+          "elements": [
+            {
+              "id": "canvas_backdrop",
+              "type": "image",
+              "rect": [
+                0,
+                0,
+                1920,
+                1080
+              ],
+              "anchor": "top_left",
+              "z": 0,
+              "overlay": true,
+              "asset": "",
+              "font": "sp_fnt00",
+              "font_size": 30,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored"
+            },
+            {
+              "id": "heading",
+              "type": "text",
+              "rect": [
+                422.4,
+                86.4,
+                1075.2,
+                183.6
+              ],
+              "anchor": "top_left",
+              "z": 1,
+              "overlay": false,
+              "asset": "",
+              "font": "sp_fnt00",
+              "font_size": 30,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored",
+              "text": "ATTRACT"
+            },
+            {
+              "id": "content",
+              "type": "menu_list",
+              "rect": [
+                307.2,
+                345.6,
+                729.6,
+                626.4
+              ],
+              "anchor": "top_left",
+              "z": 2,
+              "overlay": false,
+              "asset": "",
+              "font": "sp_fnt00",
+              "font_size": 30,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored",
+              "focus": true
+            },
+            {
+              "id": "actor",
+              "type": "3d_actor",
+              "rect": [
+                1152.0,
+                302.4,
+                518.4,
+                658.8
+              ],
+              "anchor": "top_left",
+              "z": 2,
+              "overlay": false,
+              "asset": "res://assets/characters/spidey.glb",
+              "font": "sp_fnt00",
+              "font_size": 30,
+              "colours": {
+                "text": "#FFF4CF",
+                "backdrop": "#100E1B",
+                "focus": "#FFE16B"
+              },
+              "evidence": [
+                "remake:frontend-layout-v1"
+              ],
+              "confidence": "authored"
+            }
+          ],
+          "focus_order": [
+            "content"
+          ],
+          "back": "title",
+          "sounds": {
+            "move": 41,
+            "confirm": 31,
+            "back": 35,
+            "reject": 27
+          },
+          "transition_seconds": 0.25
+        }
+      },
+      "proposal_elements": [],
+      "proposal_status": "Gemini proposal (unverified)"
+    }
+  ]
+}
