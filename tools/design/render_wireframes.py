@@ -53,9 +53,10 @@ def generate(document, destination):
 
 def overlays():
  import subprocess
- node=Path.home()/'.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node.exe'
- if not node.is_file():raise RuntimeError('Load the bundled desktop workspace dependencies before rendering overlays')
- subprocess.run([str(node),str(ROOT/'tools/design/composite_overlays.cjs')],cwd=ROOT,check=True,timeout=180)
+ import os,shutil
+ node=os.environ.get('NODE') or shutil.which('node')
+ if not node:raise RuntimeError('Install Node.js with the sharp package (or set NODE) before rendering overlays')
+ subprocess.run([node,str(ROOT/'tools/design/composite_overlays.cjs')],cwd=ROOT,check=True,timeout=180)
  return json.loads((ROOT/'staging/validation/menu/overlay-manifest.json').read_text())['count']
 
 if __name__=='__main__':

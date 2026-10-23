@@ -1,0 +1,15 @@
+name: Feature or behaviour proposal
+description: Propose a mechanic, tool, test or documentation change
+labels: [enhancement]
+body:
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposal
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence for original behaviour (if claiming fidelity)
+      description: Cite ledger entries or your own observations. Do not paste original game content or code from unlicensed sources.

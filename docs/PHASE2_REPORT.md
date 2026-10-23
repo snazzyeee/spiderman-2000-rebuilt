@@ -1,4 +1,4 @@
-> Historical checkpoint at 6e59f82. Phase 0 deletion and numeric audio bindings have since progressed; see HANDOFF.md for current results.
+> Historical checkpoint at 6e59f82. Phase 0 deletion and numeric audio bindings have since progressed; see README.md for current status.
 
 # Autonomous migration and Phase 2 report — 2026-10-20
 

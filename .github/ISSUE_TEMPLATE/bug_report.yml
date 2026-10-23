@@ -1,0 +1,38 @@
+name: Bug report
+description: Something in the Godot project, tools or tests does not work
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: Do not attach game files, extracted assets, logs containing personal paths, or tokens.
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened, and what did you expect?
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+    validations:
+      required: true
+  - type: input
+    id: env
+    attributes:
+      label: OS, Godot version and renderer
+      placeholder: Windows 11, Godot 4.7.2, forward_plus
+    validations:
+      required: true
+  - type: dropdown
+    id: assets
+    attributes:
+      label: Were locally converted game assets present?
+      options: ["No (synthetic/public clone only)", "Yes"]
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant log output
+      render: text

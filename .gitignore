@@ -28,6 +28,3 @@
 __pycache__/
 *.py[cod]
 
-# Private reference inventories/conversion logs and generated machine metadata
-/docs/research_notes/**/*.json
-/docs/research_notes/**/*.log

@@ -51,7 +51,7 @@ sheets and exact-SVG 40% overlays are produced by composite_overlays.cjs. The
 contrast test compares specified foreground colours with captured backdrop
 pixels; original palette outline/antialiasing contrast remains outside that
 measurement. Frame-interval evidence is a local menu benchmark, not a gameplay
-performance claim. See HANDOFF.md for exact results and remaining limits.
+performance claim. See README.md for current status and remaining limits.
 
 Pause now uses the same loader, fonts, action data and focus treatment over a
 70% dimmed live scene. Resume/recovery/menu callbacks retain existing cinematic

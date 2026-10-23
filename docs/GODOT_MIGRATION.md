@@ -25,8 +25,18 @@ Use the complete Godot folder and its locally generated assets.
 
 Inputs are the local PC data.pkr, the existing extraction/ASR manifest and WAVs,
 Python 3.11+ with requests/BeautifulSoup, FFmpeg, and the pinned converter.
-No Unity editor is required. The current isolated Python is in
-tools/third_party/audio-python/Scripts/python.exe. With Godot closed:
+No Unity editor is required. The asset pipeline is Windows-only. Create the
+isolated Python environment tools/third_party/audio-python/ with
+`.\tools\reference\setup_audio_asr.ps1 -PythonPath <64-bit python.exe>`; it
+installs tools/reference/requirements-audio.txt and downloads a SHA-256-pinned
+faster-whisper model (about 480 MB) used for draft transcripts. Install FFmpeg on
+PATH yourself.
+
+The pipeline was developed against one PC build of the game. Reference tools
+such as tools/reference/extract_camera_presets.py and
+extract_native_voice_catalog.py check the executable's SHA-256 and refuse other
+builds rather than guess at their layout; other editions are untested. Only use
+files from a copy you legally own. With Godot closed:
 
 ```powershell
 .\tools\pipeline\prepare_godot.ps1 -Offline -SmokeTest

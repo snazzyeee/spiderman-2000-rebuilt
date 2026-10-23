@@ -46,7 +46,7 @@ Every original source claim is re-graded below. Exact per-screen rectangles, str
 | pause/paused_header | Recovered text origin (256,50) and RGB (127,25,33); font and box extents unverified | Gemini proposal (unverified) | decomp:front.cpp#PrintPaused |
 | pause/pause_items | CMenu helpers recovered; this item list and rectangle are not established by the helper | Gemini proposal (unverified) | decomp:front.cpp#CMenu |
 | loading/level_cover_art | No independent verification of this screen-specific claim | Gemini proposal (unverified) | pkr:archive-index.json#data/L1Cov.bmp |
-| loading/loading_spinner | No independent verification of this screen-specific claim | Gemini proposal (unverified) | docs/gemini/GEMINI_MENU_BRIEF.md#L67 |
+| loading/loading_spinner | No independent verification of this screen-specific claim | Gemini proposal (unverified) | internal design brief (not published) |
 | loading/hint_label | No independent verification of this screen-specific claim | Gemini proposal (unverified) | inferred; confidence: likely |
 | comic_intro/comic_page | No independent verification of this screen-specific claim | Gemini proposal (unverified) | pkr:archive-index.json#data/L1S1_1.bmp |
 | comic_intro/page_advance_prompt | No independent verification of this screen-specific claim | Gemini proposal (unverified) | inferred; confidence: confirmed |

@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const sharp = require(path.join(process.env.USERPROFILE,'.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/sharp'));
+const sharp = require(process.env.SHARP_MODULE || 'sharp');
 const root = process.cwd();
 const doc = JSON.parse(fs.readFileSync(path.join(root,'src/ui/layout/screens.json'),'utf8'));
 const folder = path.join(root,'staging/validation/menu');

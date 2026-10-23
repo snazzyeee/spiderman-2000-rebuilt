@@ -35,13 +35,15 @@ privately. [Upstream MIT license](https://github.com/nihui/waifu2x-ncnn-vulkan/b
 and [waifu2x model/project notices](https://github.com/nagadomi/waifu2x) apply;
 the package also includes ncnn and codec dependency notices. Inference is local
 and offline; only the explicit setup script downloads this pinned archive.
-Existing private audio tool installations predate this inventory;
-their provenance still needs consolidation before new download/setup changes.
+The audio environment is created by `tools/reference/setup_audio_asr.ps1` from
+`tools/reference/requirements-audio.txt` (version-pinned, not hash-pinned) and a
+SHA-256-pinned Systran faster-whisper-small.en model from Hugging Face (see its model card for licence terms).
 
-Frontend validation uses the desktop's already bundled dependency runtime
-26.1015.12040 (no download): Sharp under the bundled Node.js packages, Apache-2.0,
-https://github.com/lovell/sharp/blob/main/LICENSE . Exact installed version is
-recorded in private staging/validation/menu/overlay-manifest.json. It rasterizes
+Optional private frontend overlays (`tools/design/render_wireframes.py --overlays`)
+need Node.js and Sharp (Apache-2.0, https://github.com/lovell/sharp/blob/main/LICENSE)
+installed by the contributor: `node` on PATH (or `NODE`) and `sharp` resolvable
+by Node (or `SHARP_MODULE`). Neither is downloaded by the project. The installed
+version is recorded in private staging/validation/menu/overlay-manifest.json. It rasterizes
 the generated SVGs, crops their canvas, applies 40% alpha and produces private
 comparison sheets. Runtime art decoding continues to use the existing SHA-pinned
 MIT Neversoft Multitool; no new executable or model was downloaded.

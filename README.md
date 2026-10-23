@@ -1,125 +1,131 @@
-# Spider-Man 2000 revamp — Godot 4
+# Spider-Man 2000 Rebuilt — Godot 4
 
-[![Synthetic regression](https://github.com/snazzyeee/spiderman-2000-revamp/actions/workflows/synthetic-regression.yml/badge.svg?branch=main)](https://github.com/snazzyeee/spiderman-2000-revamp/actions/workflows/synthetic-regression.yml)
+[![Synthetic regression](https://github.com/snazzyeee/spiderman-2000-rebuilt/actions/workflows/synthetic-regression.yml/badge.svg?branch=main)](https://github.com/snazzyeee/spiderman-2000-rebuilt/actions/workflows/synthetic-regression.yml)
 
-The active engine is **Godot 4.7.2**, with Forward+ as the default renderer and
-Mobile kept as a supported fallback through the launcher. The project contains a playable
-Mission 1 rooftop slice using locally extracted original PC models, textures
-and audio. Mechanical fidelity and complete dialogue verification remain goals.
+An unofficial, work-in-progress reimplementation of Spider-Man (2000, PC) in
+**Godot 4.7.2**. This is a fan project. It is not affiliated with or endorsed by
+Marvel, Activision, Neversoft or the original game's rights holders.
 
-The Godot project lives at the repository root (project.godot, src/, scenes/).
-Unity is not required for anything. The former Unity project's gameplay code is
-kept as reading reference in [docs/gameplay_references](docs/gameplay_references/README.md),
-and its full history is on the archive/unity-pre-migration branch. Historical
-Unity build instructions remain in [docs/MAIN_MENU.md](docs/MAIN_MENU.md).
+**This repository contains no game files.** It holds independently written
+Godot code, conversion tools, synthetic tests and documentation. Original
+models, textures, audio, dialogue, fonts and executables are never committed and
+must not be submitted. The playable slice needs game files you supply yourself
+from a copy you legally own (see [Asset pipeline](#asset-pipeline-optional)).
 
-## Play or open the prepared local project
+## Project status
 
-From this repository root:
+Early development. What exists today:
+
+- **Traversal systems** — web swing, zip, wall/ceiling crawl, camera profiles,
+  webbing meter and damage rules — covered by 150 synthetic checks that need no
+  game files.
+- **Frontend** — main, options, pause and loading screens driven by
+  `src/ui/layout/screens.json`, with layout, font-fallback and menu-audio tests.
+- **Mission 1 rooftop slice** — playable *only* with locally converted original
+  assets. The authored route, animation bindings and tuning are approximations,
+  not proven original behaviour.
+
+Known gaps: dialogue transcripts are unverified machine drafts; trigger (TRG)
+placement is unverified; the original-landmark alignment gate passes 19 of 21;
+no packaged release exists; only Windows has been used for asset-backed play.
+The [behavior ledger](docs/behavior_ledger/README.md) records what is recovered
+evidence and what is authored guesswork.
+
+## What works without game files
+
+On a fresh clone with no game files:
+
+- the project imports and opens in Godot 4.7.2;
+- `scenes/main_menu.tscn` launches (verified headless; original art, fonts and
+  sounds are simply absent);
+- all Python tests and Godot synthetic suites below run, with asset-dependent
+  checks reported as explicit skips.
+
+You can develop and test gameplay systems, UI layout, tooling and docs this way.
+
+## Quick start
+
+The launcher scripts download a hash-verified official Godot 4.7.2 into the
+ignored `tools/third_party/` folder.
+
+**Windows (PowerShell):**
 
 ```powershell
-./tools/pipeline/run_godot.ps1
-./tools/pipeline/run_godot.ps1 -Renderer mobile
-./tools/pipeline/run_godot.ps1 -Editor
+./tools/pipeline/run_godot.ps1 -Editor                      # open the editor
+./tools/pipeline/run_godot.ps1                              # run the game
+./tools/pipeline/run_godot.ps1 -Headless -TraversalTests    # synthetic traversal tests
 ```
 
-The main scene is scenes/main_menu.tscn. Game -> New Game plays the original
-intro audio, then a separate authored briefing, then the rooftop mission.
-Gamepad and keyboard/mouse controls, menu navigation, volume settings, original
-comic gallery, checkpoint loading and a free rooftop practice mode are included.
+**Linux (needs Python 3.11+ and [PowerShell 7](https://learn.microsoft.com/powershell/scripting/install/installing-powershell-on-linux)),**
+as used by CI:
 
-## Reproduce the private assets
-
-With Godot closed, the existing local PC archive and extraction/ASR data present:
-
-```powershell
-./tools/pipeline/prepare_godot.ps1 -Offline -SmokeTest
+```bash
+python3 tools/pipeline/setup_godot_linux.py
+pwsh ./tools/pipeline/run_godot.ps1 -Headless -TraversalTests
 ```
 
-Omit -Offline to fetch the supplied transcript reference again. The workflow
-uses the pinned converter, CRC/SHA-checked inputs, requests/BeautifulSoup,
-FFmpeg, the isolated Python environment and a hash-verified portable Godot.
-It never executes original game programs. No packaged Windows export was made;
-the prepared source project runs with the portable editor/runtime.
+macOS has no launcher yet. With your own Godot 4.7.2 you can open the project
+folder directly; this path is untested.
 
-[docs/GODOT_MIGRATION.md](docs/GODOT_MIGRATION.md) documents exact commands,
-directory structure, component connections, controls, manifest fields,
-validation and remaining limits.
+## Running the tests
 
-## Generated outputs and evidence
+```bash
+python -m pip install --require-hashes -r tools/pipeline/ci-requirements.txt
+python -m unittest discover -s tools/reference/tests
+python -m unittest discover -s tools/pipeline/tests
+```
 
-- assets/audio/dialogue/dialogue_manifest.json: all 3,661 clips with logical Godot
-  paths, ASR/reference status, speaker evidence and native trigger references.
-- assets/characters/ and assets/environments/: 107 exported GLBs, including 105 rigged assets and
-  low-resolution variants, plus two original rooftop geometry files.
-- assets/ui/: 34 original menu/comic images converted to PNG.
-- assets/environments/mission1_layout.json: a three-checkpoint authored route
-  derived directly from Godot collision queries over the original geometry.
-
-The player preserves 18 bones and 300 animation slots. Numeric animation
-bindings and the authored mission route are not proof of original gameplay
-semantics. The transcript page yielded 225 parsed reference lines and five
-strong whole-clip candidates. The 991 dialogue/movie entries retain 918 draft
-ASR transcripts and 73 no-speech results; complete verified transcripts,
-speaker labels and original trigger guards have not been recovered. The user
-supplied L1A1-L1A4 display names retain that provenance. Filename ordering does
-not invent playback conditions. See [native ID evidence](docs/NATIVE_VOICE_IDS.md),
-[local ASR](docs/BATCH_AUDIO.md) and [external reference scope](docs/REFERENCE_SOURCES.md).
-
-## Public source and private data
-
-Validation: all 40 original integration checks plus two native-audio checks
-(42 total), and all 150 synthetic traversal checks passed headlessly and on real
-Mobile and Forward+ Vulkan on the RX 580. All 58 Python tests passed at the latest font checkpoint. Phase 0
-Unity deletion is complete. The original landmark gate remains 19/21; TRG
-placement is still unverified. See [current handoff](docs/HANDOFF.md) and the
-[historical Phase 2 report](docs/PHASE2_REPORT.md).
-
-Public synthetic traversal scenes require no original assets:
+Godot suites (prefix with `pwsh` on Linux):
 
 ```powershell
+./tools/pipeline/run_godot.ps1 -Import
 ./tools/pipeline/run_godot.ps1 -Headless -TraversalTests
-./tools/pipeline/run_godot.ps1 -Renderer forward_plus -TraversalTests
-./tools/pipeline/run_godot.ps1 -Renderer mobile -TraversalTests
+./tools/pipeline/run_godot.ps1 -Headless -Script res://src/diagnostics/font_tests.gd
+./tools/pipeline/run_godot.ps1 -Headless -Script res://src/diagnostics/menu_audio_tests.gd
+./tools/pipeline/run_godot.ps1 -Headless -Script res://src/diagnostics/layout_tests.gd
+./tools/pipeline/run_godot.ps1 -Headless -Script res://src/diagnostics/design_qa_tests.gd
+./tools/pipeline/run_godot.ps1 -Headless -Script res://src/diagnostics/loading_tests.gd
 ```
 
-Q / R1 targets a zip; T / R2 zips forward. These assignments, the pendulum rates,
-wall attach input, edge probes, grace length and swing animation binding are
-authored tuning. Recovered events bind through the behavior ledger JSON.
+At the time of writing: 81 Python tests; 150 traversal, 15 font, 24 menu-audio,
+90 layout, 1,028 design-QA and 6 loading checks. CI
+([`.github/workflows/synthetic-regression.yml`](.github/workflows/synthetic-regression.yml))
+runs exactly these on Ubuntu. A green CI run shows the synthetic contracts hold;
+it does not establish fidelity to the original game.
 
-Godot scripts/scenes/project settings, Python conversion tools, synthetic tests
-and documentation are tracked. Original and derived assets, transcripts,
-private manifests, caches, models, tools, captures and builds stay ignored.
-A public source clone needs locally supplied PC files and conversion to assemble
-original art. There is no embedded proprietary game in the public repository.
+## Asset pipeline (optional)
 
-[Repository workflow](docs/RepositoryWorkflow.md) ·
-[Godot migration guide](docs/GODOT_MIGRATION.md) ·
-[Unity purge report](docs/migration/PURGE_REPORT.md) ·
-[Behavior ledger](docs/behavior_ledger/README.md) ·
-[Archived Unity mission guide](docs/MISSION1.md)
+To play the Mission 1 slice you convert files from your own copy of the PC game.
+The tools only read data files; they never run the original game or installer.
+[docs/GODOT_MIGRATION.md](docs/GODOT_MIGRATION.md) documents the commands,
+tool setup, outputs and limits. Converted output goes to the ignored `assets/`
+and `staging/` folders and must never be committed.
 
-Public synthetic CI is defined in `.github/workflows/synthetic-regression.yml`.
-It downloads hash-pinned Godot 4.7.2, runs Python fixtures and all synthetic
-traversal suites, and reports private-asset smoke as an explicit skip. Local
-`tools/pipeline/run_regression.ps1 -Milestone <name>` still runs the full private
-matrix on headless, real Vulkan Forward+ and Mobile. See
-[tool pins/licenses](docs/THIRD_PARTY.md) and
-[editor paths and CI](docs/GODOT_MIGRATION.md#editor-paths-and-public-ci).
+The pipeline was developed against a single PC build. Some reference tools check
+the executable's SHA-256 and refuse unknown builds; other editions are untested.
 
+## Documentation
 
-Original bitmap typography is now optional at runtime: Options → Font variant
-selects Faithful or Enhanced (default). The private conversion preserves palette
-pixels and exact nominal metrics; unknown font_big bindings remain unresolved.
-See [font evidence](docs/behavior_ledger/fonts.md) and
-[menu status](docs/MAIN_MENU.md). Current local gates: 58 Python, 44 smoke,
-150 traversal and 29 font checks per target. CI explicitly tests missing-font
-fallback with 10 font checks and skips private resources.
+- [Godot setup and asset pipeline](docs/GODOT_MIGRATION.md)
+- [Behavior ledger](docs/behavior_ledger/README.md) — recovered evidence vs. authored choices
+- [Controls](docs/Controls.md) · [Main menu](docs/MAIN_MENU.md) · [Dialogue architecture](docs/DIALOGUE_ARCHITECTURE.md)
+- [Third-party tools and licences](docs/THIRD_PARTY.md)
+- Historical: [Unity-era mission guide](docs/MISSION1.md), [Phase 2 report](docs/PHASE2_REPORT.md),
+  [Unity purge report](docs/migration/PURGE_REPORT.md). The project began in Unity;
+  that code is kept for reference in [docs/gameplay_references](docs/gameplay_references/README.md)
+  and on the `archive/unity-pre-migration` branch.
 
+## Contributing
 
-## Contributing and project status
+Contributions to original gameplay code, tools, tests and documentation are
+welcome — see [CONTRIBUTING.md](CONTRIBUTING.md). Report bugs and ideas through
+GitHub Issues; report security problems as described in [SECURITY.md](SECURITY.md).
 
-Contributions are welcome for original Godot gameplay code, tooling, tests, and documentation. See [CONTRIBUTING.md](CONTRIBUTING.md). Independently authored code is offered under the [MIT license](LICENSE), subject to third-party rights.
+## Licence
 
-This is an unofficial fan project and is not affiliated with or endorsed by Marvel, Activision, Neversoft, or the original game's rights holders. Spider-Man names, characters, trademarks, and game assets remain the property of their respective owners. This repository does not grant rights to distribute original game assets; users must supply legally obtained compatible files themselves.
-
+Code and documentation written for this project are released under the
+[MIT licence](LICENSE). The licence does **not** cover Spider-Man characters or
+trademarks, original game assets, extracted or converted game data, or
+third-party tools and code, which remain the property of their respective owners
+and subject to their own terms (see [docs/THIRD_PARTY.md](docs/THIRD_PARTY.md)).
+Nothing here grants any right to distribute original game content.
