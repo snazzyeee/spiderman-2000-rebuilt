@@ -115,3 +115,11 @@ See [font evidence](docs/behavior_ledger/fonts.md) and
 [menu status](docs/MAIN_MENU.md). Current local gates: 58 Python, 44 smoke,
 150 traversal and 29 font checks per target. CI explicitly tests missing-font
 fallback with 10 font checks and skips private resources.
+
+
+## Contributing and project status
+
+Contributions are welcome for original Godot gameplay code, tooling, tests, and documentation. See [CONTRIBUTING.md](CONTRIBUTING.md). Independently authored code is offered under the [MIT license](LICENSE), subject to third-party rights.
+
+This is an unofficial fan project and is not affiliated with or endorsed by Marvel, Activision, Neversoft, or the original game's rights holders. Spider-Man names, characters, trademarks, and game assets remain the property of their respective owners. This repository does not grant rights to distribute original game assets; users must supply legally obtained compatible files themselves.
+
