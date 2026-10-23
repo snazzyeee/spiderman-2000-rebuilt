@@ -87,7 +87,7 @@ Godot suites (prefix with `pwsh` on Linux):
 ./tools/pipeline/run_godot.ps1 -Headless -Script res://src/diagnostics/loading_tests.gd
 ```
 
-At the time of writing: 81 Python tests; 150 traversal, 15 font, 24 menu-audio,
+At the time of writing: 78 Python tests; 150 traversal, 15 font, 24 menu-audio,
 90 layout, 1,028 design-QA and 6 loading checks. CI
 ([`.github/workflows/synthetic-regression.yml`](.github/workflows/synthetic-regression.yml))
 runs exactly these on Ubuntu. A green CI run shows the synthetic contracts hold;
