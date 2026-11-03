@@ -1,4 +1,4 @@
-# Spider-Man 2000 Rebuilt — Godot 4
+# Spider-Man 2000 Rebuilt (Godot 4)
 
 [![Synthetic regression](https://github.com/snazzyeee/spiderman-2000-rebuilt/actions/workflows/synthetic-regression.yml/badge.svg?branch=main)](https://github.com/snazzyeee/spiderman-2000-rebuilt/actions/workflows/synthetic-regression.yml)
 
@@ -16,12 +16,12 @@ from a copy you legally own (see [Asset pipeline](#asset-pipeline-optional)).
 
 Early development. What exists today:
 
-- **Traversal systems** — web swing, zip, wall/ceiling crawl, camera profiles,
-  webbing meter and damage rules — covered by 150 synthetic checks that need no
+- **Traversal systems**: web swing, zip, wall/ceiling crawl, camera profiles,
+  webbing meter and damage rules, covered by 150 synthetic checks that need no
   game files.
-- **Frontend** — main, options, pause and loading screens driven by
+- **Frontend**: main, options, pause and loading screens driven by
   `src/ui/layout/screens.json`, with layout, font-fallback and menu-audio tests.
-- **Mission 1 rooftop slice** — playable *only* with locally converted original
+- **Mission 1 rooftop slice**: playable *only* with locally converted original
   assets. The authored route, animation bindings and tuning are approximations,
   not proven original behaviour.
 
@@ -107,7 +107,7 @@ the executable's SHA-256 and refuse unknown builds; other editions are untested.
 ## Documentation
 
 - [Godot setup and asset pipeline](docs/GODOT_MIGRATION.md)
-- [Behavior ledger](docs/behavior_ledger/README.md) — recovered evidence vs. authored choices
+- [Behavior ledger](docs/behavior_ledger/README.md): recovered evidence vs. authored choices
 - [Controls](docs/Controls.md) · [Main menu](docs/MAIN_MENU.md) · [Dialogue architecture](docs/DIALOGUE_ARCHITECTURE.md)
 - [Third-party tools and licences](docs/THIRD_PARTY.md)
 - Historical: [Unity-era mission guide](docs/MISSION1.md), [Phase 2 report](docs/PHASE2_REPORT.md),
@@ -118,7 +118,7 @@ the executable's SHA-256 and refuse unknown builds; other editions are untested.
 ## Contributing
 
 Contributions to original gameplay code, tools, tests and documentation are
-welcome — see [CONTRIBUTING.md](CONTRIBUTING.md). Report bugs and ideas through
+welcome. See [CONTRIBUTING.md](CONTRIBUTING.md). Report bugs and ideas through
 GitHub Issues; report security problems as described in [SECURITY.md](SECURITY.md).
 
 ## Licence
